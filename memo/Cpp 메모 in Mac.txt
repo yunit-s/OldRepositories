@@ -18,13 +18,9 @@ Cpp 메모 in Mac
 	string 객체 쓸 때 굳이 #include <string> 안 해도 된다.
 	형변환 꼬박꼬박 할 필요까지는 없다.
 
-
-
-
-
-// ************** Macbook VS Code 단축키 ***************
-ctr + opt + n : run code (우클릭해도 할 수 있음)
-ctr + shf + ` : zsh Terminal 새로 열기
-ctr + ` : 기존 zsh Terminal 창으로 커서 활성화
-ctr + c : 터미널 무한루프 강제 종료
-
+1927-최소 힙
+	cin, cout을 그냥 사용하면 시간효율성에서 좋지 않다. 아래 코드를 main문 처음에 적어주자.
+	    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	그리고, cout 에서 endl 안 쓰는 것이 좋다. 이거 대신 "\n" 나 '\n' 을 쓰자.
+	자세한 설명은 아래 페이지 참고.
+		https://blog.naver.com/khckmc316/222904980664
