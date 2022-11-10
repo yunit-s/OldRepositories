@@ -18,6 +18,9 @@ Cpp 메모 in Mac
 	string 객체 쓸 때 굳이 #include <string> 안 해도 된다.
 	형변환 꼬박꼬박 할 필요까지는 없다.
 
+10951-A+B - 4
+	입력될 테스트 케이스의 개수가 정해지지 않은 경우, cin.eof() 를 활용할 것.
+
 1927-최소 힙
 	cin, cout을 그냥 사용하면 시간효율성에서 좋지 않다. 아래 코드를 main문 처음에 적어주자.
 	    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
