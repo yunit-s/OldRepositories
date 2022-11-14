@@ -16,7 +16,7 @@ using namespace std;
 
 void merge(int num[], int iFirst, int iCen, int iLast) {
     int iL = iFirst, iR = iCen + 1, iCur = 0;
-    int numTemp[iLast - iFirst];
+    int numTemp[iLast - iFirst + 1];
     while(iCur <= iLast - iFirst) {
         // 왼쪽에서 숫자를 가져와야 하는 경우
         if (iR > iLast || (iL <= iCen && num[iL] <= num[iR])) numTemp[iCur++] = num[iL++];
@@ -57,7 +57,8 @@ int main(void) {
 
 // 제출 결과
 구현 시간 - 1번째 시도 1시간 30분
-1번째 시도 - 맞았습니다! 채점 시간 5초.
+1번째 시도 - 맞았습니다! 채점 시간 5초. numTemp 배열크기 잘못 설정한 거 발견해서 채점 다시 돌림.
+2번째 시도 - 맞았습니다! 채점 시간 3초.
 
 // test case
 1 4
