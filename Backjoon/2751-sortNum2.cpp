@@ -3,7 +3,7 @@
 
 // 구현 방법
 solv1 버블 정렬 -> 시간 초과
-solv2 퀵 정렬 -> 시간 초과
+solv2 퀵 정렬 -> 시간 초과. 그 이후 코드 수정하긴 했는데, 굳이 돌려보진 않았음.
 solv3 힙 정렬. 24173번 코드 거의 복붙함. 최대 힙 활용, 오름차순 정렬. 배열 0번부터 활용함. -> 시간 초과
 solv4 병합 정렬. 2750번 코드 가져와서 배열 크기만 늘림. -> 맞았습니다
 
@@ -64,35 +64,39 @@ int main(void) {
 
 using namespace std;
 
-void quickSort(int num[], int left, int right) {
-    //네이버 백과사전 코드 활용
-    int i, j, pivot;
-    if (left < right) {
-        i = left;
-        j = right + 1;
-        pivot = num[left];
+void quickSort(int num[], int iL, int iR) {
+    if (iL < iR) {
+        int i, j, pivot;
+        i = iL;
+        j = iR + 1;
+        pivot = num[iL]; // 기준값 : 배열 중 맨 왼쪽 값
 
         do {
-            //피봇 왼쪽 수들 중 피봇보다 큰 값 찾기
+            // 배열 왼쪽 끝부터, pivot보다 크거나 같은 값 찾기
             do {
                 i++;
-            } while (num[i] < pivot);
-            //피봇 오른쪽 수들 중 피봇보다 작은 값 찾기
+            } while (i < iR && num[i] < pivot);
+            // 배열 오른쪽 끝부터, pivot보다 작은 값 찾기
             do {
                 j--;
-            } while (num[j] > pivot);
+            } while (j > iL && num[j] >= pivot);
             if (i < j) {
+                // cout << "@ a iL=" << iL << ", iR=" << iR << ",\ti=" << i << ", j=" << j << ",\t\tpivot=" << pivot << ",\tnum[i]=" << num[i] << ", num[j]=" << num[j] << "\n";
                 int temp = num[i];
                 num[i] = num[j];
                 num[j] = temp;
             }
-        } while (i < j); //left와 right가 교차할 때까지 반복
+        } while (i < j); // i(큰 수)가 j(작은 수)보다 오른쪽에 있으면, 교환할 숫자가 없다는 뜻이기 때문에 break
 
-        int temp = num[left];
-        num[left] = num[j];
-        num[j] = temp;
-        quickSort(num, left, j - 1);
-        quickSort(num, j + 1, right);
+        if (iL < j) {
+            // j위치에 pivot을 넣는다. pivot은 이제 자리 고정됨
+            // cout << "@@b iL=" << iL << ", iR=" << iR << ",\tp=" << iL << ", j=" << j << ",\t\tpivot=" << pivot << ",\tnum[l]=" << num[iL] << ", num[j]=" << num[j] << "\n";
+            int temp = num[iL];
+            num[iL] = num[j];
+            num[j] = temp;
+        }
+        quickSort(num, iL, j - 1);
+        quickSort(num, j + 1, iR);
     }
 }
 
@@ -111,7 +115,7 @@ int main(void) {
 
     // output
     for (int i = 0; i < N; i++)
-        cout << num[i] << endl;
+        cout << num[i] << "\n";
 
     return 0;
 }
