@@ -1,0 +1,16 @@
+# directories -----------------
+
+/.metadata/
+bin/
+.settings/
+
+
+
+
+
+# files -----------------
+
+# .gitignore
+# .classpath
+# .project
+*.class
