@@ -1,6 +1,6 @@
 package assignment;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class BasicTest07 {
 
@@ -11,26 +11,31 @@ public class BasicTest07 {
 //		a[0] = sc.nextDouble(); 
 		
 		// arguments 입력받기
-		while (true) {
-			if (args.length != 5) {
-				System.out.println("Err> 5개의 정수를 입력하세요.");
-			} else {
-				int input;
-				for (int i = 0; i < 5; i++) {
-					input = Integer.parseInt(args[i]);
-					if (input < 10 || input > 99) {
-						System.out.println("Err> 10~99까지의 숫자를 입력하세요.");
-						break;
-					}
+		if (args.length != 5) {
+			System.out.println("Err> 5개의 정수를 입력하세요.");
+		} else {
+			int[] input = new int[5];
+			for (int i = 0; i < 5; i++) {
+				input[i] = Integer.parseInt(args[i]);
+				if (input[i] < 10 || input[i] > 99) {
+					System.out.println("Err> 10~99까지의 숫자를 입력하세요.");
+					return;
 				}
 			}
+			
+			// 계산
+			double result = (input[0] + input[1]) / 2 * 0.6 + (input[2] + input[3]) / 2 * 0.2 + input[4] * 0.2;
+			System.out.println("평가점수 : " + result + "점");
+			System.out.print("Class : ");
+			if (result >= 90) {
+				System.out.println("Gold Class");
+			} else if (result >= 80) {
+				System.out.println("Silver Class");
+			} else if (result >= 70) {
+				System.out.println("Bronze Class");
+			} else {
+				System.out.println("Normal Class");
+			}
 		}
-		for (int i = 0; i < 5; i++) {
-		}
-		
-		for (int i = 0; i < 5; i++) {
-			System.out.println(a[i] + ", ");
-		}
-		
 	}
 }
