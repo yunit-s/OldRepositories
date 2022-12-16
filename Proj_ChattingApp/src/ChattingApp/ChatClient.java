@@ -11,7 +11,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,22 +20,25 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class ChatClient extends Application {
 
-	// Layout - top
-	TextField ServerIpField;
-	TextField ServerPortField;
+	// Layout components - top
+	Label serverIpLabel;
+	TextField serverIpField;
+	Label serverPortLabel;
+	TextField serverPortField;
 	Button connBtn;
 	Label nameLabel;
 	TextField nameField;
 	
-	// Layout - bottom
+	// Layout components - center
+	TextArea chatArea;
+	
+	// Layout components - bottom
 	Label sendtoLabel;
 	TextField sendtoField;
-	TextArea chatArea;
 	TextField inputTextField;
 	
 	// Communicate
@@ -62,16 +64,24 @@ public class ChatClient extends Application {
 		rootPane.setPrefSize(700, 500);
 		
 		// Layout - top
+		serverIpLabel = new Label("Server IP:");
+		serverIpLabel.setPrefSize(60, 40);
+		serverIpLabel.setAlignment(Pos.CENTER_RIGHT);
+		
 		String ServerIp = "127.0.0.1";
-		ServerIpField = new TextField(ServerIp);
-		ServerIpField.setPrefSize(100, 40);
+		serverIpField = new TextField(ServerIp);
+		serverIpField.setPrefSize(80, 40);
+		
+		serverPortLabel = new Label("Server Port:");
+		serverPortLabel.setPrefSize(80, 40);
+		serverPortLabel.setAlignment(Pos.CENTER_RIGHT);
 		
 		String ServerPort = "7777";
-		ServerPortField = new TextField(ServerPort);
-		ServerPortField.setPrefSize(50, 40);
+		serverPortField = new TextField(ServerPort);
+		serverPortField.setPrefSize(60, 40);
 		
 		connBtn = new Button("Connet Server");
-		connBtn.setPrefSize(150, 40);
+		connBtn.setPrefSize(100, 40);
 		connBtn.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -79,10 +89,13 @@ public class ChatClient extends Application {
 				try {
 					// connect Server
 					int Port = 7777;
-					socket = new Socket(ServerIpField.getText(), Port);
+					socket = new Socket(serverIpField.getText(), Port);
 					pr = new PrintWriter(socket.getOutputStream());
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-					printMsg("Sys> IP:" + ServerIpField.getText() + ", Port:" + Port + " Server connect success!");
+					pr.println(nameField.getText());
+					pr.flush();
+					nameField.setDisable(true);
+					printMsg("Sys> Server connect success! (IP:" + serverIpField.getText() + ", Port:" + Port + ")");
 
 					// generate Thread - receive message from Server
 					Thread RcvThread = new Thread(new Runnable() {
@@ -94,8 +107,12 @@ public class ChatClient extends Application {
 									String msg = br.readLine();
 									String[] msgToken = msg.split(":");
 									String msgFrom = msgToken[0];
-//									String msgTo = msgToken[1];
-									String msgContents = msgToken[2];
+									String msgContents;
+									if (msgToken.length != 2) {
+										msgContents = "";
+									} else {
+										msgContents = msgToken[1];
+									}
 									printMsg(msgFrom + "> " + msgContents);
 									
 								} catch (IOException e) {
@@ -126,8 +143,10 @@ public class ChatClient extends Application {
 		FlowPane topPane = new FlowPane();
 		topPane.setPadding(new Insets(10));
 		topPane.setHgap(10);
-		topPane.getChildren().add(ServerIpField);
-		topPane.getChildren().add(ServerPortField);
+		topPane.getChildren().add(serverIpLabel);
+		topPane.getChildren().add(serverIpField);
+		topPane.getChildren().add(serverPortLabel);
+		topPane.getChildren().add(serverPortField);
 		topPane.getChildren().add(connBtn);
 		topPane.getChildren().add(nameLabel);
 		topPane.getChildren().add(nameField);
@@ -152,11 +171,11 @@ public class ChatClient extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// send Message
-//				printMsg("Sys> Enter in chatField");
 				String msg = inputTextField.getText();
-				pr.println(nameField.getText() + ":" + sendtoField.getText() + ":" + msg);
-				pr.flush(); 
+				pr.println(sendtoField.getText() + ":" + msg);
+				pr.flush();
 				inputTextField.clear();
+				printMsg("Me> " + msg);
 			}
 		});
 		
