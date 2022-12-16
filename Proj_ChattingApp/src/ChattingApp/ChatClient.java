@@ -11,23 +11,35 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class ChatClient extends Application {
 
+	// Layout - top
 	TextField ServerIpField;
 	TextField ServerPortField;
 	Button connBtn;
+	Label nameLabel;
+	TextField nameField;
+	
+	// Layout - bottom
+	Label sendtoLabel;
+	TextField sendtoField;
 	TextArea chatArea;
 	TextField inputTextField;
 	
+	// Communicate
 	Socket socket;
 	PrintWriter pr;
 	BufferedReader br;
@@ -70,7 +82,7 @@ public class ChatClient extends Application {
 					socket = new Socket(ServerIpField.getText(), Port);
 					pr = new PrintWriter(socket.getOutputStream());
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-					printMsg("Sys> Server connect success!");
+					printMsg("Sys> IP:" + ServerIpField.getText() + ", Port:" + Port + " Server connect success!");
 
 					// generate Thread - receive message from Server
 					Thread RcvThread = new Thread(new Runnable() {
@@ -79,13 +91,20 @@ public class ChatClient extends Application {
 						public void run() {
 							while (true) {
 								try {
-									printMsg(br.readLine());
+									String msg = br.readLine();
+									String[] msgToken = msg.split(":");
+									String msgFrom = msgToken[0];
+//									String msgTo = msgToken[1];
+									String msgContents = msgToken[2];
+									printMsg(msgFrom + "> " + msgContents);
+									
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
 							}
 						}
 					});
+					RcvThread.setDaemon(true);
 					RcvThread.start();
 					
 				} catch (UnknownHostException e) {
@@ -96,12 +115,22 @@ public class ChatClient extends Application {
 			}
 		});
 		
+		nameLabel = new Label("My name");
+		nameLabel.setPrefSize(100, 40);
+//		nameLabel.setTextAlignment(TextAlignment.RIGHT);
+		nameLabel.setAlignment(Pos.CENTER_RIGHT);
+				
+		nameField = new TextField("Lion");
+		nameField.setPrefSize(100, 40);
+		
 		FlowPane topPane = new FlowPane();
 		topPane.setPadding(new Insets(10));
 		topPane.setHgap(10);
 		topPane.getChildren().add(ServerIpField);
 		topPane.getChildren().add(ServerPortField);
 		topPane.getChildren().add(connBtn);
+		topPane.getChildren().add(nameLabel);
+		topPane.getChildren().add(nameField);
 		rootPane.setTop(topPane);
 		
 		// Layout - center
@@ -109,8 +138,15 @@ public class ChatClient extends Application {
 		rootPane.setCenter(chatArea);
 		
 		// Layout - bottom
+		sendtoLabel = new Label("send to");
+		sendtoLabel.setPrefSize(50, 40);
+		sendtoLabel.setAlignment(Pos.CENTER_RIGHT);
+		
+		sendtoField = new TextField("Apeach");
+		sendtoField.setPrefSize(100, 40);
+		
 		inputTextField = new TextField();
-		inputTextField.setPrefSize(200, 40);
+		inputTextField.setPrefSize(300, 40);
 		inputTextField.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -118,7 +154,7 @@ public class ChatClient extends Application {
 				// send Message
 //				printMsg("Sys> Enter in chatField");
 				String msg = inputTextField.getText();
-				pr.println(msg);
+				pr.println(nameField.getText() + ":" + sendtoField.getText() + ":" + msg);
 				pr.flush(); 
 				inputTextField.clear();
 			}
@@ -126,6 +162,9 @@ public class ChatClient extends Application {
 		
 		FlowPane bottomPane = new FlowPane();
 		bottomPane.setPadding(new Insets(10));
+		bottomPane.setHgap(10);
+		bottomPane.getChildren().add(sendtoLabel);
+		bottomPane.getChildren().add(sendtoField);
 		bottomPane.getChildren().add(inputTextField);
 		rootPane.setBottom(bottomPane);
 		
@@ -134,6 +173,7 @@ public class ChatClient extends Application {
 		
 		// window launch
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("Multi Chatting - Client v.221216");
 		primaryStage.show();
 	}
 
