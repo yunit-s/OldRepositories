@@ -190,7 +190,7 @@ SELECT usertbl.userID, name FROM usertbl
 	INNER JOIN buytbl
     ON usertbl.userID = buytbl.userID;
 
-SELECT usertbl.userID, name FROM usertbl U
+SELECT U.userID, name FROM usertbl U
 	INNER JOIN buytbl B
     ON U.userID = B.userID;
 

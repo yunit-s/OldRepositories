@@ -13,7 +13,7 @@ SHOW DATABASES; -- 현재 접속한 사용자 계정의 권한으로 접근할 �
 SHOW TABLE STATUS; -- 현재 접근 중인 DB의 테이블들 상태를 확인한다.
 
 -- 특정 테이블 명세 조회(Table Inspector의 기능)
-DESC departments; -- DESC : describe. 내림차순
+DESC departments; -- DESC : describe. 묘사하다
 DESC employees;
 
 
@@ -37,6 +37,8 @@ FROM employees;
 -- 만약 원하는 조건이 있다면, 조건절을 이용해야 한다. WHERE 사용.
 -- 교수님께서 자료 주심. 12.21_create_schema(prof).sql / 12.21_insert_data(prof).sql
 -- 앞 파일로 DB, 테이블 생성, 뒤 파일로 데이터 추가(한글 처리할 때 조심할 것)
+
+USE sqldb;
 
 -- Q. 이름이 김경호인 사람의 정보를 출력하세요.
 -- WHERE
@@ -176,13 +178,14 @@ FROM buytbl;
 -- Q. usertbl에서 가장 큰 키와 가장 작은 키의 회원 이름과 키를 출력하세요.
 -- (이거는 그룹핑 아니다. 서브 쿼리 이용하는 문제다.)
 SELECT userID, height
-FROM buytbl
-WHERE height = MAX(height);
+FROM usertbl
+WHERE height = (SELECT MAX(height) FROM usertbl) OR height = (SELECT MIN(height) FROM usertbl);
 
 -- COUNT() : 몇 개 있는지 세어준다. NULL 은 세지 않는다.
 -- Q. usertbl에서 휴대폰이 있는 사용자의 수를 출력하세요.
 SELECT COUNT(userID)
-FROM usertbl;
+FROM usertbl
+WHERE mobile1 IS NOT NULL;
 
 -- HAVING절
 -- Q. 사용자별 총 구매금액이 1,000 이상인 사용자의 ID와 구매 금액을 출력하세요.
