@@ -21,7 +21,7 @@ public class DeleteExam {
 			Connection con = DriverManager.getConnection(jdbc_url, id, pw);
 			
 			// 트랜잭션 세팅하기
-			con.setAutoCommit(false); // Auto commit 기능을 끄면서, 이때부터는 트랜잭션이 걸리게 된
+			con.setAutoCommit(false); // Auto commit 기능을 끄면서, 이때부터는 트랜잭션이 걸리게 된다.
 
 			// 3. PreparedStatement 생성
 			String sql = "DELETE FROM book WHERE btitle LIKE ?"; // 특정 키워드가 들어가있는 책은 전부 지우기
