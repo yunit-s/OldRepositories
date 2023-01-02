@@ -17,4 +17,17 @@ public class BookService {
 		return list;
 	}
 
+	public ObservableList<BookVO> deleteBook(String isbnOfSelectedBook, String searchKeyword) {
+		// TODO Auto-generated method stub
+		
+		// dao 생성
+		// dao에 isbn 넘기면서 삭제 메소드 실행
+		// 검색했던 키워드 그대로 재검색해서 결과물 list를 리턴
+		BookDAO dao = new BookDAO();
+		int rows = dao.delete(isbnOfSelectedBook);
+		System.out.println("@@ deleteBook rows = " + rows);
+		ObservableList<BookVO> list = dao.select(searchKeyword);
+		return list;
+	}
+
 }

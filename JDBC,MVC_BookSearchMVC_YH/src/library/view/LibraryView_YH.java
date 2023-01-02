@@ -18,7 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import library.controller.BookDeleteController;
 import library.controller.BookSearchController;
+import library.dao.BookDAO;
 import library.vo.BookVO;
 
 public class LibraryView_YH extends Application{
@@ -31,6 +33,7 @@ public class LibraryView_YH extends Application{
 	
 	// database keyword
 	String searchKeyword;
+	String isbnOfSelectedBook;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -64,7 +67,12 @@ public class LibraryView_YH extends Application{
 		deleteBtn.setPrefSize(150, 40);
 		deleteBtn.setDisable(true);
 		deleteBtn.setOnAction(e -> {
+			// delete a book from list
+			BookDeleteController controller = new BookDeleteController();
+			ObservableList<BookVO> list = controller.deleteBookByIsbn(isbnOfSelectedBook, searchKeyword);
+			tableView.setItems(list);
 			
+			deleteBtn.setDisable(true);
 		});
 		
 		// 컬럼 객체 생성
@@ -88,7 +96,21 @@ public class LibraryView_YH extends Application{
 		tableView.setRowFactory(e -> {
 
 			TableRow<BookVO> row = new TableRow<>(); // TableRow 생성해서 행을 만듦
-			return row; // 해당 행 리턴하기
+			
+			// row 를 클릭하면, 해당 도서의 isbn값 저장하기. 빈 칸 선택에 대한 예외처리도 할 것
+			row.setOnMouseClicked(ce -> {
+				BookVO book = row.getItem();
+				if (book == null) {
+					// click empty row
+					System.out.println("@@ 빈 칸 클릭됨");
+					return;
+				}
+				isbnOfSelectedBook = book.getBisbn();
+				deleteBtn.setDisable(false);
+				System.out.println("@@ 선택된 책 제목 : " + book.getBtitle());
+			});
+			
+			return row; // row setting complete
 		});
 
 		flowPane.getChildren().add(searchTextField);
@@ -104,14 +126,14 @@ public class LibraryView_YH extends Application{
 
 		// 창을 닫을 때 실행할 내용
 		primaryStage.setOnCloseRequest(e -> {
-//			System.out.println("창 닫힘");
+			System.out.println("@@ Window closed");
 			// 프로그램이 종료될 때, Connection Pool 자체도 종료시켜서 연결을 모두 끊어줘야 한다.
-//			try {
-//				((BasicDataSource)getDataSource()).close();
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
+			try {
+				((BasicDataSource)BookDAO.getDataSource()).close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		
 		primaryStage.show();
