@@ -3,15 +3,14 @@ package MVC.Service;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import MVC.DAO.BookDAO;
 import MVC.DAO.DBCP_Apache;
-import MVC.VO.BookVO;
-import javafx.collections.ObservableList;
+import MVC.DAO.UserDAO;
 
-public class BookService {
+public class UserService {
 
-	public ObservableList<BookVO> searchBook(String searchCategory, String searchWord) {
+	public boolean Login(String id, String pw) {
 		// TODO Auto-generated method stub
+//		System.out.println("@@ userService.login() 실행");
 		
 		Connection con = null;
 		try {
@@ -20,11 +19,17 @@ public class BookService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// dao에서 select 실행
-		BookDAO bookDao = new BookDAO(con);
-		ObservableList<BookVO> list = bookDao.select(searchCategory, searchWord);
-
+		
+		UserDAO userDao = new UserDAO(con);
+		String userPw = userDao.getPassword(id);
+		
+		boolean result = false;
+		if (pw.equals(userPw)) {
+			// 비밀번호 일치. 로그인 성공
+			System.out.println("@@ 비밀번호 일치");
+			result = true;
+		}
+		
 		try {
 			con.close();
 		} catch (SQLException e) {
@@ -32,7 +37,7 @@ public class BookService {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return result;
 	}
 
 }

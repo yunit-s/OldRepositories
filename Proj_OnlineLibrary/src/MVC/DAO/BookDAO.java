@@ -1,6 +1,14 @@
 package MVC.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import MVC.VO.BookVO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class BookDAO {
 
@@ -12,6 +20,48 @@ public class BookDAO {
 
 	public BookDAO(Connection con) {
 		this.con = con;
+	}
+	
+	public ObservableList<BookVO> select(String searchCategory, String searchWord) {
+		// TODO Auto-generated method stub
+		// sql 문 완성하기
+		// con에서 pstmt 생성
+		// execute
+		// list에 저장하기
+		// 할당 해제
+		// 리턴
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT bisbn, btitle, bauthor, bprice ");
+		sql.append("FROM book ");
+		sql.append("WHERE " + searchCategory + " LIKE ? ");
+		sql.append("ORDER BY btitle");
+
+		System.out.println("@@ check1 " + searchCategory + searchWord);
+		ObservableList<BookVO> list = FXCollections.observableArrayList();
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql.toString());
+//			pstmt.setString(1, searchCategory);
+			pstmt.setString(1, "%" + searchWord + "%");
+			System.out.println("@@ pstmt = " + pstmt.toString());
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				BookVO book = new BookVO(rs.getString("bisbn"), rs.getString("btitle"), rs.getString("bauthor"), rs.getInt("bprice"));
+				list.add(book);
+			}
+			
+			rs.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("@@ check2");
+		
+		return list;
 	}
 	
 	
