@@ -18,7 +18,18 @@ public class UserVO {
 		this.nickname = nickname;
 		this.pw = pw;
 	}
-	
+	public UserVO(String id, String nickname, String pw, String email, String phone, String identquest,
+			String identanswer) {
+		this.id = id;
+		this.nickname = nickname;
+		this.pw = pw;
+		this.email = email;
+		this.phone = phone;
+		this.identquest = identquest;
+		this.identanswer = identanswer;
+	}
+
+
 	public String getId() {return id;}
 	public void setId(String id) {this.id = id;}
 	public String getNickname() {return nickname;}

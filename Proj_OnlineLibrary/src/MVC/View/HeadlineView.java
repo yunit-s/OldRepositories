@@ -11,23 +11,29 @@ import javafx.scene.layout.FlowPane;
 
 public class HeadlineView {
 
-	// Layout
-	private BorderPane rootPane;
-	private FlowPane leftPane;
-	private FlowPane rightPane;
 	
-	// View Components
-	private Button goToHomeButton;
+	public HeadlineView() {
+	}
 	
-	private Button loginButton;
-//	private Label userNickname;
-//	private Button logoutButton;
-//	private Button myPageButton;
-	
-	// Logic Fields
-	ShareVO share;
-	
-	public HeadlineView(ShareVO share) {
+	public BorderPane getRootPane(ShareVO share) {
+
+		// Declare variables -----
+		
+		// Layout
+		BorderPane rootPane;
+		FlowPane leftPane;
+		FlowPane rightPane;
+		
+		// Components
+		Button goToHomeButton;
+		
+		Button loginButton;
+		
+		
+		
+		
+		
+		// Initialize -----
 		
 		// Layout
 		rootPane = new BorderPane();
@@ -38,37 +44,28 @@ public class HeadlineView {
 		goToHomeButton = new Button();
 		
 		loginButton = new Button();
-//		userNickname = new Label();
-//		logoutButton = new Button();
-//		myPageButton = new Button();
 		
-		// Share Object
-		this.share = share;
-	}
-	
-	public BorderPane getRootPane() {
+		
+		
+		
+		
+		// View -----
+		
 		goToHomeButton.setText("Home");
 		goToHomeButton.setPrefSize(50, 30);
 		goToHomeButton.setOnAction(e -> {
-//			share.getMainPane().setCenter(share.getBookSearchView().getRootPane());
-			share.getMainPane().setCenter(share.getBookSearchView().getRootPane());
+//			share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
+			// 실험 중
+			share.getMainPane().setCenter(share.getMypageView().getRootPane(share));
+//			share.getMainPane().setCenter(share.getMypageMenuView().getRootPane(share));
+//			share.getMainPane().setCenter(share.getMypageBorrowStatView().getRootPane(share));
 		});
 		
 		loginButton.setText("로그인");
 		loginButton.setPrefSize(80, 30);
 		loginButton.setOnAction(e -> {
-			share.getMainPane().setCenter(share.getLoginView().getRootPane());
+			share.getMainPane().setCenter(share.getLoginView().getRootPane(share));
 		});
-		
-//		userNickname.setText("누구누구" + " 님");
-//		userNickname.setPrefSize(80, 40);
-//		
-//		logoutButton.setText("로그아웃");
-//		logoutButton.setPrefSize(80, 40);
-//		
-//		myPageButton.setText("마이페이지");
-//		myPageButton.setPrefSize(80, 40);
-		
 		
 		leftPane.getChildren().add(goToHomeButton);
 		leftPane.setPadding(new Insets(5));

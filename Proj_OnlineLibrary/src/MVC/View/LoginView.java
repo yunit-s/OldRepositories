@@ -15,23 +15,29 @@ import javafx.scene.layout.VBox;
 
 public class LoginView {
 
-	// Layout
-	private BorderPane rootPane;
-	private VBox centerPane;
-	private HBox idPane;
-	private HBox pwPane;
-	
-	// View Components
-	private Label idLabel;
-	private TextField idTextField;
-	private Label pwLabel;
-	private PasswordField pwPwField;
-	private Button loginButton;
-	
-	// Logic Fields
-	ShareVO share;
-	
-	public LoginView(ShareVO share) {
+	public BorderPane getRootPane(ShareVO share) {
+
+		// Declare variables -----
+		
+		// Layout
+		BorderPane rootPane;
+		VBox centerPane;
+		HBox idPane;
+		HBox pwPane;
+		
+		// Components
+		Label idLabel;
+		TextField idTextField;
+		Label pwLabel;
+		PasswordField pwPwField;
+		Button loginButton;
+		Button signUpButton;
+		
+		
+		
+		
+		
+		// Initialize -----
 		
 		// Layout
 		rootPane = new BorderPane();
@@ -45,36 +51,28 @@ public class LoginView {
 		pwLabel = new Label();
 		pwPwField = new PasswordField();
 		loginButton = new Button();
+		signUpButton = new Button();
 
-		// Share object
-		this.share = share;
-	}
-	
-	public BorderPane getRootPane() {
-
-		// View Components
 		
-		idLabel = new Label();
+		
+		
+		
+		// View -----
+		
 		idLabel.setText("아이디");
-		idLabel.setPrefSize(60, 40);
+		idLabel.setPrefSize(60, 30);
 		idLabel.setAlignment(Pos.CENTER_RIGHT);
-		
-		idTextField = new TextField();
 		idTextField.setText("admin");
-		idTextField.setPrefSize(130, 40);
+		idTextField.setPrefSize(130, 30);
 		
-		pwLabel = new Label();
 		pwLabel.setText("비밀번호");
-		pwLabel.setPrefSize(60, 40);
+		pwLabel.setPrefSize(60, 30);
 		pwLabel.setAlignment(Pos.CENTER_RIGHT);
-		
-		pwPwField = new PasswordField();
 		pwPwField.setText("qwer1234");
-		pwPwField.setPrefSize(130, 40);
+		pwPwField.setPrefSize(130, 30);
 		
-		loginButton = new Button();
 		loginButton.setText("Login");
-		loginButton.setPrefSize(200, 40);
+		loginButton.setPrefSize(200, 30);
 		loginButton.setOnAction(e -> {
 			// ID, PW 확인하기
 			String id = idTextField.getText();
@@ -89,13 +87,21 @@ public class LoginView {
 //				Window.setScene(homeScene);
 				
 				// 검색 화면으로 이동
-				share.getMainPane().setCenter(share.getBookSearchView().getRootPane());
+				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 				
 			} else {
 				// 로그인 실패 시
 				System.out.println("@@ 로그인 실패");
 			}
 			
+		});
+
+		signUpButton.setText("Sign Up");
+		signUpButton.setPrefSize(90, 30);
+		signUpButton.setOnAction(e -> {
+			// 회원가입
+			System.out.println("@@ 회원가입");
+			share.getMainPane().setCenter(share.getSignUpView().getRootPane(share));
 		});
 
 		
@@ -117,6 +123,7 @@ public class LoginView {
 		centerPane.getChildren().add(idPane);
 		centerPane.getChildren().add(pwPane);
 		centerPane.getChildren().add(loginButton);
+		centerPane.getChildren().add(signUpButton);
 		
 		rootPane.setCenter(centerPane);
 		

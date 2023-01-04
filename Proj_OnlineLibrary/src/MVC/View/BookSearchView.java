@@ -1,8 +1,11 @@
 package MVC.View;
 
+import MVC.Controller.BookSearchController;
 import MVC.Controller.LoginController;
 import MVC.VO.BookVO;
 import MVC.VO.ShareVO;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -19,31 +22,37 @@ import javafx.scene.layout.VBox;
 
 public class BookSearchView {
 
-	// Layout
-	private BorderPane rootPane;
-	private HBox topPane;
-	private VBox centerPane;
-	private HBox bottomPane;
-	
-	// View Components
-	private Label categoryLabel; // 콤보박스면 최고
-//	ComboBox<String> categoryCombo;
-	private TextField searchWordTextField;
-	private Button searchButton;
-	private TableView<BookVO> bookTableView;
-	private Button borrowButton;
-	
-	private ShareVO share;
-	
-	public BookSearchView(ShareVO share) {
+	public BorderPane getRootPane(ShareVO share) {
+
+		// Declare variables -----
+
+		// Layout
+		BorderPane rootPane;
+		HBox topPane;
+		VBox centerPane;
+		HBox bottomPane;
 		
+		// Components
+		Label categoryLabel; // 콤보박스면 최고
+//		ComboBox<String> categoryCombo;
+		TextField searchWordTextField;
+		Button searchButton;
+		TableView<BookVO> bookTableView;
+		Button borrowButton;
+		
+		
+		
+		
+		
+		// Initialize -----
+
 		// Layout
 		rootPane = new BorderPane();
 		topPane = new HBox();
 		centerPane = new VBox();
 		bottomPane = new HBox();
 		
-		// View Components
+		// Components
 		categoryLabel = new Label(); // 콤보박스면 최고
 //		ComboBox<String> category;
 		searchWordTextField = new TextField();
@@ -51,30 +60,34 @@ public class BookSearchView {
 		bookTableView = new TableView<BookVO>();
 		borrowButton = new Button();
 
-		// Share Object
-		this.share = share;
-	}
-	
-	public BorderPane getRootPane() {
-
-		// View Components
 		
-		categoryLabel.setText("제목");
+		
+		
+		
+		// View -----
+		
+		categoryLabel.setText("btitle");
 		categoryLabel.setPrefSize(60, 40);
 		categoryLabel.setAlignment(Pos.CENTER);
 		
 		searchWordTextField.setText("검색어 입력");
-		searchWordTextField.setPrefSize(300, 40);
+		searchWordTextField.setPrefSize(400, 40);
 		searchWordTextField.setOnAction(e -> {
 			// 책 검색 (혹은 searchButton action 실행시키기)
 			System.out.println("@@ 책 검색");
+			BookSearchController controller = new BookSearchController();
+			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			bookTableView.setItems(list);
 		});
 		
 		searchButton.setText("검색");
 		searchButton.setPrefSize(60, 40);
 		searchButton.setOnAction(e -> {
 			// 책 검색
-			
+			// 일단은 위에 내용 복붙함
+			BookSearchController controller = new BookSearchController();
+			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			bookTableView.setItems(list);
 		});
 
 		// 컬럼 객체 생성
@@ -136,10 +149,11 @@ public class BookSearchView {
 		
 		
 		
-		// layout
+		// Layout
 		
 		topPane.setSpacing(10);
 		topPane.setAlignment(Pos.CENTER);
+		topPane.setPadding(new Insets(10));
 		topPane.getChildren().add(categoryLabel);
 		topPane.getChildren().add(searchWordTextField);
 		topPane.getChildren().add(searchButton);

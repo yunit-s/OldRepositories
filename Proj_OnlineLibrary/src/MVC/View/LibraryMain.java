@@ -35,42 +35,35 @@ import javafx.stage.Stage;
 
 public class LibraryMain extends Application{
 
-	// Layout
-	private Stage window;
-	
-	private Scene homeScene;
-	
-	// View Components
-	
-	// Logic Fields
-	private ShareVO share;
-	
-	public void LibraryMainInit() {
-
-		share = new ShareVO();
-		
-		homeScene = new Scene(share.getMainPane());
-	}
-	
-	
-	
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		window = primaryStage;
-		LibraryMainInit();
+		
+		// Declare variables -----
+		ShareVO share;
+		Scene homeScene;
 		
 		
+		
+		
+		// Initialize -----
+		
+		share = new ShareVO();
+		homeScene = new Scene(share.getMainPane());
+		
+		
+		
+		
+		// View -----
 		
 		share.getMainPane().setPrefSize(700, 500);
-		share.getMainPane().setTop(share.getHeadlineView().getRootPane());
-		share.getMainPane().setCenter(share.getLoginView().getRootPane());
+		share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
+		share.getMainPane().setCenter(share.getLoginView().getRootPane(share));
 //		share.getMainPane().setCenter(share.getBookSearchView().getRootPane());
 		
 		
 		
-		window.setScene(homeScene);
-		window.show();
+		primaryStage.setScene(homeScene);
+		primaryStage.show();
 		
 		
 	

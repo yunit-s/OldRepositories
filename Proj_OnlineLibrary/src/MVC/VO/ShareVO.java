@@ -3,6 +3,10 @@ package MVC.VO;
 import MVC.View.BookSearchView;
 import MVC.View.HeadlineView;
 import MVC.View.LoginView;
+import MVC.View.MypageBorrowStatView;
+import MVC.View.MypageMenuView;
+import MVC.View.MypageView;
+import MVC.View.SignUpView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -13,8 +17,13 @@ public class ShareVO {
 	private HeadlineView headlineView;
 	private LoginView loginView;
 	private BookSearchView bookSearchView;
+	private SignUpView signUpView;
+	private MypageView mypageView;
+	private MypageMenuView mypageMenuView;
+	private MypageBorrowStatView mypageBorrowStatView;
 	
 	private UserVO user;
+	
 	
 	
 	
@@ -23,22 +32,22 @@ public class ShareVO {
 		
 		mainPane = new BorderPane();
 		
-		headlineView = new HeadlineView(this);
-		loginView = new LoginView(this);
-		bookSearchView = new BookSearchView(this);
+		headlineView = new HeadlineView();
+		loginView = new LoginView();
+		bookSearchView = new BookSearchView();
+		signUpView = new SignUpView();
+		mypageView = new MypageView();
+		mypageMenuView = new MypageMenuView();
+		mypageBorrowStatView = new MypageBorrowStatView();
+		
+		user = null;
 	}
 
-//	public ShareVO(BorderPane mainPane, HeadlineView headlineView, LoginView loginView, BookSearchView bookSearchView) {
-//		this.mainPane = mainPane;
-//		this.headlineView = headlineView;
-//		this.loginView = loginView;
-//		this.bookSearchView = bookSearchView;
-//	}
 
-	
-	
-	
-	
+
+
+
+
 	public BorderPane getMainPane() {
 		return mainPane;
 	}
@@ -63,5 +72,29 @@ public class ShareVO {
 	public void setBookSearchView(BookSearchView bookSearchView) {
 		this.bookSearchView = bookSearchView;
 	}
-
+	public SignUpView getSignUpView() {
+		return signUpView;
+	}
+	public void setSignUpView(SignUpView signUpView) {
+		this.signUpView = signUpView;
+	}
+	public MypageView getMypageView() {
+		return mypageView;
+	}
+	public void setMypageView(MypageView mypageView) {
+		this.mypageView = mypageView;
+	}
+	public MypageMenuView getMypageMenuView() {
+		return mypageMenuView;
+	}
+	public void setMypageMenuView(MypageMenuView mypageMenuView) {
+		this.mypageMenuView = mypageMenuView;
+	}
+	public MypageBorrowStatView getMypageBorrowStatView() {
+		return mypageBorrowStatView;
+	}
+	public void setMypageBorrowStatView(MypageBorrowStatView mypageBorrowStatView) {
+		this.mypageBorrowStatView = mypageBorrowStatView;
+	}
+	
 }
