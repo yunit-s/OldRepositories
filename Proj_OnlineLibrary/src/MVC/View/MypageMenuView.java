@@ -1,13 +1,16 @@
 package MVC.View;
 
 import MVC.Controller.LoginController;
+import MVC.Controller.WithdrawController;
 import MVC.VO.ShareVO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,6 +32,7 @@ public class MypageMenuView {
 		Button withdrawButton;
 		
 		Button modifyBookDBButton;
+		Button outstandingBookButton;
 		Button customerListButton;
 		Button modifyWebsiteButton;
 		
@@ -49,6 +53,7 @@ public class MypageMenuView {
 		withdrawButton = new Button();
 		
 		modifyBookDBButton = new Button();
+		outstandingBookButton = new Button();
 		customerListButton = new Button();
 		modifyWebsiteButton = new Button();
 
@@ -94,22 +99,49 @@ public class MypageMenuView {
 		withdrawButton.setText("회원탈퇴");
 		withdrawButton.setPrefSize(160, 30);
 		withdrawButton.setOnAction(e -> {
-			
+			System.out.println("@@ 회원 탈퇴");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("회원탈퇴");
+			alert.setHeaderText("회원 탈퇴");
+			alert.setContentText(share.getUser().getNickname() + " 님의 계정이 탈퇴되었습니다.");
+			alert.setOnCloseRequest(e2 -> {
+				System.out.println("@@ alert 창 닫힘");
+				// 여기에 회원 탈퇴하는 코드 넣을 것
+				WithdrawController controller = new WithdrawController();
+				int rows = controller.withdrawAccount(share.getUser().getId());
+				share.setUser(null);
+				share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
+				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
+			});
+			alert.show();
+
 		});
 		
 		modifyBookDBButton.setText("도서 데이터베이스 수정");
 		modifyBookDBButton.setPrefSize(160, 30);
-//		if (!share.getUser().getId().equals("admin")) {
-//			modifyBookDBButton.setVisible(false);
-//		}
 		modifyBookDBButton.setOnAction(e -> {
-			
+			System.out.println("@@ 도서 데이터베이스 수정");
+			BorderPane pane = share.getMypageView().getRootPane(share);
+			pane.setCenter(share.getMypageModifyBookDBView().getRootPane(share));
+			share.getMainPane().setCenter(pane);
+		});
+
+		outstandingBookButton.setText("미납 도서");
+		outstandingBookButton.setPrefSize(160, 30);
+		outstandingBookButton.setOnAction(e -> {
+			System.out.println("@@ 미납 도서");
+			BorderPane pane = share.getMypageView().getRootPane(share);
+			pane.setCenter(share.getMypageOutstandingBookView().getRootPane(share));
+			share.getMainPane().setCenter(pane);
 		});
 		
 		customerListButton.setText("회원 목록");
 		customerListButton.setPrefSize(160, 30);
 		customerListButton.setOnAction(e -> {
-			
+			System.out.println("@@ 회원 목록");
+			BorderPane pane = share.getMypageView().getRootPane(share);
+			pane.setCenter(share.getMypageUserListView().getRootPane(share));
+			share.getMainPane().setCenter(pane);
 		});
 		
 		modifyWebsiteButton.setText("사이트 편집");
@@ -124,37 +156,20 @@ public class MypageMenuView {
 		
 		// Layout
 		
-//		idPane.setSpacing(10);
-//		idPane.setAlignment(Pos.BASELINE_CENTER);
-//		idPane.getChildren().add(idLabel);
-//		idPane.getChildren().add(idTextField);
-//		
-//		pwPane.setSpacing(10);
-//		pwPane.setAlignment(Pos.CENTER);
-//		pwPane.getChildren().add(pwLabel);
-//		pwPane.getChildren().add(pwPwField);
-//
-//		centerPane.setSpacing(10);
-//		centerPane.setAlignment(Pos.CENTER);
-//		centerPane.getChildren().add(idPane);
-//		centerPane.getChildren().add(pwPane);
-//		centerPane.getChildren().add(loginButton);
-//		centerPane.getChildren().add(signUpButton);
-		
-//		rootPane.setCenter(centerPane);
 		rootPane.setSpacing(10);
 		rootPane.setPadding(new Insets(5));
 		rootPane.setAlignment(Pos.CENTER);
 		rootPane.getChildren().add(myBorrowStatButton);
-		rootPane.getChildren().add(myBorrowLogButton);
-		rootPane.getChildren().add(myInterBookButton);
+//		rootPane.getChildren().add(myBorrowLogButton);
+//		rootPane.getChildren().add(myInterBookButton);
 		rootPane.getChildren().add(modifyMyInfoButton);
 		rootPane.getChildren().add(withdrawButton);
 		if (share.getUser().getId().equals("admin")) {
-			System.out.println("@@ admin 계정");
+			System.out.println("@@ Mypage menu - admin 계정");
 			rootPane.getChildren().add(modifyBookDBButton);
+			rootPane.getChildren().add(outstandingBookButton);
 			rootPane.getChildren().add(customerListButton);
-			rootPane.getChildren().add(modifyWebsiteButton);
+//			rootPane.getChildren().add(modifyWebsiteButton);
 		} else {
 			System.out.println("@@ 일반회원 계정");
 		}

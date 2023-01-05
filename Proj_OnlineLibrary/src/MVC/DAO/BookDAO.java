@@ -93,7 +93,7 @@ public class BookDAO {
 			
 			while (rs.next()) {
 				BookVO book = new BookVO(rs.getString("bisbn"), rs.getString("btitle"), rs.getString("bdate"), rs.getInt("bpage"), rs.getInt("bprice"),
-						rs.getString("bauthor"), rs.getString("btranslator"), rs.getString("bsupplement"), rs.getString("bpublisher"));
+						rs.getString("bauthor"), rs.getString("bpublisher"), rs.getString("bimgurl"));
 				list.add(book);
 			}
 			

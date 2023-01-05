@@ -8,10 +8,10 @@ public class BookVO {
 	private int bpage;
 	private int bprice;
 	private String bauthor;
-	private String btranslator;
-	private String bsupplement;
+//	private String btranslator;
+//	private String bsupplement;
 	private String bpublisher;
-//	private String bimgurl;
+	private String bimgurl;
 //	private String bimgbase64;
 
 	public BookVO(String bisbn, String btitle, String bauthor, int bprice) {
@@ -20,17 +20,18 @@ public class BookVO {
 		this.bauthor = bauthor;
 		this.bprice = bprice;
 	}
-	public BookVO(String bisbn, String btitle, String bdate, int bpage, int bprice, String bauthor, String btranslator,
-		String bsupplement, String bpublisher) {
+	public BookVO(String bisbn, String btitle, String bdate, int bpage, int bprice, String bauthor,
+			String bpublisher, String bimgurl) {
 		this.bisbn = bisbn;
 		this.btitle = btitle;
 		this.bdate = bdate;
 		this.bpage = bpage;
 		this.bprice = bprice;
 		this.bauthor = bauthor;
-		this.btranslator = btranslator;
-		this.bsupplement = bsupplement;
+//		this.btranslator = btranslator;
+//		this.bsupplement = bsupplement;
 		this.bpublisher = bpublisher;
+		this.bimgurl = bimgurl;
 	}
 
 	public String getBisbn() {return bisbn;}
@@ -45,11 +46,13 @@ public class BookVO {
 	public void setBprice(int bprice) {this.bprice = bprice;}
 	public String getBauthor() {return bauthor;}
 	public void setBauthor(String bauthor) {this.bauthor = bauthor;}
-	public String getBtranslator() {return btranslator;}
-	public void setBtranslator(String btranslator) {this.btranslator = btranslator;}
-	public String getBsupplement() {return bsupplement;}
-	public void setBsupplement(String bsupplement) {this.bsupplement = bsupplement;}
+//	public String getBtranslator() {return btranslator;}
+//	public void setBtranslator(String btranslator) {this.btranslator = btranslator;}
+//	public String getBsupplement() {return bsupplement;}
+//	public void setBsupplement(String bsupplement) {this.bsupplement = bsupplement;}
 	public String getBpublisher() {return bpublisher;}
 	public void setBpublisher(String bpublisher) {this.bpublisher = bpublisher;}
+	public String getBimgurl() {return bimgurl;}
+	public void setBimgurl(String bimgurl) {this.bimgurl = bimgurl;}
 	
 }

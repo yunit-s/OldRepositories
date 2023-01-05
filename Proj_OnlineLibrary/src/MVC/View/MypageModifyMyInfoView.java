@@ -1,5 +1,6 @@
 package MVC.View;
 
+import MVC.Controller.ModifyUserInfoController;
 import MVC.VO.ShareVO;
 import MVC.VO.UserVO;
 import javafx.geometry.HPos;
@@ -89,13 +90,13 @@ public class MypageModifyMyInfoView {
 		pwLabel.setText("비밀번호");
 		pwLabel.setPrefSize(80, 30);
 		pwLabel.setAlignment(Pos.CENTER_RIGHT);
-//		pwPwField.setText("qwer1234");
+		pwPwField.setText("qwer1234");
 		pwPwField.setPrefSize(250, 30);
 		
 		pwcheckLabel.setText("비밀번호확인");
 		pwcheckLabel.setPrefSize(80, 30);
 		pwcheckLabel.setAlignment(Pos.CENTER_RIGHT);
-//		pwcheckPwField.setText("qwer123");
+		pwcheckPwField.setText("qwer1234");
 		pwcheckPwField.setPrefSize(250, 30);
 		
 		emailLabel.setText("e-mail");
@@ -128,17 +129,27 @@ public class MypageModifyMyInfoView {
 			// 기존 데이터와 중복 여부 확인
 			
 //			LoginController controller = new LoginController();
-			if (true) {
+			ModifyUserInfoController controller = new ModifyUserInfoController();
+			if (controller.checkIdInUsersDB(idTextField.getText()) != null) {
 				System.out.println("@@ 개인 정보 수정 완료");
 				
-				UserVO user = new UserVO(idTextField.getText(), nicknameTextField.getText(), pwPwField.getText(), emailTextField.getText(),
-						phoneTextField.getText(), identquestTextField.getText(), identanswerTextField.getText(), "일반회원");
+				String id = idTextField.getText();
+				String nickname = nicknameTextField.getText();
+				String pw = pwPwField.getText();
+				String email = emailTextField.getText();
+				String phone = phoneTextField.getText();
+				String identquest = identquestTextField.getText();
+				String identanswer = identanswerTextField.getText();
+				String tier = share.getUser().getTier();
+				int point = share.getUser().getPoint();
+				UserVO user = new UserVO(id, nickname, pw, email, phone, identquest, identanswer, tier, point);
+				int rows = controller.editUserToUsersDB(user);
 				share.setUser(user);
 				// 헤드라인 갱신
 				share.getMainPane().setTop(share.getHeadlineLoggedinView().getRootPane(share));
 			} else {
-				// 로그인 실패 시
-				System.out.println("@@ 개인 정보 수정 실패");
+				// 아이디 검색 실패 시
+				System.out.println("@@ 개인 정보 수정 실패. 아이디 불일치");
 			}
 			
 		});

@@ -66,10 +66,21 @@ public class LibraryMain extends Application{
 		
 		
 		primaryStage.setScene(homeScene);
+		primaryStage.setTitle("Online Library");
+		primaryStage.setOnCloseRequest(e -> {
+			// close connection pool
+			System.out.println("@@ primary stage 종료");
+			try {
+				((BasicDataSource)DBCP_Apache.getDataSource()).close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("@@ connection pool 할당해제");
+		});
 		primaryStage.show();
 		
-		
-	
+
 	
 	
 	

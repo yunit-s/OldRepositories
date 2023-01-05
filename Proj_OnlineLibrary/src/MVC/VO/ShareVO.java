@@ -5,8 +5,11 @@ import MVC.View.HeadlineLoggedinView;
 import MVC.View.HeadlineView;
 import MVC.View.LoginView;
 import MVC.View.MypageModifyMyInfoView;
+import MVC.View.MypageOutstandingBookView;
 import MVC.View.MypageBorrowStatView;
+import MVC.View.MypageUserListView;
 import MVC.View.MypageMenuView;
+import MVC.View.MypageModifyBookDBView;
 import MVC.View.MypageView;
 import MVC.View.SignUpView;
 import javafx.scene.layout.BorderPane;
@@ -25,6 +28,9 @@ public class ShareVO {
 	private MypageBorrowStatView mypageBorrowStatView;
 	private HeadlineLoggedinView headlineLoggedinView;
 	private MypageModifyMyInfoView mypageModifyMyInfoView;
+	private MypageUserListView mypageUserListView;
+	private MypageModifyBookDBView mypageModifyBookDBView;
+	private MypageOutstandingBookView mypageOutstandingBookView;
 	
 	private UserVO user;
 	
@@ -45,6 +51,9 @@ public class ShareVO {
 		mypageBorrowStatView = new MypageBorrowStatView();
 		headlineLoggedinView = new HeadlineLoggedinView();
 		mypageModifyMyInfoView = new MypageModifyMyInfoView();
+		mypageUserListView = new MypageUserListView();
+		mypageModifyBookDBView = new MypageModifyBookDBView();
+		mypageOutstandingBookView = new MypageOutstandingBookView();
 		
 		user = null;
 	}
@@ -113,14 +122,32 @@ public class ShareVO {
 	public MypageModifyMyInfoView getMypageModifyMyInfoView() {
 		return mypageModifyMyInfoView;
 	}
-	public void setModifyMyInfoView(MypageModifyMyInfoView mypageModifyMyInfoView) {
+	public void setMypageModifyMyInfoView(MypageModifyMyInfoView mypageModifyMyInfoView) {
 		this.mypageModifyMyInfoView = mypageModifyMyInfoView;
 	}
-	
-	
-	
-	
-	
+	public MypageUserListView getMypageUserListView() {
+		return mypageUserListView;
+	}
+	public void setMypageUserListView(MypageUserListView mypageUserListView) {
+		this.mypageUserListView = mypageUserListView;
+	}
+	public MypageModifyBookDBView getMypageModifyBookDBView() {
+		return mypageModifyBookDBView;
+	}
+	public void setMypageModifyBookDBView(MypageModifyBookDBView mypageModifyBookDBView) {
+		this.mypageModifyBookDBView = mypageModifyBookDBView;
+	}
+	public MypageOutstandingBookView getMypageOutstandingBookView() {
+		return mypageOutstandingBookView;
+	}
+	public void setMypageOutstandingBookView(MypageOutstandingBookView mypageOutstandingBookView) {
+		this.mypageOutstandingBookView = mypageOutstandingBookView;
+	}
+
+
+
+
+
 	public UserVO getUser() {
 		return user;
 	}

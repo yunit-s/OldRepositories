@@ -1,5 +1,6 @@
 package MVC.View;
 
+import MVC.Controller.SignUpController;
 import MVC.VO.ShareVO;
 import MVC.VO.UserVO;
 import javafx.geometry.HPos;
@@ -76,7 +77,7 @@ public class SignUpView {
 		idLabel.setText("아이디");
 		idLabel.setPrefSize(80, 30);
 		idLabel.setAlignment(Pos.CENTER_RIGHT);
-		idTextField.setText("이종석");
+		idTextField.setText("jslee");
 		idTextField.setPrefSize(250, 30);
 		
 		nicknameLabel.setText("닉네임");
@@ -127,19 +128,31 @@ public class SignUpView {
 			// 기존 데이터와 중복 여부 확인
 			
 //			LoginController controller = new LoginController();
-			if (true) {
-				// 중복이 아니면, 회원 가입
+			
+			SignUpController controller = new SignUpController();
+			
+			if (controller.checkIdInUsersDB(idTextField.getText()) == null) {
+				// 존재하지 않는 id인 경우, 회원 가입
 				System.out.println("@@ 회원가입 완료");
 				
-				UserVO user = new UserVO(idTextField.getText(), nicknameTextField.getText(), pwPwField.getText(), emailTextField.getText(),
-						phoneTextField.getText(), identquestTextField.getText(), identanswerTextField.getText(), "Bronze");
+				String id = idTextField.getText();
+				String nickname = nicknameTextField.getText();
+				String pw = pwPwField.getText();
+				String email = emailTextField.getText();
+				String phone = phoneTextField.getText();
+				String identquest = identquestTextField.getText();
+				String identanswer = identanswerTextField.getText();
+				String tier = "Bronze";
+				int point = 0;
+				UserVO user = new UserVO(id, nickname, pw, email, phone, identquest, identanswer, tier, point);
+				controller.addNewuserToUsersDB(user);
 				share.setUser(user);
 				// 검색 화면으로 이동
 				share.getMainPane().setTop(share.getHeadlineLoggedinView().getRootPane(share));
 				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 			} else {
 				// 로그인 실패 시
-				System.out.println("@@ 회원가입 실패");
+				System.out.println("@@ 회원가입 실패 - 아이디 중복");
 			}
 			
 		});

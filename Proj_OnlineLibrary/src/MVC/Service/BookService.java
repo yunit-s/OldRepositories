@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 public class BookService {
 
 	public ObservableList<BookVO> searchBook(String searchCategory, String searchWord) {
-		// TODO Auto-generated method stub
 		
 		Connection con = null;
 		try {

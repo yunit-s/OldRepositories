@@ -10,13 +10,14 @@ public class UserVO {
 	private String identquest;
 	private String identanswer;
 	private String tier;
+	private int point;
 
 	
 	
 	public UserVO(String id) {
 		this.id = id;
 	}
-	public UserVO(String id, String nickname, String pw, String email, String phone, String identquest, String identanswer, String tier) {
+	public UserVO(String id, String nickname, String pw, String email, String phone, String identquest, String identanswer, String tier, int point) {
 		this.id = id;
 		this.nickname = nickname;
 		this.pw = pw;
@@ -25,6 +26,7 @@ public class UserVO {
 		this.identquest = identquest;
 		this.identanswer = identanswer;
 		this.tier = tier;
+		this.point = point;
 	}
 
 
@@ -44,6 +46,8 @@ public class UserVO {
 	public void setIdentanswer(String identanswer) {this.identanswer = identanswer;}
 	public String getTier() {return tier;}
 	public void setTier(String tier) {this.tier = tier;}
+	public int getPoint() {return point;}
+	public void setPoint(int point) {this.point = point;}
 	
 //	public void setUserInfo(String id, String nickname, String pw, String email, String phone, String identquest, String identanswer) {
 //		this.id = id;

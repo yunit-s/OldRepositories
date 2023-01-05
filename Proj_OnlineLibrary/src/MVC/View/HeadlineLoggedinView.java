@@ -51,8 +51,8 @@ public class HeadlineLoggedinView {
 		// View -----
 		
 		// Components
-		goToHomeButton.setText("Home");
-		goToHomeButton.setPrefSize(70, 30);
+		goToHomeButton.setText("『Online Library』");
+		goToHomeButton.setPrefSize(130, 30);
 		goToHomeButton.setOnAction(e -> {
 			// 실험 중
 			share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
