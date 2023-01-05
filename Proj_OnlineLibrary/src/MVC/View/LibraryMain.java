@@ -39,8 +39,10 @@ public class LibraryMain extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		
 		// Declare variables -----
+		
 		ShareVO share;
 		Scene homeScene;
+		
 		
 		
 		
@@ -49,6 +51,7 @@ public class LibraryMain extends Application{
 		
 		share = new ShareVO();
 		homeScene = new Scene(share.getMainPane());
+		
 		
 		
 		
@@ -412,4 +415,5 @@ public class LibraryMain extends Application{
 	public static void main(String[] args) {
 		launch();
 	}
+	
 }

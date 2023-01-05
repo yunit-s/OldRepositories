@@ -20,6 +20,18 @@ public class BookVO {
 		this.bauthor = bauthor;
 		this.bprice = bprice;
 	}
+	public BookVO(String bisbn, String btitle, String bdate, int bpage, int bprice, String bauthor, String btranslator,
+		String bsupplement, String bpublisher) {
+		this.bisbn = bisbn;
+		this.btitle = btitle;
+		this.bdate = bdate;
+		this.bpage = bpage;
+		this.bprice = bprice;
+		this.bauthor = bauthor;
+		this.btranslator = btranslator;
+		this.bsupplement = bsupplement;
+		this.bpublisher = bpublisher;
+	}
 
 	public String getBisbn() {return bisbn;}
 	public void setBisbn(String bisbn) {this.bisbn = bisbn;}

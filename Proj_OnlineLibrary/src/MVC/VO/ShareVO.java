@@ -1,8 +1,10 @@
 package MVC.VO;
 
 import MVC.View.BookSearchView;
+import MVC.View.HeadlineLoggedinView;
 import MVC.View.HeadlineView;
 import MVC.View.LoginView;
+import MVC.View.MypageModifyMyInfoView;
 import MVC.View.MypageBorrowStatView;
 import MVC.View.MypageMenuView;
 import MVC.View.MypageView;
@@ -21,6 +23,8 @@ public class ShareVO {
 	private MypageView mypageView;
 	private MypageMenuView mypageMenuView;
 	private MypageBorrowStatView mypageBorrowStatView;
+	private HeadlineLoggedinView headlineLoggedinView;
+	private MypageModifyMyInfoView mypageModifyMyInfoView;
 	
 	private UserVO user;
 	
@@ -39,9 +43,13 @@ public class ShareVO {
 		mypageView = new MypageView();
 		mypageMenuView = new MypageMenuView();
 		mypageBorrowStatView = new MypageBorrowStatView();
+		headlineLoggedinView = new HeadlineLoggedinView();
+		mypageModifyMyInfoView = new MypageModifyMyInfoView();
 		
 		user = null;
 	}
+
+
 
 
 
@@ -95,6 +103,29 @@ public class ShareVO {
 	}
 	public void setMypageBorrowStatView(MypageBorrowStatView mypageBorrowStatView) {
 		this.mypageBorrowStatView = mypageBorrowStatView;
+	}
+	public HeadlineLoggedinView getHeadlineLoggedinView() {
+		return headlineLoggedinView;
+	}
+	public void setHeadlineLoggedinView(HeadlineLoggedinView headlineLoggedinView) {
+		this.headlineLoggedinView = headlineLoggedinView;
+	}
+	public MypageModifyMyInfoView getMypageModifyMyInfoView() {
+		return mypageModifyMyInfoView;
+	}
+	public void setModifyMyInfoView(MypageModifyMyInfoView mypageModifyMyInfoView) {
+		this.mypageModifyMyInfoView = mypageModifyMyInfoView;
+	}
+	
+	
+	
+	
+	
+	public UserVO getUser() {
+		return user;
+	}
+	public void setUser(UserVO user) {
+		this.user = user;
 	}
 	
 }

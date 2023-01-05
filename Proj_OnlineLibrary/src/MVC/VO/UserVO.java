@@ -13,13 +13,10 @@ public class UserVO {
 
 	
 	
-	public UserVO(String id, String nickname, String pw) {
+	public UserVO(String id) {
 		this.id = id;
-		this.nickname = nickname;
-		this.pw = pw;
 	}
-	public UserVO(String id, String nickname, String pw, String email, String phone, String identquest,
-			String identanswer) {
+	public UserVO(String id, String nickname, String pw, String email, String phone, String identquest, String identanswer, String tier) {
 		this.id = id;
 		this.nickname = nickname;
 		this.pw = pw;
@@ -27,6 +24,7 @@ public class UserVO {
 		this.phone = phone;
 		this.identquest = identquest;
 		this.identanswer = identanswer;
+		this.tier = tier;
 	}
 
 
@@ -47,5 +45,30 @@ public class UserVO {
 	public String getTier() {return tier;}
 	public void setTier(String tier) {this.tier = tier;}
 	
+//	public void setUserInfo(String id, String nickname, String pw, String email, String phone, String identquest, String identanswer) {
+//		this.id = id;
+//		this.nickname = nickname;
+//		this.pw = pw;
+//		this.email = email;
+//		this.phone = phone;
+//		this.identquest = identquest;
+//		this.identanswer = identanswer;
+//		
+//	}
+	
+//	public void setLoginUserInfo(String id) {
+//		this.id = id;
+//	}
+	
+//	public void setUser(UserVO user) {
+//		id = user.getId();
+//		nickname = user.getNickname();
+//		pw = user.getPw();
+//		email = user.getEmail();
+//		phone = user.getPhone();
+//		identquest = user.getIdentquest();
+//		identanswer = user.getIdentanswer();
+//		tier = user.getTier();
+//	}
 	
 }

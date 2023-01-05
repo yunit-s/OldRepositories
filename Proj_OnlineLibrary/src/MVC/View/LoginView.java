@@ -58,7 +58,8 @@ public class LoginView {
 		
 		
 		// View -----
-		
+
+		// Components
 		idLabel.setText("아이디");
 		idLabel.setPrefSize(60, 30);
 		idLabel.setAlignment(Pos.CENTER_RIGHT);
@@ -80,13 +81,13 @@ public class LoginView {
 			System.out.println("@@ 로그인 시도. id = " + id + ", pw = " + pw);
 			
 			LoginController controller = new LoginController();
-			if (controller.tryLogin(id, pw) == true) {
+			UserVO user = controller.login(id, pw); 
+			if (user != null) {
 				// 로그인 성공 시
-				System.out.println("@@ 로그인 성공");
-//				user = new UserVO(id, "관리자", pw);
-//				Window.setScene(homeScene);
-				
+				System.out.println("@@ 로그인 성공. id = " + user.getId());
+				share.setUser(user);
 				// 검색 화면으로 이동
+				share.getMainPane().setTop(share.getHeadlineLoggedinView().getRootPane(share));
 				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 				
 			} else {
@@ -107,7 +108,6 @@ public class LoginView {
 		
 		
 		// Layout
-		
 		idPane.setSpacing(10);
 		idPane.setAlignment(Pos.BASELINE_CENTER);
 		idPane.getChildren().add(idLabel);
@@ -129,4 +129,5 @@ public class LoginView {
 		
 		return rootPane;
 	}
+	
 }

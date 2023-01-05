@@ -11,10 +11,6 @@ import javafx.scene.layout.FlowPane;
 
 public class HeadlineView {
 
-	
-	public HeadlineView() {
-	}
-	
 	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
@@ -50,13 +46,14 @@ public class HeadlineView {
 		
 		
 		// View -----
-		
+
+		// Components
 		goToHomeButton.setText("Home");
-		goToHomeButton.setPrefSize(50, 30);
+		goToHomeButton.setPrefSize(70, 30);
 		goToHomeButton.setOnAction(e -> {
-//			share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
+			share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 			// 실험 중
-			share.getMainPane().setCenter(share.getMypageView().getRootPane(share));
+//			share.getMainPane().setCenter(share.getMypageView().getRootPane(share));
 //			share.getMainPane().setCenter(share.getMypageMenuView().getRootPane(share));
 //			share.getMainPane().setCenter(share.getMypageBorrowStatView().getRootPane(share));
 		});
@@ -66,7 +63,10 @@ public class HeadlineView {
 		loginButton.setOnAction(e -> {
 			share.getMainPane().setCenter(share.getLoginView().getRootPane(share));
 		});
+
 		
+		
+		// Layout
 		leftPane.getChildren().add(goToHomeButton);
 		leftPane.setPadding(new Insets(5));
 		leftPane.setAlignment(Pos.CENTER_LEFT);
@@ -81,4 +81,5 @@ public class HeadlineView {
 		
 		return rootPane;
 	}
+	
 }

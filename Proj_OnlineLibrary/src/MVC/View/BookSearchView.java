@@ -65,7 +65,8 @@ public class BookSearchView {
 		
 		
 		// View -----
-		
+
+		// Components
 		categoryLabel.setText("btitle");
 		categoryLabel.setPrefSize(60, 40);
 		categoryLabel.setAlignment(Pos.CENTER);
@@ -106,7 +107,7 @@ public class BookSearchView {
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("bprice"));
 		// 위에서 만든 컬럼 객체를 TableView에 붙인다.
 		bookTableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, priceColumn);
-		
+		bookTableView.setPadding(new Insets(5));
 		bookTableView.setRowFactory(e -> {
 
 			TableRow<BookVO> row = new TableRow<>();
@@ -150,7 +151,6 @@ public class BookSearchView {
 		
 		
 		// Layout
-		
 		topPane.setSpacing(10);
 		topPane.setAlignment(Pos.CENTER);
 		topPane.setPadding(new Insets(10));
@@ -172,4 +172,5 @@ public class BookSearchView {
 		
 		return rootPane;
 	}
+	
 }

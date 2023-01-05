@@ -43,6 +43,7 @@ public class MypageBorrowStatView {
 		
 		// View -----
 
+		// Components
 		returnBookButton.setText("반납하기");
 		returnBookButton.setPrefSize(200, 30);
 		returnBookButton.setOnAction(e -> {
@@ -122,7 +123,6 @@ public class MypageBorrowStatView {
 //			
 //		});
 
-
 		
 		
 		// Layout
@@ -132,4 +132,5 @@ public class MypageBorrowStatView {
 		
 		return rootPane;
 	}
+	
 }

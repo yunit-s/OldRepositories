@@ -28,6 +28,10 @@ public class MypageMenuView {
 		Button modifyMyInfoButton;
 		Button withdrawButton;
 		
+		Button modifyBookDBButton;
+		Button customerListButton;
+		Button modifyWebsiteButton;
+		
 		
 		
 		
@@ -43,16 +47,25 @@ public class MypageMenuView {
 		myInterBookButton = new Button();
 		modifyMyInfoButton = new Button();
 		withdrawButton = new Button();
+		
+		modifyBookDBButton = new Button();
+		customerListButton = new Button();
+		modifyWebsiteButton = new Button();
 
 		
 		
 		
 		
 		// View -----
-		
+
+		// Components
 		myBorrowStatButton.setText("내 대여 현황 & 반납");
 		myBorrowStatButton.setPrefSize(160, 30);
 		myBorrowStatButton.setOnAction(e -> {
+			System.out.println("@@ 내 대여 현황 & 반납");
+			BorderPane pane = share.getMypageView().getRootPane(share);
+			pane.setCenter(share.getMypageBorrowStatView().getRootPane(share));
+			share.getMainPane().setCenter(pane);
 			
 		});
 		
@@ -71,7 +84,11 @@ public class MypageMenuView {
 		modifyMyInfoButton.setText("개인 정보 수정");
 		modifyMyInfoButton.setPrefSize(160, 30);
 		modifyMyInfoButton.setOnAction(e -> {
-			
+			System.out.println("@@ 개인 정보 수정");
+			BorderPane pane = share.getMypageView().getRootPane(share);
+			pane.setCenter(share.getMypageModifyMyInfoView().getRootPane(share));
+			share.getMainPane().setCenter(pane);
+//			share.getMypageView().getRootPane(share).setCenter(share.getModifyMyInfoView().getRootPane(share)); // 이건 동작 안 됨
 		});
 		
 		withdrawButton.setText("회원탈퇴");
@@ -80,31 +97,27 @@ public class MypageMenuView {
 			
 		});
 		
+		modifyBookDBButton.setText("도서 데이터베이스 수정");
+		modifyBookDBButton.setPrefSize(160, 30);
+//		if (!share.getUser().getId().equals("admin")) {
+//			modifyBookDBButton.setVisible(false);
+//		}
+		modifyBookDBButton.setOnAction(e -> {
+			
+		});
 		
-//		loginButton.setText("Login");
-//		loginButton.setPrefSize(200, 30);
-//		loginButton.setOnAction(e -> {
-//			// ID, PW 확인하기
-//			String id = idTextField.getText();
-//			String pw = pwPwField.getText();
-//			System.out.println("@@ 로그인 시도. id = " + id + ", pw = " + pw);
-//			
-//			LoginController controller = new LoginController();
-//			if (controller.tryLogin(id, pw) == true) {
-//				// 로그인 성공 시
-//				System.out.println("@@ 로그인 성공");
-////				user = new UserVO(id, "관리자", pw);
-////				Window.setScene(homeScene);
-//				
-//				// 검색 화면으로 이동
-//				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
-//				
-//			} else {
-//				// 로그인 실패 시
-//				System.out.println("@@ 로그인 실패");
-//			}
-//			
-//		});
+		customerListButton.setText("회원 목록");
+		customerListButton.setPrefSize(160, 30);
+		customerListButton.setOnAction(e -> {
+			
+		});
+		
+		modifyWebsiteButton.setText("사이트 편집");
+		modifyWebsiteButton.setPrefSize(160, 30);
+		modifyWebsiteButton.setOnAction(e -> {
+			
+		});
+		
 
 
 		
@@ -131,12 +144,22 @@ public class MypageMenuView {
 //		rootPane.setCenter(centerPane);
 		rootPane.setSpacing(10);
 		rootPane.setPadding(new Insets(5));
+		rootPane.setAlignment(Pos.CENTER);
 		rootPane.getChildren().add(myBorrowStatButton);
 		rootPane.getChildren().add(myBorrowLogButton);
 		rootPane.getChildren().add(myInterBookButton);
 		rootPane.getChildren().add(modifyMyInfoButton);
 		rootPane.getChildren().add(withdrawButton);
+		if (share.getUser().getId().equals("admin")) {
+			System.out.println("@@ admin 계정");
+			rootPane.getChildren().add(modifyBookDBButton);
+			rootPane.getChildren().add(customerListButton);
+			rootPane.getChildren().add(modifyWebsiteButton);
+		} else {
+			System.out.println("@@ 일반회원 계정");
+		}
 		
 		return rootPane;
 	}
+	
 }
