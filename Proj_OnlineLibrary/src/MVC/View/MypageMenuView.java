@@ -7,6 +7,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public class MypageMenuView {
 
@@ -100,20 +104,54 @@ public class MypageMenuView {
 		withdrawButton.setPrefSize(160, 30);
 		withdrawButton.setOnAction(e -> {
 			System.out.println("@@ 회원 탈퇴");
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("회원탈퇴");
-			alert.setHeaderText("회원 탈퇴");
-			alert.setContentText(share.getUser().getNickname() + " 님의 계정이 탈퇴되었습니다.");
-			alert.setOnCloseRequest(e2 -> {
-				System.out.println("@@ alert 창 닫힘");
-				// 여기에 회원 탈퇴하는 코드 넣을 것
-				WithdrawController controller = new WithdrawController();
-				int rows = controller.withdrawAccount(share.getUser().getId());
-				share.setUser(null);
-				share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
-				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
+			
+//			Alert alert = new Alert(AlertType.INFORMATION);
+//			alert.setTitle("회원탈퇴");
+//			alert.setHeaderText("회원 탈퇴");
+//			alert.setContentText(share.getUser().getNickname() + " 님의 계정이 탈퇴되었습니다.");
+//			alert.setOnCloseRequest(e2 -> {
+//				System.out.println("@@ alert 창 닫힘");
+//				// 여기에 회원 탈퇴하는 코드 넣을 것
+//				WithdrawController controller = new WithdrawController();
+//				int rows = controller.withdrawAccount(share.getUser().getId());
+//				share.setUser(null);
+//				share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
+//				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
+//			});
+//			alert.show();
+			
+			// Dialog로 구현하기
+			Dialog<String> dialog = new Dialog<String>();
+	        dialog.setTitle("회원 탈퇴");
+	        ButtonType typeYes = new ButtonType("예", ButtonData.YES);
+		    ButtonType typeNo = new ButtonType("아니오", ButtonData.NO);
+		    dialog.setContentText("탈퇴하시겠습니까?");
+		    dialog.getDialogPane().getButtonTypes().add(typeYes);
+		    dialog.getDialogPane().getButtonTypes().add(typeNo);
+//		    dialog.setOnCloseRequest(e2 -> {
+//		    	System.out.println("@@ dialog 닫힘");
+//		    });
+		    dialog.setResultConverter(new Callback<ButtonType, String>() {
+				
+				@Override
+				public String call(ButtonType param) {
+					if (param.getButtonData() == ButtonData.YES) {
+						System.out.println("@@ 회원 탈퇴 승인");
+						WithdrawController controller = new WithdrawController();
+						int rows = controller.withdrawAccount(share.getUser().getId());
+						share.setUser(null);
+						share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
+						share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
+					} else if (param.getButtonData() == ButtonData.NO) {
+						System.out.println("@@ 회원 탈퇴 취소");
+					}
+//					else if (param.getButtonData() == ButtonData.CANCEL_CLOSE) {
+//						System.out.println("@@ Dialog param = cancel_close"); // 이건 창 닫힐 때 무조건 눌리네
+//					}
+					return null;
+				}
 			});
-			alert.show();
+		    dialog.showAndWait();
 
 		});
 		

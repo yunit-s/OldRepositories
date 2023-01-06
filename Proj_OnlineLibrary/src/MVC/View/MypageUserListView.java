@@ -1,11 +1,13 @@
 package MVC.View;
 
 import MVC.Controller.UserSearchController;
+import MVC.Controller.WithdrawController;
 import MVC.VO.ShareVO;
 import MVC.VO.UserVO;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -16,9 +18,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class MypageUserListView {
 
+	// Business Logic
+	String selectedUserId;
+	
 	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
@@ -34,8 +40,8 @@ public class MypageUserListView {
 		TextField searchWordTextField;
 		Button searchButton;
 		TableView<UserVO> usersTableView;
-		Button modifyCustomerButton;
-		Button deleteCustomerButton;
+		Button modifyUserButton;
+		Button deleteUserButton;
 		
 		
 		
@@ -54,8 +60,8 @@ public class MypageUserListView {
 		searchWordTextField = new TextField();
 		searchButton = new Button();
 		usersTableView = new TableView<UserVO>();
-		modifyCustomerButton = new Button();
-		deleteCustomerButton = new Button();
+		modifyUserButton = new Button();
+		deleteUserButton = new Button();
 
 		
 		
@@ -71,11 +77,8 @@ public class MypageUserListView {
 		searchWordTextField.setText("jelee");
 		searchWordTextField.setPrefSize(400, 30);
 		searchWordTextField.setOnAction(e -> {
-			// 책 검색 (혹은 searchButton action 실행시키기)
+			// 회원 검색 (혹은 searchButton action 실행시키기)
 			System.out.println("@@ 사용자 검색");
-//			BookSearchController controller = new BookSearchController();
-//			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
-//			usersTableView.setItems(list);
 			UserSearchController controller = new UserSearchController();
 			ObservableList<UserVO> list = controller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
 			usersTableView.setItems(list);
@@ -84,11 +87,11 @@ public class MypageUserListView {
 		searchButton.setText("검색");
 		searchButton.setPrefSize(60, 30);
 		searchButton.setOnAction(e -> {
-			// 책 검색
+			// 회원 검색
 			// 일단은 위에 내용 복붙함
-//			BookSearchController controller = new BookSearchController();
-//			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
-//			usersTableView.setItems(list);
+			UserSearchController controller = new UserSearchController();
+			ObservableList<UserVO> list = controller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
+			usersTableView.setItems(list);
 		});
 
 
@@ -118,17 +121,11 @@ public class MypageUserListView {
 					System.out.println("@@ 빈 칸 클릭함");
 					return;
 				}
-				
+				selectedUserId = user.getId();
+				System.out.println("@@ selectedUserId = " + selectedUserId);
 				if(e1.getClickCount() == 2) {
 					System.out.println("@@ 행 더블클릭. title = " + row.getItem().getId());
 
-//					Dialog<String> dialog = new Dialog<String>();
-//  			        dialog.setTitle("책 세부정보");
-//				    ButtonType type = new ButtonType("Ok", ButtonData.OK_DONE);
-//				    dialog.setContentText(" 다이얼로그 테스트 ");
-//				    dialog.getDialogPane().getButtonTypes().add(type);
-//				    dialog.getDialogPane().setMinHeight(300);
-//		            dialog.showAndWait();
 				} else {
 					System.out.println("@@ 행 클릭. title = " + row.getItem().getId());
 					
@@ -139,16 +136,39 @@ public class MypageUserListView {
 
 		});
 		
-		modifyCustomerButton.setText("회원 수정");
-		modifyCustomerButton.setPrefSize(100, 30);
-		modifyCustomerButton.setOnAction(e -> {
+		modifyUserButton.setText("회원 수정");
+		modifyUserButton.setPrefSize(100, 30);
+		modifyUserButton.setOnAction(e -> {
 			System.out.println("@@ 회원 수정");
+			
+			// 새 stage에서 수정 작업 진행
+			MypageUserModifyView mypageUserModifyView = new MypageUserModifyView();
+			Stage userModifyStage = mypageUserModifyView.getRootStage(selectedUserId);
+			userModifyStage.setOnCloseRequest(e2 -> {
+				System.out.println("@@ 회원 수정 창 닫힘");
+				
+				// 회원 테이블 갱신
+				UserSearchController ucontroller = new UserSearchController();
+				ObservableList<UserVO> list = ucontroller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
+				usersTableView.setItems(list);
+			});
+			userModifyStage.show();
+			
 		});
 		
-		deleteCustomerButton.setText("회원 삭제");
-		deleteCustomerButton.setPrefSize(100, 30);
-		deleteCustomerButton.setOnAction(e -> {
+		deleteUserButton.setText("회원 삭제");
+		deleteUserButton.setPrefSize(100, 30);
+		deleteUserButton.setOnAction(e -> {
 			System.out.println("@@ 회원 삭제");
+			
+			// 회원 삭제
+			WithdrawController wcontroller = new WithdrawController();
+			int rows = wcontroller.withdrawAccount(selectedUserId);
+
+			// 회원 테이블 갱신
+			UserSearchController ucontroller = new UserSearchController();
+			ObservableList<UserVO> list = ucontroller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
+			usersTableView.setItems(list);
 		});
 
 		
@@ -163,8 +183,8 @@ public class MypageUserListView {
 
 		bottomPane.setAlignment(Pos.BASELINE_RIGHT);
 		bottomPane.setHgap(10);
-		bottomPane.getChildren().add(modifyCustomerButton);
-		bottomPane.getChildren().add(deleteCustomerButton);
+		bottomPane.getChildren().add(modifyUserButton);
+		bottomPane.getChildren().add(deleteUserButton);
 		
 		rootPane.setPadding(new Insets(5));
 		rootPane.setTop(topPane);
