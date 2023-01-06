@@ -35,7 +35,6 @@ public class BorrBookDAO {
 		String returndate = book.getReturndate();
 		
 		StringBuffer sql = new StringBuffer();
-		
 		sql.append("INSERT ");
 		sql.append("INTO borrbook (bisbn, btitle, id, borrdate, returndate) ");
 		sql.append("VALUES ");
@@ -100,6 +99,32 @@ public class BorrBookDAO {
 		
 		return list;
 		
+	}
+
+	public int deleteBookByBisbn(String selectedBookBisbn) {
+		// sql 문 작성
+		// con을 이용해서 pstmt 생성
+		// execute
+		// 영향받은 row 수 리턴
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("DELETE FROM borrbook ");
+		sql.append("WHERE bisbn = ?");
+		
+		int rows = 0;
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, selectedBookBisbn);
+			
+			System.out.println("@@ 도서 반납 pstmt = " + pstmt.toString());
+			rows = pstmt.executeUpdate();
+			
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rows;
 	}
 
 }

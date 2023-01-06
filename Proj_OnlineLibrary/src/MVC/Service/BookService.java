@@ -124,4 +124,29 @@ public class BookService {
 		return rows;
 	}
 
+	public int setReturnedBookOneByBisbn(String selectedBookBisbn) {
+		System.out.println("@@ bookService.setReturnedBookOneByBisbn() 실행");
+		
+		Connection con = null;
+		try {
+			con = DBCP_Apache.getDataSource().getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		BookDAO bookDao = new BookDAO(con);
+		int rows = bookDao.editBorrowableByBisbn(selectedBookBisbn, "o");
+//		LocalDate now = LocalDate.now();
+//		String returndate = now.plusDays(7).toString();
+		rows = bookDao.editReturndateByBisbn(selectedBookBisbn, null);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rows;
+	}
+
 }

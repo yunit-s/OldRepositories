@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class HeadlineLoggedinView {
 
@@ -17,11 +19,12 @@ public class HeadlineLoggedinView {
 		// Layout
 		BorderPane rootPane;
 		FlowPane leftPane;
+		FlowPane centerPane;
 		FlowPane rightPane;
 		
 		// Components
 		Button goToHomeButton;
-		
+		Label libraryBanner;
 		Label nicknameLabel;
 		Button logoutButton;
 		Button mypageButton;
@@ -35,11 +38,12 @@ public class HeadlineLoggedinView {
 		// Layout
 		rootPane = new BorderPane();
 		leftPane = new FlowPane();
+		centerPane = new FlowPane();
 		rightPane = new FlowPane();
 		
 		// Components
 		goToHomeButton = new Button();
-
+		libraryBanner = new Label();
 		nicknameLabel = new Label();
 		logoutButton = new Button();
 		mypageButton = new Button();
@@ -51,12 +55,14 @@ public class HeadlineLoggedinView {
 		// View -----
 		
 		// Components
-		goToHomeButton.setText("『Online Library』");
-		goToHomeButton.setPrefSize(130, 30);
+		goToHomeButton.setText("『 Home 』");
+		goToHomeButton.setPrefSize(100, 30);
 		goToHomeButton.setOnAction(e -> {
-			// 실험 중
 			share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 		});
+
+		libraryBanner.setText("Online Library");
+		libraryBanner.setFont(Font.font("Viner Hand ITC", FontWeight.BOLD, 25));
 		
 		nicknameLabel.setText(share.getUser().getNickname() + " 님");
 		nicknameLabel.setPrefSize(80, 30);
@@ -87,6 +93,10 @@ public class HeadlineLoggedinView {
 		leftPane.setPadding(new Insets(5));
 		leftPane.setAlignment(Pos.CENTER_LEFT);
 		
+		centerPane.getChildren().add(libraryBanner);
+		centerPane.setPadding(new Insets(5));
+		centerPane.setAlignment(Pos.CENTER);
+		
 //		rightPane.setColumnHalignment(HPos.RIGHT); // 이건 안 되네
 		rightPane.setPadding(new Insets(5));
 		rightPane.setHgap(10);
@@ -96,6 +106,7 @@ public class HeadlineLoggedinView {
 		rightPane.getChildren().add(mypageButton);
 		
 		rootPane.setLeft(leftPane);
+		rootPane.setCenter(centerPane);
 		rootPane.setRight(rightPane);
 		
 		return rootPane;

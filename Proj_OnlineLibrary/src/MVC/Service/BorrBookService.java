@@ -56,4 +56,26 @@ public class BorrBookService {
 		return list;
 	}
 
+	public int deleteBookOneByBisbn(String selectedBookBisbn) {
+		System.out.println("@@ BorrBookService.deleteBookOneByBorrBookVO() 실행");
+		
+		Connection con = null;
+		try {
+			con = DBCP_Apache.getDataSource().getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		BorrBookDAO borrBookDao = new BorrBookDAO(con);
+		int rows = borrBookDao.deleteBookByBisbn(selectedBookBisbn);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rows;
+	}
+
 }

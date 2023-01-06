@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class BookSearchView {
 
@@ -135,18 +136,17 @@ public class BookSearchView {
 						borrowButton.setDisable(true);
 					} else {
 						borrowButton.setDisable(false);
+						//왔다갑니다.
 					}
 					
 					if(e1.getClickCount() == 2) {
 						System.out.println("@@ 행 더블클릭. title = " + row.getItem().getBtitle());
-	
-//						Dialog<String> dialog = new Dialog<String>();
-//	  			        dialog.setTitle("책 세부정보");
-//					    ButtonType type = new ButtonType("Ok", ButtonData.OK_DONE);
-//					    dialog.setContentText(" 다이얼로그 테스트 ");
-//					    dialog.getDialogPane().getButtonTypes().add(type);
-//					    dialog.getDialogPane().setMinHeight(300);
-//			            dialog.showAndWait();
+
+						// 새 stage에서 상세정보 출력
+						BookVODetailView bookVODetailView = new BookVODetailView();
+						Stage detailStage = bookVODetailView.getRootStage(selectedBookBisbn);
+						detailStage.show();
+						
 					} else {
 						System.out.println("@@ 행 클릭. title = " + row.getItem().getBtitle());
 						
@@ -163,8 +163,8 @@ public class BookSearchView {
 		borrowButton.setOnAction(e -> {
 			System.out.println("@@ 책 대여하기");
 			
-			// book 테이블 수정
 			if (share.getUser() != null) {
+				// book, borrbook 테이블 수정
 				BorrowBookController borrowBookController = new BorrowBookController();
 				int rows = borrowBookController.borrowBookOneFromBookDBByBisbn(selectedBookBisbn, share.getUser());
 				

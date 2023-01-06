@@ -2,6 +2,7 @@ package MVC.View;
 
 import MVC.Controller.BookSearchController;
 import MVC.Controller.BorrBookSearchController;
+import MVC.Controller.ReturnBookController;
 import MVC.VO.BorrBookVO;
 import MVC.VO.ShareVO;
 import javafx.collections.FXCollections;
@@ -21,6 +22,9 @@ import javafx.scene.layout.HBox;
 
 public class MypageOutstandingBookView {
 
+	// Business Logic
+	String selectedBookBisbn;
+	
 	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
@@ -126,11 +130,12 @@ public class MypageOutstandingBookView {
 			TableRow<BorrBookVO> row = new TableRow<>();
 			row.setOnMouseClicked(e1 -> {
 				
-				BorrBookVO book = row.getItem();
-				if (book == null) {
+				BorrBookVO borrBook = row.getItem();
+				if (borrBook == null) {
 					System.out.println("@@ 빈 칸 클릭함");
 					return;
 				}
+				selectedBookBisbn = borrBook.getBisbn();
 				
 				if(e1.getClickCount() == 2) {
 					System.out.println("@@ 행 더블클릭. title = " + row.getItem().getBtitle());
@@ -159,6 +164,15 @@ public class MypageOutstandingBookView {
 		returnBookButton.setPrefSize(100, 30);
 		returnBookButton.setOnAction(e -> {
 			System.out.println("@@ 반납처리");
+
+			// book, borrbook 테이블 수정
+			ReturnBookController returnBookController = new ReturnBookController();
+			int rows = returnBookController.returnBookOneFromBorrBookDBByBisbn(selectedBookBisbn, share.getUser());
+			
+			// 목록 갱신
+			BorrBookSearchController controller = new BorrBookSearchController();
+			ObservableList<BorrBookVO> list = controller.searchBook("id", "");
+			bookTableView.setItems(list);
 		});
 
 		

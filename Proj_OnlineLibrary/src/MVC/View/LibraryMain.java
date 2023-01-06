@@ -60,8 +60,8 @@ public class LibraryMain extends Application{
 		
 		share.getMainPane().setPrefSize(700, 500);
 		share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
-		share.getMainPane().setCenter(share.getLoginView().getRootPane(share));
-//		share.getMainPane().setCenter(share.getBookSearchView().getRootPane());
+//		share.getMainPane().setCenter(share.getLoginView().getRootPane(share));
+		share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 		
 		
 		

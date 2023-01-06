@@ -1,6 +1,8 @@
 package MVC.View;
 
+import MVC.Controller.BookSearchController;
 import MVC.Controller.BorrBookSearchController;
+import MVC.Controller.ReturnBookController;
 import MVC.VO.BookVO;
 import MVC.VO.BorrBookVO;
 import MVC.VO.ShareVO;
@@ -58,12 +60,7 @@ public class MypageBorrowStatView {
 		// View -----
 
 		// Components
-		returnBookButton.setText("반납하기");
-		returnBookButton.setPrefSize(150, 30);
-		returnBookButton.setOnAction(e -> {
-			
-		});
-
+		
 		// 컬럼 객체 생성
 //		tableView.setPrefSize(700, 600);
 		TableColumn<BorrBookVO, String> isbnColumn = new TableColumn<>("ISBN");
@@ -115,31 +112,20 @@ public class MypageBorrowStatView {
 		tmplist = borrBookSearchController.searchBook("id", share.getUser().getId());
 		bookTableView.setItems(tmplist);
 
-		
-//		loginButton.setText("Login");
-//		loginButton.setPrefSize(200, 30);
-//		loginButton.setOnAction(e -> {
-//			// ID, PW 확인하기
-//			String id = idTextField.getText();
-//			String pw = pwPwField.getText();
-//			System.out.println("@@ 로그인 시도. id = " + id + ", pw = " + pw);
-//			
-//			LoginController controller = new LoginController();
-//			if (controller.tryLogin(id, pw) == true) {
-//				// 로그인 성공 시
-//				System.out.println("@@ 로그인 성공");
-////				user = new UserVO(id, "관리자", pw);
-////				Window.setScene(homeScene);
-//				
-//				// 검색 화면으로 이동
-//				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
-//				
-//			} else {
-//				// 로그인 실패 시
-//				System.out.println("@@ 로그인 실패");
-//			}
-//			
-//		});
+		returnBookButton.setText("반납하기");
+		returnBookButton.setPrefSize(150, 30);
+		returnBookButton.setOnAction(e -> {
+			System.out.println("@@ 반납하기");
+			
+			// book, borrbook 테이블 수정
+			ReturnBookController returnBookController = new ReturnBookController();
+			int rows = returnBookController.returnBookOneFromBorrBookDBByBisbn(selectedBookBisbn, share.getUser());
+			
+			// 목록 갱신
+			BorrBookSearchController controller = new BorrBookSearchController();
+			ObservableList<BorrBookVO> list = controller.searchBook("id", share.getUser().getId());
+			bookTableView.setItems(list);
+		});
 
 		
 		

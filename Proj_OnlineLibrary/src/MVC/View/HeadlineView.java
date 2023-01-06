@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class HeadlineView {
 
@@ -18,11 +20,12 @@ public class HeadlineView {
 		// Layout
 		BorderPane rootPane;
 		FlowPane leftPane;
+		FlowPane centerPane;
 		FlowPane rightPane;
 		
 		// Components
 		Button goToHomeButton;
-		
+		Label libraryBanner;
 		Button loginButton;
 		
 		
@@ -34,11 +37,12 @@ public class HeadlineView {
 		// Layout
 		rootPane = new BorderPane();
 		leftPane = new FlowPane();
+		centerPane = new FlowPane();
 		rightPane = new FlowPane();
 		
 		// Components
 		goToHomeButton = new Button();
-		
+		libraryBanner = new Label();
 		loginButton = new Button();
 		
 		
@@ -48,15 +52,14 @@ public class HeadlineView {
 		// View -----
 
 		// Components
-		goToHomeButton.setText("『Online Library』");
-		goToHomeButton.setPrefSize(130, 30);
+		goToHomeButton.setText("『 Home 』");
+		goToHomeButton.setPrefSize(100, 30);
 		goToHomeButton.setOnAction(e -> {
 			share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
-			// 실험 중
-//			share.getMainPane().setCenter(share.getMypageView().getRootPane(share));
-//			share.getMainPane().setCenter(share.getMypageMenuView().getRootPane(share));
-//			share.getMainPane().setCenter(share.getMypageBorrowStatView().getRootPane(share));
 		});
+		
+		libraryBanner.setText("Online Library");
+		libraryBanner.setFont(Font.font("Viner Hand ITC", FontWeight.BOLD, 25));
 		
 		loginButton.setText("로그인");
 		loginButton.setPrefSize(80, 30);
@@ -71,12 +74,17 @@ public class HeadlineView {
 		leftPane.setPadding(new Insets(5));
 		leftPane.setAlignment(Pos.CENTER_LEFT);
 		
+		centerPane.getChildren().add(libraryBanner);
+		centerPane.setPadding(new Insets(5));
+		centerPane.setAlignment(Pos.CENTER);
+		
 //		rightPane.setColumnHalignment(HPos.RIGHT); // 이건 안 되네
 		rightPane.setPadding(new Insets(5));
 		rightPane.setAlignment(Pos.CENTER_RIGHT);
 		rightPane.getChildren().add(loginButton);
 		
 		rootPane.setLeft(leftPane);
+		rootPane.setCenter(centerPane);
 		rootPane.setRight(rightPane);
 		
 		return rootPane;
