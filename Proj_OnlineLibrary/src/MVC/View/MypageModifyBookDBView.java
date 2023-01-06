@@ -1,8 +1,11 @@
 package MVC.View;
 
 import MVC.Controller.BookSearchController;
+import MVC.Controller.DeleteBookController;
+import MVC.Controller.UserSearchController;
 import MVC.VO.BookVO;
 import MVC.VO.ShareVO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,9 +19,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class MypageModifyBookDBView {
 
+	// Business Logic
+	String selectedBookIsbn;
+	
 	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
@@ -37,6 +44,9 @@ public class MypageModifyBookDBView {
 		Button addBookButton;
 		Button modifyBookButton;
 		Button deleteBookButton;
+
+		BookSearchController tmpcontroller;
+		ObservableList<BookVO> tmplist;
 		
 		
 		
@@ -59,6 +69,9 @@ public class MypageModifyBookDBView {
 		modifyBookButton = new Button();
 		deleteBookButton = new Button();
 
+		tmpcontroller = new BookSearchController();
+		tmplist = FXCollections.observableArrayList();
+		
 		
 		
 		
@@ -113,14 +126,6 @@ public class MypageModifyBookDBView {
 		TableColumn<BookVO, String> publisherColumn = new TableColumn<>("출판사");
 		publisherColumn.setMinWidth(110);
 		publisherColumn.setCellValueFactory(new PropertyValueFactory<>("bpublisher"));
-		
-//		
-//		TableColumn<BookVO, String> Column = new TableColumn<>("");
-//		Column.setMinWidth(150);
-//		Column.setCellValueFactory(new PropertyValueFactory<>(""));
-//		TableColumn<BookVO, Integer> priceColumn = new TableColumn<>("전화번호");
-//		priceColumn.setMinWidth(100);
-//		priceColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 		// 위에서 만든 컬럼 객체를 TableView에 붙인다.
 		bookTableView.getColumns().addAll(isbnColumn, titleColumn, dateColumn, pageColumn, priceColumn,
 				authorColumn, publisherColumn);
@@ -134,17 +139,10 @@ public class MypageModifyBookDBView {
 					System.out.println("@@ 빈 칸 클릭함");
 					return;
 				}
-				
+				selectedBookIsbn = book.getBisbn();
 				if(e1.getClickCount() == 2) {
 					System.out.println("@@ 행 더블클릭. title = " + row.getItem().getBtitle());
 
-//					Dialog<String> dialog = new Dialog<String>();
-//  			        dialog.setTitle("책 세부정보");
-//				    ButtonType type = new ButtonType("Ok", ButtonData.OK_DONE);
-//				    dialog.setContentText(" 다이얼로그 테스트 ");
-//				    dialog.getDialogPane().getButtonTypes().add(type);
-//				    dialog.getDialogPane().setMinHeight(300);
-//		            dialog.showAndWait();
 				} else {
 					System.out.println("@@ 행 클릭. title = " + row.getItem().getBtitle());
 					
@@ -154,23 +152,61 @@ public class MypageModifyBookDBView {
 			return row;
 
 		});
+		// 화면 초기값 - 모든 리스트 불러오기
+		tmplist = tmpcontroller.searchBook(categoryLabel.getText(), "");
+		bookTableView.setItems(tmplist);
 		
 		addBookButton.setText("도서 추가");
 		addBookButton.setPrefSize(100, 30);
 		addBookButton.setOnAction(e -> {
 			System.out.println("@@ 도서 추가");
+
+			MypageBookInsertView mypageBookInsertView = new MypageBookInsertView();
+			Stage userInsertStage = mypageBookInsertView.getRootStage();
+			userInsertStage.setOnCloseRequest(e2 -> {
+				System.out.println("@@ 도서 추가 창 닫힘");
+				
+				// 도서 테이블 갱신
+				BookSearchController controller = new BookSearchController();
+				ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), "");
+				bookTableView.setItems(list);
+			});
+			userInsertStage.show();
 		});
 		
 		modifyBookButton.setText("도서 수정");
 		modifyBookButton.setPrefSize(100, 30);
 		modifyBookButton.setOnAction(e -> {
 			System.out.println("@@ 도서 수정");
+			
+			MypageBookModifyView mypageBookModifyView = new MypageBookModifyView();
+			Stage userModifyStage = mypageBookModifyView.getRootStage(selectedBookIsbn);
+			userModifyStage.setOnCloseRequest(e2 -> {
+				System.out.println("@@ 도서 수정 창 닫힘");
+
+				// 도서 테이블 갱신
+				BookSearchController controller = new BookSearchController();
+				ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+				bookTableView.setItems(list);
+			});
+			userModifyStage.show();
 		});
 		
 		deleteBookButton.setText("도서 삭제");
 		deleteBookButton.setPrefSize(100, 30);
 		deleteBookButton.setOnAction(e -> {
 			System.out.println("@@ 도서 삭제");
+			
+			DeleteBookController controller = new DeleteBookController();
+			int rows = controller.deleteBookOneFromBookDBByBisbn(selectedBookIsbn);
+			selectedBookIsbn = null;
+			if (rows == 0)
+				System.out.println("@@ 삭제된 책 : " + rows + "권");
+
+			// 도서 테이블 갱신
+			BookSearchController scontroller = new BookSearchController();
+			ObservableList<BookVO> list = scontroller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			bookTableView.setItems(list);
 		});
 
 		

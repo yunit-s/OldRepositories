@@ -1,8 +1,10 @@
 package MVC.View;
 
 import MVC.Controller.BookSearchController;
-import MVC.VO.BookVO;
+import MVC.Controller.BorrBookSearchController;
+import MVC.VO.BorrBookVO;
 import MVC.VO.ShareVO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -33,8 +35,11 @@ public class MypageOutstandingBookView {
 //		ComboBox<String> categoryCombo;
 		TextField searchWordTextField;
 		Button searchButton;
-		TableView<BookVO> bookTableView;
+		TableView<BorrBookVO> bookTableView;
 		Button returnBookButton;
+
+		BorrBookSearchController tmpcontroller;
+		ObservableList<BorrBookVO> tmplist;
 		
 		
 		
@@ -52,9 +57,12 @@ public class MypageOutstandingBookView {
 //		ComboBox<String> category;
 		searchWordTextField = new TextField();
 		searchButton = new Button();
-		bookTableView = new TableView<BookVO>();
+		bookTableView = new TableView<BorrBookVO>();
 		returnBookButton = new Button();
 
+		tmpcontroller = new BorrBookSearchController();
+		tmplist = FXCollections.observableArrayList();
+		
 		
 		
 		
@@ -66,13 +74,13 @@ public class MypageOutstandingBookView {
 		categoryLabel.setPrefSize(60, 30);
 		categoryLabel.setAlignment(Pos.CENTER);
 		
-		searchWordTextField.setText("java");
+//		searchWordTextField.setText("java");
 		searchWordTextField.setPrefSize(400, 30);
 		searchWordTextField.setOnAction(e -> {
 			// 책 검색 (혹은 searchButton action 실행시키기)
 			System.out.println("@@ 책 검색");
-			BookSearchController controller = new BookSearchController();
-			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			BorrBookSearchController controller = new BorrBookSearchController();
+			ObservableList<BorrBookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
 			bookTableView.setItems(list);
 		});
 		
@@ -81,44 +89,44 @@ public class MypageOutstandingBookView {
 		searchButton.setOnAction(e -> {
 			// 책 검색
 			// 일단은 위에 내용 복붙함
-			BookSearchController controller = new BookSearchController();
-			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			BorrBookSearchController controller = new BorrBookSearchController();
+			ObservableList<BorrBookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
 			bookTableView.setItems(list);
 		});
 
 		// 컬럼 객체 생성
 //		tableView.setPrefSize(700, 600);
-		TableColumn<BookVO, String> isbnColumn = new TableColumn<>("ISBN");
+		TableColumn<BorrBookVO, String> isbnColumn = new TableColumn<>("ISBN");
 		isbnColumn.setMinWidth(120);
 		isbnColumn.setCellValueFactory(new PropertyValueFactory<>("bisbn"));
-		TableColumn<BookVO, String> titleColumn = new TableColumn<>("제목");
+		TableColumn<BorrBookVO, String> titleColumn = new TableColumn<>("제목");
 		titleColumn.setMinWidth(200);
 		titleColumn.setCellValueFactory(new PropertyValueFactory<>("btitle"));
-		TableColumn<BookVO, String> idColumn = new TableColumn<>("대출고객 ID");
+		TableColumn<BorrBookVO, String> idColumn = new TableColumn<>("대출고객 ID");
 		idColumn.setMinWidth(50);
 		idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-		TableColumn<BookVO, String> borrdateColumn = new TableColumn<>("대출일");
+		TableColumn<BorrBookVO, String> borrdateColumn = new TableColumn<>("대출일");
 		borrdateColumn.setMinWidth(30);
 		borrdateColumn.setCellValueFactory(new PropertyValueFactory<>("borrdate"));
-		TableColumn<BookVO, String> returndeadlineColumn = new TableColumn<>("반납기한");
-		returndeadlineColumn.setMinWidth(30);
-		returndeadlineColumn.setCellValueFactory(new PropertyValueFactory<>("returndeadline"));
+		TableColumn<BorrBookVO, String> returndateColumn = new TableColumn<>("반납기한");
+		returndateColumn.setMinWidth(30);
+		returndateColumn.setCellValueFactory(new PropertyValueFactory<>("returndate"));
 		
 		
-//		TableColumn<BookVO, String> Column = new TableColumn<>("");
+//		TableColumn<BorrBookVO, String> Column = new TableColumn<>("");
 //		Column.setMinWidth(150);
 //		Column.setCellValueFactory(new PropertyValueFactory<>(""));
-//		TableColumn<BookVO, Integer> priceColumn = new TableColumn<>("전화번호");
+//		TableColumn<BorrBookVO, Integer> priceColumn = new TableColumn<>("전화번호");
 //		priceColumn.setMinWidth(100);
 //		priceColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 		// 위에서 만든 컬럼 객체를 TableView에 붙인다.
-		bookTableView.getColumns().addAll(isbnColumn, titleColumn, idColumn, borrdateColumn, returndeadlineColumn);
+		bookTableView.getColumns().addAll(isbnColumn, titleColumn, idColumn, borrdateColumn, returndateColumn);
 		
 		bookTableView.setRowFactory(e -> {
-			TableRow<BookVO> row = new TableRow<>();
+			TableRow<BorrBookVO> row = new TableRow<>();
 			row.setOnMouseClicked(e1 -> {
 				
-				BookVO book = row.getItem();
+				BorrBookVO book = row.getItem();
 				if (book == null) {
 					System.out.println("@@ 빈 칸 클릭함");
 					return;
@@ -143,6 +151,9 @@ public class MypageOutstandingBookView {
 			return row;
 
 		});
+		// 화면 초기값 - 모든 리스트 불러오기
+		tmplist = tmpcontroller.searchBook(categoryLabel.getText(), "");
+		bookTableView.setItems(tmplist);
 		
 		returnBookButton.setText("반납처리");
 		returnBookButton.setPrefSize(100, 30);

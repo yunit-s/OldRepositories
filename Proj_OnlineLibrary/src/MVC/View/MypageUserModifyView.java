@@ -188,10 +188,11 @@ public class MypageUserModifyView {
 		
 		scene = new Scene(rootPane);
 		primaryStage.setScene(scene);
-//		primaryStage.setOnCloseRequest(e -> {
-//			System.out.println("@@ 회원 수정 창 닫힘 1");
-//		});
+		primaryStage.setOnCloseRequest(e -> {
+			primaryStage.getOnCloseRequest();
+		});
 		
 		return primaryStage;
 	}
+	
 }

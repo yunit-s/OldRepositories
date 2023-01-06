@@ -1,21 +1,15 @@
 package MVC.View;
 
-import MVC.Controller.LoginController;
 import MVC.Controller.WithdrawController;
 import MVC.VO.ShareVO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -204,6 +198,12 @@ public class MypageMenuView {
 		rootPane.getChildren().add(withdrawButton);
 		if (share.getUser().getId().equals("admin")) {
 			System.out.println("@@ Mypage menu - admin 계정");
+			Label empty1 = new Label();
+			empty1.setText("관리자 메뉴");
+			empty1.setPrefSize(160, 30);
+			empty1.setAlignment(Pos.BOTTOM_CENTER);
+			
+			rootPane.getChildren().add(empty1);
 			rootPane.getChildren().add(modifyBookDBButton);
 			rootPane.getChildren().add(outstandingBookButton);
 			rootPane.getChildren().add(customerListButton);

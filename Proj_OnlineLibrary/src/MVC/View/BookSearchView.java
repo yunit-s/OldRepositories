@@ -1,16 +1,17 @@
 package MVC.View;
 
 import MVC.Controller.BookSearchController;
-import MVC.Controller.LoginController;
+import MVC.Controller.BorrowBookController;
 import MVC.VO.BookVO;
 import MVC.VO.ShareVO;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -18,10 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class BookSearchView {
 
+	// Business Logic
+	String selectedBookBisbn;
+	
 	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
@@ -29,7 +32,6 @@ public class BookSearchView {
 		// Layout
 		BorderPane rootPane;
 		HBox topPane;
-		VBox centerPane;
 		HBox bottomPane;
 		
 		// Components
@@ -49,7 +51,7 @@ public class BookSearchView {
 		// Layout
 		rootPane = new BorderPane();
 		topPane = new HBox();
-		centerPane = new VBox();
+//		centerPane = new VBox();
 		bottomPane = new HBox();
 		
 		// Components
@@ -94,19 +96,25 @@ public class BookSearchView {
 		// 컬럼 객체 생성
 //		tableView.setPrefSize(700, 600);
 		TableColumn<BookVO, String> isbnColumn = new TableColumn<>("ISBN");
-		isbnColumn.setMinWidth(150);
+		isbnColumn.setMinWidth(120);
 		isbnColumn.setCellValueFactory(new PropertyValueFactory<>("bisbn"));
-		TableColumn<BookVO, String> titleColumn = new TableColumn<>("TITLE");
+		TableColumn<BookVO, String> titleColumn = new TableColumn<>("제목");
 		titleColumn.setMinWidth(300);
 		titleColumn.setCellValueFactory(new PropertyValueFactory<>("btitle"));
-		TableColumn<BookVO, String> authorColumn = new TableColumn<>("AUTHOR");
-		authorColumn.setMinWidth(150);
+		TableColumn<BookVO, String> authorColumn = new TableColumn<>("저자");
+		authorColumn.setMinWidth(100);
 		authorColumn.setCellValueFactory(new PropertyValueFactory<>("bauthor"));
-		TableColumn<BookVO, Integer> priceColumn = new TableColumn<>("PRICE");
-		priceColumn.setMinWidth(150);
+		TableColumn<BookVO, Integer> priceColumn = new TableColumn<>("가격");
+		priceColumn.setMinWidth(60);
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("bprice"));
+		TableColumn<BookVO, Integer> borrowableColumn = new TableColumn<>("대여 가능");
+		borrowableColumn.setMinWidth(60);
+		borrowableColumn.setCellValueFactory(new PropertyValueFactory<>("bborrowable"));
+		TableColumn<BookVO, Integer> breturndateColumn = new TableColumn<>("반납 기한");
+		breturndateColumn.setMinWidth(80);
+		breturndateColumn.setCellValueFactory(new PropertyValueFactory<>("breturndate"));
 		// 위에서 만든 컬럼 객체를 TableView에 붙인다.
-		bookTableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, priceColumn);
+		bookTableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, priceColumn, borrowableColumn, breturndateColumn);
 		bookTableView.setPadding(new Insets(5));
 		bookTableView.setRowFactory(e -> {
 
@@ -120,6 +128,13 @@ public class BookSearchView {
 					if (book == null) {
 						System.out.println("@@ 빈 칸 클릭함");
 						return;
+					}
+					selectedBookBisbn = book.getBisbn();
+					System.out.println("@@ test " + book.getBborrowable() + ",");
+					if (book.getBborrowable().equals("x")) {
+						borrowButton.setDisable(true);
+					} else {
+						borrowButton.setDisable(false);
 					}
 					
 					if(e1.getClickCount() == 2) {
@@ -143,9 +158,32 @@ public class BookSearchView {
 		});
 
 		borrowButton.setText("대여하기");
-		borrowButton.setPrefSize(100, 40);
+		borrowButton.setPrefSize(100, 30);
+		borrowButton.setDisable(true);
 		borrowButton.setOnAction(e -> {
 			System.out.println("@@ 책 대여하기");
+			
+			// book 테이블 수정
+			if (share.getUser() != null) {
+				BorrowBookController borrowBookController = new BorrowBookController();
+				int rows = borrowBookController.borrowBookOneFromBookDBByBisbn(selectedBookBisbn, share.getUser());
+				
+				// 목록 갱신
+				BookSearchController controller = new BookSearchController();
+				ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+				bookTableView.setItems(list);
+			} else {
+				System.out.println("@@ 로그인 정보 없음");
+
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("로그인 정보 없음");
+				alert.setHeaderText("로그인 정보 없음");
+				alert.setContentText("로그인하십시오.");
+//				alert.setOnCloseRequest(e2 -> {
+//					System.out.println("@@ alert 창 닫힘");
+//				});
+				alert.show();
+			}
 		});
 		
 		
@@ -157,17 +195,14 @@ public class BookSearchView {
 		topPane.getChildren().add(categoryLabel);
 		topPane.getChildren().add(searchWordTextField);
 		topPane.getChildren().add(searchButton);
-
-		centerPane.setAlignment(Pos.CENTER);
-		centerPane.setSpacing(10);
-		centerPane.getChildren().add(bookTableView);
 		
 		bottomPane.setSpacing(10);
+		bottomPane.setPadding(new Insets(5));
 		bottomPane.setAlignment(Pos.CENTER_RIGHT);
 		bottomPane.getChildren().add(borrowButton);
 		
 		rootPane.setTop(topPane);
-		rootPane.setCenter(centerPane);
+		rootPane.setCenter(bookTableView);
 		rootPane.setBottom(bottomPane);
 		
 		return rootPane;

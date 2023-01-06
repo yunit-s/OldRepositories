@@ -148,7 +148,6 @@ public class UserDAO {
 		String tier = user.getTier();
 		
 		StringBuffer sql = new StringBuffer();
-//		sql.append("INSERT INTO users values(?, ?, ?, ?, ?, ?, ?, ?)");
 		sql.append("UPDATE users ");
 		sql.append("SET nickname = ?, pw = ?, email = ?, phone = ?, ");
 		sql.append("identquest = ?, identanswer = ?, tier = ? WHERE id = ?");

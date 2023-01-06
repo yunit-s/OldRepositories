@@ -1,29 +1,41 @@
 package MVC.View;
 
+import MVC.Controller.BorrBookSearchController;
 import MVC.VO.BookVO;
+import MVC.VO.BorrBookVO;
 import MVC.VO.ShareVO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MypageBorrowStatView {
 
+	// Business Logic
+	String selectedBookBisbn;
+	
 	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
 		
 		// Layout
 		BorderPane rootPane;
+		HBox bottomPane;
 		
 		// Components
-		TableView<BookVO> bookTableView;
+		TableView<BorrBookVO> bookTableView;
 		Button returnBookButton;
-		
+
+		BorrBookSearchController borrBookSearchController;
+		ObservableList<BorrBookVO> tmplist;
 		
 		
 		
@@ -32,12 +44,14 @@ public class MypageBorrowStatView {
 		
 		// Layout
 		rootPane = new BorderPane();
+		bottomPane = new HBox();
 		
 		// Components
-		bookTableView = new TableView<BookVO>();
+		bookTableView = new TableView<BorrBookVO>();
 		returnBookButton = new Button();
 
-		
+		borrBookSearchController = new BorrBookSearchController();
+		tmplist = FXCollections.observableArrayList();
 		
 		
 		
@@ -45,37 +59,38 @@ public class MypageBorrowStatView {
 
 		// Components
 		returnBookButton.setText("반납하기");
-		returnBookButton.setPrefSize(200, 30);
+		returnBookButton.setPrefSize(150, 30);
 		returnBookButton.setOnAction(e -> {
 			
 		});
 
 		// 컬럼 객체 생성
 //		tableView.setPrefSize(700, 600);
-		TableColumn<BookVO, String> isbnColumn = new TableColumn<>("ISBN");
-		isbnColumn.setMinWidth(150);
+		TableColumn<BorrBookVO, String> isbnColumn = new TableColumn<>("ISBN");
+		isbnColumn.setMinWidth(120);
 		isbnColumn.setCellValueFactory(new PropertyValueFactory<>("bisbn"));
-		TableColumn<BookVO, String> titleColumn = new TableColumn<>("TITLE");
+		TableColumn<BorrBookVO, String> titleColumn = new TableColumn<>("제목");
 		titleColumn.setMinWidth(300);
 		titleColumn.setCellValueFactory(new PropertyValueFactory<>("btitle"));
-		TableColumn<BookVO, String> authorColumn = new TableColumn<>("AUTHOR");
-		authorColumn.setMinWidth(150);
-		authorColumn.setCellValueFactory(new PropertyValueFactory<>("bauthor"));
-		TableColumn<BookVO, Integer> priceColumn = new TableColumn<>("PRICE");
-		priceColumn.setMinWidth(150);
-		priceColumn.setCellValueFactory(new PropertyValueFactory<>("bprice"));
+		TableColumn<BorrBookVO, String> borrdateColumn = new TableColumn<>("대여 날짜");
+		borrdateColumn.setMinWidth(60);
+		borrdateColumn.setCellValueFactory(new PropertyValueFactory<>("borrdate"));
+		TableColumn<BorrBookVO, Integer> returndateColumn = new TableColumn<>("반납 기한");
+		returndateColumn.setMinWidth(60);
+		returndateColumn.setCellValueFactory(new PropertyValueFactory<>("returndate"));
 		// 위에서 만든 컬럼 객체를 TableView에 붙인다.
-		bookTableView.getColumns().addAll(isbnColumn, titleColumn, authorColumn, priceColumn);
+		bookTableView.getColumns().addAll(isbnColumn, titleColumn, borrdateColumn, returndateColumn);
 		
 		bookTableView.setRowFactory(e -> {
-			TableRow<BookVO> row = new TableRow<>();
+			TableRow<BorrBookVO> row = new TableRow<>();
 			row.setOnMouseClicked(e1 -> {
 				
-				BookVO book = row.getItem();
-				if (book == null) {
+				BorrBookVO borrBook = row.getItem();
+				if (borrBook == null) {
 					System.out.println("@@ 빈 칸 클릭함");
 					return;
 				}
+				selectedBookBisbn = borrBook.getBisbn();
 				
 				if(e1.getClickCount() == 2) {
 					System.out.println("@@ 행 더블클릭. title = " + row.getItem().getBtitle());
@@ -96,6 +111,9 @@ public class MypageBorrowStatView {
 			return row;
 
 		});
+		// 화면 초기값 - 모든 리스트 불러오기
+		tmplist = borrBookSearchController.searchBook("id", share.getUser().getId());
+		bookTableView.setItems(tmplist);
 
 		
 //		loginButton.setText("Login");
@@ -126,9 +144,13 @@ public class MypageBorrowStatView {
 		
 		
 		// Layout
+		bottomPane.setPadding(new Insets(5));
+		bottomPane.setAlignment(Pos.CENTER_RIGHT);
+		bottomPane.getChildren().add(returnBookButton);
+		
 		rootPane.setPadding(new Insets(5));
 		rootPane.setCenter(bookTableView);
-		rootPane.setBottom(returnBookButton);
+		rootPane.setBottom(bottomPane);
 		
 		return rootPane;
 	}

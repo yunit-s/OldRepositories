@@ -4,10 +4,10 @@ import MVC.Controller.UserSearchController;
 import MVC.Controller.WithdrawController;
 import MVC.VO.ShareVO;
 import MVC.VO.UserVO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -42,7 +42,10 @@ public class MypageUserListView {
 		TableView<UserVO> usersTableView;
 		Button modifyUserButton;
 		Button deleteUserButton;
-		
+
+		UserSearchController tmpcontroller;
+		ObservableList<UserVO> tmplist;
+
 		
 		
 		
@@ -63,6 +66,8 @@ public class MypageUserListView {
 		modifyUserButton = new Button();
 		deleteUserButton = new Button();
 
+		tmpcontroller = new UserSearchController();
+		tmplist = FXCollections.observableArrayList();
 		
 		
 		
@@ -135,6 +140,9 @@ public class MypageUserListView {
 			return row;
 
 		});
+		// 화면 초기값 - 모든 리스트 불러오기
+		tmplist = tmpcontroller.searchUser(categoryLabel.getText(), "");
+		usersTableView.setItems(tmplist);
 		
 		modifyUserButton.setText("회원 수정");
 		modifyUserButton.setPrefSize(100, 30);
@@ -148,8 +156,8 @@ public class MypageUserListView {
 				System.out.println("@@ 회원 수정 창 닫힘");
 				
 				// 회원 테이블 갱신
-				UserSearchController ucontroller = new UserSearchController();
-				ObservableList<UserVO> list = ucontroller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
+				UserSearchController controller = new UserSearchController();
+				ObservableList<UserVO> list = controller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
 				usersTableView.setItems(list);
 			});
 			userModifyStage.show();
