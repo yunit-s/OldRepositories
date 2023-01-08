@@ -6,10 +6,14 @@ import javafx.collections.ObservableList;
 
 public class BookSearchController {
 
-	public ObservableList<BookVO> getResult(String searchKeyword) {
-		// TODO Auto-generated method stub
-		BookService service = new BookService();
-		ObservableList<BookVO> list = service.selectBooks(searchKeyword);
+	public ObservableList<BookVO> searchBook(String searchCategory, String searchWord) {
+		// service 생성
+		// service의 searchBook 호출
+		// 리턴받은 list 리턴
+
+		System.out.println("@@ check3 " + searchCategory + searchWord);
+		BookService bookService = new BookService();
+		ObservableList<BookVO> list = bookService.searchBook(searchCategory, searchWord);
 		return list;
 	}
 
