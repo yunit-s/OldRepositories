@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- mapper xml 파일은 한 개만 만드는 것이 아니다. -->
+
+<mapper namespace="example.myBook">
+
+	<select id="selectBookByISBNHashMap" parameterType="String" resultType="HashMap">
+		<!-- parameterType : isbn의 자료형. resultType : 결과로 리턴받는 데이터의 자료형 -->
+		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
+		<![CDATA[
+			SELECT bisbn, btitle, bauthor, bprice
+			FROM book
+			WHERE bisbn = #{isbn}
+		]]>
+	</select>
+	
+	<select id="selectAllHashMap" resultType="HashMap">
+		<![CDATA[
+			SELECT bisbn, btitle, bauthor, bprice
+			FROM book
+		]]>
+	</select>
+
+	<!-- select에서 가져온 column과 매칭되는 vo의 field를 찾아서 값을 매핑해준다. DB의 컬럼명과 field명이 동일해야만 가능하다. -->
+	<select id="selectBookByISBNBookVO" parameterType="String" resultType="Book">
+	<!-- resultType 에서 원래 "example.vo.BookVO" 라고 써야 하지만, SqlMapConfig 에서 alias 설정해줬으니 바꿔서 써도 된다. -->
+		<![CDATA[
+			SELECT btitle, bauthor
+			FROM book
+			WHERE bisbn = #{isbn}
+		]]>
+	</select>
+
+	<!-- select의 결과 컬럼명과 VO의 필드명이 다른 경우 -->
+	<resultMap id="testMap" type="Book">
+		<!-- column="select 결과 집합의 컬럼명" / property="VO의 field명" -->
+		<result column="b_isbn" property="bisbn" />
+		<result column="b_title" property="btitle" />
+		<result column="b_author" property="bauthor" />
+		<result column="b_price" property="bprice" />
+	</resultMap>
+	<select id="selectBookByISBNResultMap" parameterType="String" resultMap="testMap">
+		<![CDATA[
+			SELECT bisbn AS b_isbn, btitle AS b_title, bauthor AS b_author, bprice AS b_price
+			FROM book
+			WHERE bisbn = #{isbn}
+		]]>
+	</select>
+
+	<!-- update구문 -->
+	<update id="update" parameterType="Book">
+	<!-- #{btitle} : Book이라는 VO 안에 있는 btitle 필드값을 대입한다는 의미 -->
+		<![CDATA[
+			UPDATE book
+			SET btitle = #{btitle}, bauthor = #{bauthor}, bprice = #{bprice}
+			WHERE bisbn = #{bisbn}
+		]]>
+	</update>
+
+</mapper>
