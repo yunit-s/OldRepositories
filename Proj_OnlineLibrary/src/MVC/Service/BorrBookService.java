@@ -78,4 +78,26 @@ public class BorrBookService {
 		return rows;
 	}
 
+	public String getReturndateOneByBisbn(String selectedBookBisbn) {
+		System.out.println("@@ BorrBookService.getReturndateByBisbn() 실행");
+		
+		Connection con = null;
+		try {
+			con = DBCP_Apache.getDataSource().getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		BorrBookDAO borrBookDao = new BorrBookDAO(con);
+		ObservableList<BorrBookVO> list = borrBookDao.select("bisbn", selectedBookBisbn);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list.get(0).getReturndate();
+	}
+
 }

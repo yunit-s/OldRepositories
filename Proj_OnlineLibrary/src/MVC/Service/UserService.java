@@ -2,6 +2,7 @@ package MVC.Service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import MVC.DAO.BookDAO;
 import MVC.DAO.DBCP_Apache;
@@ -191,6 +192,62 @@ public class UserService {
 		}
 		
 		return list;
+	}
+
+	public int changePointToUserByReturndate(UserVO user, String returndate) {
+		System.out.println("@@ userService.changePointToUserByReturndate() 실행");
+		
+		Connection con = null;
+		try {
+			con = DBCP_Apache.getDataSource().getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// 반납 날짜에 따른 포인트 계산
+		LocalDate now = LocalDate.now();
+		String[] rdateSplit = returndate.split("-");
+		if (now.getYear() <= Integer.parseInt(rdateSplit[0])
+				&& now.getMonthValue() <= Integer.parseInt(rdateSplit[1])
+				&& now.getDayOfMonth() <= Integer.parseInt(rdateSplit[2])) {
+			user.setPoint(user.getPoint() + 5);
+			System.out.println("@@ 기한 내 반납. 5포인트 추가. 유저 포인트 = " + user.getPoint());
+		} else {
+			user.setPoint(user.getPoint() - 5);
+			if (user.getPoint() < 0)
+				user.setPoint(0);
+			System.out.println("@@ 기한 후 반납. 5포인트 차감. 유저 포인트 = " + user.getPoint());
+		}
+		
+		// 티어 계산
+		int userPoint = user.getPoint();
+		if (!user.getTier().equals("Admin")) {
+			if (userPoint >= 100) {
+				user.setTier("VIP");
+			} else if (userPoint >= 70) {
+				user.setTier("Platinum");
+			} else if (userPoint >= 40) {
+				user.setTier("Gold");
+			} else if (userPoint >= 20) {
+				user.setTier("Silver");
+			} else {
+				user.setTier("Bronze");
+			}
+			System.out.println("@@ 유저 등급 : " + user.getTier());
+		}
+		
+		UserDAO userDao = new UserDAO(con);
+		int rows = userDao.updateUser(user);
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rows;
 	}
 
 }

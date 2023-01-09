@@ -2,15 +2,24 @@ package MVC.Controller;
 
 import MVC.Service.BookService;
 import MVC.Service.BorrBookService;
+import MVC.Service.UserService;
 import MVC.VO.BorrBookVO;
 import MVC.VO.UserVO;
 
 public class ReturnBookController {
 
 	public int returnBookOneFromBorrBookDBByBisbn(String selectedBookBisbn, UserVO user) {
-		BorrBookService borrBookService = new BorrBookService();
-		int rows = borrBookService.deleteBookOneByBisbn(selectedBookBisbn);
 		
+		// 반납 시기에 따른 포인트 추가
+		BorrBookService borrBookService = new BorrBookService();
+		String returndate = borrBookService.getReturndateOneByBisbn(selectedBookBisbn);
+		UserService userService = new UserService();
+		int rows = userService.changePointToUserByReturndate(user, returndate);
+		
+		// 반납 도서 데이터베이스에서 반납 도서 삭제
+		rows = borrBookService.deleteBookOneByBisbn(selectedBookBisbn);
+		
+		// 도서 데이터베이스에서 반납 반영
 		BookService bookService = new BookService();
 		rows = bookService.setReturnedBookOneByBisbn(selectedBookBisbn);
 		

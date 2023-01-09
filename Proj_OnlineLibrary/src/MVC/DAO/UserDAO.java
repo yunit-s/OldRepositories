@@ -146,11 +146,12 @@ public class UserDAO {
 		String identquest = user.getIdentquest();
 		String identanswer = user.getIdentanswer();
 		String tier = user.getTier();
+		int point = user.getPoint();
 		
 		StringBuffer sql = new StringBuffer();
 		sql.append("UPDATE users ");
 		sql.append("SET nickname = ?, pw = ?, email = ?, phone = ?, ");
-		sql.append("identquest = ?, identanswer = ?, tier = ? WHERE id = ?");
+		sql.append("identquest = ?, identanswer = ?, tier = ?, point = ? WHERE id = ?");
 		
 		int rows = 0;
 		try {
@@ -162,7 +163,8 @@ public class UserDAO {
 			pstmt.setString(5, identquest);
 			pstmt.setString(6, identanswer);
 			pstmt.setString(7, tier);
-			pstmt.setString(8, id);
+			pstmt.setInt(8, point);
+			pstmt.setString(9, id);
 			
 			System.out.println("@@ 회원 정보 수정 pstmt = " + pstmt.toString());
 			rows = pstmt.executeUpdate();
