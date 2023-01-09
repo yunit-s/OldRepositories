@@ -4,16 +4,18 @@ USE library;
 SELECT
 
 -- library database - book table edit code
--- 컬럼 추가
-alter table book add bborrowed boolean default false;
-alter table book add breturndate date default null;
--- 컬럼 변경
-alter table book change bborrowed bborrowable boolean default true;
-alter table book modify bborrowable CHAR(2) default 'O';
-alter table book modify breturndate date default '-';
 -- 컬럼 삭제
 alter table book drop btranslator;
 alter table book drop bsupplement;
+-- 컬럼 추가
+alter table book add bborrowable CHAR(2) default 'o';
+alter table book add breturndate date default null;
+-- 컬럼 변경
+-- alter table book change bborrowed bborrowable boolean default true;
+-- alter table book modify bborrowable CHAR(2) default 'O';
+-- alter table book modify breturndate date default '-';
+
+
 
 
 -- 책 추가
@@ -21,14 +23,16 @@ alter table book drop bsupplement;
 -- 	values ( )
 -- 책 정보 수정
 -- UPDATE 테이블명 SET 컬럼1 = 수정값1 [, 컬럼2 = 수정값2 ...] [WHERE 조건];
-UPDATE book SET bborrowable = 'x' WHERE bisbn = ?;
+-- UPDATE book SET bborrowable = 'x' WHERE bisbn = ?;
 
 
 show table status;
 desc book;
 select * from book order by bprice desc limit 50;
 select * from book where btitle like '%java%';
+
 -- --------------------------------------------------
+
 
 
 
@@ -47,13 +51,13 @@ CREATE TABLE users (
     point INT NOT NULL default 0
 );
 
-alter table users add point int default 0;
 insert into users values('admin', '관리자', 'qwer1234', 'admin@gmail.com', '010-1234-9999', '당신의 이름은?', '관리자', 'Admin', 0);
 insert into users values('jelee', '이지은', 'qwer1234', 'jelee@gmail.com', '010-1111-1111', '당신의 이름은?', '이지은', 'Bronze', 0);
+insert into users values('jslee', '창호', 'qwer1234', 'jslee@gmail.com', '010-2222-2222', '당신의 이름은?', '이종석', 'Bronze', 0);
 
-UPDATE `library`.`users` SET `tier` = 'Admin' WHERE (`id` = 'admin');
 -- UPDATE 테이블명 SET 컬럼1 = 수정값1 [, 컬럼2 = 수정값2 ...] [WHERE 조건];
-UPDATE users SET nickname = ?, pw = ?, email = ?, phone = ?, identquest = ?, identanswer = ?, tier = ? WHERE id = ?;
+-- UPDATE `library`.`users` SET `tier` = 'Admin' WHERE (`id` = 'admin');
+-- UPDATE users SET nickname = ?, pw = ?, email = ?, phone = ?, identquest = ?, identanswer = ?, tier = ? WHERE id = ?;
 
 
 
@@ -61,8 +65,6 @@ desc users;
 select * from users;
 select pw from users where id = 'admin';
 delete from users where id = 'jslee';
-
-
 
 
 -- --------------------------------------------------
@@ -75,14 +77,11 @@ delete from users where id = 'jslee';
 DROP TABLE IF EXISTS borrbook;
 CREATE TABLE borrbook (
 	bisbn		VARCHAR(20) Not Null primary key,
-    btitle	VARCHAR(20) not null,
+    btitle	VARCHAR(50) not null,
     id	VARCHAR(20) not null,
     borrdate	DATE not null,
     returndate	DATE not null
 );
-
-
-alter table borrbook modify btitle VARCHAR(50) not null;
 
 
 
@@ -92,3 +91,11 @@ select pw from users where id = 'admin';
 
 
 -- --------------------------------------------------
+
+
+
+
+-- 230109 MyBatis 교육
+select * from book where bisbn = '89-7914-206-4';
+select * from book where bprice = 99999;
+
