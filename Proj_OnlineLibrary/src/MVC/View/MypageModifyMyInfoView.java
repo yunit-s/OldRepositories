@@ -6,9 +6,12 @@ import MVC.VO.UserVO;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 
 public class MypageModifyMyInfoView {
@@ -127,8 +130,8 @@ public class MypageModifyMyInfoView {
 		modifyButton.setPrefSize(100, 30);
 		modifyButton.setOnAction(e -> {
 			// 기존 데이터와 중복 여부 확인
-			
-//			LoginController controller = new LoginController();
+
+			StringBuffer dialogMsg = new StringBuffer();
 			ModifyUserInfoController controller = new ModifyUserInfoController();
 			if (controller.checkIdInUsersDB(idTextField.getText()) != null) {
 				System.out.println("@@ 개인 정보 수정 완료");
@@ -147,10 +150,23 @@ public class MypageModifyMyInfoView {
 				share.setUser(user);
 				// 헤드라인 갱신
 				share.getMainPane().setTop(share.getHeadlineLoggedinView().getRootPane(share));
+				
+				dialogMsg.append("- 개인 정보 수정 완료 -");
+				dialogMsg.append("\n정상적으로 수정되었습니다.");
+				
 			} else {
 				// 아이디 검색 실패 시
 				System.out.println("@@ 개인 정보 수정 실패. 아이디 불일치");
+				dialogMsg.append("- 개인 정보 수정 실패 -");
 			}
+
+			// 안내 메시지 출력
+			Dialog<String> dialog = new Dialog<String>();
+	        dialog.setTitle("개인 정보 수정");
+	        ButtonType typeOk= new ButtonType("확인", ButtonData.OK_DONE);
+		    dialog.setContentText(dialogMsg.toString());
+		    dialog.getDialogPane().getButtonTypes().add(typeOk);
+		    dialog.showAndWait();
 			
 		});
 

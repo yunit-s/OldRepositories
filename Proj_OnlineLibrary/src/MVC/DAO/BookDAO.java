@@ -22,49 +22,6 @@ public class BookDAO {
 		this.con = con;
 	}
 	
-//	public ObservableList<BookVO> select(String searchCategory, String searchWord) {
-//		// TODO Auto-generated method stub
-//		// sql 문 완성하기
-//		// con에서 pstmt 생성
-//		// execute
-//		// list에 저장하기
-//		// 할당 해제
-//		// 리턴
-//		
-//		StringBuffer sql = new StringBuffer();
-//		sql.append("SELECT bisbn, btitle, bauthor, bprice ");
-//		sql.append("FROM book ");
-//		sql.append("WHERE " + searchCategory + " LIKE ? ");
-//		sql.append("ORDER BY btitle");
-//
-//		System.out.println("@@ check1 " + searchCategory + searchWord);
-//		ObservableList<BookVO> list = FXCollections.observableArrayList();
-//		try {
-//			PreparedStatement pstmt = con.prepareStatement(sql.toString());
-////			pstmt.setString(1, searchCategory);
-//			pstmt.setString(1, "%" + searchWord + "%");
-//			System.out.println("@@ pstmt = " + pstmt.toString());
-//			
-//			ResultSet rs = pstmt.executeQuery();
-//			
-//			while (rs.next()) {
-//				BookVO book = new BookVO(rs.getString("bisbn"), rs.getString("btitle"), rs.getString("bauthor"), rs.getInt("bprice"));
-//				list.add(book);
-//			}
-//			
-//			rs.close();
-//			pstmt.close();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		System.out.println("@@ check2");
-//		
-//		return list;
-//	}
-	
-	// 검색을 전체로 바꿔보자
 	public ObservableList<BookVO> select(String searchCategory, String searchWord) {
 		// TODO Auto-generated method stub
 		// sql 문 완성하기
@@ -74,7 +31,7 @@ public class BookDAO {
 		// 할당 해제
 		// 리턴
 
-		System.out.println("@@ BookDAO select() - " + searchCategory + searchWord);
+		System.out.println("@@ BookDAO - select() - " + searchCategory + ", " + searchWord);
 		
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT * ");
@@ -112,6 +69,7 @@ public class BookDAO {
 		// con을 이용해서 pstmt 생성
 		// execute
 		// 영향받은 row 수 리턴
+		System.out.println("@@ BookDAO - updateBook() 실행");
 
 		String bisbn = book.getBisbn();
 		String btitle = book.getBtitle();
@@ -163,6 +121,7 @@ public class BookDAO {
 		// con을 이용해서 pstmt 생성
 		// execute
 		// 영향받은 row 수 리턴
+		System.out.println("@@ BookDAO - deleteBookByBisbn() 실행");
 		
 		StringBuffer sql = new StringBuffer();
 		sql.append("DELETE ");
@@ -190,6 +149,7 @@ public class BookDAO {
 		// con을 이용해서 pstmt 생성
 		// execute
 		// 영향받은 row 수 리턴
+		System.out.println("@@ BookDAO - insertBook() 실행");
 
 		String bisbn = book.getBisbn();
 		String btitle = book.getBtitle();
@@ -243,6 +203,7 @@ public class BookDAO {
 		// con을 이용해서 pstmt 생성
 		// execute
 		// 영향받은 row 수 리턴
+		System.out.println("@@ BookDAO - editBorrowableByBisbn() 실행");
 		
 		StringBuffer sql = new StringBuffer();
 		sql.append("UPDATE book ");
@@ -255,7 +216,7 @@ public class BookDAO {
 			pstmt.setString(1, bborrowable);
 			pstmt.setString(2, selectedBookBisbn);
 			
-			System.out.println("@@ 도서 borrowable 변경. pstmt = " + pstmt.toString());
+			System.out.println("@@ 도서 borrowable 변경 pstmt = " + pstmt.toString());
 			rows = pstmt.executeUpdate();
 			
 			pstmt.close();
@@ -271,6 +232,7 @@ public class BookDAO {
 		// con을 이용해서 pstmt 생성
 		// execute
 		// 영향받은 row 수 리턴
+		System.out.println("@@ BookDAO - editReturndateByBisbn() 실행");
 		
 		StringBuffer sql = new StringBuffer();
 		sql.append("UPDATE book ");
@@ -283,7 +245,7 @@ public class BookDAO {
 			pstmt.setString(1, returndate);
 			pstmt.setString(2, selectedBookBisbn);
 			
-			System.out.println("@@ 도서 반납기한 설정. pstmt = " + pstmt.toString());
+			System.out.println("@@ 도서 반납기한 설정 pstmt = " + pstmt.toString());
 			rows = pstmt.executeUpdate();
 			
 			pstmt.close();

@@ -3,6 +3,7 @@ package MVC.View;
 import MVC.Controller.BookSearchController;
 import MVC.Controller.DeleteBookController;
 import MVC.Controller.UserSearchController;
+import MVC.Controller.WithdrawController;
 import MVC.VO.BookVO;
 import MVC.VO.ShareVO;
 import javafx.collections.FXCollections;
@@ -10,16 +11,20 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class MypageModifyBookDBView {
 
@@ -196,17 +201,41 @@ public class MypageModifyBookDBView {
 		deleteBookButton.setPrefSize(100, 30);
 		deleteBookButton.setOnAction(e -> {
 			System.out.println("@@ 도서 삭제");
-			
-			DeleteBookController controller = new DeleteBookController();
-			int rows = controller.deleteBookOneFromBookDBByBisbn(selectedBookIsbn);
-			selectedBookIsbn = null;
-			if (rows == 0)
-				System.out.println("@@ 삭제된 책 : " + rows + "권");
 
-			// 도서 테이블 갱신
-			BookSearchController scontroller = new BookSearchController();
-			ObservableList<BookVO> list = scontroller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
-			bookTableView.setItems(list);
+			// 안내 메시지 출력
+			Dialog<String> dialog = new Dialog<String>();
+	        dialog.setTitle("도서 삭제");
+	        ButtonType typeYes = new ButtonType("예", ButtonData.YES);
+		    ButtonType typeNo = new ButtonType("아니오", ButtonData.NO);
+		    dialog.setContentText("정말 삭제하시겠습니까?");
+		    dialog.getDialogPane().getButtonTypes().add(typeYes);
+		    dialog.getDialogPane().getButtonTypes().add(typeNo);
+//		    dialog.setOnCloseRequest(e2 -> {
+//		    	System.out.println("@@ dialog 닫힘");
+//		    });
+		    dialog.setResultConverter(new Callback<ButtonType, String>() {
+				
+				@Override
+				public String call(ButtonType param) {
+					if (param.getButtonData() == ButtonData.YES) {
+						DeleteBookController controller = new DeleteBookController();
+						int rows = controller.deleteBookOneFromBookDBByBisbn(selectedBookIsbn);
+						selectedBookIsbn = null;
+						if (rows == 0)
+							System.out.println("@@ 삭제된 책 : " + rows + "권");
+
+						// 도서 테이블 갱신
+						BookSearchController scontroller = new BookSearchController();
+						ObservableList<BookVO> list = scontroller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+						bookTableView.setItems(list);
+					} else if (param.getButtonData() == ButtonData.NO) {
+						System.out.println("@@ 도서 삭제 취소");
+					}
+					return null;
+				}
+			});
+		    dialog.showAndWait();
+		    
 		});
 
 		

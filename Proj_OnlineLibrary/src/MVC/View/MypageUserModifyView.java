@@ -7,9 +7,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -139,10 +142,11 @@ public class MypageUserModifyView {
 		modifyButton.setText("수정");
 		modifyButton.setPrefSize(100, 30);
 		modifyButton.setOnAction(e -> {
-			
+
+			StringBuffer dialogMsg = new StringBuffer();
 			ModifyUserInfoController controller = new ModifyUserInfoController();
 			if (controller.checkIdInUsersDB(idTextField.getText()) != null) {
-				System.out.println("@@ 개인 정보 수정 완료");
+				System.out.println("@@ 회원 정보 수정 완료");
 				
 				String id = idTextField.getText();
 				String nickname = nicknameTextField.getText();
@@ -155,11 +159,26 @@ public class MypageUserModifyView {
 				int point = user.getPoint();
 				UserVO newUser = new UserVO(id, nickname, pw, email, phone, identquest, identanswer, tier, point);
 				int rows = controller.editUserToUsersDB(newUser);
+				
+				dialogMsg.append("- 회원 정보 수정 완료 -");
+				dialogMsg.append("\n정상적으로 수정되었습니다.");
+				
 			} else {
 				// 아이디 검색 실패 시
-				System.out.println("@@ 개인 정보 수정 실패. 아이디 불일치");
+				System.out.println("@@ 회원 정보 수정 실패. 아이디 불일치");
+				
+				dialogMsg.append("- 회원 정보 수정 실패 -");
+//				dialogMsg.append("\n아이디 입력 오류");
 			}
-			
+
+			// 안내 메시지 출력
+			Dialog<String> dialog = new Dialog<String>();
+	        dialog.setTitle("회원 정보 수정");
+	        ButtonType typeOk= new ButtonType("확인", ButtonData.OK_DONE);
+		    dialog.setContentText(dialogMsg.toString());
+		    dialog.getDialogPane().getButtonTypes().add(typeOk);
+		    dialog.showAndWait();
+		    
 		});
 
 		// Layout
@@ -188,9 +207,10 @@ public class MypageUserModifyView {
 		
 		scene = new Scene(rootPane);
 		primaryStage.setScene(scene);
-		primaryStage.setOnCloseRequest(e -> {
-			primaryStage.getOnCloseRequest();
-		});
+//		primaryStage.setOnCloseRequest(e -> {
+//			System.out.println("@@ 회원 정보 수정 창 닫힘");
+//			primaryStage.close();
+//		});
 		
 		return primaryStage;
 	}

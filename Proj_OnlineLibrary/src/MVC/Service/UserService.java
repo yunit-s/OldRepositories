@@ -10,6 +10,9 @@ import MVC.DAO.UserDAO;
 import MVC.VO.BookVO;
 import MVC.VO.UserVO;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.ButtonBar.ButtonData;
 
 public class UserService {
 
@@ -207,35 +210,50 @@ public class UserService {
 		
 		// 반납 날짜에 따른 포인트 계산
 		LocalDate now = LocalDate.now();
-		String[] rdateSplit = returndate.split("-");
-		if (now.getYear() <= Integer.parseInt(rdateSplit[0])
-				&& now.getMonthValue() <= Integer.parseInt(rdateSplit[1])
-				&& now.getDayOfMonth() <= Integer.parseInt(rdateSplit[2])) {
-			user.setPoint(user.getPoint() + 5);
-			System.out.println("@@ 기한 내 반납. 5포인트 추가. 유저 포인트 = " + user.getPoint());
+		LocalDate deadline = LocalDate.parse(returndate);
+		int userPointOld = user.getPoint();
+		int userPointNew = user.getPoint();
+		StringBuffer msg = new StringBuffer();
+		msg.append("- 반납 완료 -");
+		if (deadline.isAfter(now)) {
+			userPointNew = userPointOld + 5;
+			msg.append("\n기한 내 반납 완료 : +5 points");
 		} else {
-			user.setPoint(user.getPoint() - 5);
-			if (user.getPoint() < 0)
-				user.setPoint(0);
-			System.out.println("@@ 기한 후 반납. 5포인트 차감. 유저 포인트 = " + user.getPoint());
+			userPointNew = userPointOld - 5;
+			msg.append("\n반납 기한 만료 : -5 points");
 		}
+		if (userPointNew < 0) userPointNew = 0;
+		user.setPoint(userPointNew);
+		msg.append("\n현재 점수 : " + userPointNew + " point");
 		
 		// 티어 계산
-		int userPoint = user.getPoint();
-		if (!user.getTier().equals("Admin")) {
-			if (userPoint >= 100) {
-				user.setTier("VIP");
-			} else if (userPoint >= 70) {
-				user.setTier("Platinum");
-			} else if (userPoint >= 40) {
-				user.setTier("Gold");
-			} else if (userPoint >= 20) {
-				user.setTier("Silver");
+		String userTierOld = user.getTier();
+		String userTierNew = userTierOld;
+		if (!userTierOld.equals("Admin")) {
+			if (userPointNew >= 100) {
+				userTierNew = "VIP";
+			} else if (userPointNew >= 70) {
+				userTierNew = "Platinum";
+			} else if (userPointNew >= 40) {
+				userTierNew = "Gold";
+			} else if (userPointNew >= 20) {
+				userTierNew = "Silver";
 			} else {
-				user.setTier("Bronze");
+				userTierNew = "Bronze";
 			}
-			System.out.println("@@ 유저 등급 : " + user.getTier());
+			if(!userTierNew.equals(userTierOld)) {
+				msg.append("\n\n등급이 변동되었습니다. \n현재 등급 : " + userTierNew);
+			}
 		}
+		user.setTier(userTierNew);
+		
+		// 안내메시지 출력
+		Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("반납 완료");
+        ButtonType typeOk= new ButtonType("확인", ButtonData.OK_DONE);
+	    dialog.setContentText(msg.toString());
+	    dialog.getDialogPane().getButtonTypes().add(typeOk);
+	    dialog.showAndWait();
 		
 		UserDAO userDao = new UserDAO(con);
 		int rows = userDao.updateUser(user);

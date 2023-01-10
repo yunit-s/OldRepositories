@@ -10,19 +10,35 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
 public class MypageMenuView {
 
-	public VBox getRootPane(ShareVO share) {
+	public BorderPane getRootPane(ShareVO share) {
 
 		// Declare variables -----
 		
 		// Layout
-		VBox rootPane;
+		BorderPane rootPane;
+		VBox topPane;
+		FlowPane topInfoPane;
+		FlowPane topPointPane;
+		FlowPane topTierPane;
+		VBox centerPane;
 		
 		// Components
+		Label infoLabel;
+		Label pointLabel;
+		Label userPointLabel;
+		Label tierLabel;
+		Label userTierLabel;
+		
 		Button myBorrowStatButton;
 		Button myBorrowLogButton;
 		Button myInterBookButton;
@@ -32,7 +48,7 @@ public class MypageMenuView {
 		Button modifyBookDBButton;
 		Button outstandingBookButton;
 		Button customerListButton;
-		Button modifyWebsiteButton;
+//		Button modifyWebsiteButton;
 		
 		
 		
@@ -41,9 +57,20 @@ public class MypageMenuView {
 		// Initialize -----
 		
 		// Layout
-		rootPane = new VBox();
+		rootPane = new BorderPane();
+		topPane = new VBox();
+		topInfoPane = new FlowPane();
+		topPointPane = new FlowPane();
+		topTierPane = new FlowPane();
+		centerPane = new VBox();
 		
 		// Components
+		infoLabel = new Label();
+		pointLabel = new Label();
+		userPointLabel = new Label();
+		tierLabel = new Label();
+		userTierLabel = new Label();
+		
 		myBorrowStatButton = new Button();
 		myBorrowLogButton = new Button();
 		myInterBookButton = new Button();
@@ -53,7 +80,7 @@ public class MypageMenuView {
 		modifyBookDBButton = new Button();
 		outstandingBookButton = new Button();
 		customerListButton = new Button();
-		modifyWebsiteButton = new Button();
+//		modifyWebsiteButton = new Button();
 
 		
 		
@@ -62,6 +89,27 @@ public class MypageMenuView {
 		// View -----
 
 		// Components
+		infoLabel.setText("- 내 정보 -");
+		infoLabel.setPrefSize(160, 30);
+		infoLabel.setAlignment(Pos.CENTER);
+		infoLabel.setFont(Font.font(15));
+		
+		pointLabel.setText("포인트 : ");
+		pointLabel.setPrefSize(70, 30);
+		userPointLabel.setText(String.valueOf(share.getUser().getPoint()));
+		userPointLabel.setPrefSize(90, 30);
+		userPointLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+		
+		tierLabel.setText("등급 : ");
+		tierLabel.setPrefSize(70, 30);
+		userTierLabel.setText(share.getUser().getTier());
+		userTierLabel.setPrefSize(90, 30);
+//		userTierLabel.setFont(Font.font("Viner Hand ITC", FontWeight.BOLD, 25));
+		userTierLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+		if (share.getUser().getId().equals("admin")) {
+			userTierLabel.setTextFill(Color.DARKRED);
+		}
+		
 		myBorrowStatButton.setText("내 대여 현황 & 반납");
 		myBorrowStatButton.setPrefSize(160, 30);
 		myBorrowStatButton.setOnAction(e -> {
@@ -99,22 +147,6 @@ public class MypageMenuView {
 		withdrawButton.setOnAction(e -> {
 			System.out.println("@@ 회원 탈퇴");
 			
-//			Alert alert = new Alert(AlertType.INFORMATION);
-//			alert.setTitle("회원탈퇴");
-//			alert.setHeaderText("회원 탈퇴");
-//			alert.setContentText(share.getUser().getNickname() + " 님의 계정이 탈퇴되었습니다.");
-//			alert.setOnCloseRequest(e2 -> {
-//				System.out.println("@@ alert 창 닫힘");
-//				// 여기에 회원 탈퇴하는 코드 넣을 것
-//				WithdrawController controller = new WithdrawController();
-//				int rows = controller.withdrawAccount(share.getUser().getId());
-//				share.setUser(null);
-//				share.getMainPane().setTop(share.getHeadlineView().getRootPane(share));
-//				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
-//			});
-//			alert.show();
-			
-			// Dialog로 구현하기
 			Dialog<String> dialog = new Dialog<String>();
 	        dialog.setTitle("회원 탈퇴");
 	        ButtonType typeYes = new ButtonType("예", ButtonData.YES);
@@ -176,41 +208,64 @@ public class MypageMenuView {
 			share.getMainPane().setCenter(pane);
 		});
 		
-		modifyWebsiteButton.setText("사이트 편집");
-		modifyWebsiteButton.setPrefSize(160, 30);
-		modifyWebsiteButton.setOnAction(e -> {
-			
-		});
+//		modifyWebsiteButton.setText("사이트 편집");
+//		modifyWebsiteButton.setPrefSize(160, 30);
+//		modifyWebsiteButton.setOnAction(e -> {
+//			
+//		});
 		
 
 
 		
 		
 		// Layout
+		topInfoPane.getChildren().add(infoLabel);
+		topPointPane.getChildren().add(pointLabel);
+		topPointPane.getChildren().add(userPointLabel);
+		topTierPane.getChildren().add(tierLabel);
+		topTierPane.getChildren().add(userTierLabel);
 		
-		rootPane.setSpacing(10);
-		rootPane.setPadding(new Insets(5));
-		rootPane.setAlignment(Pos.CENTER);
-		rootPane.getChildren().add(myBorrowStatButton);
-//		rootPane.getChildren().add(myBorrowLogButton);
-//		rootPane.getChildren().add(myInterBookButton);
-		rootPane.getChildren().add(modifyMyInfoButton);
-		rootPane.getChildren().add(withdrawButton);
+		topPane.getChildren().add(topInfoPane);
+		topPane.getChildren().add(topPointPane);
+		topPane.getChildren().add(topTierPane);
+//		topPane.setPrefSize(160, 200);
+		topPane.setMaxSize(160, 100);
+		
+		centerPane.setSpacing(10);
+		centerPane.setPadding(new Insets(5));
+		centerPane.setAlignment(Pos.TOP_CENTER);
+		centerPane.getChildren().add(topPane);
 		if (share.getUser().getId().equals("admin")) {
-			System.out.println("@@ Mypage menu - admin 계정");
-			Label empty1 = new Label();
-			empty1.setText("관리자 메뉴");
-			empty1.setPrefSize(160, 30);
-			empty1.setAlignment(Pos.BOTTOM_CENTER);
+//			System.out.println("@@ Mypage menu - admin 계정");
+			Label adminLabel = new Label();
+			adminLabel.setText("- 관리자 메뉴 -");
+			adminLabel.setPrefSize(160, 30);
+			adminLabel.setAlignment(Pos.BOTTOM_CENTER);
+			adminLabel.setFont(Font.font(15));
 			
-			rootPane.getChildren().add(empty1);
-			rootPane.getChildren().add(modifyBookDBButton);
-			rootPane.getChildren().add(outstandingBookButton);
-			rootPane.getChildren().add(customerListButton);
+			centerPane.getChildren().add(adminLabel);
+			centerPane.getChildren().add(modifyBookDBButton);
+			centerPane.getChildren().add(outstandingBookButton);
+			centerPane.getChildren().add(customerListButton);
 //			rootPane.getChildren().add(modifyWebsiteButton);
 		} else {
-			System.out.println("@@ 일반회원 계정");
+//			System.out.println("@@ Mypage menu - 일반회원 계정");
+			Label userLabel = new Label();
+			userLabel.setText("- 회원 메뉴 -");
+			userLabel.setPrefSize(160, 30);
+			userLabel.setAlignment(Pos.BOTTOM_CENTER);
+			userLabel.setFont(Font.font(15));
+			
+			centerPane.getChildren().add(userLabel);
+			centerPane.getChildren().add(myBorrowStatButton);
+//			rootPane.getChildren().add(myBorrowLogButton);
+//			rootPane.getChildren().add(myInterBookButton);
+			centerPane.getChildren().add(modifyMyInfoButton);
+			centerPane.getChildren().add(withdrawButton);
 		}
+		
+		rootPane.setTop(topPane);
+		rootPane.setCenter(centerPane);
 		
 		return rootPane;
 	}

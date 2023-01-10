@@ -8,6 +8,9 @@ import MVC.VO.BookVO;
 import MVC.VO.BorrBookVO;
 import MVC.VO.UserVO;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.ButtonBar.ButtonData;
 
 public class BorrowBookController {
 
@@ -23,6 +26,20 @@ public class BorrowBookController {
 		
 		BorrBookService borrBookService = new BorrBookService();
 		rows = borrBookService.insertBookOneByBorrBookVO(borrBook);
+		
+		// 안내 메시지 출력
+		StringBuffer dialogMsg = new StringBuffer();
+		dialogMsg.append("- 도서 대출 완료 -");
+		dialogMsg.append("\n도서 제목 : " + book.getBtitle());
+		dialogMsg.append("\n도서 저자 : " + book.getBauthor());
+		dialogMsg.append("\n반납 기한 : " + borrBook.getReturndate());
+		Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("도서 대출");
+        ButtonType typeOk= new ButtonType("확인", ButtonData.OK_DONE);
+	    dialog.setContentText(dialogMsg.toString());
+	    dialog.getDialogPane().getButtonTypes().add(typeOk);
+	    dialog.showAndWait();
+	    
 		return rows;
 	}
 

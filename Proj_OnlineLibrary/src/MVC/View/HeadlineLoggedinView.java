@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -26,6 +27,7 @@ public class HeadlineLoggedinView {
 		Button goToHomeButton;
 		Label libraryBanner;
 		Label nicknameLabel;
+		Label sirLabel;
 		Button logoutButton;
 		Button mypageButton;
 		
@@ -45,6 +47,7 @@ public class HeadlineLoggedinView {
 		goToHomeButton = new Button();
 		libraryBanner = new Label();
 		nicknameLabel = new Label();
+		sirLabel = new Label();
 		logoutButton = new Button();
 		mypageButton = new Button();
 		
@@ -64,10 +67,19 @@ public class HeadlineLoggedinView {
 		libraryBanner.setText("Online Library");
 		libraryBanner.setFont(Font.font("Viner Hand ITC", FontWeight.BOLD, 25));
 		
-		nicknameLabel.setText(share.getUser().getNickname() + " 님");
-		nicknameLabel.setPrefSize(80, 30);
+		nicknameLabel.setText(share.getUser().getNickname());
+		nicknameLabel.setPrefSize(60, 30);
 		nicknameLabel.setAlignment(Pos.BASELINE_RIGHT);
 		nicknameLabel.setPadding(new Insets(5));
+		nicknameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+		if (share.getUser().getId().equals("admin")) {
+			nicknameLabel.setTextFill(Color.DARKRED);
+		}
+		
+		sirLabel.setText("님");
+		sirLabel.setPrefSize(20, 30);
+		sirLabel.setAlignment(Pos.BASELINE_LEFT);
+//		sirLabel.setPadding(new Insets(5));
 		
 		logoutButton.setText("Logout");
 		logoutButton.setPrefSize(80, 30);
@@ -102,6 +114,7 @@ public class HeadlineLoggedinView {
 		rightPane.setHgap(10);
 		rightPane.setAlignment(Pos.CENTER_RIGHT);
 		rightPane.getChildren().add(nicknameLabel);
+		rightPane.getChildren().add(sirLabel);
 		rightPane.getChildren().add(logoutButton);
 		rightPane.getChildren().add(mypageButton);
 		

@@ -4,6 +4,7 @@ import MVC.Controller.BookSearchController;
 import MVC.Controller.BorrowBookController;
 import MVC.VO.BookVO;
 import MVC.VO.ShareVO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,8 +37,9 @@ public class BookSearchView {
 		HBox bottomPane;
 		
 		// Components
-		Label categoryLabel; // 콤보박스면 최고
-//		ComboBox<String> categoryCombo;
+//		Label categoryLabel; // 콤보박스면 최고
+		ComboBox<String> categoryCombo;
+		ObservableList<String> categoryList;
 		TextField searchWordTextField;
 		Button searchButton;
 		TableView<BookVO> bookTableView;
@@ -56,8 +58,9 @@ public class BookSearchView {
 		bottomPane = new HBox();
 		
 		// Components
-		categoryLabel = new Label(); // 콤보박스면 최고
-//		ComboBox<String> category;
+//		categoryLabel = new Label(); // 콤보박스면 최고
+		categoryCombo = new ComboBox<String>();
+		categoryList = FXCollections.observableArrayList();
 		searchWordTextField = new TextField();
 		searchButton = new Button();
 		bookTableView = new TableView<BookVO>();
@@ -70,9 +73,14 @@ public class BookSearchView {
 		// View -----
 
 		// Components
-		categoryLabel.setText("btitle");
-		categoryLabel.setPrefSize(60, 30);
-		categoryLabel.setAlignment(Pos.CENTER);
+//		categoryLabel.setText("btitle");
+//		categoryLabel.setPrefSize(60, 30);
+//		categoryLabel.setAlignment(Pos.CENTER);
+		
+		categoryList.addAll("btitle", "bauthor", "bisbn");
+		categoryCombo.setItems(categoryList);
+		categoryCombo.setValue("btitle");
+		categoryCombo.setPrefSize(100, 30);
 		
 		searchWordTextField.setText("검색어 입력");
 		searchWordTextField.setPrefSize(400, 30);
@@ -80,7 +88,7 @@ public class BookSearchView {
 			// 책 검색 (혹은 searchButton action 실행시키기)
 			System.out.println("@@ 책 검색");
 			BookSearchController controller = new BookSearchController();
-			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			ObservableList<BookVO> list = controller.searchBook(categoryCombo.getValue(), searchWordTextField.getText());
 			bookTableView.setItems(list);
 		});
 		
@@ -90,7 +98,7 @@ public class BookSearchView {
 			// 책 검색
 			// 일단은 위에 내용 복붙함
 			BookSearchController controller = new BookSearchController();
-			ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+			ObservableList<BookVO> list = controller.searchBook(categoryCombo.getValue(), searchWordTextField.getText());
 			bookTableView.setItems(list);
 		});
 
@@ -131,7 +139,6 @@ public class BookSearchView {
 						return;
 					}
 					selectedBookBisbn = book.getBisbn();
-					System.out.println("@@ test " + book.getBborrowable() + ",");
 					if (book.getBborrowable().equals("x")) {
 						borrowButton.setDisable(true);
 					} else {
@@ -170,7 +177,7 @@ public class BookSearchView {
 				
 				// 목록 갱신
 				BookSearchController controller = new BookSearchController();
-				ObservableList<BookVO> list = controller.searchBook(categoryLabel.getText(), searchWordTextField.getText());
+				ObservableList<BookVO> list = controller.searchBook(categoryCombo.getValue(), searchWordTextField.getText());
 				bookTableView.setItems(list);
 			} else {
 				System.out.println("@@ 로그인 정보 없음");
@@ -192,7 +199,7 @@ public class BookSearchView {
 		topPane.setSpacing(10);
 		topPane.setAlignment(Pos.CENTER);
 		topPane.setPadding(new Insets(10));
-		topPane.getChildren().add(categoryLabel);
+		topPane.getChildren().add(categoryCombo);
 		topPane.getChildren().add(searchWordTextField);
 		topPane.getChildren().add(searchButton);
 		
