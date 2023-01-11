@@ -31,6 +31,11 @@ desc book;
 select * from book order by bprice desc limit 50;
 select * from book where btitle like '%java%';
 
+update book set bborrowable = 'o' where bisbn = '978-89-6848-156-7';
+update book set bborrowable = 'o', breturndate = null where bisbn = '978-89-6848-042-3';
+
+
+
 -- --------------------------------------------------
 
 
@@ -59,12 +64,12 @@ insert into users values('jslee', '창호', 'qwer1234', 'jslee@gmail.com', '010-
 -- UPDATE `library`.`users` SET `tier` = 'Admin' WHERE (`id` = 'admin');
 -- UPDATE users SET nickname = ?, pw = ?, email = ?, phone = ?, identquest = ?, identanswer = ?, tier = ? WHERE id = ?;
 
-
-
 desc users;
 select * from users;
 select pw from users where id = 'admin';
 delete from users where id = 'jslee';
+
+update users set point = 35, tier = 'Silver' where id = 'jslee';
 
 
 -- --------------------------------------------------
@@ -77,12 +82,14 @@ delete from users where id = 'jslee';
 DROP TABLE IF EXISTS borrbook;
 CREATE TABLE borrbook (
 	bisbn		VARCHAR(20) Not Null primary key,
-    btitle	VARCHAR(50) not null,
+    btitle	VARCHAR(100) not null,
     id	VARCHAR(20) not null,
     borrdate	DATE not null,
     returndate	DATE not null
 );
 
+alter table borrbook modify btitle VARCHAR(100) not null;
+update borrbook set returndate = DATE('20230109') where bisbn = '978-89-98756-79-6';
 
 
 desc borrbook;
