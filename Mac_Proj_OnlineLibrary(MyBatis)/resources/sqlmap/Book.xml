@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<!-- mapper xml 파일은 한 개만 만드는 것이 아니다. -->
+<mapper namespace="OnlineLibrary.BookXml">
 
-<mapper namespace="example.myBook">
-
-	<select id="selectBookByISBNHashMap" parameterType="String" resultType="HashMap">
-		<!-- parameterType : isbn의 자료형. resultType : 결과로 리턴받는 데이터의 자료형 -->
-		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
+	<!-- 
+	<resultMap id="BookVOMap" type="BookVOxml">
+		<result column="bisbn" property="bisbn"/>
+		<result column="btitle" property="btitle"/>
+		<result column="bdate" property="bdate"/>
+		<result column="bpage" property="bpage"/>
+		<result column="bprice" property="bprice"/>
+		<result column="bauthor" property="bauthor"/>
+		<result column="bpublisher" property="bpublisher"/>
+		<result column="bimgurl" property="bimgurl"/>
+		<result column="bimgbase64" property="bimgbase64"/>
+		<result column="bborrowable" property="bborrowable"/>
+		<result column="breturndate" property="breturndate"/>
+	</resultMap>
+	 -->
+	
+	<select id="selectBookByCategoryBookVO" parameterType="SearchObjectVOxml" resultType="BookVOxml">
 		<![CDATA[
-			SELECT bisbn, btitle, bauthor, bprice
+			SELECT *
 			FROM book
-			WHERE bisbn = #{isbn}
+			WHERE ${category} LIKE #{keyword}
+			ORDER BY bisbn ASC
 		]]>
 	</select>
 	
-	<select id="selectAllHashMap" resultType="HashMap">
+	<insert id="insertBookByBookVO" parameterType="BookVOxml">
 		<![CDATA[
-			SELECT bisbn, btitle, bauthor, bprice
-			FROM book
+			INSERT
+			INTO book
+			VALUES (#{bisbn}, #{btitle}, #{bdate}, #{bpage}, 
+				#{bprice}, #{bauthor}, #{bpublisher}, #{bimgurl}, 
+				#{bimgbase64}, #{bborrowable}, #{breturndate})
 		]]>
-	</select>
-
-	<!-- select에서 가져온 column과 매칭되는 vo의 field를 찾아서 값을 매핑해준다. DB의 컬럼명과 field명이 동일해야만 가능하다. -->
-	<select id="selectBookByISBNBookVO" parameterType="String" resultType="Book">
-	<!-- resultType 에서 원래 "example.vo.BookVO" 라고 써야 하지만, SqlMapConfig 에서 alias 설정해줬으니 바꿔서 써도 된다. -->
-		<![CDATA[
-			SELECT btitle, bauthor
-			FROM book
-			WHERE bisbn = #{isbn}
-		]]>
-	</select>
-
-	<!-- select의 결과 컬럼명과 VO의 필드명이 다른 경우 -->
-	<resultMap id="testMap" type="Book">
-		<!-- column="select 결과 집합의 컬럼명" / property="VO의 field명" -->
-		<result column="b_isbn" property="bisbn" />
-		<result column="b_title" property="btitle" />
-		<result column="b_author" property="bauthor" />
-		<result column="b_price" property="bprice" />
-	</resultMap>
-	<select id="selectBookByISBNResultMap" parameterType="String" resultMap="testMap">
-		<![CDATA[
-			SELECT bisbn AS b_isbn, btitle AS b_title, bauthor AS b_author, bprice AS b_price
-			FROM book
-			WHERE bisbn = #{isbn}
-		]]>
-	</select>
-
-	<!-- update구문 -->
-	<update id="update" parameterType="Book">
-	<!-- #{btitle} : Book이라는 VO 안에 있는 btitle 필드값을 대입한다는 의미 -->
+	</insert>
+	
+	<update id="updateBookByBookVO" parameterType="BookVOxml">
 		<![CDATA[
 			UPDATE book
-			SET btitle = #{btitle}, bauthor = #{bauthor}, bprice = #{bprice}
+			SET btitle = #{btitle}, bdate = #{bdate}, bpage = #{bpage}, bprice = #{bprice},
+				bauthor = #{bauthor}, bpublisher = #{bpublisher}, bimgurl = #{bimgurl}, bimgbase64 = #{bimgbase64},
+				bborrowable = #{bborrowable}, breturndate = #{breturndate}
 			WHERE bisbn = #{bisbn}
 		]]>
 	</update>
+	
+	<delete id="deleteBookByBookVO" parameterType="String">
+		<![CDATA[
+			DELETE
+			FROM book
+			WHERE bisbn = #{bisbn}
+		]]>
+	</delete>
 
 </mapper>

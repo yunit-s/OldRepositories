@@ -2,35 +2,23 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
-	<!--
-		property는 하나만 설정할 예정
-		외부 파일을 이용해서 데이터베이스 접속정보를 가져올 거다.
-		외부 파일을 하나 만든다. -> driver.properties 파일을 생성하는 것
-		Driver, JDBC url, ID, PW 4가지가 있어야 한다.
-		연결 정보같은 내용은 파일로 하나 빼서 관리하는 게 일반적인 방식이다.
-	 -->
+	<!-- 외부 파일을 이용해서 데이터베이스 접속정보 가져오기 -->
 	<properties resource="./driver.properties"/>
 	
-	<!-- 
-		MyBatis에 대한 기본 세팅정보가 나온다.
-		MyBatis가 동작하는 기본적인 방식에 대한 세팅정보가 있다.
-	 -->
+	<!-- MyBatis가 동작하는 기본적인 방식에 대한 세팅정보가 있다. -->
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
-		<!--  Data가 없을 경우, NULL 로 처리한다. -->
 	</settings>
 	 
-	<!--
-		별명 지정하기. 타이핑 줄이기 좋으니까. aliasing
-		XML 코드 안에서는 type에 적은 것을 alias에 적은 것처럼 표시하겠다는 뜻. java 코드에는 영향 없음.
-	  -->
+	<!-- 별명 지정하기 -->
 	<typeAliases>
-	 	<typeAlias type="example.vo.BookVO" alias="Book"/>
+	 	<typeAlias type="MVC.VO.BookVO" alias="BookVOxml"/>
+	 	<typeAlias type="MVC.VO.UserVO" alias="UserVOxml"/>
+	 	<typeAlias type="MVC.VO.BorrBookVO" alias="BorrBookVOxml"/>
+	 	<typeAlias type="MVC.VO.SearchObjectVO" alias="SearchObjectVOxml"/>
 	</typeAliases>
 	
-	<!-- Database 연결 정보 선언
-		연결 정보를 여러 개 설정할 수 있어. 여러 개 설정해놓고, MyBatis가 선택해서 연결하게 할 수 있음.
-	 -->
+	<!-- Database 연결 정보 선언 -->
 	<environments default="development">
 		<!-- 
 			아래처럼 여러 가지 환경을 만들 수 있음.
@@ -43,10 +31,6 @@
 				<!-- 
 					type="JDBC 이면, 수동으로 transaction을 처리하겠다는 의미.
 					지금까지 우리가 코드로 했던 방식을 말한다. commit(), rollback() 를 직접 명시하면서 활용하는 것.
-					type="MANAGED" 이면, 자동으로 transaction을 관리한다.
-					Container 가 transaction을 관리한다. 내가 직접 코드를 넣을 필요가 없다. 아직은 안 배웠음.
-					나중에 spring 쓸 때는 스프링 트랜잭션 매니저? 가 있어서 그걸 이용하면 되기 때문에 MANAGED를 쓰면 된다.
-					지금은 그냥 JDBC 로 수동설정한다.
 				 -->
 			</transactionManager>
 			<dataSource type="POOLED">
@@ -61,7 +45,6 @@
 				<property name="username" value="${user}"/>
 				<property name="password" value="${password}"/>
 				
-				<!-- 데이터베이스 connection pool에 대한 설정이 나올 수 있다. -->
 			</dataSource>
 		</environment>
 	</environments>
@@ -69,9 +52,9 @@
 	<!-- mapping된 SQL 구문이 있는 XML파일에 대한 설정 -->
 	<mappers>
 		<mapper resource="./sqlmap/Book.xml"/>
-		<!-- <mapper resource="./sqlmap/Member.xml"/> -->
+		<mapper resource="./sqlmap/User.xml"/>
+		<mapper resource="./sqlmap/BorrBook.xml"/>
 	
 	</mappers>
-
 
 </configuration>

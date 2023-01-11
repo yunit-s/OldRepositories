@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="OnlineLibrary.UserXml">
+
+	<!-- 
+	<resultMap id="UserVOMap" type="UserVOxml">
+		<result column="id" property="id" />
+		<result column="nickname" property="nickname" />
+		<result column="pw" property="pw" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<result column="identquest" property="identquest" />
+		<result column="identanswer" property="identanswer" />
+		<result column="tier" property="tier" />
+		<result column="point" property="point" />
+	</resultMap>
+	 -->
+	
+	<select id="selectUsersByIdUserVOMap" parameterType="String" resultType="UserVOxml">
+		<![CDATA[
+			SELECT *
+			FROM users
+			WHERE id = #{searchWord}
+		]]>
+	</select>
+	
+	<select id="selectUsersByCategoryUserVO" parameterType="SearchObjectVOxml" resultType="UserVOxml">
+		<![CDATA[
+			SELECT *
+			FROM users
+			WHERE ${category} LIKE #{keyword}
+		]]>
+	</select>
+	
+	<insert id="insertUserOne" parameterType="UserVOxml">
+		<![CDATA[
+			INSERT
+			INTO users
+			VALUES (#{id}, #{nickname}, #{pw}, #{email}, #{phone}, #{identquest}, #{identanswer}, #{tier}, #{point})
+		]]>
+	</insert>
+	
+	<update id="updateUserOne" parameterType="UserVOxml">
+		<![CDATA[
+			UPDATE users
+			SET nickname = #{nickname}, pw = #{pw}, email = #{email}, phone = #{phone}, identquest = #{identquest}, 
+				identanswer = #{identanswer}, tier = #{tier}, point = #{point}
+			WHERE id = #{id}
+		]]>
+	</update>
+	
+	<delete id="deleteUserOne" parameterType="String">
+		<![CDATA[
+			DELETE
+			FROM users
+			WHERE id = #{id}
+		]]>
+	</delete>
+	
+</mapper>

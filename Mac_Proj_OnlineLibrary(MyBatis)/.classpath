@@ -9,5 +9,8 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/mybatis-3.5.11.jar"/>
 	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/commons-dbcp2-2.9.0.jar"/>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/commons-pool2-2.11.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

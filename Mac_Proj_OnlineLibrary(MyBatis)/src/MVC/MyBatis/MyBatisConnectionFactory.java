@@ -1,4 +1,4 @@
-package example.mybatis;
+package MVC.MyBatis;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -12,7 +12,7 @@ public class MyBatisConnectionFactory {
 	private static SqlSessionFactory sqlSessionFactory; // 공장은 하나만 만들기 때문에 static으로 선언
 	
 	static {
-		
+		System.out.println("@@@ static factory 생성");
 		String resource = "./SqlMapConfig.xml";
 		try {
 			Reader reader = Resources.getResourceAsReader(resource); // Reader라는 스트림을 이용해서 xml 리소스 파일을 읽어들이겠다는 의미
