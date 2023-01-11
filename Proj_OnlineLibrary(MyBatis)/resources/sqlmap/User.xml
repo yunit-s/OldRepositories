@@ -4,20 +4,7 @@
 <mapper namespace="OnlineLibrary.UserXml">
 
 	<!-- 
-	<resultMap id="UsersMap" type="UserVOxml">
-		<result column="u_id" property="id" />
-		<result column="u_nickname" property="nickname" />
-		<result column="u_pw" property="pw" />
-		<result column="u_email" property="email" />
-		<result column="u_phone" property="phone" />
-		<result column="u_identquest" property="identquest" />
-		<result column="u_identanswer" property="identanswer" />
-		<result column="u_tier" property="tier" />
-		<result column="u_point" property="point" />
-	</resultMap>
-	 -->
-	
-	<resultMap id="UserVO" type="UserVOxml">
+	<resultMap id="UserVOMap" type="UserVOxml">
 		<result column="id" property="id" />
 		<result column="nickname" property="nickname" />
 		<result column="pw" property="pw" />
@@ -28,15 +15,47 @@
 		<result column="tier" property="tier" />
 		<result column="point" property="point" />
 	</resultMap>
+	 -->
 	
-	<select id="selectUsersByISBNUserVO" parameterType="String" resultMap="UserVO">
-		<!-- parameterType : isbn의 자료형. resultType : 결과로 리턴받는 데이터의 자료형 -->
-		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
+	<select id="selectUsersByIdUserVOMap" parameterType="String" resultType="UserVOxml">
 		<![CDATA[
 			SELECT *
 			FROM users
 			WHERE id = #{searchWord}
 		]]>
 	</select>
+	
+	<select id="selectUsersByCategoryUserVO" parameterType="SearchObjectVOxml" resultType="UserVOxml">
+		<![CDATA[
+			SELECT *
+			FROM users
+			WHERE ${category} LIKE #{keyword}
+		]]>
+	</select>
+	
+	<insert id="insertUserOne" parameterType="UserVOxml">
+		<![CDATA[
+			INSERT
+			INTO users
+			VALUES (#{id}, #{nickname}, #{pw}, #{email}, #{phone}, #{identquest}, #{identanswer}, #{tier}, #{point})
+		]]>
+	</insert>
+	
+	<update id="updateUserOne" parameterType="UserVOxml">
+		<![CDATA[
+			UPDATE users
+			SET nickname = #{nickname}, pw = #{pw}, email = #{email}, phone = #{phone}, identquest = #{identquest}, 
+				identanswer = #{identanswer}, tier = #{tier}, point = #{point}
+			WHERE id = #{id}
+		]]>
+	</update>
+	
+	<delete id="deleteUserOne" parameterType="String">
+		<![CDATA[
+			DELETE
+			FROM users
+			WHERE id = #{id}
+		]]>
+	</delete>
 	
 </mapper>

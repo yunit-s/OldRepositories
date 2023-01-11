@@ -14,7 +14,7 @@ public class ModifyBookInfoController {
 
 	public int editBookOneFromBookDB(BookVO book) {
 		BookService bookService = new BookService();
-		int rows = bookService.editBookOneByBookVO(book);
+		int rows = bookService.editBookOneByBookVO_mybatis(book);
 		return rows;
 	}
 	

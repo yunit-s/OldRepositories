@@ -7,13 +7,13 @@ public class ModifyUserInfoController {
 
 	public UserVO checkIdInUsersDB(String id) {
 		UserService userService = new UserService();
-		UserVO user = userService.getUserById(id);
+		UserVO user = userService.getUserById_mybatis(id);
 		return user;
 	}
 
 	public int editUserToUsersDB(UserVO user) {
 		UserService userService = new UserService();
-		int rows = userService.editUserByUserVO(user);
+		int rows = userService.editUserByUserVO_mybatis(user);
 		return rows;
 	}
 

@@ -88,7 +88,7 @@ public class MypageModifyBookDBView {
 		categoryLabel.setPrefSize(60, 30);
 		categoryLabel.setAlignment(Pos.CENTER);
 		
-		searchWordTextField.setText("java");
+		searchWordTextField.setText("");
 		searchWordTextField.setPrefSize(400, 30);
 		searchWordTextField.setOnAction(e -> {
 			// 책 검색 (혹은 searchButton action 실행시키기)

@@ -14,6 +14,8 @@
 	<typeAliases>
 	 	<typeAlias type="MVC.VO.BookVO" alias="BookVOxml"/>
 	 	<typeAlias type="MVC.VO.UserVO" alias="UserVOxml"/>
+	 	<typeAlias type="MVC.VO.BorrBookVO" alias="BorrBookVOxml"/>
+	 	<typeAlias type="MVC.VO.SearchObjectVO" alias="SearchObjectVOxml"/>
 	</typeAliases>
 	
 	<!-- Database 연결 정보 선언 -->
@@ -51,6 +53,7 @@
 	<mappers>
 		<mapper resource="./sqlmap/Book.xml"/>
 		<mapper resource="./sqlmap/User.xml"/>
+		<mapper resource="./sqlmap/BorrBook.xml"/>
 	
 	</mappers>
 

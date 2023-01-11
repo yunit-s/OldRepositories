@@ -16,11 +16,11 @@ public class BorrowBookController {
 
 	public int borrowBookOneFromBookDBByBisbn(String selectedBookBisbn, UserVO user) {
 		BookService bookService = new BookService();
-		int rows = bookService.setBorrowedBookOneByBisbn(selectedBookBisbn);
 		ObservableList<BookVO> list = bookService.searchBook_mybatis("bisbn", selectedBookBisbn);
+		BookVO book = list.get(0);
+		int rows = bookService.setBorrowedBookOneByBisbn_mybatis(book);
 		
 		// BookVO 를 BorrBookVO 로 변경
-		BookVO book = list.get(0);
 		LocalDate now = LocalDate.now();
 		BorrBookVO borrBook = new BorrBookVO(book.getBisbn(), book.getBtitle(), user.getId(), now.toString(), now.plusDays(7).toString());
 		

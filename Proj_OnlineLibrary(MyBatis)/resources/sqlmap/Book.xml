@@ -3,6 +3,56 @@
 
 <mapper namespace="OnlineLibrary.BookXml">
 
+	<!-- 
+	<resultMap id="BookVOMap" type="BookVOxml">
+		<result column="bisbn" property="bisbn"/>
+		<result column="btitle" property="btitle"/>
+		<result column="bdate" property="bdate"/>
+		<result column="bpage" property="bpage"/>
+		<result column="bprice" property="bprice"/>
+		<result column="bauthor" property="bauthor"/>
+		<result column="bpublisher" property="bpublisher"/>
+		<result column="bimgurl" property="bimgurl"/>
+		<result column="bimgbase64" property="bimgbase64"/>
+		<result column="bborrowable" property="bborrowable"/>
+		<result column="breturndate" property="breturndate"/>
+	</resultMap>
+	 -->
 	
+	<select id="selectBookByCategoryBookVO" parameterType="SearchObjectVOxml" resultType="BookVOxml">
+		<![CDATA[
+			SELECT *
+			FROM book
+			WHERE ${category} LIKE #{keyword}
+		]]>
+	</select>
+	
+	<insert id="insertBookByBookVO" parameterType="BookVOxml">
+		<![CDATA[
+			INSERT
+			INTO book
+			VALUES (#{bisbn}, #{btitle}, #{bdate}, #{bpage}, 
+				#{bprice}, #{bauthor}, #{bpublisher}, #{bimgurl}, 
+				#{bimgbase64}, #{bborrowable}, #{breturndate})
+		]]>
+	</insert>
+	
+	<update id="updateBookByBookVO" parameterType="BookVOxml">
+		<![CDATA[
+			UPDATE book
+			SET btitle = #{btitle}, bdate = #{bdate}, bpage = #{bpage}, bprice = #{bprice},
+				bauthor = #{bauthor}, bpublisher = #{bpublisher}, bimgurl = #{bimgurl}, bimgbase64 = #{bimgbase64},
+				bborrowable = #{bborrowable}, breturndate = #{breturndate}
+			WHERE bisbn = #{bisbn}
+		]]>
+	</update>
+	
+	<delete id="deleteBookByBookVO" parameterType="String">
+		<![CDATA[
+			DELETE
+			FROM book
+			WHERE bisbn = #{bisbn}
+		]]>
+	</delete>
 
 </mapper>

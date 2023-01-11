@@ -164,7 +164,7 @@ public class MypageBookInsertView {
 		breturndateLabel.setText("반납 기한");
 		breturndateLabel.setPrefSize(80, 30);
 		breturndateLabel.setAlignment(Pos.CENTER_RIGHT);
-		breturndateTextField.setText(String.valueOf(LocalDate.now().plusDays(7)));
+//		breturndateTextField.setText(String.valueOf(LocalDate.now().plusDays(7)));
 		breturndateTextField.setPrefSize(250, 30);
 		
 		insertButton.setText("도서 추가");
@@ -186,6 +186,7 @@ public class MypageBookInsertView {
 				String bimgbase64 = bimgbase64TextField.getText();
 				String bborrowable = bborrowableTextField.getText();
 				String breturndate = breturndateTextField.getText();
+				if (breturndate == "") breturndate = null;
 				BookVO newBook = new BookVO(bisbn, btitle, bdate, bpage, bprice, bauthor, bpublisher, bimgurl, bimgbase64, bborrowable, breturndate);
 				int rows = controller.insertBookOneToBookDB(newBook);
 //			} else {

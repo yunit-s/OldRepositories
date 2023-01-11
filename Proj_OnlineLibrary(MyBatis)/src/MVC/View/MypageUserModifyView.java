@@ -144,8 +144,7 @@ public class MypageUserModifyView {
 		modifyButton.setOnAction(e -> {
 
 			StringBuffer dialogMsg = new StringBuffer();
-			ModifyUserInfoController controller = new ModifyUserInfoController();
-			if (controller.checkIdInUsersDB(idTextField.getText()) != null) {
+			if (modifyUserInfoController.checkIdInUsersDB(idTextField.getText()) != null) {
 				System.out.println("@@ 회원 정보 수정 완료");
 				
 				String id = idTextField.getText();
@@ -158,7 +157,7 @@ public class MypageUserModifyView {
 				String tier = user.getTier();
 				int point = user.getPoint();
 				UserVO newUser = new UserVO(id, nickname, pw, email, phone, identquest, identanswer, tier, point);
-				int rows = controller.editUserToUsersDB(newUser);
+				int rows = modifyUserInfoController.editUserToUsersDB(newUser);
 				
 				dialogMsg.append("- 회원 정보 수정 완료 -");
 				dialogMsg.append("\n정상적으로 수정되었습니다.");

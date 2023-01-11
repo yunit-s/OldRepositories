@@ -79,7 +79,7 @@ public class BorrBookService {
 	}
 
 	public String getReturndateOneByBisbn(String selectedBookBisbn) {
-		System.out.println("@@ BorrBookService.getReturndateByBisbn() 실행");
+		System.out.println("@@ BorrBookService.getReturndateOneByBisbn() 실행");
 		
 		Connection con = null;
 		try {

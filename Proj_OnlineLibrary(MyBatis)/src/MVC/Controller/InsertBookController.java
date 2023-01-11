@@ -18,7 +18,7 @@ public class InsertBookController {
 
 	public int insertBookOneToBookDB(BookVO newBook) {
 		BookService bookService = new BookService();
-		int rows = bookService.insertBookOneByBookVO(newBook);
+		int rows = bookService.insertBookOneByBookVO_mybatis(newBook);
 		return rows;
 	}
 
