@@ -57,6 +57,7 @@ public class MypageBookModifyView {
 		
 		
 		// Initialize -----
+		
 		// Layout
 		primaryStage = new Stage();
 		scene = null;
@@ -230,7 +231,7 @@ public class MypageBookModifyView {
 		primaryStage.setTitle("도서 수정");
 		primaryStage.setScene(scene);
 //		primaryStage.setOnCloseRequest(e -> {
-//			System.out.println("@@ 회원 수정 창 닫힘 1");
+//			System.out.println("@@ 회원 수정 창 닫힘");
 //		});
 		
 		return primaryStage;

@@ -12,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -37,7 +36,7 @@ public class BookSearchView {
 		HBox bottomPane;
 		
 		// Components
-//		Label categoryLabel; // 콤보박스면 최고
+//		Label categoryLabel;
 		ComboBox<String> categoryCombo;
 		ObservableList<String> categoryList;
 		TextField searchWordTextField;
@@ -54,7 +53,6 @@ public class BookSearchView {
 		// Layout
 		rootPane = new BorderPane();
 		topPane = new HBox();
-//		centerPane = new VBox();
 		bottomPane = new HBox();
 		
 		// Components
@@ -143,7 +141,6 @@ public class BookSearchView {
 						borrowButton.setDisable(true);
 					} else {
 						borrowButton.setDisable(false);
-						//왔다갑니다.
 					}
 					
 					if(e1.getClickCount() == 2) {

@@ -5,11 +5,19 @@ public class SearchObjectVO {
 	private String category;
 	private String keyword;
 	
+	
+	
+	
+	
 	public SearchObjectVO(String category, String keyword) {
 		this.category = category;
 		this.keyword = keyword;
 	}
 
+	
+	
+	
+	
 	public String getCategory() {
 		return category;
 	}

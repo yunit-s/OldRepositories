@@ -3,7 +3,6 @@ package MVC.View;
 import java.time.LocalDate;
 
 import MVC.Controller.InsertBookController;
-import MVC.Controller.ModifyBookInfoController;
 import MVC.VO.BookVO;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -52,14 +51,12 @@ public class MypageBookInsertView {
 		TextField breturndateTextField;
 		Button insertButton;
 		
-//		ModifyBookInfoController modifyBookInfoController;
-		BookVO book;
-		
 		
 		
 		
 		
 		// Initialize -----
+		
 		// Layout
 		primaryStage = new Stage();
 		scene = null;
@@ -91,9 +88,6 @@ public class MypageBookInsertView {
 		breturndateTextField = new TextField();
 		insertButton = new Button();
 		
-//		modifyBookInfoController = new ModifyBookInfoController();
-//		book = modifyBookInfoController.getBookOneFromBookDBByBisbn(selectedBookIsbn);
-		book = new BookVO(null, null, null, 0, 0, null, null, null, null, null, null);
 		
 		
 		
@@ -104,61 +98,61 @@ public class MypageBookInsertView {
 		bisbnLabel.setText("ISBN");
 		bisbnLabel.setPrefSize(80, 30);
 		bisbnLabel.setAlignment(Pos.CENTER_RIGHT);
-		bisbnTextField.setText("1234-1234-4321");
+//		bisbnTextField.setText("1234-1234-4321");
 		bisbnTextField.setPrefSize(250, 30);
 		
 		btitleLabel.setText("제목");
 		btitleLabel.setPrefSize(80, 30);
 		btitleLabel.setAlignment(Pos.CENTER_RIGHT);
-		btitleTextField.setText("책 이름 어떻게 지으면 좋을까");
+//		btitleTextField.setText("책 이름 어떻게 지으면 좋을까");
 		btitleTextField.setPrefSize(250, 30);
 		
 		bdateLabel.setText("출판일");
 		bdateLabel.setPrefSize(80, 30);
 		bdateLabel.setAlignment(Pos.CENTER_RIGHT);
-		bdateTextField.setText(String.valueOf(LocalDate.now()));
+//		bdateTextField.setText(String.valueOf(LocalDate.now()));
 		bdateTextField.setPrefSize(250, 30);
 		
 		bpageLabel.setText("쪽수");
 		bpageLabel.setPrefSize(80, 30);
 		bpageLabel.setAlignment(Pos.CENTER_RIGHT);
-		bpageTextField.setText("999");
+//		bpageTextField.setText("999");
 		bpageTextField.setPrefSize(250, 30);
 		
 		bpriceLabel.setText("가격");
 		bpriceLabel.setPrefSize(80, 30);
 		bpriceLabel.setAlignment(Pos.CENTER_RIGHT);
-		bpriceTextField.setText("99999");
+//		bpriceTextField.setText("99999");
 		bpriceTextField.setPrefSize(250, 30);
 		
 		bauthorLabel.setText("저자");
 		bauthorLabel.setPrefSize(80, 30);
 		bauthorLabel.setAlignment(Pos.CENTER_RIGHT);
-		bauthorTextField.setText("yunit");
+//		bauthorTextField.setText("yunit");
 		bauthorTextField.setPrefSize(250, 30);
 		
 		bpublisherLabel.setText("출판사");
 		bpublisherLabel.setPrefSize(80, 30);
 		bpublisherLabel.setAlignment(Pos.CENTER_RIGHT);
-		bpublisherTextField.setText("한국도서관");
+//		bpublisherTextField.setText("한국도서관");
 		bpublisherTextField.setPrefSize(250, 30);
 		
 		bimgurlLabel.setText("이미지 url");
 		bimgurlLabel.setPrefSize(80, 30);
 		bimgurlLabel.setAlignment(Pos.CENTER_RIGHT);
-		bimgurlTextField.setText("https://www.유알엘.com/bimgurl");
+//		bimgurlTextField.setText("https://www.유알엘.com/bimgurl");
 		bimgurlTextField.setPrefSize(250, 30);
 		
 		bimgbase64Label.setText("이미지 변환");
 		bimgbase64Label.setPrefSize(80, 30);
 		bimgbase64Label.setAlignment(Pos.CENTER_RIGHT);
-		bimgbase64TextField.setText("https://www.유알엘.com/bimgbase64");
+//		bimgbase64TextField.setText("https://www.유알엘.com/bimgbase64");
 		bimgbase64TextField.setPrefSize(250, 30);
 		
 		bborrowableLabel.setText("대출 가능 여부");
 		bborrowableLabel.setPrefSize(80, 30);
 		bborrowableLabel.setAlignment(Pos.CENTER_RIGHT);
-		bborrowableTextField.setText("o");
+//		bborrowableTextField.setText("o");
 		bborrowableTextField.setPrefSize(250, 30);
 		
 		breturndateLabel.setText("반납 기한");
@@ -189,9 +183,9 @@ public class MypageBookInsertView {
 				if (breturndate == "") breturndate = null;
 				BookVO newBook = new BookVO(bisbn, btitle, bdate, bpage, bprice, bauthor, bpublisher, bimgurl, bimgbase64, bborrowable, breturndate);
 				int rows = controller.insertBookOneToBookDB(newBook);
-//			} else {
-//				// 아이디가 이미 존재할 시
-//				System.out.println("@@ 도서 추가 실패. isbn 중복");
+			} else {
+				// 도서가 이미 존재할 시
+				System.out.println("@@ 도서 추가 실패. isbn 중복");
 			}
 			
 		});
@@ -230,7 +224,7 @@ public class MypageBookInsertView {
 		primaryStage.setTitle("도서 추가");
 		primaryStage.setScene(scene);
 //		primaryStage.setOnCloseRequest(e -> {
-//			System.out.println("@@ 회원 수정 창 닫힘 1");
+//			System.out.println("@@ 도서 추가 창 닫힘");
 //		});
 		
 		return primaryStage;

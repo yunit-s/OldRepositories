@@ -57,11 +57,8 @@ public class ShareVO {
 		
 		user = null;
 	}
-
-
-
-
-
+	
+	
 
 
 
@@ -143,10 +140,6 @@ public class ShareVO {
 	public void setMypageOutstandingBookView(MypageOutstandingBookView mypageOutstandingBookView) {
 		this.mypageOutstandingBookView = mypageOutstandingBookView;
 	}
-
-
-
-
 
 	public UserVO getUser() {
 		return user;

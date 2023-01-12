@@ -77,60 +77,57 @@ public class SignUpView {
 		idLabel.setText("아이디");
 		idLabel.setPrefSize(80, 30);
 		idLabel.setAlignment(Pos.CENTER_RIGHT);
-		idTextField.setText("jslee");
+//		idTextField.setText("jslee");
 		idTextField.setPrefSize(250, 30);
 		
 		nicknameLabel.setText("닉네임");
 		nicknameLabel.setPrefSize(80, 30);
 		nicknameLabel.setAlignment(Pos.CENTER_RIGHT);
-		nicknameTextField.setText("창호");
+//		nicknameTextField.setText("창호");
 		nicknameTextField.setPrefSize(250, 30);
 		
 		pwLabel.setText("비밀번호");
 		pwLabel.setPrefSize(80, 30);
 		pwLabel.setAlignment(Pos.CENTER_RIGHT);
-		pwPwField.setText("qwer1234");
+//		pwPwField.setText("qwer1234");
 		pwPwField.setPrefSize(250, 30);
 		
 		pwcheckLabel.setText("비밀번호확인");
 		pwcheckLabel.setPrefSize(80, 30);
 		pwcheckLabel.setAlignment(Pos.CENTER_RIGHT);
-		pwcheckPwField.setText("qwer123");
+//		pwcheckPwField.setText("qwer123");
 		pwcheckPwField.setPrefSize(250, 30);
 		
 		emailLabel.setText("e-mail");
 		emailLabel.setPrefSize(80, 30);
 		emailLabel.setAlignment(Pos.CENTER_RIGHT);
-		emailTextField.setText("jslee@gmail.com");
+//		emailTextField.setText("jslee@gmail.com");
 		emailTextField.setPrefSize(250, 30);
 		
 		phoneLabel.setText("전화번호");
 		phoneLabel.setPrefSize(80, 30);
 		phoneLabel.setAlignment(Pos.CENTER_RIGHT);
-		phoneTextField.setText("010-1234-5678");
+//		phoneTextField.setText("010-1234-5678");
 		phoneTextField.setPrefSize(250, 30);
 		
 		identquestLabel.setText("본인 확인 질문");
 		identquestLabel.setPrefSize(80, 30);
 		identquestLabel.setAlignment(Pos.CENTER_RIGHT);
-		identquestTextField.setText("당신의 이름은?");
+//		identquestTextField.setText("당신의 이름은?");
 		identquestTextField.setPrefSize(250, 30);
 		
 		identanswerLabel.setText("본인 확인 답변");
 		identanswerLabel.setPrefSize(80, 30);
 		identanswerLabel.setAlignment(Pos.CENTER_RIGHT);
-		identanswerTextField.setText("이종석");
+//		identanswerTextField.setText("이종석");
 		identanswerTextField.setPrefSize(250, 30);
 		
 		signUpButton.setText("회원가입");
 		signUpButton.setPrefSize(100, 30);
 		signUpButton.setOnAction(e -> {
+			
 			// 기존 데이터와 중복 여부 확인
-			
-//			LoginController controller = new LoginController();
-			
 			SignUpController controller = new SignUpController();
-			
 			if (controller.checkIdInUsersDB(idTextField.getText()) == null) {
 				// 존재하지 않는 id인 경우, 회원 가입
 				System.out.println("@@ 회원가입 완료");
@@ -151,7 +148,7 @@ public class SignUpView {
 				share.getMainPane().setTop(share.getHeadlineLoggedinView().getRootPane(share));
 				share.getMainPane().setCenter(share.getBookSearchView().getRootPane(share));
 			} else {
-				// 로그인 실패 시
+				// 이미 존재하는 id인 경우
 				System.out.println("@@ 회원가입 실패 - 아이디 중복");
 			}
 			

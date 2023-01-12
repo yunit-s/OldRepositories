@@ -1,7 +1,6 @@
 package MVC.View;
 
 import MVC.VO.ShareVO;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -78,7 +77,6 @@ public class HeadlineView {
 		centerPane.setPadding(new Insets(5));
 		centerPane.setAlignment(Pos.CENTER);
 		
-//		rightPane.setColumnHalignment(HPos.RIGHT); // 이건 안 되네
 		rightPane.setPadding(new Insets(5));
 		rightPane.setAlignment(Pos.CENTER_RIGHT);
 		rightPane.getChildren().add(loginButton);

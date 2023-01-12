@@ -16,6 +16,10 @@ public class BookVO {
 	private String bborrowable;
 	private String breturndate;
 
+	
+	
+	
+	
 	public BookVO(String bisbn, String btitle, String bauthor, int bprice) {
 		this.bisbn = bisbn;
 		this.btitle = btitle;
@@ -39,6 +43,10 @@ public class BookVO {
 		this.breturndate = breturndate;
 	}
 
+	
+	
+	
+	
 	public String getBisbn() {return bisbn;}
 	public void setBisbn(String bisbn) {this.bisbn = bisbn;}
 	public String getBtitle() {return btitle;}
@@ -65,7 +73,5 @@ public class BookVO {
 	public void setBborrowable(String bborrowable) {this.bborrowable = bborrowable;}
 	public String getBreturndate() {return breturndate;}
 	public void setBreturndate(String breturndate) {this.breturndate = breturndate;}
-	
-	
 	
 }

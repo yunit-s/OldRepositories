@@ -7,12 +7,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -55,6 +55,7 @@ public class MypageUserModifyView {
 		
 		
 		// Initialize -----
+		
 		// Layout
 		primaryStage = new Stage();
 		scene = null;
@@ -167,7 +168,6 @@ public class MypageUserModifyView {
 				System.out.println("@@ 회원 정보 수정 실패. 아이디 불일치");
 				
 				dialogMsg.append("- 회원 정보 수정 실패 -");
-//				dialogMsg.append("\n아이디 입력 오류");
 			}
 
 			// 안내 메시지 출력

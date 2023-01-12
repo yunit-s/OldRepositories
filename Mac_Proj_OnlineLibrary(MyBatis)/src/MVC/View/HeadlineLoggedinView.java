@@ -109,7 +109,6 @@ public class HeadlineLoggedinView {
 		centerPane.setPadding(new Insets(5));
 		centerPane.setAlignment(Pos.CENTER);
 		
-//		rightPane.setColumnHalignment(HPos.RIGHT); // 이건 안 되네
 		rightPane.setPadding(new Insets(5));
 		rightPane.setHgap(10);
 		rightPane.setAlignment(Pos.CENTER_RIGHT);
