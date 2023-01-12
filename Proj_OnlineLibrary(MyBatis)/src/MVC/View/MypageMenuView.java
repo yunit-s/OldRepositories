@@ -11,7 +11,6 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -40,8 +39,8 @@ public class MypageMenuView {
 		Label userTierLabel;
 		
 		Button myBorrowStatButton;
-		Button myBorrowLogButton;
-		Button myInterBookButton;
+//		Button myBorrowLogButton;
+//		Button myInterBookButton;
 		Button modifyMyInfoButton;
 		Button withdrawButton;
 		
@@ -72,8 +71,8 @@ public class MypageMenuView {
 		userTierLabel = new Label();
 		
 		myBorrowStatButton = new Button();
-		myBorrowLogButton = new Button();
-		myInterBookButton = new Button();
+//		myBorrowLogButton = new Button();
+//		myInterBookButton = new Button();
 		modifyMyInfoButton = new Button();
 		withdrawButton = new Button();
 		
@@ -120,17 +119,17 @@ public class MypageMenuView {
 			
 		});
 		
-		myBorrowLogButton.setText("내 대여 기록");
-		myBorrowLogButton.setPrefSize(160, 30);
-		myBorrowLogButton.setOnAction(e -> {
-			
-		});
+//		myBorrowLogButton.setText("내 대여 기록");
+//		myBorrowLogButton.setPrefSize(160, 30);
+//		myBorrowLogButton.setOnAction(e -> {
+//			
+//		});
 		
-		myInterBookButton.setText("내 관심 도서");
-		myInterBookButton.setPrefSize(160, 30);
-		myInterBookButton.setOnAction(e -> {
-			
-		});
+//		myInterBookButton.setText("내 관심 도서");
+//		myInterBookButton.setPrefSize(160, 30);
+//		myInterBookButton.setOnAction(e -> {
+//			
+//		});
 		
 		modifyMyInfoButton.setText("개인 정보 수정");
 		modifyMyInfoButton.setPrefSize(160, 30);
@@ -171,9 +170,6 @@ public class MypageMenuView {
 					} else if (param.getButtonData() == ButtonData.NO) {
 						System.out.println("@@ 회원 탈퇴 취소");
 					}
-//					else if (param.getButtonData() == ButtonData.CANCEL_CLOSE) {
-//						System.out.println("@@ Dialog param = cancel_close"); // 이건 창 닫힐 때 무조건 눌리네
-//					}
 					return null;
 				}
 			});

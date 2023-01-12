@@ -3,4 +3,29 @@
 
 <mapper namespace="OnlineLibrary.BorrBookXml">
 
+	<select id="selectBorrBook" parameterType="SearchObjectVOxml" resultType="BorrBookVOxml">
+		<![CDATA[
+			SELECT *
+			FROM borrbook
+			WHERE ${category} LIKE #{keyword}
+			ORDER BY bisbn ASC
+		]]>
+	</select>
+
+	<insert id="insertBorrBook" parameterType="BorrBookVOxml">
+		<![CDATA[
+			INSERT
+			INTO borrbook
+			VALUES (#{bisbn}, #{btitle}, #{id}, #{borrdate}, #{returndate})
+		]]>
+	</insert>
+	
+	<delete id="deleteBorrBook" parameterType="String">
+		<![CDATA[
+			DELETE
+			FROM borrbook
+			WHERE bisbn = #{bisbn}
+		]]>
+	</delete>
+
 </mapper>

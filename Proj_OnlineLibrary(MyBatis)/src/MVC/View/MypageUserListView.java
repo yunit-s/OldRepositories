@@ -72,6 +72,7 @@ public class MypageUserListView {
 		
 		
 		
+		
 		// View -----
 
 		// Components
@@ -98,7 +99,6 @@ public class MypageUserListView {
 			ObservableList<UserVO> list = controller.searchUser(categoryLabel.getText(), searchWordTextField.getText());
 			usersTableView.setItems(list);
 		});
-
 
 		// 컬럼 객체 생성
 //		tableView.setPrefSize(700, 600);

@@ -1,9 +1,7 @@
 package MVC.View;
 
-import MVC.Controller.BookSearchController;
 import MVC.Controller.BorrBookSearchController;
 import MVC.Controller.ReturnBookController;
-import MVC.VO.BookVO;
 import MVC.VO.BorrBookVO;
 import MVC.VO.ShareVO;
 import javafx.collections.FXCollections;
@@ -17,7 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class MypageBorrowStatView {
 
@@ -42,6 +39,7 @@ public class MypageBorrowStatView {
 		
 		
 		
+		
 		// Initialize -----
 		
 		// Layout
@@ -54,6 +52,8 @@ public class MypageBorrowStatView {
 
 		borrBookSearchController = new BorrBookSearchController();
 		tmplist = FXCollections.observableArrayList();
+		
+		
 		
 		
 		
@@ -92,13 +92,6 @@ public class MypageBorrowStatView {
 				if(e1.getClickCount() == 2) {
 					System.out.println("@@ 행 더블클릭. title = " + row.getItem().getBtitle());
 
-//					Dialog<String> dialog = new Dialog<String>();
-//  			        dialog.setTitle("책 세부정보");
-//				    ButtonType type = new ButtonType("Ok", ButtonData.OK_DONE);
-//				    dialog.setContentText(" 다이얼로그 테스트 ");
-//				    dialog.getDialogPane().getButtonTypes().add(type);
-//				    dialog.getDialogPane().setMinHeight(300);
-//		            dialog.showAndWait();
 				} else {
 					System.out.println("@@ 행 클릭. title = " + row.getItem().getBtitle());
 					
@@ -122,9 +115,12 @@ public class MypageBorrowStatView {
 			int rows = returnBookController.returnBookOneFromBorrBookDBByBisbn(selectedBookBisbn, share.getUser());
 			
 			// 목록 갱신
-			BorrBookSearchController controller = new BorrBookSearchController();
-			ObservableList<BorrBookVO> list = controller.searchBook("id", share.getUser().getId());
-			bookTableView.setItems(list);
+//			BorrBookSearchController controller = new BorrBookSearchController();
+//			ObservableList<BorrBookVO> list = controller.searchBook("id", share.getUser().getId());
+//			bookTableView.setItems(list);
+			
+			// 좌측 메뉴, 우측 테이블뷰 동시 갱신
+			share.getMainPane().setCenter(share.getMypageView().getRootPane(share));
 		});
 
 		

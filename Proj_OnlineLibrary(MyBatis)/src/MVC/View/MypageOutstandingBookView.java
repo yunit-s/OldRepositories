@@ -1,6 +1,5 @@
 package MVC.View;
 
-import MVC.Controller.BookSearchController;
 import MVC.Controller.BorrBookSearchController;
 import MVC.Controller.ReturnBookController;
 import MVC.VO.BorrBookVO;
@@ -115,14 +114,6 @@ public class MypageOutstandingBookView {
 		TableColumn<BorrBookVO, String> returndateColumn = new TableColumn<>("반납기한");
 		returndateColumn.setMinWidth(30);
 		returndateColumn.setCellValueFactory(new PropertyValueFactory<>("returndate"));
-		
-		
-//		TableColumn<BorrBookVO, String> Column = new TableColumn<>("");
-//		Column.setMinWidth(150);
-//		Column.setCellValueFactory(new PropertyValueFactory<>(""));
-//		TableColumn<BorrBookVO, Integer> priceColumn = new TableColumn<>("전화번호");
-//		priceColumn.setMinWidth(100);
-//		priceColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 		// 위에서 만든 컬럼 객체를 TableView에 붙인다.
 		bookTableView.getColumns().addAll(isbnColumn, titleColumn, idColumn, borrdateColumn, returndateColumn);
 		
@@ -140,13 +131,6 @@ public class MypageOutstandingBookView {
 				if(e1.getClickCount() == 2) {
 					System.out.println("@@ 행 더블클릭. title = " + row.getItem().getBtitle());
 
-//					Dialog<String> dialog = new Dialog<String>();
-//  			        dialog.setTitle("책 세부정보");
-//				    ButtonType type = new ButtonType("Ok", ButtonData.OK_DONE);
-//				    dialog.setContentText(" 다이얼로그 테스트 ");
-//				    dialog.getDialogPane().getButtonTypes().add(type);
-//				    dialog.getDialogPane().setMinHeight(300);
-//		            dialog.showAndWait();
 				} else {
 					System.out.println("@@ 행 클릭. title = " + row.getItem().getBtitle());
 					

@@ -8,24 +8,24 @@ import MVC.VO.BookVO;
 import MVC.VO.BorrBookVO;
 import MVC.VO.UserVO;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.ButtonBar.ButtonData;
 
 public class BorrowBookController {
 
 	public int borrowBookOneFromBookDBByBisbn(String selectedBookBisbn, UserVO user) {
+		// book 데이터베이스에 대여 기록 남기기
 		BookService bookService = new BookService();
 		ObservableList<BookVO> list = bookService.searchBook_mybatis("bisbn", selectedBookBisbn);
 		BookVO book = list.get(0);
 		int rows = bookService.setBorrowedBookOneByBisbn_mybatis(book);
 		
-		// BookVO 를 BorrBookVO 로 변경
+		// BookVO를 토대로 BorrBookVO를 생성하고, borrbook데이터베이스에 추가
 		LocalDate now = LocalDate.now();
 		BorrBookVO borrBook = new BorrBookVO(book.getBisbn(), book.getBtitle(), user.getId(), now.toString(), now.plusDays(7).toString());
-		
 		BorrBookService borrBookService = new BorrBookService();
-		rows = borrBookService.insertBookOneByBorrBookVO(borrBook);
+		rows = borrBookService.insertBookOneByBorrBookVO_mybatis(borrBook);
 		
 		// 안내 메시지 출력
 		StringBuffer dialogMsg = new StringBuffer();

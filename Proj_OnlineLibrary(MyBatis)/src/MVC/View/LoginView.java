@@ -4,17 +4,13 @@ import MVC.Controller.LoginController;
 import MVC.VO.ShareVO;
 import MVC.VO.UserVO;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
 
 public class LoginView {
 
@@ -150,7 +146,6 @@ public class LoginView {
 			// 회원가입
 			System.out.println("@@ 회원가입");
 			share.getMainPane().setCenter(share.getSignUpView().getRootPane(share));
-			
 		});
 
 		

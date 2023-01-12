@@ -1,9 +1,7 @@
 package MVC.View;
 
 import MVC.Controller.BookSearchController;
-import MVC.Controller.ModifyBookInfoController;
 import MVC.VO.BookVO;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -61,6 +59,7 @@ public class BookVODetailView {
 		
 		
 		// Initialize -----
+		
 		// Layout
 		primaryStage = new Stage();
 		scene = null;
@@ -186,7 +185,6 @@ public class BookVODetailView {
 		okButton.setOnAction(e -> {
 			System.out.println("@@ 도서 상세정보 확인");
 			primaryStage.close();
-			
 		});
 
 		// Layout

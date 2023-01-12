@@ -8,6 +8,10 @@ public class BorrBookVO {
 	private String borrdate;
 	private String returndate;
 	
+	
+	
+	
+	
 	public BorrBookVO(String bisbn, String btitle, String id, String borrdate, String returndate) {
 		this.bisbn = bisbn;
 		this.btitle = btitle;
@@ -16,6 +20,10 @@ public class BorrBookVO {
 		this.returndate = returndate;
 	}
 
+	
+	
+	
+	
 	public String getBisbn() {
 		return bisbn;
 	}
