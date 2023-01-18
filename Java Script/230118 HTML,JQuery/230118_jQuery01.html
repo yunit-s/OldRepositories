@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <!-- jQuery를 사용하기 위한 CDN  -->
+    <!--
+        순서 조심해야 한다. 라이브러리부터 읽고 나서, 우리들의 코드를 읽어야 오류가 안 난다.
+    -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+    <script src="./js/230118_jQuery01.js"></script>
+</head>
+<body>
+    <h1 id="h1_id">h1 태그.</h1>
+    <div>
+        <div id="div_id">가장 좋아하는 가수는?</div>
+        <ul>
+            <!-- 같은 레벨에 있는 태그끼리는 형제 관계다 -->
+            <li>홍길동</li>
+            <li id="shin">신사임당</li>
+            <!--
+                구조 선택자
+                ul 태그는 li 태그의 부모다.
+                ul > li#shin
+                    ul태그의 자식으로 있는 li태그 중 id가 shin인 경우
+            -->
+            <li id="kang" class="class1">강감찬</li>
+            <li id="lee" class="class1">이순신</li>
+        </ul>
+
+        <!--
+            inline event model 이라는, HTML이 가지는 이벤트 처리 방식으로 버튼에 이벤트를 설정하자.
+            속성(attribute)을 이용한다.
+        -->
+        <input type="button" value="클릭해보세요!! 클릭클릭" onclick="myFunc()">
+        <input type="button" value="myFunc1()" onclick="myFunc1()">
+
+    </div>
+</body>
+</html>
