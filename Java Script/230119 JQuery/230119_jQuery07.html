@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <!-- jQuery를 사용하기 위한 CDN 설정  -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+
+    <!--
+        Bootstrap CDN을 포함해서 제공하는 CSS 이용해서 스타일 적용하기
+    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    
+    <script src="./js/230119_jQuery07.js"></script>
+
+</head>
+<body>
+    <!--
+        event propagation
+        이벤트 처리에 대한 가장 큰 특징. default event와 event propagation
+            자식에서 이벤트가 발생하면, 부모까지 그 이벤트가 타고 올라오는 것.
+            불편하니까 이 현상을 막아 보자.
+    -->
+    <div onclick="outerFunc()">
+        <button calss="btn btn-primary" onclick="innerFunc()">
+            버튼. innerFunc 실행
+        </button>
+    </div>
+    
+
+</body>
+</html>

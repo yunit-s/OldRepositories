@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <!-- jQuery를 사용하기 위한 CDN 설정  -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+
+    <!--
+        Bootstrap CDN을 포함해서 제공하는 CSS 이용해서 스타일 적용하기
+    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    
+    <script src="./js/230119_jQuery06.js"></script>
+
+</head>
+<body>
+    <ul>
+        <li>홍길동</li>
+        <li>신사임당</li>
+        <li>강감찬</li>
+    </ul>
+    <br><br>
+
+    <!--
+        a 태그(anchor 태그)
+        해당 hyperlink를 클릭하면, browser가 새로운 request를 보내는 것.
+        해당 서버가 naver 홈페이지에 대한 html, css, javascript를 우리 browser에게 전송한다.
+        그런데 이 작업을 이벤트로 판정한다.
+            click 이벤트가 끝나고 나면, 페이지가 바뀌는(페이지 전환) 이벤트가 자동으로 순차적으로 발생한다.
+        이런 이벤트를 default event라고 한다.
+        anchor가 가지고 있는 본연의 이벤트가 있는 거야.
+            클릭이 일어나면, 그 다음 default event가 자동으로 생성되어 일어나는 것.
+        우선 일어나는 것은 onclick의 이벤트. 그게 끝나면, 페이지 전환 이벤트가 일어난다.
+
+        지금 우리가 원하는 것은, default event가 일어나지 않게 처리하는 것.
+            onclick 이벤트에서 default event를 중지시킬 수 있다.
+    -->
+    <a href="http://www.naver.com" onclick="anchorOnClickFunc()">네이버로 가기</a>
+
+</body>
+</html>
