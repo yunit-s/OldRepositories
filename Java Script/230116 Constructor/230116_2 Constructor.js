@@ -44,7 +44,7 @@ console.log(Object.getOwnPropertyDescriptors(person)); // 출력 : {name: {…},
     // property마다 설정된 상세 정보를 확인할 수 있다.
     // 직접 설정하지 않은 여러 설정값들은 디폴트로 true가 들어간 것.
 
-// 객체를 다른 방식으로 반들어보자.
+// 객체를 다른 방식으로 만들어보자.
 // 메소드를 이용해서 특정 객체의 property를 설정해보자.
 const person1 = {}
 Object.defineProperty(person1, 'firstName', {
@@ -63,6 +63,7 @@ const person2 = {
 }
 console.log(person1.firstName); // 출력 : 홍
 console.log(person1.value); // 출력 : undefined
+console.log(Object.getOwnPropertyDescriptors(person1).firstName.writable); // 출력 : true
 person1.firstName = '최';
 console.log(person1.firstName); // 출력 : 최
 console.log(person1); // 출력 : {firstName: '최'}

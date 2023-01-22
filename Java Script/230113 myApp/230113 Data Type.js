@@ -123,7 +123,8 @@ console.log(typeof myFunc); // function 출력됨
     // reference type이라서 object라고 나와야 하는데, function으로 출력된다.
     // 진짜 data type과 리턴 타입이 정확하게 매칭되는 것은 아니다.
 
-// let myFunc
+
+
 
 
 // 함수를 정의하는 방법
