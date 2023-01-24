@@ -62,8 +62,14 @@ const person2 = {
     lastName: '길동'
 }
 console.log(person1.firstName); // 출력 : 홍
-console.log(person1.value); // 출력 : undefined
+// console.log(person1.value); // 출력 : undefined
+console.log(Object.getOwnPropertyDescriptors(person1)); // 출력 : {firstName: {…}}
+console.log(Object.getOwnPropertyDescriptors(person1).firstName); // 출력 : {value: '홍', writable: true, enumerable: true, configurable: true}
 console.log(Object.getOwnPropertyDescriptors(person1).firstName.writable); // 출력 : true
+console.log(Object.getOwnPropertyDescriptors(person1, 'firstName')); // 출력 : {firstName: {…}}
+console.log(Object.getOwnPropertyDescriptors(person1, 'firstName').writable); // 출력 : undefined
+console.log(Object.getOwnPropertyDescriptors(person1, 'firstName').firstName.writable); // 출력 : true
+console.log(Object.getOwnPropertyDescriptors(person1, '__proto__')); // 출력 : {firstName: {…}}
 person1.firstName = '최';
 console.log(person1.firstName); // 출력 : 최
 console.log(person1); // 출력 : {firstName: '최'}
