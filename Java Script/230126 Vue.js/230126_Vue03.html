@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        html의 div 내용
+        <my-local-component1></my-local-component1>
+        <my-local-component2></my-local-component2>
+    </div>
+
+    <script>
+        // 지역 component 2개 만들어서 사용하기
+        let cmp1 = {
+            template: '<div>첫 번째 지역 component : {{ cmp1Data }}</div>',
+            // data의 method 표현식
+            // data() { }
+            // 이번엔 이 방식으로 해보자. 이게 우리 눈에는 더 익으니까.
+            data: function() {
+                return {
+                    cmp1Data: 100
+                }
+            }
+            
+        };
+        let cmp2 = {
+            template: '<div>두 번째 지역 component : {{ cmp2Data }}</div>',
+            data() {
+                return {
+                    // 여기서 cmp1의 데이터를 써보자
+                    //      불가능하다.
+                    //      한 컴포넌트에서 다른 컴포넌트의 데이터에 직접 access하는 건 불가능하다.
+                    //      scope가 다르기 때문
+                    cmp2Data: cmp1.data.cmp1data
+                }
+            }
+        };
+
+        new Vue({
+            el: '#app',
+            // template: 'Vue instance template',
+            // data: {
+            //     vueData: 100
+            // },
+            components: {
+                'my-local-component1': cmp1,
+                'my-local-component2': cmp2
+            }
+        });
+    </script>
+</body>
+</html>

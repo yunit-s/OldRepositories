@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue-Component구현 연습문제</title>
+
+
+    <!-- jQuery를 사용하기 위한 CDN 설정  -->
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- EventBus를 사용하지 않고 다른 component로 event를 전달하기 -->
+    <div id="app">
+        다른 component로 event+data 전달하기 - eventBus 사용하지 않고 구현하기<br>
+        <global-component-a v-bind:props-data-a="rootData"></global-component-a>
+        <global-component-b v-on:emit-evt-b="occurEvtRoot"></global-component-b>
+    </div>
+
+    <script>
+        // 전역 컴포넌트 생성
+        Vue.component('global-component-a', {
+            // 여러 줄에 걸쳐서 문자열을 표헌하기 위해 백틱'`'을 사용하자.
+            // template에는 하나의 root element만 있어야 한다.
+            //      따라서 div로 두 개를 묶어준다.
+            template: `
+            <div>
+                <local-component-c></local-component-c>
+                <local-component-d v-bind:props-data-d="propsDataA"></local-component-d>
+            </div>
+            `,
+            props: {
+                propsDataA: String
+            },
+            components: {
+                // 하위 컴포넌트 생성
+                // 컴포넌트 내용을 꼭 여기서 구현까지 할 필요는 없고, 밖에서 구현하고 가져와도 된다.
+                'local-component-c': {
+                    template: '<div>local component c</div>'
+                },
+                'local-component-d': {
+                    template: '<div>처리된 데이터: {{ propsDataD }}</div>',
+                    props: {
+                        propsDataD: String
+                    }
+                },
+            },
+        });
+        Vue.component('global-component-b', {
+            template: '<local-component-f v-on:emit-evt-f="occurEvtB"></local-component-f>',
+            components: {
+                'local-component-f': {
+                    template: `
+                    <div>
+                        <input type="text" id="inputText">
+                        <button v-on:click="btnClick">클릭</button>
+                    </div>
+                    `,
+                    // 버튼이 클릭되면 click이벤트가 발생하고.
+                    //      그 이벤트의 처리는 버튼의 상위 컴포넌트에 있는 메소드가 한다.
+                    //      따라서 상위 컴포넌트인 f는 그 메소드를 가지고 있어야 한다.
+                    methods: {
+                        btnClick: function() {
+                            console.log('btnClick 메소드 실행')
+                            // alert($('#inputText').val());
+                            let text = $('#inputText').val();
+                            console.log('textfield 값 = ' + text);
+                            this.$emit('emit-evt-f', text);
+                        }
+                    }
+                }
+            },
+            methods: {
+                occurEvtB: function(...args) {
+                    console.log('occurEvtB 메소드 실행');
+                    console.log(args[0]);
+                    this.$emit('emit-evt-b', args[0]);
+                    // this.$emit('emit-evt-b', args); // 이걸로도 전송은 된다. 대신 더 큰 배열 하나에 포함되어 전송된다.
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                rootData: 'init'
+            },
+            methods: {
+                occurEvtRoot: function(...args) {
+                    console.log('occurEvtRoot 메소드 실행');
+                    console.log('rootData = ' + this.rootData); // this 안 붙이면 오류난다.
+                    console.log('args[0] = ');
+                    console.log(args[0]);
+                    this.rootData = args[0];
+                    console.log('rootData = ' + this.rootData);
+                }
+            }
+        });
+    </script>
+    </script>
+</body>
+</html>

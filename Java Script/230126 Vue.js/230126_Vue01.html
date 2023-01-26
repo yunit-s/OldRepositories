@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        Vue instance를 부착시킬 div element
+        {{ myID }} {{ myAge }}
+        {{ this.myID }}
+        <!--
+            이 안에서의 this의 의미는 이 div를 부착하고 있는 Vue instance를 지칭하게 된다.
+            {{}} 이 안에는 java script 코드가 들어가기 때문에 이것도 정상적으로 동작된다.
+            다만, {{ this.data.myID }} 이렇게 쓰면 안 된다.
+        -->
+
+        <!--
+            전역 component
+            전역 component도 Root component 안에서만 호출이 가능하다.
+            template 속성에 저장한 값을 그대로 가져와서 치환하게 된다.
+        -->
+        <my-component></my-component>
+
+        <!--
+            지역 component
+            Vue instance 내의 components 속성에 선언된 것들
+            이걸 선언한 해당 컴포넌트 내에서만 사용할 수 있다.
+        -->
+        <my-local-component></my-local-component>
+    </div>
+
+    <!--
+        지금은 html 코드와 java script 코드를 하나의 파일 안에 모두 넣었지만,
+        나중에는 CLI를 이용해서 Java Script code를 component화하고
+        따로 파일을 만들어서 구현하게 된다.
+    -->
+    <script>
+
+        // 전역 component 등록하기
+        // 우선 컴포넌트 하나 생성하기
+        //      컴포넌트는 자바스크립트 객체를 컴포넌트화시키는 방식으로 만든다.
+        let globalCmp = {
+            // template 속성이 있으면 컴포넌트 ㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍ 맞?
+            template: '<div>전역 component로 등록된 globalCmp</div>'
+        }
+        // 특정 자바스크립트 객체를 전역 컴포넌트로 등록
+        // 컴포넌트 이름 구성하는 방법
+        //      케밥 케이스 방식, 2단어 이상, 소문자, '-' 활용
+        //      케밥 케이스가 싫으면, 파스칼 케이스 사용하며 된다.
+        //          첫 글자 대문자
+        //              my-component -> MyComponent
+        // 컴포넌트의 이름은 결국 HTML 태그명으로 사용된다.
+        //      이 태그명으로 HTML에서 사용 가능해진다.
+        //      단, 아무데서나 사용할 수 있는 것은 아니다.
+        //      Root component 아래에 있어야 하는 것.
+        Vue.component('my-component', globalCmp);
+
+        // 지역 component 등록하기
+        let localCmp = {
+            template: '<div>여기는 localCmp의 template</div>'
+        }
+
+        // Vue instance 생성
+        //      이 Vue instance가 Root component가 된다.
+        new Vue({
+            el: '#app', // el속성. id가 app인 element
+            // template: '<div>template으로 변경된 값</div>',
+                // component의 내용인 기존 <div>~~~</div> 를 template 값으로 치환
+                //      다시 말해서, ㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍ
+                // 페이지 소스 보기 말고, F12 - Elements 보면 적용된 코드를 확인할 수 있다.
+            data: {
+                // 컴포넌트가 가지는 데이터. 쉽게 말하면 변수.
+                // 얘네는 Root component가 가지고 있는 데이터다. 다른 component와 조금 다르다.
+                myID: '홍길동',
+                myAge: 20
+                //      QQQ) text interpolation? 이게 랜더링이랑 같은 개념인가? 그것보다는 그냥 html에 표현하기 이런 말같음.
+            },
+            
+            // 로컬 components
+            components: {
+                // 컴포넌트가 여러 개일 수 있으니까 객체로 선언한다.
+                //      이 안에는 Java script 문법이 적용된다.
+                //      key값은 문자열이어야 한다.
+                //      value는 ㅍㅍㅍㅍㅍㅍㅍㅍ
+                // 컴포넌트의 이름 : 태그 명으로 사용된다.
+                'my-local-component': localCmp
+            }
+        });
+    </script>
+
+</body>
+</html>
