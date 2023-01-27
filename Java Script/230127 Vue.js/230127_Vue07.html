@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue07-{{ }}</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터를 위한 CDN 포함시키기 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <!-- Axios를 위한 CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1>{ { } } 콧수염 문법</h1>
+        <div>{{ message }}</div>
+        
+        <!--
+            여기서 연산도 가능할까?
+            가능하다. 왜냐하면, 이 안에 있는 내용을 연산한 후의 최종 결과를 그 위치에 찍는 방식이기 때문
+        -->
+        <div>{{ message + "!!!" }}</div>
+
+        <!-- 문자열 편집하기 -->
+        <div>{{ message.split('').reverse().join('') }}</div>
+            <!--
+                split : 문자열 자르기
+                reverse : 역순으로 만들기
+                join : 하나의 문자열로 붙이기
+                이러한 방식이 가능은 하지만, 좋은 방식은 아니다.
+                    {{  }}는 가급적 값을 찍어주는 역할만 하는 것이 좋다.
+                이렇게 연산을 하고 싶다면, 함수를 따로 만들어서 사용한다.
+            -->
+
+        <!--
+            아래 코드는 오류다. {{ }} 안에는 문자열로 표현할 수 있는 값이 와야 한다.
+            그런데 아래 코드는 statement? 야. 단순한 식이지.
+        -->
+        <!-- <div>{{ let a = 100; }}</div> -->
+        <!-- <div>{{ if(true) { return 100 } }}</div> -->
+
+        <!--
+            수식인 것 같은데 오류가 나지 않는 유일한 예외가 있다.
+                삼항 연산자
+            아래 코드는 오류가 아니다.
+            간단하게 조건에 따라 출력을 바꿔야할 때 사용할 수 있다.
+        -->
+        <div>{{ true ? 10 : 100 }}</div>
+        
+        <!-- 문자열 편집을 함수로 구현해서 호출하기 -->
+        <div>myFunc() : {{ myFunc() }}</div>
+        <div>myFunc() : {{ myFunc() }}</div>
+
+        <!--
+            이런 함수와 조금 다른, 좋은 기능이 있다.
+            computed
+            얘는 함수를 호출하는 게 아니라서 ()를 적지 않는다.
+        -->
+        <div>myComputed : {{ myComputed }}</div>
+        <div>myComputed : {{ myComputed }}</div>
+            <!--
+                분명 두 번을 호출했는데, log는 한 번만 호출된다. 왜일까?
+                    myComputed는 변수다. 계산된 값을 캐싱해서 그 결과값을 저장하고 있는 것.
+                    호출하는 개념이 아니다. 데이터가 바뀌는 시점에 미리 계산을 해놓고, return을 해서
+                    그 결과를 myComputed라는 변수에 저장하게 된다.
+                    QQQ) 그럼 데이터 바뀌면 log가 다시 찍히나?
+            -->
+    </div>
+
+    <script>
+        new Vue({
+            data: {
+                message: 'Vue 인스턴스의 데이터 - message'
+            },
+            methods: {
+                myFunc: function() {
+                    console.log('myFunc() 메소드 호출됨');
+                    return this.message.split('').reverse().join('');
+                }
+            },
+            computed: {
+                myComputed: function() {
+                    console.log('myComputed() 호출됨');
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

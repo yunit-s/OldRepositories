@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue06-v-bind directive</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터를 위한 CDN 포함시키기 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <!-- Axios를 위한 CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- CSS? -->
+    <style>
+        .myStyle {
+            background-color: yellow;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <h1>v-bind directive</h1>
+        <div v-bind:id="myID">첫 번째 본문</div>
+            <!--
+                div 태그의 id라는 속성에 상위 컴포넌트의 "myID"라는 데이터를 연동시키기
+                브라우저에서 f12 눌러서 Elements 확인해보면, 코드 자체가 변경되어 있음을 확인할 수 있다.
+                v-bind 의 목적은 내용을 보기 위해 텍스트를 삽입하려는 게 아니다.
+                태그의 속성의 값을 상위 컴포넌트의 데이터로 연동시키기 위해 사용한다.
+            -->
+        <div>텍스트 연동은 : {{ message }}</div>
+            <!-- 이게 텍스트 삽입(text interpolation)이다. -->
+        <div class="myStyle">스타일 연동 예제 1 - 기존 방식</div>
+        <div v-bind:class="styleValue">스타일 연동 예제 2 - v-bind 디렉티브를 활용한 방식</div>
+            <!-- 데이터를 연동할건데, class속성에 상위 컴포넌트의 "styleValue"라는 데이터를 연동시키기 -->
+        <div :class="styleValue">스타일 연동 예제 3 - v-bind 생략하기</div>
+            <!-- v-bind는 생략이 가능하다. -->
+
+        <!-- 전역 컴포넌트를 Root 컴포넌트의 하위 컴포넌트로 적용 -->
+        <!--
+            v-bind의 용법 2가지
+                1. 이미 존재하는 html 태그에서 쓰는 v-bind
+                    element의 속성을 지정할 때 사용
+                2. 우리가 만든 컴포넌트에서 쓰는 v-bind
+                    상위 컴포넌트에서 props를 통해 데이터를 전달하는 것
+            위가 1번에 해당, 아래가 2번에 해당한다.
+        -->
+        <my-component v-bind:my-data="message"></my-component>
+    </div>
+
+    <script>
+        // component를 생성하면서 바로 전역으로 등록하기
+        Vue.component('my-component', {
+            props: ['myData'], // 카멜 케이스로 적을 것
+            template: '<div>전달된 데이터: {{  }}</div>',
+            data: function() {
+                return {
+                    // 최상위 컴포넌트를 제외하고는 데이터를 반드시 함수로 만들어야 한다.
+                    //      그리고 안에서 객체를 리턴해야 한다.
+                }
+            }
+        });
+
+        new Vue({
+            data: {
+                message: 'Vue instance의 data인 message',
+                myID: 'myDiv',
+                styleValue: 'myStyle'
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

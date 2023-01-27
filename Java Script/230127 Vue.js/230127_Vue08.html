@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue08-directive</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터를 위한 CDN 포함시키기 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <!-- Axios를 위한 CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1>directive</h1>
+
+        <!-- v-bind 디렉티브 -->
+        <div v-bind:id="myID">Elements 확인해보면, id="myDIV"로 바뀌어 있음.</div>
+
+        <!--
+            v-if 디렉티브 : 명제의 참거짓에 따라 DOM에 포함시킬지 말지 여부를 결정한다.
+                true면, 해당 태그가 그대로 출력된다.
+                false면, 해당 태그가 DOM에서 아예 삭제된다.
+                마치 jQuery의 remove를 사용하는 것과 같다.
+        -->
+        <a v-if="flag" href="http://www.naver.com">네이버로 가기</a><br>
+
+        <!--
+            v-show 디렉티브 : 명제의 참거짓에 따라 화면에 출력할지 말지 여부를 결정한다.
+                ture면, 요소가 DOM에 존재하며 화면에 출력한다.
+                false면, 요소가 DOM에는 존재하지만 화면에서 안 보이게 처리한다.
+        -->
+        <a v-show="flag" href="http://www.kakao.com">카카오로 가기</a><br>
+
+        <!--
+            v-model 디렉티브
+                입력상자에 넣은 글자가 바뀌면, myTxt의 값도 자동으로 바뀐다.
+        -->
+        <input v-model="myTxt">myTxt 출력 : {{ myTxt }}
+        <button v-on:click="myFunc">myTxt값 확인</button><br>
+
+        <!--
+            v-for
+                반복 동작
+                다른 것들보단 좀 더 생각할 게 있다.
+            jQuery때와의 차이점
+                jQuery는 실시간으로 데이터를 만들어서 붙였는데, 어떻게 보면 이게 더 편했을 수 있다.
+                v-for는 이미 데이터를 완성한 다음에야 불러올 수 있다.
+        -->
+        <ul>
+            <li v-for="name in names">{{ name }}</li>
+                <!-- names의 데이터들을 가지고 하나씩 name이라는 변수 안에 집어넣는다. -->
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            data: {
+                flag: true,
+                myID: 'myDIV',
+                myTxt: '',
+                names: ['홍길동', '신사임당', '강감찬']
+            },
+            methods: {
+                myFunc: function() {
+                    alert(this.myTxt);
+                }
+            },
+            watch: {
+                // 데이터의 변경을 감시한다.
+                // 변수의 값이 변경되면, 거기에 연결된 콜백 함수가 바로 실행된다.
+                myTxt: function(data) {
+                    // alert('myTxt 변경됨. : ' + this.myTxt);
+                    // console.log('myTxt 변경됨 : ' + this.myTxt + '로 변경됨');
+                    console.log('myTxt 변경됨 : ' + data + '로 변경됨'); // 변경된 값이 data로 들어온다.
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

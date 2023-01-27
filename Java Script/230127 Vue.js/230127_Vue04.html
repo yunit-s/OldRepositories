@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue04-Axios</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터를 위한 CDN 포함시키기 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <!-- Axios를 위한 CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1>Vue 라우터 - Axios</h1>
+        <button v-on:click="myFunc">AJAX 호출</button>
+    </div>
+
+    <script>
+        new Vue({
+            methods: {
+                myFunc: function() {
+                    // 함수 리터럴로 표현
+                    // Axios를 이용한 AJAX 호출
+                    // alert('myFunc() 호출됨');
+
+                    // JQuery를 사용했었을 때
+                    // $.ajax({
+                    //     success: function() {}
+                    // });
+
+                    // axios 활용하기
+                    axios({
+                        // JQuery 했을 때와 property가 유사하다.
+                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
+                        method: 'GET', // jQuery에서는 type
+                        // 데이터 넘기기
+                        //      data 는 POST, PUT, DELETE 메소드 방식에서만 적용 가능.
+                        //      GET 방식에서는 이 data 키를 넘길 수 없다.
+                        // data: {
+                        // }
+                        // params는 URL parameter를 지칭한다.
+                        //      Query String 방식으로 전달되는 데이터를 의미.
+                        //      GET 방식에서 사용한다.
+                        params: {
+                            key: 'e8b19160d24b80d241f860153813316d',
+                            targetDt: '20230101'
+                        },
+                        responseType: 'json' // default값이 json이다.
+                    }).then(function(result) {
+                        // 호출에 성공했을 때
+                        alert('axios 호출 성공');
+                        console.log(result);
+                            // result를 보면, 서버가 보내준 상태정보까지 다 받아온다.
+                            //      우리가 원하는 박스오피스 정보는 data속성 안에 들어있다.
+                            //      jQuery는 바로 박스오피스 정보를 json으로 보내주는데,
+                            //      여기에는 이 안의 data에 접근해야만 제대로 된 정보를 받을 수 있다.
+                        console.log(result.data);
+
+                    }).catch(function(data) {
+                        // 호출에 실패했을 때
+                        alert('axios 호출 실패');
+
+                    })
+                        // 호출에 성공하면 then(), 실패하면 catch()
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>
