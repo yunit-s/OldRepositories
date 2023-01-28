@@ -61,12 +61,11 @@
                             //      여기에는 이 안의 data에 접근해야만 제대로 된 정보를 받을 수 있다.
                         console.log(result.data);
 
-                    }).catch(function(data) {
+                    }).catch(function(result) {
                         // 호출에 실패했을 때
                         alert('axios 호출 실패');
 
-                    })
-                        // 호출에 성공하면 then(), 실패하면 catch()
+                    });
                 }
             }
         }).$mount('#app');
