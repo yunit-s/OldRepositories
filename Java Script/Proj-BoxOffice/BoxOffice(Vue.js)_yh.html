@@ -23,61 +23,159 @@
 <body>
     <div id="main-div">
         <h1>Box Office</h1>
-        <global-cmp></global-cmp>
+        <global-cmp1 v-on:emit-evt-g1="occurEvtRoot"></global-cmp1>
+        <global-cmp2></global-cmp2>
     </div>
 
     <script>
-        // Global components
-        Vue.component('global-cmp', {
+        // Local components
+        let localCmp1 = {
             template: `
             <div>
-                전역 컴포넌트 템플릿<br>
-                <local-cmp1></local-cmp1>
+                local-cmp1 템플릿<br>
+                <input type="text" id="dateTxtField"><button v-on:click="btnClicked">검색</button>
             </div>`,
-            components: {
-                'local-cmp1': {
-                    template: `
-                    <div>
-                        local-cmp1 템플릿<br>
-                        <input type="text" id="dateTxtField"><button v-on:click="btnClicked">검색</button>
-                    </div>`,
-                    methods: {
-                        btnClicked: function() {
-                            console.log('btnClicked() 호출됨');
-                            let date = $('#dateTxtField').val();
-                            // console.log('날짜 : ', date);
-                            this.connAxios(date);
-                        },
-                        connAxios: function(date) {
-                            console.log('connAxios() 호출됨');
-
-                            // axios 호출
-                            axios({
-                                url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
-                                method: 'GET',
-                                params: {
-                                    key: 'e8b19160d24b80d241f860153813316d',
-                                    targetDt: date
-                                },
-                                responseType: 'json'
-                            }).then(function(result) {
-                                console.log('axios 호출 성공');
-                                // console.log(result);
-                                console.log(result.data);
-
-                            }).catch(function(result) {
-                                console.log('axios 호출 실패');
-
-                            });
-                        }
-                    }
+            data: function() {
+                return {
+                    // localData: 100,
+                    // axiosResult: Array
                 }
+            },
+            methods: {
+                btnClicked: function() {
+                    console.log('btnClicked() 호출됨');
+                    let date = $('#dateTxtField').val();
+                    // console.log('날짜 : ', date);
+                    console.log('emit(). 이벤트 발생.');
+                    this.$emit('emit-evt-l1', date);
+                }
+            }
+        };
+        let localCmp2 = {
+            template: `
+            <div>
+                local-cmp2 템플릿<br>
+                <input type="text" id="dateTxtField"><button v-on:click="btnClicked">검색</button>
+            </div>`,
+            data: function() {
+                return {
+                    localData2: String
+                }
+            },
+            methods: {
+                btnClicked: function() {
+
+                },
+                connAxios: function(date) {
+                    console.log('connAxios() 호출됨');
+
+                    // axios 호출
+                    axios({
+                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
+                        method: 'GET',
+                        params: {
+                            key: 'e8b19160d24b80d241f860153813316d',
+                            targetDt: date
+                        },
+                        responseType: 'json'
+                    }).then(function(result) {
+                        console.log('axios 호출 성공');
+                        // console.log(result);
+                        // console.log(result.data);
+                        
+                        this.axiosResult = result.data;
+                        console.log('this.axiosResult = ');
+                        console.log(this.axiosResult);
+
+                    }).catch(function(result) {
+                        console.log('axios 호출 실패');
+
+                    });
+                }
+            }
+        }
+
+        // Global components
+        Vue.component('global-cmp1', {
+            template: `
+            <div>
+                전역 컴포넌트1 템플릿<br>
+                <local-cmp1 v-on:emit-evt-l1="occurEvtG1"></local-cmp1>
+            </div>`,
+            methods: {
+                occurEvtG1: function(param) {
+                    console.log('occurEvtG1() 호출됨');
+                    // console.log(param);
+                    this.$emit('emit-evt-g1', param);
+                }
+            },
+            components: {
+                'local-cmp1': localCmp1
+            }
+        });
+        Vue.component('global-cmp2', {
+            template: `
+            <div>
+                전역 컴포넌트2 템플릿<br>
+                <local-cmp2 v-on:emit-evt-l2="occurEvtG2"></local-cmp2>
+            </div>`,
+            methods: {
+                occurEvtG2: function(param) {
+                    console.log('occurEvtG2() 호출됨');
+                    // console.log(param);
+                    this.$emit('emit-evt-g2', param);
+                }
+            },
+            props: {
+                propsData: String
+            },
+            components: {
+                'local-cmp2': localCmp2
             }
         })
 
         // Root component
         new Vue({
             // template: '<div>root 컴포넌트 템플릿</div>'
+            data: {
+                targetDt: String,
+                axiosResult: Array
+            },
+            methods: {
+                occurEvtRoot: function(param) {
+                    console.log('occurEvtRoot() 호출됨');
+                    this.targetDt = param;
+                    console.log(this.targetDt);
+                    // this.connAxios(param);
+                },
+                connAxios: function(date) {
+                    console.log('connAxios() 호출됨');
+
+                    // console.log(this.targetDt); // Root component 안의 data에 접근 가능
+                    // axios 호출
+                    axios({
+                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
+                        method: 'GET',
+                        params: {
+                            key: 'e8b19160d24b80d241f860153813316d',
+                            targetDt: date
+                        },
+                        responseType: 'json'
+                    }).then(function(result) {
+                        console.log('axios 호출 성공');
+                        // console.log(result);
+                        // console.log(result.data);
+                        
+                        this.axiosResult = result.data;
+                        console.log('this.axiosResult = ');
+                        console.log(this.axiosResult);
+
+                    }).catch(function(result) {
+                        console.log('axios 호출 실패');
+
+                    });
+                }
+            }
         }).$mount('#main-div');
     </script>
 </body>
