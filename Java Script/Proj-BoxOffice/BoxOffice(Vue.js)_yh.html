@@ -23,8 +23,9 @@
 <body>
     <div id="main-div">
         <h1>Box Office</h1>
-        <global-cmp1 v-on:emit-evt-g1="occurEvtRoot"></global-cmp1>
-        <global-cmp2></global-cmp2>
+        <button v-on:click="rootBtnClicked">root 버튼</button><br><br>
+        <global-cmp1 v-on:emit-evt-g1="occurEvtRoot"></global-cmp1><br>
+        <global-cmp2 v-bind:axios-result-g2="axiosResultRoot"></global-cmp2>
     </div>
 
     <script>
@@ -32,75 +33,74 @@
         let localCmp1 = {
             template: `
             <div>
-                local-cmp1 템플릿<br>
-                <input type="text" id="dateTxtField"><button v-on:click="btnClicked">검색</button>
+                <h4 v-show="false">local-cmp1 템플릿</h4>
+                <div>날짜 입력 : 
+                    <input type="text" v-model="inputDate">
+                    <button v-on:click="l1BtnClicked">검색</button><br>
+                </div>
             </div>`,
+                // <input type="text" id="dateTxtField">
             data: function() {
                 return {
-                    // localData: 100,
-                    // axiosResult: Array
+                    // Root component를 제외한 모든 component는 data를 함수의 리턴객체로 표현해야 한다.
+                    inputDate: ''
                 }
             },
             methods: {
-                btnClicked: function() {
+                l1BtnClicked: function() {
                     console.log('btnClicked() 호출됨');
-                    let date = $('#dateTxtField').val();
-                    // console.log('날짜 : ', date);
-                    console.log('emit(). 이벤트 발생.');
-                    this.$emit('emit-evt-l1', date);
+
+                    // jQuery로 textfield 읽는 방법
+                    // let date = $('#dateTxtField').val();
+                    // // console.log('emit(). 이벤트 발생.');
+                    // this.$emit('emit-evt-l1', date);
+
+                    // v-model directive로 textfield 읽는 방법
+                    this.$emit('emit-evt-l1', this.inputDate);
                 }
             }
         };
         let localCmp2 = {
             template: `
             <div>
-                local-cmp2 템플릿<br>
-                <input type="text" id="dateTxtField"><button v-on:click="btnClicked">검색</button>
+                <h4 v-show="false">local-cmp2 템플릿</h4>
+                <table border="1">
+                    <caption>[ 영화 순위 ]</caption>
+                    <div>
+                        <tr>
+                            <th width="20px">Rank</th>
+                            <th width="100px">Poster</th>
+                            <th width="500px">Title</th>
+                            <th width="100px">AudiAcc</th>
+                            <th width="130px">openDt</th>
+                            <th width="20px">index</th>
+                        </tr>
+                        <tr v-for="(item, index) in axiosResultL2" :key="index">
+                            <td align="center">{{ item.rank }}</td>
+                            <td align="center"><img v-bind:src="item.thumbnailUrl"></td>
+                            <td align="left">{{ item.movieNm }}</td>
+                            <td align="center">{{ item.audiAcc }}</td>
+                            <td align="center">{{ item.openDt }}</td>
+                            <td align="center">{{ index }}</td>
+                        </tr>
+                    </div>
+                </table>
             </div>`,
-            data: function() {
-                return {
-                    localData2: String
-                }
-            },
-            methods: {
-                btnClicked: function() {
-
-                },
-                connAxios: function(date) {
-                    console.log('connAxios() 호출됨');
-
-                    // axios 호출
-                    axios({
-                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
-                        method: 'GET',
-                        params: {
-                            key: 'e8b19160d24b80d241f860153813316d',
-                            targetDt: date
-                        },
-                        responseType: 'json'
-                    }).then(function(result) {
-                        console.log('axios 호출 성공');
-                        // console.log(result);
-                        // console.log(result.data);
-                        
-                        this.axiosResult = result.data;
-                        console.log('this.axiosResult = ');
-                        console.log(this.axiosResult);
-
-                    }).catch(function(result) {
-                        console.log('axios 호출 실패');
-
-                    });
-                }
+            props: {
+                axiosResultL2: Array
             }
         }
+
+
+
+
 
         // Global components
         Vue.component('global-cmp1', {
             template: `
             <div>
-                전역 컴포넌트1 템플릿<br>
-                <local-cmp1 v-on:emit-evt-l1="occurEvtG1"></local-cmp1>
+                <h3 v-show="false">전역 컴포넌트1 템플릿</h3>
+                <local-cmp1 v-on:emit-evt-l1="occurEvtG1"></local-cmp1><br>
             </div>`,
             methods: {
                 occurEvtG1: function(param) {
@@ -116,43 +116,57 @@
         Vue.component('global-cmp2', {
             template: `
             <div>
-                전역 컴포넌트2 템플릿<br>
-                <local-cmp2 v-on:emit-evt-l2="occurEvtG2"></local-cmp2>
+                <h3 v-show="false">전역 컴포넌트2 템플릿</h3>
+                <button v-on:click="g2BtnClicked">전역2 버튼</button><br><br>
+                <local-cmp2 v-on:emit-evt-l2="occurEvtG2" v-bind:axios-result-l2="axiosResultG2"></local-cmp2><br>
             </div>`,
+            props: {
+                axiosResultG2: Array
+            },
             methods: {
                 occurEvtG2: function(param) {
                     console.log('occurEvtG2() 호출됨');
                     // console.log(param);
                     this.$emit('emit-evt-g2', param);
+                },
+                g2BtnClicked: function() {
+                    console.log('g2BtnClicked() 호출됨');
+                    if (this.axiosResultG2.length == 0) {
+                        console.log('axios 데이터 없음');
+                    } else {
+                        console.log(this.axiosResultG2);
+                    }
                 }
-            },
-            props: {
-                propsData: String
             },
             components: {
                 'local-cmp2': localCmp2
             }
         })
 
+
+
+
+
         // Root component
         new Vue({
             // template: '<div>root 컴포넌트 템플릿</div>'
             data: {
-                targetDt: String,
-                axiosResult: Array
+                axiosResultRoot: []
             },
             methods: {
                 occurEvtRoot: function(param) {
                     console.log('occurEvtRoot() 호출됨');
-                    this.targetDt = param;
-                    console.log(this.targetDt);
-                    // this.connAxios(param);
+                    // console.log(param);
+                    this.connAxios(param); // param : textfield에서 입력한 날짜
+                },
+                rootBtnClicked: function() {
+                    console.log('rootBtnClicked() 호출됨');
+                    console.log(this.axiosResultRoot);
                 },
                 connAxios: function(date) {
                     console.log('connAxios() 호출됨');
 
-                    // console.log(this.targetDt); // Root component 안의 data에 접근 가능
-                    // axios 호출
+                    // BoxOffice 데이터 가져오기
                     axios({
                         url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
                         method: 'GET',
@@ -161,19 +175,57 @@
                             targetDt: date
                         },
                         responseType: 'json'
-                    }).then(function(result) {
+                    }).then(result => {
+                        // 여기서 then()의 매개변수를 단순히 function(result) {}으로 하면 안 된다.
+                        //      function()으로 했을 때와 Arrow function '=>' 으로 구현했을 때의
+                        //      this가 가리킬 수 있는 객체가 달라지기 때문
+
                         console.log('axios 호출 성공');
                         // console.log(result);
                         // console.log(result.data);
                         
-                        this.axiosResult = result.data;
-                        console.log('this.axiosResult = ');
-                        console.log(this.axiosResult);
+                        this.axiosResultRoot = result.data.boxOfficeResult.dailyBoxOfficeList;
+                            // dailyBoxOfficeList만 Array이고, 나머진 Object다.
+                            // Array가 활용하기 더 좋은 듯.
+                        console.log('this.axiosResultRoot = ');
+                        console.log(this.axiosResultRoot);
+                        
+                        this.axiosResultRoot.forEach(item => {
+                            
+                            // 영화 포스터 가져오기
+                            axios({
+                                url: 'https://dapi.kakao.com/v2/search/image',
+                                method: 'GET',
+                                params: {
+                                    query: item.movieNm + ' 포스터'
+                                },
+                                headers: {
+                                    // 인증에 대한 정보 입력
+                                    // Authorization: 'KakaoAK ${REST_API_KEY}'
+                                    Authorization: 'KakaoAK e5511dcd4332e8a8fb811afe1f102815'
+                                },
+                                responseType: 'json'
+                            }).then(searchResult => {
+                                console.log('axios 호출 성공');
 
-                    }).catch(function(result) {
+                                // 이미지 데이터 저장하기
+                                //      Vue.set()을 쓰지 않으면 화면 갱신이 자동으로 이루어지지 않음.
+                                //      Vue.set() 관련 정보 : https://v2.vuejs.org/v2/api/#Vue-set
+                                // item.thumbnailUrl = searchResult.data.documents[0].thumbnail_url;
+                                Vue.set(item, 'thumbnailUrl', searchResult.data.documents[0].thumbnail_url);
+                            }).catch(error => {
+                                console.log('axios 호출 실패');
+                            })
+                            // .finally(function(result) {
+                            //     console.log('finally 호출');
+                            // })
+                        });
+
+                    }).catch(error => {
                         console.log('axios 호출 실패');
-
-                    });
+                    }).finally(function(result) {
+                        console.log('finally 호출');
+                    })
                 }
             }
         }).$mount('#main-div');
