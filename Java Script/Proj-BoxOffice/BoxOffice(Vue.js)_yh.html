@@ -35,11 +35,10 @@
             <div>
                 <h4 v-show="false">local-cmp1 템플릿</h4>
                 <div>날짜 입력 : 
-                    <input type="text" v-model="inputDate">
+                    <input type="text" v-model="inputDate" />
                     <button v-on:click="l1BtnClicked">검색</button><br>
                 </div>
             </div>`,
-                // <input type="text" id="dateTxtField">
             data: function() {
                 return {
                     // Root component를 제외한 모든 component는 data를 함수의 리턴객체로 표현해야 한다.
@@ -68,26 +67,39 @@
                     <caption>[ 영화 순위 ]</caption>
                     <div>
                         <tr>
+                            <th width="20px">Select</th>
                             <th width="20px">Rank</th>
                             <th width="100px">Poster</th>
                             <th width="500px">Title</th>
                             <th width="100px">AudiAcc</th>
-                            <th width="130px">openDt</th>
-                            <th width="20px">index</th>
+                            <th width="130px">OpenDt</th>
+                            <th width="20px">Index</th>
+                            <th width="80px">Delete</th>
                         </tr>
                         <tr v-for="(item, index) in axiosResultL2" :key="index">
+                            <td align="center"><input type="checkbox" v-bind:id="'chkbox'+(index + 1)" /></td>
                             <td align="center">{{ item.rank }}</td>
-                            <td align="center"><img v-bind:src="item.thumbnailUrl"></td>
+                            <td align="center"><img v-bind:src="item.thumbnailUrl" /></td>
                             <td align="left">{{ item.movieNm }}</td>
                             <td align="center">{{ item.audiAcc }}</td>
                             <td align="center">{{ item.openDt }}</td>
                             <td align="center">{{ index }}</td>
+                            <td align="center"><button v-on:click="l2BtnClicked">삭제</button></td>
                         </tr>
                     </div>
                 </table>
             </div>`,
             props: {
                 axiosResultL2: Array
+            },
+            methods: {
+                l2BtnClicked: function() {
+                    console.log('l2BtnCliecked() 호출됨');
+                    for (let i = 1; i <= 10; i++) {
+                        let chkboxid = 'chkbox' + i;
+                        console.log(chkboxid);
+                    }
+                }
             }
         }
 
