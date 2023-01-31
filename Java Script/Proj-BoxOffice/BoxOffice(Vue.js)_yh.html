@@ -19,6 +19,9 @@
     <!-- Axios 활용을 위한 CDN -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <!-- Bootstrap modal 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Bootstrap CSS 활용을 위한 CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
@@ -76,7 +79,7 @@
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
-
+    
 </head>
 <body>
     <!-- Root component -->
@@ -126,7 +129,6 @@
                                 </a>
                             </li>
                         </ul>
-
                     </div>
                 </nav>
 
@@ -138,9 +140,9 @@
                         <button v-on:click="delSelBtnClicked" class="btn btn-secondary">선택 삭제</button>
                         <button v-on:click="delAllBtnClicked" class="btn btn-danger">전체 삭제</button>
                     </p>
-                    <div class="table-responsive">
 
-                        <!-- movie list table -->
+                    <!-- movie list table -->
+                    <div class="table-responsive">
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
@@ -158,7 +160,10 @@
                                     <td align="center"><input type="checkbox" v-bind:id="'chkbox'+(index + 1)" /></td>
                                     <td align="center">{{ item.rank }}</td>
                                     <td align="center"><img v-bind:src="item.thumbnailUrl" /></td>
-                                    <td align="left">{{ item.movieNm }}</td>
+                                    <!-- <td align="left">{{ item.movieNm }}</td> -->
+                                    <td align="left">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" v-on:click="searchMovieDetails(item.movieCd, $event)">{{ item.movieNm }}</a>
+                                    </td>
                                     <td align="center">{{ item.audiAcc }}</td>
                                     <td align="center">{{ item.openDt }}</td>
                                     <td align="center">
@@ -168,6 +173,42 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="exampleModalLabel">{{ movieDetails.movieNm }}</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        <li><h5>출연</h5>
+                                            <span v-for="actor in movieDetails.actors">{{ actor.peopleNm }}, </span><br><br>
+                                        </li>
+                                        <li><h5>영화감독</h5>
+                                            <span v-for="director in movieDetails.directors">{{ director.peopleNm }}</span><br><br>
+                                        </li>
+                                        <li><h5>관련 영화사</h5>
+                                            <div v-for="company in movieDetails.companys">{{ company.companyPartNm }} : {{ company.companyNm }}</div><br>
+                                        </li>
+                                        <li><h5>개봉일</h5>
+                                            <div>{{ movieDetails.openDt }}</div><br>
+                                        </li>
+                                        <li><h5>상영 시간</h5>
+                                            <div>{{ movieDetails.showTm }}분</div><br>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </main>
             </div>
         </div>
@@ -182,7 +223,8 @@
         new Vue({
             data: {
                 inputDate: '', // 검색창에 입력된 date양식의 날짜. '-'를 포함한다.
-                movieListRoot: [] // 박스오피스 정보
+                movieListRoot: [], // 박스오피스 정보
+                movieDetails: {} // 영화 상세 정보(modal 창에 띄울 내용)
             },
             methods: {
                 // debug
@@ -301,6 +343,27 @@
                 delAllBtnClicked: function() {
                     console.log('delAllBtnClicked() 호출됨');
                     this.movieListRoot.splice(0); // 영화리스트 배열에 있는 모든 요소 삭제
+                },
+                searchMovieDetails: function(movieCode) {
+                    console.log('searchMovieDetails() 호출됨');
+                    
+                    // Get movie details from online open API
+                    axios({
+                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json',
+                        method: 'GET',
+                        params: {
+                            key: 'e8b19160d24b80d241f860153813316d',
+                            movieCd: movieCode
+                        },
+                        responseType: 'json'
+                    }).then(details => {
+                        console.log('axios 호출 성공');
+                        // console.log(details);
+                        this.movieDetails = details.data.movieInfoResult.movieInfo;
+                        console.log(this.movieDetails);
+                    }).catch(error => {
+                        console.log('axios 호출 실패');
+                    })
                 }
             }
         }).$mount('#root-div');
