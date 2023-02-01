@@ -161,8 +161,8 @@
                                     <td style="text-align:center">{{ item.rank }}</td>
                                     <td style="text-align:center"><img v-bind:src="item.thumbnailUrl" /></td>
                                     <!-- <td style="text-align:left">{{ item.movieNm }}</td> -->
-                                    <td style="text-align:left" text-align="left">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" v-on:click="emitDetailsEvt(item.movieCd)">{{ item.movieNm }}</a>
+                                    <td style="text-align:left">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" v-on:click="searchMovieDetails(item.movieCd, $event)">{{ item.movieNm }}</a>
                                     </td>
                                     <td style="text-align:center">{{ item.audiAcc }}</td>
                                     <td style="text-align:center">{{ item.openDt }}</td>
@@ -174,15 +174,45 @@
                         </table>
                     </div>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="exampleModalLabel">{{ movieDetails.movieNm }}</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        <li><h5>출연</h5>
+                                            <span v-for="actor in movieDetails.actors">{{ actor.peopleNm }}, </span><br><br>
+                                        </li>
+                                        <li><h5>영화감독</h5>
+                                            <span v-for="director in movieDetails.directors">{{ director.peopleNm }}</span><br><br>
+                                        </li>
+                                        <li><h5>관련 영화사</h5>
+                                            <div v-for="company in movieDetails.companys">{{ company.companyPartNm }} : {{ company.companyNm }}</div><br>
+                                        </li>
+                                        <li><h5>개봉일</h5>
+                                            <!-- <div>{{ movieDetails.openDt }}</div><br> -->
+                                            <div>{{ transDateToKr(movieDetails.openDt) }}</div><br>
+                                        </li>
+                                        <li><h5>상영 시간</h5>
+                                            <div>{{ movieDetails.showTm }}분</div><br>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </main>
             </div>
         </div>
-
-        <!-- modal component -->
-        <!-- Root component 안에만 적어주면 어디든 상관없는 듯 -->
-        <modal-cmp></modal-cmp>
-
     </div>
 
 
@@ -190,122 +220,15 @@
 
 
     <script>
-        // Declare event bus
-        let EventBus = new Vue();
-
-        Vue.component('modalCmp', {
-            template:`
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-on:occur-details-evt="">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">{{ movieDetails.movieNm }}</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li><h5>출연</h5>
-                                    <span v-for="actor in movieDetails.actors">{{ actor.peopleNm }}, </span><br><br>
-                                </li>
-                                <li><h5>영화감독</h5>
-                                    <span v-for="director in movieDetails.directors">{{ director.peopleNm }}</span><br><br>
-                                </li>
-                                <li><h5>관련 영화사</h5>
-                                    <div v-for="company in movieDetails.companys">{{ company.companyPartNm }} : {{ company.companyNm }}</div><br>
-                                </li>
-                                <li><h5>개봉일</h5>
-                                    <!-- <div>{{ movieDetails.openDt }}</div><br> -->
-                                    <div>{{ transDateToKor(movieDetails.openDt) }}</div><br>
-                                </li>
-                                <li><h5>상영 시간</h5>
-                                    <div>{{ movieDetails.showTm }}분</div><br>
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `,
-            data: function() {
-                return {
-                    movieDetails: {} // 영화 상세 정보(modal 창에 띄울 내용)
-                }
-            },
-            // created : 프로그램이 실행된 직후 자동으로 실행되는 내용
-            created: function() {
-                console.log('modalCmp-created() 속성 함수 호출됨');
-
-                // event bus에 대한 이벤트 등록해두기
-                // 만약 다른 곳에서도 똑같은 이름의 이벤트 버스 함수를 만들면, 해당하는 모든 함수가 실행된다.
-                //      상위 컴포넌트의 이벤트 함수가 먼저 실행됨
-
-                // event bus에서 this 활용하기
-                //      event bus에서 this를 쓰면, event bus 자신을 가리키게 된다.
-                //      우리가 흔히 생각하는, created를 포함한 컴포넌트를 가리키기 위해서는 function에 .bind(this)를 붙이거나,
-                //      혹은, 이벤트 함수를 arrow function으로 잡아주면 된다.
-
-                // .bind(this)을 사용하는 방법
-                EventBus.$on('occurDetailsEvt', function(movieCode) {
-                    // 나중에 나에게 ()가 발생하면 실행할 내용 정의
-                    console.log('modalCmp-occurDetailsEvt 이벤트 발생. ', movieCode);
-                    this.searchMovieDetails(movieCode);
-                }.bind(this));
-
-                // // Arrow function을 사용하는 방법
-                // EventBus.$on('occurDetailsEvt', movieCode => {
-                //     // 나중에 나에게 ()가 발생하면 실행할 내용 정의
-                //     console.log('modalCmp-occurDetailsEvt 이벤트 발생. ', movieCode);
-                //     this.searchMovieDetails(movieCode);
-                // });
-            },
-            methods: {
-                // Search movie details
-                searchMovieDetails: function(movieCode) {
-                    console.log('searchMovieDetails() 호출됨');
-                    
-                    // Get movie details from online open API
-                    axios({
-                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json',
-                        method: 'GET',
-                        params: {
-                            key: 'e8b19160d24b80d241f860153813316d',
-                            movieCd: movieCode
-                        },
-                        responseType: 'json'
-                    }).then(details => {
-                        console.log('영화 상세정보 axios 호출 성공');
-                        // console.log(details);
-                        this.movieDetails = details.data.movieInfoResult.movieInfo;
-                        console.log(this.movieDetails);
-                    }).catch(error => {
-                        console.log('영화 상세정보 axios 호출 실패');
-                    })
-                },
-                // 날짜 표기방식 변환
-                transDateToKor: function(date) {
-                    // 무작정 date로 date.substring을 쓸 수 없다.
-                    //      date의 데이터타입이 String일 때만 사용할 수 있기 때문
-                    // 날짜 검색을 하지 않아도 이 메소드가 한 번씩 실행되는 이유를 모르겠다.
-                    let dateStr = new String(date);
-                    return dateStr.substring(0, 4) + '년 ' + dateStr.substring(4, 6) + '월 ' + dateStr.substring(6, 8) + '일';
-                }
-            }
-
-        });
-
         // Root component
         new Vue({
             data: {
                 inputDate: '', // 검색창에 입력된 date양식의 날짜. '-'를 포함한다.
                 movieListRoot: [], // 박스오피스 정보
+                movieDetails: {} // 영화 상세 정보(modal 창에 띄울 내용)
             },
             methods: {
-                // // debug
+                // debug
                 // rootBtnClicked: function() {
                 //     console.log('rootBtnClicked() 호출됨');
                 //     console.log(this.inputDate);
@@ -351,7 +274,6 @@
                         console.log('this.movieListRoot = ');
                         console.log(this.movieListRoot);
                         
-                        // put poster url in movie list
                         this.movieListRoot.forEach(item => {
                             // forEach()
                             //      자바스크립트의 배열에서 활용 가능한 반복문.
@@ -423,10 +345,33 @@
                     console.log('delAllBtnClicked() 호출됨');
                     this.movieListRoot.splice(0); // 영화리스트 배열에 있는 모든 요소 삭제
                 },
-                // emit event when click movie title
-                emitDetailsEvt: function(movieCode) {
-                    console.log('emitDetailsEvt() 호출됨');
-                    EventBus.$emit('occurDetailsEvt', movieCode); // 이벤트버스를 통해 occurDetailsEvt라는 이름의 이벤트 발생시키기
+                searchMovieDetails: function(movieCode) {
+                    console.log('searchMovieDetails() 호출됨');
+                    
+                    // Get movie details from online open API
+                    axios({
+                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json',
+                        method: 'GET',
+                        params: {
+                            key: 'e8b19160d24b80d241f860153813316d',
+                            movieCd: movieCode
+                        },
+                        responseType: 'json'
+                    }).then(details => {
+                        console.log('영화 상세정보 axios 호출 성공');
+                        // console.log(details);
+                        this.movieDetails = details.data.movieInfoResult.movieInfo;
+                        console.log(this.movieDetails);
+                    }).catch(error => {
+                        console.log('영화 상세정보 axios 호출 실패');
+                    })
+                },
+                transDateToKr: function(date) {
+                    // 무작정 date로 substring을 쓸 수 없다.
+                    //      date의 데이터타입이 String일 때만 사용할 수 있기 때문
+                    // 날짜 검색을 하지 않아도 이 메소드가 한 번씩 실행되는 이유를 모르겠다.
+                    let dateStr = new String(date);
+                    return dateStr.substring(0, 4) + '년 ' + dateStr.substring(4, 6) + '월 ' + dateStr.substring(6, 8) + '일';
                 }
             }
         }).$mount('#root-div');
