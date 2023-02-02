@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!--
+      우리는 반응형 웹 형태로 구현할 예정
+        크기가 달라져도 문제 없이 보이도록 함
+      mobile 형태로 구현할 것이기 때문에 meta 설정이 들어간다.
+    -->
+    <!-- viewport 설정
+      pc인지 mobile인지, 화면 배율은 어떻게 줄 건지 설정하는 것
+        width=device-width : app의 가로 길이는 사용하는 기기의 가로 길이로 설정
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 웹 아이콘 사용하기 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!--
+      기본적인 favicon 설정
+        favorite icon 의 약자
+        href : icon 파일
+    -->
+    <link rel="shortcut icon" href="src/assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="src/assets/favicon.ico" type="image/x-icon">
+
+    <!--
+      폰트 설정 - 웹 폰트 사용하기
+      ubuntu 폰트를 활용하기 위한 CDN
+    -->
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+
+
+    <title>vue-todo</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
+  </body>
+</html>
