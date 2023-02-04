@@ -18,6 +18,8 @@
 
 <script>
 // 이 부분(export의 바깥 부분)이 root 컴포넌트가 된다.
+//    이전에는 최상위에 Vue instance를 만들고, 그것을 Root component로 했다면,
+//    이번에는 최상위에 Vue instance가 있고, 그 아래에 여기의 component를 root로 설정하는 식이다.
 //    외부 .vue 파일에 있던 자료를 가져와서 특정 이름으로 객체화시키기
 import TodoHeader from "./components/TodoHeader.vue"; // TodoHeader.vue 객체를 TodoHeader라는 이름으로 활용하겠다는 의미
 import TodoInput from "./components/TodoInput.vue";
