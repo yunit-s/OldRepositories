@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>입력 연습입니다.!</h1>
+	<!--
+	클라이언트가 서버쪽에 데이터를 보낼 때, GET, POST 방식으로 데이터를 보낼 수 있다.
+	GET은 여러 가지 방법으로 사용할 수 있는데, POST는 기본적으로 HTML form tag를 이용한다.
+	-->
+	
+	<!-- POST 방식 -->
+		
+	<!--
+	Servers - Tomcat... - server.xml - source 보면,
+		155번 줄에 내용이 server가 우리 프로젝트와 연동이 됐다는 내용이다. QQQ>
+	-->
+	
+	<!--
+	form의 action 속성에 호출(submit)할 서버 쪽 프로그램 명시합니다 
+	먼저 경로를 써봅니다 
+	method를 명시하지 않으면 무조건 GET 방식임
+	-->
+
+	<!--
+	<form action="http://127.0.0.1:8080/input/inputText" method="post">
+		<span>사용자 ID:</span>
+		<input type="text" name="userID">
+		<br><br>
+		<button type="submit">button submit</button> 
+		<input type="submit" value="input submit">
+	</form>
+	-->
+	
+	<!-- GET 방식 -->
+	<!--
+	<form action="http://127.0.0.1:8080/input/inputText" method="get">
+		<span>사용자 ID:</span>
+		<input type="text" name="userID">
+		<br><br>
+		<button type="submit">button submit</button> 
+		<input type="submit" value="input submit">
+	</form>
+	
+	<br><br><br>
+	<a href="http://127.0.0.1:8080/input/inputText?userID=신사임당">form태그 바깥에 있는 anchor태그</a>
+	<span>Query String 방식으로 데이터 전달해보자.</span>
+    -->
+    
+	
+	<!-- POST 방식 -->
+	<!--
+	지금까지는 action 속성에 절대경로를 사용하고 있다.
+		절대경로 : http://~~~~
+		상대경로 : context root 를 기준으로 경로를 설정
+			ex. inputText
+	그런데, inputText는 되는데, /inputText는 안 된다. 왜일까?
+		/로 시작하는 경우 -> domain까지를 지칭한다.
+			/ : "http://127.0.0.1:8080/" 이만큼을 지칭하는 문자
+		/로 시작하지 않는 경우 -> context root까지를 지칭
+			-> "http://127.0.0.1:8080/input/"
+			
+	일반적으로 절대경로보다 상대경로를 많이 사용한다.
+	-->
+	<form action="inputText" method="post">
+		<span>사용자 ID:</span>
+		<input type="text" name="userID">
+		<br><br>
+		<button type="submit">button submit</button>
+		<input type="submit" value="input submit">
+	</form>
+	
+	<br><br><br>
+	<a href="http://127.0.0.1:8080/input/inputText?userID=신사임당">form태그 바깥에 있는 anchor태그</a>
+	<span>Query String 방식으로 데이터 전달해보자.</span>
+    
+    
+    
+</body>
+</html>
