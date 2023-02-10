@@ -4,14 +4,16 @@
           PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
           
-<mapper namespace="myMember">
+<mapper namespace="myBoard">
 
-	<select id="login" parameterType="Member"
-	        resultType="Member">		
+	<!--
+		id : 이 기능에 대해 이름 붙이기
+		전달해줄 데이터는 없으니 parameterType 안 적음. 리턴 자료는 board 타입
+	-->
+	<select id="allBoards" resultType="Board">
 		<![CDATA[
-			SELECT memberId, memberName, memberPw
-			FROM members 
-			WHERE memberId = #{memberId} AND memberPw = #{memberPw}	
+			SELECT boardNum, boardTitle, boardContent, boardAuthor, boardDate, boardLike
+			FROM boards
 		]]>
 	</select>
 

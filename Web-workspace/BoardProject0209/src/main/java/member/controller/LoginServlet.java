@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import board.service.BoardService;
+import board.vo.Board;
 import member.service.MemberService;
 import member.vo.Member;
 
@@ -83,6 +86,13 @@ public class LoginServlet extends HttpServlet {
 		//		ㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍ VO를 가지고서 이동하는 것이 좋다.?
 		Member result = service.login(member);
 		
+		List<Board> list = null;
+		
+		if (result != null) {
+			BoardService bservice = new BoardService();
+			list = bservice.getAllBoard(); // 모든 글 불러오기
+		}
+		
 		// 3. 출력처리
 		if (result != null) {
 			// 로그인 성공
@@ -91,13 +101,27 @@ public class LoginServlet extends HttpServlet {
 			// service는 일반 java 클래스다. service에서 남기는 거 아님.
 			HttpSession session = request.getSession(true);
 			session.setAttribute("member", result);
+			
+			// 불러온 게시판 목록을 session에 저장해도 될까?
+			//		이러면 session에 저장하는 파일 용량이 엄청 커져. 그리고 이 게시판 목록은 1회성 데이터일 뿐이야.
+			//		session이 편하고 좋긴 하지만, 괜히 session의 공간만 차지하게 되기 때문에 서버에 부하를 많이 주게 된다.
+			//		따라서 여기에 저장하지 않는 게 좋다.
+			//		여기 말고도 저장할 수 있는 공간이 있다. 바로 request 객체다.
+//			session.setAttribute("boardList", list);
+			
 			// 게시판 HTML 페이지를 클라이언트에게 전송한다.
 			// 여기서는 JSP로 전송한다. 왜? JSP는 프로그램적 요소를 전달할 수 있기 때문
 			// JSP의 실체는 Servlet이다.
 			//		프로세스 과정 : html -> servlet -> service -> dao -> service -> controller -> jsp(servlet) -> client
 			//		servlet에서 다른 servlet(jsp)를 불러서 일을 시키게 된다.
 			RequestDispatcher dispatcher = request.getRequestDispatcher("loginSuccess.jsp"); // 다음에 실행할 jsp를 명시
+			
+			// request 객체에 게시판 목록 저장하기
+			// 현재 필요한 데이터는 1회성으로써, jsp가 출력할 수 있도록 데이터를 jsp에게 전달만 하면 된다.
+			// 따라서 request 객체에 데이터를 붙여서 jsp에게 보낸다.
+			request.setAttribute("boardList", list); // request 객체에 boardList라는 이름으로 list를 저장하기
 			dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
+			
 			
 		} else {
 			// 로그인 실패
