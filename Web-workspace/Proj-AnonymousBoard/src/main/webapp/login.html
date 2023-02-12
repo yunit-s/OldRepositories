@@ -5,13 +5,29 @@
 <title>Anonymous Board</title>
 </head>
 <body>
+	<div style="text-align: center">
+		<h1>** 익명 게시판 **</h1>
+		<div>접속 url : http://127.0.0.1:8080/AnonymousBoard/login.html</div>
+	</div>
 	
-	<h1>** 익명 게시판 **</h1>
-	<div>접속 url : http://127.0.0.1:8080/AnonymousBoard/login.html</div>
-	<form action="#" method="post">
-		ID : <input type="text"><br>
-		PW : <input type="password">
-		<button type="submit">로그인</button>
+	<form action="mainview" method="post">
+		<table>
+			<tr>
+				<td style="text-align: right">ID : </td>
+				<td><input type="text" name="userId"></td>
+			</tr>
+			<tr>
+				<td style="text-align: right">PW : </td>
+				<td><input type="password" name="userPw"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align: right"><button type="submit">로그인</button></td>
+			</tr>
+		</table>
+		
+		<div style="width: 200px; text-align: right"></div>
 	</form>
+
 </body>
 </html>

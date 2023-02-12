@@ -15,15 +15,40 @@ pom.xml	>	dependencies 등록
 	- mysql-connector-java
 	- mybatis
 
+
+
+
+
 ## 파일 별 정보
 
 * Java Resources - src/main/java (java)
-	- MainView.java
-		package : common
-		URL mappings : /mainview
+	- common
+		- MainView.java
+			type : Servlet
+			URL mappings : /mainview
+			
+	- common.mybatis
+		- MyBatisConnectionFactory.java
+
+	- member.service
+		- MemberService
+		
+	- member.dao
+		- MemberDao.java
+		
+	- member.vo
+		- Member.java
 
 
 * Java Resources - resources (xml, properties)
+	- driver.properties
+		DB 연결 기본 정보
+		
+	- SqlMapConfig.xml
+		DB 연결 세부 설정
+		
+	- sqlmap
+		Member.xml
 
 
 
@@ -32,8 +57,34 @@ pom.xml	>	dependencies 등록
 		첫 화면
 
 
+
+
+
 ## 남은 할 일
-v 로그인 화면 작성
-로그인 후 나오는 페이지 작성
-DB를 통해서 로그인 성공하기
+- [x]로그인 화면 작성
+- [x]로그인 후 servlet으로 html 페이지 만들어보기
+- [ ]DB를 통해서 로그인 성공하기
+- [ ]로그인 성공 여부에 따라 출력 페이지 다르게 하기 - RequestDispatcher
+- [ ].jsp 파일로 화면 출력하기
+- [ ]story board 그리기
+- [ ]클래스 다이어그램? 그리기
+
+
+
+
+
+## 미완료 세부 작업
+- [ ]login.html에서 테이블 가운데정렬 안 됨. 왜지?
+- [ ]mapper.xml에서 resultMap 기능 적용해보기
+- [ ]transaction 실행 단위 구분짓기
+[ ]DAO에서 select() 구문 범용성있게 만들기
+
+
+
+
+
+## 발생한 오류
+* 412 error
+>브라우저를 포함한, 사용자 설정 전반적으로 문제를 야기시킬 가능성이 있다.   
+내 경우, 브라우저를 전부 닫았다가 다시 켜니 해결됐다.(시크릿 모드라서 캐시가 모두 삭제됨)
 
