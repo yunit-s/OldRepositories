@@ -16,10 +16,13 @@ public class MemberDao {
 		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		Member selectResult = sqlSession.selectOne("memberXml.login", loginMember);
 		sqlSession.close();
-		if (selectResult == null) System.out.println("!! selectResult == null");
-		else {
-			System.out.println("!! selectResult != null. id = " + selectResult.getMemberId());
-		}
+		
+//		// Debug
+//		if (selectResult == null) {
+//			System.out.println("!!! selectResult == null");
+//		} else {
+//			System.out.println("!!! selectResult != null. id = " + selectResult.getMemberId());
+//		}
 		return selectResult;
 	}
 

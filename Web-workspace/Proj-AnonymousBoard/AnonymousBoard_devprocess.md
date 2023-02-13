@@ -23,9 +23,10 @@ pom.xml	>	dependencies 등록
 
 * Java Resources - src/main/java (java)
 	- common
-		- MainView.java
-			type : Servlet
-			URL mappings : /mainview
+		- LoginServlet.java
+			type : Servlet<br>
+			URL mappings : /loginServlet   
+			초기에는 MainView.java로 만들었으나 이름 변경함.
 			
 	- common.mybatis
 		- MyBatisConnectionFactory.java
@@ -61,23 +62,24 @@ pom.xml	>	dependencies 등록
 
 
 ## 남은 할 일
-- [x]로그인 화면 작성
-- [x]로그인 후 servlet으로 html 페이지 만들어보기
-- [ ]DB를 통해서 로그인 성공하기
-- [ ]로그인 성공 여부에 따라 출력 페이지 다르게 하기 - RequestDispatcher
-- [ ].jsp 파일로 화면 출력하기
-- [ ]story board 그리기
-- [ ]클래스 다이어그램? 그리기
+- [x] 로그인 화면 작성
+- [x] 로그인 후 servlet으로 html 페이지 만들어보기
+- [x] DB를 통해서 로그인 성공하기
+- [x] 로그인 성공 여부에 따라 출력 페이지 다르게 하기 - RequestDispatcher
+- [x] .jsp 파일로 화면 출력하기
+- [ ] story board 그리기
+- [ ] 클래스 다이어그램? 그리기
 
 
 
 
 
 ## 미완료 세부 작업
-- [ ]login.html에서 테이블 가운데정렬 안 됨. 왜지?
-- [ ]mapper.xml에서 resultMap 기능 적용해보기
-- [ ]transaction 실행 단위 구분짓기
-[ ]DAO에서 select() 구문 범용성있게 만들기
+- [x] login.html에서 테이블 가운데정렬 안 됨. 왜지?
+	-> margin 속성으로 정렬 가능
+- [ ] mapper.xml에서 resultMap 기능 적용해보기
+- [ ] transaction 실행 단위 구분짓기
+[ ] DAO에서 select() 구문 범용성있게 만들기
 
 
 

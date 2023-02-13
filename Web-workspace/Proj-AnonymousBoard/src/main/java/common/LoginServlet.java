@@ -3,11 +3,13 @@ package common;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.service.MemberService;
 import member.vo.Member;
@@ -15,14 +17,14 @@ import member.vo.Member;
 /**
  * Servlet implementation class MainView
  */
-@WebServlet("/mainview")
-public class MainView extends HttpServlet {
+@WebServlet("/loginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainView() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,22 +56,50 @@ public class MainView extends HttpServlet {
 		loginMember.setMemberId(userId);
 		loginMember.setMemberPw(userPw);
 		
+		
+		
 		// data process
 		MemberService service = new MemberService();
 		loginMember = service.login(loginMember);
 		
 		
-		
+
 		// output data
 		response.setContentType("text/html; charset=UTF-8"); // ContentType 설정
-		
-		// Debug - 직접적인 화면 출력
-		PrintWriter out = response.getWriter();
-		out.println("<html><head></head><body>");
-		out.println("<h3>MainView.java - doPost() 실행됨</h3>");
-		out.println("<div>request.getContextPath() 실행 결과 : " + request.getContextPath() + "</div>");
-		out.println("<div>loginMember Id = " + loginMember.getMemberId() + ", loginMember Pw = " + loginMember.getMemberPw() + "</div>");
-		out.println("</body></html>");
+		if (loginMember != null) {
+			// login success
+
+			HttpSession session = request.getSession(true);
+			session.setAttribute("loginMember", loginMember);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
+			request.setAttribute("loginMember", loginMember);
+			dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
+			
+//			// Debug
+//			PrintWriter out = response.getWriter();
+//			out.println("<html><head></head><body>");
+//			out.println("<h3>MainView.java - doPost() - login success</h3>");
+//			out.println("<div>request.getContextPath() 실행 결과 : " + request.getContextPath() + "</div>");
+//			out.println("<div>loginMember Id = " + loginMember.getMemberId() + ", loginMember Pw = " + loginMember.getMemberPw() + "</div>");
+//			out.println("</body></html>");
+			
+		} else {
+			// login fail
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("loginFailed.jsp");
+			request.setAttribute("userId", userId);
+			request.setAttribute("userPw", userPw);
+			dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
+			
+//			// Debug
+//			PrintWriter out = response.getWriter();
+//			out.println("<html><head></head><body>");
+//			out.println("<h3>MainView.java - doPost() - login fail</h3>");
+//			out.println("<div>request.getContextPath() 실행 결과 : " + request.getContextPath() + "</div>");
+//			out.println("<div>입력 Id = " + userId + ", 입력 Pw = " + userPw + "</div>");
+//			out.println("</body></html>");
+		}
 	}
 
 }
