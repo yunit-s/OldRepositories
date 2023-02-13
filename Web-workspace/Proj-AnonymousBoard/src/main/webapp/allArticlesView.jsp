@@ -17,8 +17,13 @@
 	%>
 	<div>
 		<h3 style="text-align: center">전체 글 보기</h3>
-		<div style="text-align: center"><%= loginMember.getMemberId() %>, <%= loginMember.getMemberName() %></div>
-		<div style="text-align: center"><%= loginMember2.getMemberId() %>, <%= loginMember2.getMemberName() %></div>
+		
+		<div style="text-align: center"><%//= loginMember.getMemberId() %>, <%//= loginMember.getMemberName() %></div>
+		<div style="text-align: center"><%//= loginMember2.getMemberId() %>, <%//= loginMember2.getMemberName() %></div>
+
+		<form action="newArticleCall" method="post" style="text-align: center">
+			<button type="submit">새 글 작성</button>
+		</form>
 
 		<table border="2" style="text-align: center; margin-left:auto; margin-right:auto;">
 			<thead>

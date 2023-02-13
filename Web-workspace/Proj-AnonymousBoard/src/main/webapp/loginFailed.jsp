@@ -11,6 +11,7 @@
 	<h3>Login failed!</h3>
 	<div>userId : <%= request.getAttribute("userId") %></div>
 	<div>userPw : <%= request.getAttribute("userPw") %></div>
+	<button onclick="history.back()">뒤로가기</button>
 	
 </body>
 </html>
