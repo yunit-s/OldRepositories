@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.service.BoardService;
+import board.vo.Board;
+
 /**
  * Servlet implementation class ArticleDetailsCallServlet
  */
@@ -31,11 +34,17 @@ public class ArticleDetailsCallServlet extends HttpServlet {
 //		response.setContentType("text/html; charset=UTF-8"); // ContentType 설정
 		
 		// input data
-		String input = request.getParameter("data");
+		String bNum = request.getParameter("bNum");
+		BoardService bService = new BoardService();
+		Board tgBoard = new Board();
+		tgBoard.setBoardNum(Integer.parseInt(bNum));
+		tgBoard = bService.getArticleOne(tgBoard);
+		
+		
 		
 		// switch page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
-		request.setAttribute("data", input);
+		request.setAttribute("tgBoard", tgBoard); // DB에서 검색해온 board 데이터를 request로 넘겨주기
 		dispatcher.forward(request, response);
 
 	}

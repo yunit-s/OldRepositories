@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="member.vo.Member" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,15 @@
 </head>
 <body>
 
+	<%
+	// input data
+	// session에 저장한 데이터
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	
+	// request에 저장한 데이터
+	
+	%>
+	
 	<header>
 		<button onclick="history.back()">뒤로가기</button>
 	</header>
@@ -22,15 +32,15 @@
 		<table style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td style="text-align: right">글 제목 : </td>
-				<td><input type="text" name="boardTitle"></td>
+				<td><input type="text" name="bTitle"></td>
 			</tr>
 			<tr>
 				<td style="text-align: right">글 작성자 : </td>
-				<td><input type="text" name="boardAuthor" value="작성자id" disabled="true"></td>
+				<td><input type="text" name="bAuthor" value="<%= loginMember.getMemberId() %>" readonly></td>
 			</tr>
 			<tr>
 				<td style="text-align: right">글 내용 : </td>
-				<td><input type="text" name="boardContent"></td>
+				<td><input type="text" name="bContent"></td>
 			</tr>
 			<tr>
 				<td></td>

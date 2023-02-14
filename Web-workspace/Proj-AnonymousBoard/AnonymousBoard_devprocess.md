@@ -22,9 +22,9 @@ pom.xml	->	dependencies 등록
 ## 파일 별 정보
 
 * Java Resources - src/main/java (java)
-	> 모든 controller 특징
-		- type : 전부 Servlet으로 구현함.
-		- URL mappings : 클래스 이름에서 Servlet만 지움
+	> - 모든 controller 특징
+	type : 전부 Servlet으로 구현함.
+	URL mappings : 클래스 이름에서 Servlet만 지움
 		
 	- common
 		- LoginServlet.java
@@ -40,6 +40,15 @@ pom.xml	->	dependencies 등록
 		- EditArticleResultServlet.java
 		- NewArticleCallServlet.java
 		- NewArticleResultServlet.java
+		
+	- board.dao
+		- BoardDAO.java
+		
+	- board.service
+		- BoardService.java
+		
+	- board.vo
+		- Board.java
 			
 	- comment.controller
 		- DelCommentCallServlet.java
@@ -47,7 +56,7 @@ pom.xml	->	dependencies 등록
 		- EditCommentResultServlet.java
 
 	- member.service
-		- MemberService
+		- MemberService.java
 		
 	- member.dao
 		- MemberDao.java
@@ -64,8 +73,9 @@ pom.xml	->	dependencies 등록
 	- SqlMapConfig.xml <br>
 		DB 연결 세부 설정
 		
-	- sqlmap
-		Member.xml
+	- sqlmap <br>
+		- Board.xml
+		- Member.xml
 
 
 
@@ -91,6 +101,8 @@ pom.xml	->	dependencies 등록
 - [x] .jsp 파일로 화면 출력하기
 - [x] 기본 story board 그리기
 - [x] 기본 View 전환 완성하기
+- [ ] Servlet 기능 완성하기
+	- 완성 : NewArticleCall, NewArticleResult
 - [ ] 클래스 다이어그램? 그리기
 
 
@@ -99,6 +111,7 @@ pom.xml	->	dependencies 등록
 
 ## 미완료 세부 작업
 - [x] login.html에서 테이블 가운데정렬 -> style="margin: center" 으로 정렬 가능
+- [ ] 새로고침 했을 경우, 해당 Servlet이 한 번 더 실행된다.
 - [ ] mapper.xml에서 resultMap 기능 적용해보기
 - [ ] transaction 실행 단위 구분짓기
 - [ ] hidden으로 페이지마다 primary key 정보 꾸준히 전달하기
@@ -117,6 +130,9 @@ pom.xml	->	dependencies 등록
 >html의 속성값은 기본적으로 모두 "" 로 감싸야한다. 그래야 공백도 포함시킨다.
 그렇지 않으면 공백 전까지만 포함시킨다.
 
+* html input 태그에서 disabled 와 readonly의 차이
+> disabled는 submit으로 서버에 제출되지 않는다.
+readonly는 서버에 제출 가능하며, 브라우저에서 drag도 할 수 있다. 속성에 따로 값을 줄 필요 없다.
 
 
 

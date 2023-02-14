@@ -14,6 +14,7 @@
 	<!-- 별명 지정하기 -->
 	<typeAliases>
 	 	<typeAlias type="member.vo.Member" alias="Member"/>
+	 	<typeAlias type="board.vo.Board" alias="Board"/>
 	</typeAliases>
 	
 	<!-- Database 연결 정보 선언 -->
@@ -55,6 +56,7 @@
 	<!-- mapping된 SQL 구문이 있는 XML파일에 대한 설정 -->
 	<mappers>
 		<mapper resource="./sqlmap/Member.xml"/>
+		<mapper resource="./sqlmap/Board.xml"/>
 	
 	</mappers>
 

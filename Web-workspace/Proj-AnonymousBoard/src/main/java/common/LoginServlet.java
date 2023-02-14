@@ -2,6 +2,7 @@ package common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import board.service.BoardService;
+import board.vo.Board;
 import member.service.MemberService;
 import member.vo.Member;
 
@@ -64,11 +67,17 @@ public class LoginServlet extends HttpServlet {
 		if (loginMember != null) {
 			// login success
 
+			// session에 로그인 정보 저장
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", loginMember);
 			
+			// select 전체 게시글
+			BoardService bService = new BoardService();
+			List<Board> bList = bService.getArticleAll();
+			
+			// 페이지 전환 - 전체 게시글 보기 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
-			request.setAttribute("loginMember", loginMember);
+			request.setAttribute("bList", bList);
 			dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 			
 //			// Debug

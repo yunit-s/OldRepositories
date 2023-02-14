@@ -44,8 +44,14 @@ drop table boards;
 # 데이터 추가
 INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('플스 팔아요!', 'seo', '싸게 팔아요.. 네고 사절!'); # 나머지 colomn 데이터는 알아서 들어간다.
 INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('핸드폰 팔아요!', 'son', '5만원에 팔아요!');
+INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('지갑 팝니다~~', 'seo', '택포 28만원이고 네고 없습니다.');
+INSERT INTO boards(boardNum, boardTitle, boardAuthor, boardContent, boardDate) values('1', '플스 팔아요!', 'seo', '싸게 팔아요.. 네고 사절!', '2023-02-13 10:30:40');
 # 		새 데이터 추가할 때 주의점 - foreign key로 등록된 members의 memberId에 존재하는 데이터가 아니면 오류 발생
 # 		오류 내용 : Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails.
+
+DELETE FROM boards WHERE boardNum>=4;
+
+INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('지갑 팝니다~~', null, '택포 28만원이고 네고 없습니다.');
 
 select * from boards;
 SELECT boardNum, boardTitle, boardAuthor, boardContent, boardDate, boardLike FROM boards;
