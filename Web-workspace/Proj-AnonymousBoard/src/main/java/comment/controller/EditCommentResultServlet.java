@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class delCommentCallServlet
+ * Servlet implementation class editCommentResultServlet
  */
-@WebServlet("/delCommentCall")
-public class delCommentCallServlet extends HttpServlet {
+@WebServlet("/editCommentResult")
+public class EditCommentResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public delCommentCallServlet() {
+    public EditCommentResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class delCommentCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("!! delCommentCallServlet.doGet() 실행");
+		System.out.println("editCommentResultServlet.doGet() 실행");
 	}
 
 	/**
@@ -36,8 +36,6 @@ public class delCommentCallServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("delCommentCallServlet.doPost() 실행");
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		dispatcher.forward(request, response);
 		

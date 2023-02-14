@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class editCommentCallServlet
  */
 @WebServlet("/editCommentCall")
-public class editCommentCallServlet extends HttpServlet {
+public class EditCommentCallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editCommentCallServlet() {
+    public EditCommentCallServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class editCommentCallServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editComment.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editComment.jsp");
 		dispatcher.forward(request, response);
 		
 	}

@@ -10,7 +10,7 @@ Group Id : ServletProject <br>
 Artifact Id : AnonymousBoard
 
 * Maven repository 사이트에서 관련 자료 가져오기 <br>
-pom.xml	>	dependencies 등록
+pom.xml	->	dependencies 등록
 	- tomcat-servlet-api
 	- mysql-connector-java
 	- mybatis
@@ -22,19 +22,29 @@ pom.xml	>	dependencies 등록
 ## 파일 별 정보
 
 * Java Resources - src/main/java (java)
+	> 모든 controller 특징
+		- type : 전부 Servlet으로 구현함.
+		- URL mappings : 클래스 이름에서 Servlet만 지움
+		
 	- common
-		- LoginServlet.java <br>
-			type : Servlet <br>
-			URL mappings : /loginServlet <br>
-			초기에는 MainView.java로 만들었으나 이름 변경함.
-			
+		- LoginServlet.java
+		- LogoutServlet.java
+		
 	- common.mybatis
 		- MyBatisConnectionFactory.java
 		
 	- board.controller
-		- newArticleCallServlet <br>
-			type : Servlet <br>
-			URL mappings : /newArticleCall
+		- ArticleDetailsCallServlet.java
+		- DelArticleCallServlet.java
+		- EditArticleCallServlet.java
+		- EditArticleResultServlet.java
+		- NewArticleCallServlet.java
+		- NewArticleResultServlet.java
+			
+	- comment.controller
+		- DelCommentCallServlet.java
+		- EditCommentCallServlet.java
+		- EditCommentResultServlet.java
 
 	- member.service
 		- MemberService
@@ -63,14 +73,11 @@ pom.xml	>	dependencies 등록
 	- login.html <br>
 		첫 화면
 		
-	- loginFailed.jsp <br>
-		로그인 실패했을 때
-		
 	- allArticlesView.jsp <br>
 		전체 게시글 보기
 		
-	- newArticle.html <br>
-		새 글 작성
+	- articleDetails.jsp <br>
+		글 세부 내용 보기
 
 
 
@@ -83,9 +90,7 @@ pom.xml	>	dependencies 등록
 - [x] 로그인 성공 여부에 따라 출력 페이지 다르게 하기 - RequestDispatcher
 - [x] .jsp 파일로 화면 출력하기
 - [x] 기본 story board 그리기
-- [ ] 기본 View 전환 완성하기
-	- 완성 : loginFailed.jsp, newArticle.html, articleDetails.jsp, editArticle.html
-	- 미완성 : editComment.html
+- [x] 기본 View 전환 완성하기
 - [ ] 클래스 다이어그램? 그리기
 
 
@@ -97,7 +102,7 @@ pom.xml	>	dependencies 등록
 - [ ] mapper.xml에서 resultMap 기능 적용해보기
 - [ ] transaction 실행 단위 구분짓기
 - [ ] hidden으로 페이지마다 primary key 정보 꾸준히 전달하기
-[ ] DAO에서 select() 구문 범용성있게 만들기
+- [ ] DAO에서 select() 구문 범용성있게 만들기
 
 
 
@@ -117,7 +122,8 @@ pom.xml	>	dependencies 등록
 
 ## 의문사항
 * .jsp에서는 session, request를 통해서 데이터를 전달할 수 있다. 그럼 html에서는 데이터를 전달하는 방법이 없을까?<br>
-> 없다. 기본적으로 html은 정적 resource다. 정해진 화면을 출력하는 용도로 사용된다. 입력된 값에 따라 화면이 달라지는 것을 보기 위해서는 동적 resource인 servlet이나 jsp를 활용해야 한다.
+> 없다. 기본적으로 html은 정적 resource다. 정해진 화면을 출력하는 용도로 사용된다.
+입력된 값에 따라 화면이 달라지는 것을 보기 위해서는 동적 resource인 servlet이나 jsp를 활용해야 한다.
 
 * response는 request처럼 데이터 전달 못 하나?
 > 의미가 없다. 애초에 request는 처리할 데이터를 입력받아야 하기 때문에 입력을 받는 것이다. 굳이 response에 화면이 아닌 추가적인 데이터를 전달할 필요가 없다.

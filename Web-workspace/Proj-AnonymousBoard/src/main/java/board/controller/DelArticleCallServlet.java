@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class editArticleResultServlet
+ * Servlet implementation class DelArticleCallServlet
  */
-@WebServlet("/editArticleResult")
-public class editArticleResultServlet extends HttpServlet {
+@WebServlet("/delArticleCall")
+public class DelArticleCallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editArticleResultServlet() {
+    public DelArticleCallServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +28,17 @@ public class editArticleResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("editArticleResultServlet.doGet() 실행");
+		System.out.println("delArticleCallServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("delArticleCallServlet.doPost() 실행");
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response);
 		
 	}

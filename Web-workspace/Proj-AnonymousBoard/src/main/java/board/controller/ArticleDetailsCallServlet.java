@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class delArticleCallServlet
+ * Servlet implementation class ArticleDetailsCallServlet
  */
-@WebServlet("/delArticleCall")
-public class delArticleCallServlet extends HttpServlet {
+@WebServlet("/articleDetailsCall")
+public class ArticleDetailsCallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public delArticleCallServlet() {
+    public ArticleDetailsCallServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,19 +28,23 @@ public class delArticleCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("delArticleCallServlet.doGet() 실행");
+//		response.setContentType("text/html; charset=UTF-8"); // ContentType 설정
+		
+		// input data
+		String input = request.getParameter("data");
+		
+		// switch page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
+		request.setAttribute("data", input);
+		dispatcher.forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		System.out.println("delArticleCallServlet.doPost() 실행");
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
-		dispatcher.forward(request, response);
-		
+		System.out.println("articleDetailsCallServlet.doPost() 실행");
 	}
 
 }

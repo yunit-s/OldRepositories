@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class articleDetailsCallServlet
+ * Servlet implementation class NewArticleCallServlet
  */
-@WebServlet("/articleDetailsCall")
-public class articleDetailsCallServlet extends HttpServlet {
+@WebServlet("/newArticleCall")
+public class NewArticleCallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public articleDetailsCallServlet() {
+    public NewArticleCallServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,23 +28,17 @@ public class articleDetailsCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html; charset=UTF-8"); // ContentType 설정
-		
-		// input data
-		String input = request.getParameter("data");
-		
-		// switch page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
-		request.setAttribute("data", input);
-		dispatcher.forward(request, response);
-
+		System.out.println("newArticleCallServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("articleDetailsCallServlet.doPost() 실행");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("newArticle.jsp");
+		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
+
 	}
 
 }

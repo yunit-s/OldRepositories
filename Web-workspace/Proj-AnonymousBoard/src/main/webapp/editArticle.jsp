@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>새 글 작성</title>
+<title>글 수정하기</title>
 </head>
 <body>
 
@@ -13,10 +15,10 @@
 	
 	
 	<div style="text-align: center">
-		<h3>새 글 쓰기</h3>
+		<h3>글 수정하기</h3>
 	</div>
 	
-	<form action="newArticleResult" method="post">
+	<form action="editArticleResult" method="post">
 		<table style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td style="text-align: right">글 제목 : </td>
@@ -32,7 +34,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td style="text-align: right"><button type="submit">작성 완료</button></td>
+				<td style="text-align: right"><button type="submit">수정 완료</button></td>
 			</tr>
 		</table>
 	</form>
