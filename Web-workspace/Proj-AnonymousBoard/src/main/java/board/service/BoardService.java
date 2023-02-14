@@ -35,4 +35,11 @@ public class BoardService {
 		return 0;
 	}
 
+	public int delArticleOne(Board tgBoard) {
+		System.out.println("!! BoardService.delArticleOne() 실행");
+		BoardDAO bDao = new BoardDAO();
+		int result = bDao.deleteOne(tgBoard);
+		return 0;
+	}
+
 }

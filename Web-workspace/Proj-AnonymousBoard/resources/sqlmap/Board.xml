@@ -43,4 +43,13 @@
 		]]>
 	</insert>
 
+	<!-- delete -->
+	<insert id="deleteOne" parameterType="Board">
+		<![CDATA[
+			DELETE
+			FROM boards
+			WHERE boardNum=#{boardNum};
+		]]>
+	</insert>
+
 </mapper>
