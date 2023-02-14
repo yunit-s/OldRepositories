@@ -12,10 +12,16 @@
 
 	<%
 	// input data
-	// session에 저장한 데이터
-	Member loginMember = (Member)session.getAttribute("loginMember");
+	// data from session
+	Member loginMember = null;
+	try {
+		loginMember = (Member)session.getAttribute("loginMember");
+	} catch (Exception e) {
+		System.out.println("!!! articleDetails.jsp에서 session오류 발생");
+		response.sendRedirect("sessionError.jsp");
+	}
 	
-	// request에 저장한 데이터
+	// data from request
 	Board board = (Board)request.getAttribute("tgBoard");
 	
 	%>
