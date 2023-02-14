@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.service.BoardService;
+import board.vo.Board;
+
 /**
  * Servlet implementation class EditArticleCallServlet
  */
@@ -36,7 +39,23 @@ public class EditArticleCallServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// input data
+		int bNum = Integer.parseInt(request.getParameter("bNum"));
+		
+		
+		
+		// process
+		Board tgBoard = new Board();
+		tgBoard.setBoardNum(bNum);
+		
+		BoardService bService = new BoardService();
+		tgBoard = bService.getArticleOne(tgBoard);
+		
+		
+		
+		// switch page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("editArticle.jsp");
+		request.setAttribute("tgBoard", tgBoard);
 		dispatcher.forward(request, response);
 		
 	}

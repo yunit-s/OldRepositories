@@ -50,6 +50,8 @@ INSERT INTO boards(boardNum, boardTitle, boardAuthor, boardContent, boardDate) v
 # 		오류 내용 : Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails.
 
 DELETE FROM boards WHERE boardNum>=4;
+delete from boards where boardAuthor is null;
+# delete from boards where boardAuthor = null; # 이건 안 되네
 
 INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('지갑 팝니다~~', null, '택포 28만원이고 네고 없습니다.');
 

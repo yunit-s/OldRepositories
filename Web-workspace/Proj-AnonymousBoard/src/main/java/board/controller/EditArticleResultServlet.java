@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.service.BoardService;
+import board.vo.Board;
+
 /**
  * Servlet implementation class EditArticleResultServlet
  */
@@ -35,6 +38,29 @@ public class EditArticleResultServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// input data
+		request.setCharacterEncoding("UTF-8");
+		String bNum = request.getParameter("bNum");
+		String bTitle = request.getParameter("bTitle");
+		String bContent = request.getParameter("bContent");
+		
+		
+		
+		// process
+		Board tgBoard = new Board();
+		tgBoard.setBoardNum(Integer.parseInt(bNum));
+		tgBoard.setBoardTitle(bTitle);
+		tgBoard.setBoardContent(bContent);
+		
+		BoardService bService = new BoardService();
+		int result = bService.editArticle(tgBoard);
+		
+		
+		
+		// switch page
+		tgBoard = bService.getArticleOne(tgBoard);
+		request.setAttribute("tgBoard", tgBoard);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		dispatcher.forward(request, response);

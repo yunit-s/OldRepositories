@@ -35,9 +35,14 @@ public class ArticleDetailsCallServlet extends HttpServlet {
 		
 		// input data
 		String bNum = request.getParameter("bNum");
-		BoardService bService = new BoardService();
+		
+		
+		
+		// process
 		Board tgBoard = new Board();
 		tgBoard.setBoardNum(Integer.parseInt(bNum));
+		
+		BoardService bService = new BoardService();
 		tgBoard = bService.getArticleOne(tgBoard);
 		
 		

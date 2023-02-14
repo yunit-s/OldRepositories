@@ -14,6 +14,7 @@
 	// input data
 	// session에 저장한 데이터
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	
 	// request에 저장한 데이터
 	Board board = (Board)request.getAttribute("tgBoard");
 	
@@ -69,9 +70,11 @@
 			<td></td>
 			<td style="text-align: right">
 				<form action="editArticleCall" method="post">
+					<input type="hidden" name="bNum" value="<%= bNum %>">
 					<button type="submit">글 수정</button>
 				</form>
 				<form action="delArticleCall" method="post">
+					<input type="hidden" name="bNum" value="<%= bNum %>">
 					<button type="submit">글 삭제</button>
 				</form>
 			</td>

@@ -28,4 +28,11 @@ public class BoardService {
 		return result;
 	}
 
+	public int editArticle(Board tgBoard) {
+		System.out.println("!! BoardService.editArticle() 실행");
+		BoardDAO bDao = new BoardDAO();
+		int result = bDao.update(tgBoard);
+		return 0;
+	}
+
 }

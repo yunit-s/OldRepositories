@@ -46,6 +46,8 @@ public class NewArticleResultServlet extends HttpServlet {
 		String bAuthor = request.getParameter("bAuthor");
 		String bContent = request.getParameter("bContent");
 		
+		
+		
 		// process
 		Board newBoard = new Board();
 		newBoard.setBoardTitle(bTitle);
@@ -55,12 +57,13 @@ public class NewArticleResultServlet extends HttpServlet {
 		BoardService bService = new BoardService();
 		int result = bService.addArticle(newBoard);
 
-		// select 전체 게시글
-		List<Board> bList = bService.getArticleAll();
+		
 		
 		// switch page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
+		List<Board> bList = bService.getArticleAll(); // select 전체 게시글
 		request.setAttribute("bList", bList);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 		
 	}

@@ -34,4 +34,13 @@ public class BoardDAO {
 		return result;
 	}
 
+	public int update(Board tgBoard) {
+		System.out.println("!! BoardDAO.update() 실행");
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		int result = sqlSession.update("boardXml.updateOne", tgBoard);
+		sqlSession.commit();
+		sqlSession.close();
+		return 0;
+	}
+
 }
