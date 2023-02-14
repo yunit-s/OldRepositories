@@ -28,16 +28,13 @@ public class newArticleResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("newArticleResultServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		System.out.println("!! newArticleResultServlet.doPost() 실행");
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기

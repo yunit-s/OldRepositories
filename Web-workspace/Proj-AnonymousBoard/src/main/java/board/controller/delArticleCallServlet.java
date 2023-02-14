@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class newArticleCallServlet
+ * Servlet implementation class delArticleCallServlet
  */
-@WebServlet("/newArticleCall")
-public class newArticleCallServlet extends HttpServlet {
+@WebServlet("/delArticleCall")
+public class delArticleCallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public newArticleCallServlet() {
+    public delArticleCallServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +28,19 @@ public class newArticleCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("newArticleCallServlet.doGet() 실행");
+		System.out.println("delArticleCallServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("newArticle.html");
-		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 
+		System.out.println("delArticleCallServlet.doPost() 실행");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }

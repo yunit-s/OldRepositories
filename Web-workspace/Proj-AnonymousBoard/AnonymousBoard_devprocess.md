@@ -2,14 +2,14 @@
 
 ## 기본 틀 구성하기
 
-* 프로젝트 생성
+* 프로젝트 생성 <br>
 context root : AnonymousBoard
 
-* Convert to Maven Project
-Group Id : ServletProject
+* Convert to Maven Project <br>
+Group Id : ServletProject <br>
 Artifact Id : AnonymousBoard
 
-* Maven repository 사이트에서 관련 자료 가져오기
+* Maven repository 사이트에서 관련 자료 가져오기 <br>
 pom.xml	>	dependencies 등록
 	- tomcat-servlet-api
 	- mysql-connector-java
@@ -23,17 +23,17 @@ pom.xml	>	dependencies 등록
 
 * Java Resources - src/main/java (java)
 	- common
-		- LoginServlet.java
-			type : Servlet<br>
-			URL mappings : /loginServlet   
+		- LoginServlet.java <br>
+			type : Servlet <br>
+			URL mappings : /loginServlet <br>
 			초기에는 MainView.java로 만들었으나 이름 변경함.
 			
 	- common.mybatis
 		- MyBatisConnectionFactory.java
 		
 	- board.controller
-		- newArticleCallServlet
-			type : Servlet
+		- newArticleCallServlet <br>
+			type : Servlet <br>
 			URL mappings : /newArticleCall
 
 	- member.service
@@ -44,14 +44,14 @@ pom.xml	>	dependencies 등록
 		
 	- member.vo
 		- Member.java
-			
+
 
 
 * Java Resources - resources (xml, properties)
-	- driver.properties
+	- driver.properties <br>
 		DB 연결 기본 정보
 		
-	- SqlMapConfig.xml
+	- SqlMapConfig.xml <br>
 		DB 연결 세부 설정
 		
 	- sqlmap
@@ -60,16 +60,16 @@ pom.xml	>	dependencies 등록
 
 
 * src - /main/webapp (html, jsp 파일)
-	- login.html
+	- login.html <br>
 		첫 화면
 		
-	- loginFailed.jsp
+	- loginFailed.jsp <br>
 		로그인 실패했을 때
 		
-	- allArticlesView.jsp
+	- allArticlesView.jsp <br>
 		전체 게시글 보기
 		
-	- newArticle.html
+	- newArticle.html <br>
 		새 글 작성
 
 
@@ -84,8 +84,8 @@ pom.xml	>	dependencies 등록
 - [x] .jsp 파일로 화면 출력하기
 - [x] 기본 story board 그리기
 - [ ] 기본 View 전환 완성하기
-	- 완성 : loginFailed.jsp, newArticle.html
-	- 미완성 : articleDetails.jsp, editArticle.html, editComment.html
+	- 완성 : loginFailed.jsp, newArticle.html, articleDetails.jsp, editArticle.html
+	- 미완성 : editComment.html
 - [ ] 클래스 다이어그램? 그리기
 
 
@@ -108,6 +108,9 @@ pom.xml	>	dependencies 등록
 >브라우저를 포함한, 사용자 설정 전반적으로 문제를 야기시킬 가능성이 있다.   
 내 경우, 브라우저를 전부 닫았다가 다시 켜니 해결됐다.(시크릿 모드라서 캐시가 모두 삭제됨)
 
+* .jsp 에서 변수 출력할 때 띄어쓰기 반영 안 되는 경우
+>html의 속성값은 기본적으로 모두 "" 로 감싸야한다. 그래야 공백도 포함시킨다.
+그렇지 않으면 공백 전까지만 포함시킨다.
 
 
 

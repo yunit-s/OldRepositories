@@ -1,4 +1,4 @@
-package board.controller;
+package common;
 
 import java.io.IOException;
 
@@ -8,18 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import member.vo.Member;
 
 /**
- * Servlet implementation class newArticleCallServlet
+ * Servlet implementation class logoutServlet
  */
-@WebServlet("/newArticleCall")
-public class newArticleCallServlet extends HttpServlet {
+@WebServlet("/logout")
+public class logoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public newArticleCallServlet() {
+    public logoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +31,21 @@ public class newArticleCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("newArticleCallServlet.doGet() 실행");
+		System.out.println("logoutServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("newArticle.html");
-		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 
+		HttpSession session = request.getSession(true);
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		System.out.println("!!! logout! id : " + loginMember.getMemberId());
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
+		dispatcher.forward(request, response);
+		
 	}
 
 }

@@ -17,7 +17,7 @@ import member.vo.Member;
 /**
  * Servlet implementation class MainView
  */
-@WebServlet("/loginServlet")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,12 +33,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8"); // ContentType 설정
-		PrintWriter out = response.getWriter();
-		out.println("<html><head></head><body>");
-		out.println("<h3>MainView.java - doGet() 실행됨</h3>");
-		out.println("<div>request.getContextPath() 실행 결과 : " + request.getContextPath() + "</div>");
-		out.println("</body></html>");
+		System.out.println("LoginServlet.doGet() 실행");
 	}
 
 	/**
