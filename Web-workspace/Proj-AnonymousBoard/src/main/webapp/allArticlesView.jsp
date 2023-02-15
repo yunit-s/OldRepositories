@@ -12,11 +12,15 @@
 	<%
 	// input data
 	// data from session
-	Member loginMember = null;
-	try {
-		loginMember = (Member)session.getAttribute("loginMember");
-	} catch (Exception e) {
-		System.out.println("!!! allArticlesView.jsp에서 session오류 발생");
+	Member loginMember = (Member)session.getAttribute("loginMember");
+//	try {
+//		loginMember = (Member)session.getAttribute("loginMember");
+//	} catch (Exception e) {
+//		System.out.println("!!! allArticlesView.jsp에서 session오류 발생");
+//		response.sendRedirect("sessionError.jsp");
+//	}
+	if (loginMember == null) {
+		System.out.println("!!! Session Expiration! (allArticlesView.jsp)");
 		response.sendRedirect("sessionError.jsp");
 	}
 	
@@ -54,7 +58,7 @@
 		</thead>
 		<tbody>
 			<%
-			if (bList != null) {
+			if (!bList.isEmpty()) {
 				for (Board article : bList) {
 					int bNum = article.getBoardNum();
 					String bTitle = article.getBoardTitle();

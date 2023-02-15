@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="commentXml">
+
+	<!-- select -->
+	<select id="selectAll" parameterType="int" resultType="Comment">
+		<!--
+			parameterType : 인자의 자료형. int도 되고, Integer도 된다.
+			resultType : 결과로 리턴받는 데이터의 자료형 -->
+		<!--
+			CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법
+			여기에 넘겨줄 떄의 인자 이름은 의미없다.(여기서는 boardNum)
+			인자가 하나일 경우, #{} 안에 적어야하는 이름은 자유롭게 설정 가능하다. 
+		-->
+		<![CDATA[
+			SELECT commentNum, commentArticleNum, commentAuthor, commentContent,
+				commentDate
+			FROM comments
+			WHERE commentArticleNum = #{bNum};
+		]]>
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="Comment">
+		<!-- parameterType : boardNum의 자료형. resultType : 결과로 리턴받는 데이터의 자료형 -->
+		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
+		<![CDATA[
+			SELECT commentNum, commentArticleNum, commentAuthor, commentContent,
+				commentDate
+			FROM comments
+			WHERE commentNum = #{cNum};
+		]]>
+	</select>
+
+	
+	<!-- update -->
+	<update id="updateOne" parameterType="Comment">
+		<![CDATA[
+			UPDATE comments
+			SET commentContent = #{commentContent}
+			WHERE commentNum = #{commentNum};
+		]]>
+	</update>
+
+</mapper>

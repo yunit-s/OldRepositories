@@ -40,7 +40,7 @@ public class BoardDAO {
 		int result = sqlSession.update("boardXml.updateOne", tgBoard);
 		sqlSession.commit();
 		sqlSession.close();
-		return 0;
+		return result;
 	}
 
 	public int deleteOne(Board tgBoard) {
@@ -49,7 +49,7 @@ public class BoardDAO {
 		int result = sqlSession.update("boardXml.deleteOne", tgBoard);
 		sqlSession.commit();
 		sqlSession.close();
-		return 0;
+		return result;
 	}
 
 }

@@ -35,21 +35,21 @@
 	</insert>
 	
 	<!-- update -->
-	<insert id="updateOne" parameterType="Board">
+	<update id="updateOne" parameterType="Board">
 		<![CDATA[
 			UPDATE boards
-			SET boardTitle=#{boardTitle}, boardContent=#{boardContent}
-			WHERE boardNum=#{boardNum};
+			SET boardTitle = #{boardTitle}, boardContent = #{boardContent}
+			WHERE boardNum = #{boardNum};
 		]]>
-	</insert>
+	</update>
 
 	<!-- delete -->
-	<insert id="deleteOne" parameterType="Board">
+	<delete id="deleteOne" parameterType="Board">
 		<![CDATA[
 			DELETE
 			FROM boards
-			WHERE boardNum=#{boardNum};
+			WHERE boardNum = #{boardNum};
 		]]>
-	</insert>
+	</delete>
 
 </mapper>

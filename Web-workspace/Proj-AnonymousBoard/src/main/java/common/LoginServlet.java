@@ -43,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		doGet(request, response);
 		
 		// input data
 		request.setCharacterEncoding("UTF-8"); // request 자료들을 UTF-8 로 인코딩. 이 작업 안 하면 내부 자료들 한글 깨진다.

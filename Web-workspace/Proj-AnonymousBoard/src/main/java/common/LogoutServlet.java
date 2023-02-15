@@ -43,15 +43,20 @@ public class LogoutServlet extends HttpServlet {
 		try {
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			System.out.println("!!! logout! id : " + loginMember.getMemberId());
-			loginMember.setMemberId(null);
-			session.setAttribute("loginMember", loginMember);
+//			loginMember.setMemberId(null);
+//			session.setAttribute("loginMember", loginMember);
+			session.removeAttribute("loginMember");
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("!!! logoutServlet.doPost() 오류발생");
+			System.out.println("!!! logoutServlet.doPost() 오류발생 : " + e);
+
+			Member loginMember = (Member)session.getAttribute("loginMember");
+			if (loginMember != null) {
+				System.out.println("!!! logout! id : " + loginMember.getMemberId());
+				session.removeAttribute("loginMember");
+			}
 		}
 		
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
-//		dispatcher.forward(request, response);
 		response.sendRedirect("login.html");
 		
 	}

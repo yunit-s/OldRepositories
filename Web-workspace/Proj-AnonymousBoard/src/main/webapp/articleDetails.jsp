@@ -1,7 +1,7 @@
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="member.vo.Member, board.vo.Board" %>
+<%@ page import="member.vo.Member, board.vo.Board, comment.vo.Comment, java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,21 +13,27 @@
 	<%
 	// input data
 	// data from session
-	Member loginMember = null;
-	try {
-		loginMember = (Member)session.getAttribute("loginMember");
-	} catch (Exception e) {
-		System.out.println("!!! articleDetails.jsp에서 session오류 발생");
+	Member loginMember = (Member)session.getAttribute("loginMember");
+//	try {
+//		loginMember = (Member)session.getAttribute("loginMember");
+//	} catch (Exception e) {
+//		System.out.println("!!! articleDetails.jsp에서 session오류 발생");
+//		response.sendRedirect("sessionError.jsp");
+//	}
+	if (loginMember == null) {
+		System.out.println("!!! Session Expiration! (articleDetails.jsp)");
 		response.sendRedirect("sessionError.jsp");
 	}
 	
 	// data from request
 	Board board = (Board)request.getAttribute("tgBoard");
+	List<Comment> cList = (List<Comment>)request.getAttribute("cList");
 	
 	%>
 	
 	<header>
 		<button onclick="history.back()">뒤로가기</button>
+		<a href="gotoAllArticlesView"><button>전체 글 보기</button></a>
 		<div style="text-align: right">
 			login : <%= loginMember.getMemberName() %>
 		</div>
@@ -98,30 +104,43 @@
 		<thead>
 			<th scope="col">작성자</th>
 			<th scope="col">내용</th>
+			<th scope="col">작성일</th>
 			<th scope="col"> </th>
 			<th scope="col"> </th>
 		</thead>
 		<tbody>
+			<%
+			if (!cList.isEmpty()) {
+				for (Comment item : cList) {
+					int cNum = item.getCommentNum();
+					int cArticleNum = item.getCommentArticleNum();
+					String cAuthor = item.getCommentAuthor();
+					String cContent = item.getCommentContent();
+					String cDate = item.getCommentDate();
+			%>
 			<tr>
-				<td>aaa</td>
-				<td>댓글내용내용내용</td>
+				<td><%= cAuthor %></td>
+				<td><%= cContent %></td>
+				<td><%= cDate %></td>
 				<td>
 					<form action="editCommentCall" method="post">
+						<input type="hidden" name="bNum" value="<%= bNum %>">
+						<input type="hidden" name="cNum" value="<%= cNum %>">
 						<button type="submit">수정</button>
 					</form>
 				</td>
 				<td>
 					<form action="delCommentCall" method="post">
+						<input type="hidden" name="bNum" value="<%= bNum %>">
+						<input type="hidden" name="cNum" value="<%= cNum %>">
 						<button type="submit">삭제</button>
 					</form>
 				</td>
 			</tr>
-			<tr>
-				<td>bbb</td>
-				<td>댓글내용내용내용</td>
-				<td>수정</td>
-				<td>삭제</td>
-			</tr>
+			<%
+				}
+			}
+			%>
 		</tbody>
 	</table>
 

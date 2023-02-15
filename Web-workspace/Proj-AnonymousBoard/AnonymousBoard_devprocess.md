@@ -22,9 +22,9 @@ pom.xml	->	dependencies 등록
 ## 파일 별 정보
 
 * Java Resources - src/main/java (java)
-	>모든 controller 특징
-type : 전부 Servlet으로 구현함.
-URL mappings : 클래스 이름에서 Servlet만 지움
+	> 모든 controller 특징
+	type : 전부 Servlet으로 구현함.
+	URL mappings : 클래스 이름에서 Servlet만 지움 <br>
 		
 	- common
 		- LoginServlet.java
@@ -104,6 +104,7 @@ URL mappings : 클래스 이름에서 Servlet만 지움
 - [x] 글 관련 Servlet 기능 구현하기
 - [ ] DB에 댓글 Table 생성하고, 더미 데이터 추가해서 댓글 띄우기
 - [ ] 댓글 관련 Servlet 기능 구현하기
+- [ ] 글 삭제하면 해당 글에 달려있는 댓글도 모두 지울 것
 - [ ] 클래스 다이어그램? 그리기
 
 
@@ -143,15 +144,15 @@ AJAX를 사용하는 등 다른 기술을 사용하면 문제가 자연스럽게
 
 
 ## 의문사항
-* .jsp에서는 session, request를 통해서 데이터를 전달할 수 있다. 그럼 html에서는 데이터를 전달하는 방법이 없을까?<br>
->없다. 기본적으로 html은 정적 resource다. 정해진 화면을 출력하는 용도로 사용된다.
+* .jsp에서는 session, request를 통해서 데이터를 전달할 수 있다. 그럼 html에서는 데이터를 전달하는 방법이 없을까?
+	>없다. 기본적으로 html은 정적 resource다. 정해진 화면을 출력하는 용도로 사용된다.
 입력된 값에 따라 화면이 달라지는 것을 보기 위해서는 동적 resource인 servlet이나 jsp를 활용해야 한다.
 
 * response는 request처럼 데이터 전달 못 하나?
->의미가 없다. 애초에 request는 처리할 데이터를 입력받아야 하기 때문에 입력을 받는 것이다. 굳이 response에 화면이 아닌 추가적인 데이터를 전달할 필요가 없다.
+	>의미가 없다. 애초에 request는 처리할 데이터를 입력받아야 하기 때문에 입력을 받는 것이다. 굳이 response에 화면이 아닌 추가적인 데이터를 전달할 필요가 없다.
 
 * id에 실명 거론. 필수인가?
->필수 아니다. 로그인 멤버와 그에 따른 CRUD 기능만 정상적으로 동작하면 상관없다.
+	>필수 아니다. 로그인 멤버와 그에 따른 CRUD 기능만 정상적으로 동작하면 상관없다.
 
 * HttpSession 에서 request.getSession(true) 의 true 의미는?
 >

@@ -12,11 +12,9 @@
 	<%
 	// input data
 	// data from session
-	Member loginMember = null;
-	String memberId = null;
-	if (session.getAttribute("loginMember") != null) {
-		loginMember = (Member)session.getAttribute("loginMember");
-		System.out.println("!!! memberId = " + memberId);
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	if (loginMember != null) {
+		System.out.println("!!! memberId = " + loginMember.getMemberId());
 	} else {
 		System.out.println("!!! loginMember == null");
 	}
@@ -35,8 +33,9 @@
 	<%
 	}
 	%>
+	<a href="login.html"><button>로그인 화면으로(a tag)</button></a>
 	<form action="login.html" method="post">
-		<button type="submit">로그인 화면으로</button>
+		<button type="submit">로그인 화면으로(from tag)</button>
 	</form>
 
 </body>

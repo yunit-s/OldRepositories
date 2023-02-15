@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="comment.vo.Comment"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,15 @@
 <title>댓글 수정하기</title>
 </head>
 <body>
+
+	<%
+	// input data
+	// data from request
+	// int bNum = (int)request.getAttribute("bNum");
+	Comment tgComment = (Comment)request.getAttribute("tgComment");
+	
+	%>
+
 
 	<header>
 		<button onclick="history.back()">뒤로가기</button>
@@ -19,14 +29,22 @@
 	</div>
 	
 	<form action="editCommentResult" method="post">
+		<%
+		int cNum = tgComment.getCommentNum();
+		int cArticleNum = tgComment.getCommentArticleNum();
+		String cAuthor = tgComment.getCommentAuthor();
+		String cContent = tgComment.getCommentContent();
+		%>
+		<input type="hidden" name="cNum" value="<%= cNum %>">
+		<input type="hidden" name="cArticleNum" value="<%= cArticleNum %>">
 		<table style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td style="text-align: right">댓글 작성자 : </td>
-				<td><input type="text" name="commentAuthor" value="작성자id" disabled="true"></td>
+				<td><input type="text" name="cAuthor" value="<%= cAuthor %>" readonly></td>
 			</tr>
 			<tr>
 				<td style="text-align: right">댓글 내용 : </td>
-				<td><input type="text" name="commentContent"></td>
+				<td><input type="text" name="cContent" value="<%= cContent %>"></td>
 			</tr>
 			<tr>
 				<td></td>

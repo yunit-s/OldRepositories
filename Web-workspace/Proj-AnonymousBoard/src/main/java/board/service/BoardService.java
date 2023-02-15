@@ -17,8 +17,8 @@ public class BoardService {
 	public Board getArticleOne(Board tgBoard) {
 		System.out.println("!! BoardService.getArticleOne() 실행");
 		BoardDAO bDao = new BoardDAO();
-		Board board = bDao.selectOne(tgBoard);
-		return board;
+		Board rsBoard = bDao.selectOne(tgBoard);
+		return rsBoard;
 	}
 
 	public int addArticle(Board newBoard) {
@@ -32,14 +32,14 @@ public class BoardService {
 		System.out.println("!! BoardService.editArticle() 실행");
 		BoardDAO bDao = new BoardDAO();
 		int result = bDao.update(tgBoard);
-		return 0;
+		return result;
 	}
 
 	public int delArticleOne(Board tgBoard) {
 		System.out.println("!! BoardService.delArticleOne() 실행");
 		BoardDAO bDao = new BoardDAO();
 		int result = bDao.deleteOne(tgBoard);
-		return 0;
+		return result;
 	}
 
 }
