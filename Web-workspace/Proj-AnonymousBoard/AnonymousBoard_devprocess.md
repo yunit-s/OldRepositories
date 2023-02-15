@@ -23,8 +23,8 @@ pom.xml	->	dependencies 등록
 
 * Java Resources - src/main/java (java)
 	> 모든 controller 특징
-	type : 전부 Servlet으로 구현함.
-	URL mappings : 클래스 이름에서 Servlet만 지움 <br>
+		type : 전부 Servlet으로 구현함.
+		URL mappings : 클래스 이름에서 Servlet만 지움 <br>
 		
 	- common
 		- LoginServlet.java
@@ -157,3 +157,15 @@ AJAX를 사용하는 등 다른 기술을 사용하면 문제가 자연스럽게
 * HttpSession 에서 request.getSession(true) 의 true 의미는?
 >
 
+
+
+## 그 외 정보
+* AJAX와 json 데이터 타입
+	> CDN 추가하면 JSONObject 와 JSONArray 클래스를 활용할 수 있다.
+JSONObject
+	: json 형태로 문자열을 저장한다. 데이터 전송은 이 클래스 타입을 사용할 것.
+	{"key1":"value1","key2":"value2"}
+JSONArray
+	json에서 배열 데이터를 저장할 때 활용.
+	["value1","value2","value3"]
+	

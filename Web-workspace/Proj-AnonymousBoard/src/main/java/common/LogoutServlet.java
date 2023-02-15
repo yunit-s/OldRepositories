@@ -43,8 +43,6 @@ public class LogoutServlet extends HttpServlet {
 		try {
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			System.out.println("!!! logout! id : " + loginMember.getMemberId());
-//			loginMember.setMemberId(null);
-//			session.setAttribute("loginMember", loginMember);
 			session.removeAttribute("loginMember");
 		} catch (Exception e) {
 			// TODO: handle exception
