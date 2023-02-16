@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.service.BoardService;
 import board.vo.Board;
+import comment.service.CommentService;
+import comment.vo.Comment;
 
 /**
  * Servlet implementation class EditArticleResultServlet
@@ -31,7 +34,7 @@ public class EditArticleResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("editArticleResultServlet.doGet() 실행");
+		System.out.println("EditArticleResultServlet.doGet() 실행");
 	}
 
 	/**
@@ -41,7 +44,7 @@ public class EditArticleResultServlet extends HttpServlet {
 
 		// input data
 		request.setCharacterEncoding("UTF-8");
-		String bNum = request.getParameter("bNum");
+		int bNum = Integer.parseInt(request.getParameter("bNum"));
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
 		
@@ -49,19 +52,24 @@ public class EditArticleResultServlet extends HttpServlet {
 		
 		// process
 		Board tgBoard = new Board();
-		tgBoard.setBoardNum(Integer.parseInt(bNum));
+		tgBoard.setBoardNum(bNum);
 		tgBoard.setBoardTitle(bTitle);
 		tgBoard.setBoardContent(bContent);
-		
 		BoardService bService = new BoardService();
 		int result = bService.editArticle(tgBoard);
 		
 		
+
+		// get data for request attribute
+		tgBoard = bService.getArticleOne(tgBoard);
+		CommentService cService = new CommentService();
+		List<Comment> cList = cService.getCommentAll(tgBoard.getBoardNum());
+		
+		
 		
 		// switch page
-		tgBoard = bService.getArticleOne(tgBoard);
 		request.setAttribute("tgBoard", tgBoard);
-		
+		request.setAttribute("cList", cList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		dispatcher.forward(request, response);
 		

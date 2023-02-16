@@ -14,16 +14,16 @@ public class MemberDao {
 		// 리턴
 		System.out.println("!! MemberDao.select() 실행");
 		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		Member selectResult = sqlSession.selectOne("memberXml.login", loginMember);
+		Member rsMember = sqlSession.selectOne("memberXml.login", loginMember);
 		sqlSession.close();
 		
-//		// Debug
-//		if (selectResult == null) {
-//			System.out.println("!!! selectResult == null");
+//		// debug
+//		if (rsMember == null) {
+//			System.out.println("!!! rsMember == null");
 //		} else {
-//			System.out.println("!!! selectResult != null. id = " + selectResult.getMemberId());
+//			System.out.println("!!! rsMember != null. id = " + rsMember.getMemberId());
 //		}
-		return selectResult;
+		return rsMember;
 	}
 
 }

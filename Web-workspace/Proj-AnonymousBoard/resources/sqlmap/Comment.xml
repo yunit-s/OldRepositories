@@ -33,7 +33,15 @@
 			WHERE commentNum = #{cNum};
 		]]>
 	</select>
-
+	
+	<!-- insert -->
+	<insert id="insertOne" parameterType="Comment">
+		<![CDATA[
+			INSERT
+			INTO comments(commentArticleNum, commentAuthor, commentContent)
+			VALUES (#{commentArticleNum}, #{commentAuthor}, #{commentContent});
+		]]>
+	</insert>
 	
 	<!-- update -->
 	<update id="updateOne" parameterType="Comment">
@@ -43,5 +51,14 @@
 			WHERE commentNum = #{commentNum};
 		]]>
 	</update>
+	
+	<!-- delete -->
+	<delete id="deleteOne" parameterType="Comment">
+		<![CDATA[
+			DELETE
+			FROM comments
+			WHERE commentNum = #{commentNum};
+		]]>
+	</delete>
 
 </mapper>

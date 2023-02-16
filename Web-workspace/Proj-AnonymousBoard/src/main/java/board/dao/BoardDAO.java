@@ -46,7 +46,7 @@ public class BoardDAO {
 	public int deleteOne(Board tgBoard) {
 		System.out.println("!! BoardDAO.deleteOne() 실행");
 		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-		int result = sqlSession.update("boardXml.deleteOne", tgBoard);
+		int result = sqlSession.delete("boardXml.deleteOne", tgBoard);
 		sqlSession.commit();
 		sqlSession.close();
 		return result;

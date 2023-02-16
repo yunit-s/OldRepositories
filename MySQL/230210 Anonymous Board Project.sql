@@ -94,7 +94,7 @@ INSERT INTO comments(commentArticleNum, commentAuthor, commentContent, commentDa
 
 # 데이터 수정
 # UPDATE
-UPDATE comments SET commentContent = 'asdfasdf' WHERE commentNum = 1;
+UPDATE comments SET commentContent = '안 살 건데용?' WHERE commentNum = 1;
 
 select * from comments;
 select * from comments where commentArticleNum=2;

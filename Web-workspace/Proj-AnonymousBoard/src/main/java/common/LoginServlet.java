@@ -48,38 +48,39 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8"); // request 자료들을 UTF-8 로 인코딩. 이 작업 안 하면 내부 자료들 한글 깨진다.
 		String userId = request.getParameter("userId"); // HTML에 명시된 이름으로 값 가져오기
 		String userPw = request.getParameter("userPw"); // HTML에 명시된 이름으로 값 가져오기
-
+		
+		
+		
+		// process
 		Member loginMember = new Member();
 		loginMember.setMemberId(userId);
 		loginMember.setMemberPw(userPw);
-		
-		
-		
-		// data process
 		MemberService service = new MemberService();
 		loginMember = service.login(loginMember);
 		
 		
 
 		// output data
-		response.setContentType("text/html; charset=UTF-8"); // ContentType 설정
+		response.setContentType("text/html; charset=UTF-8"); // MIME Type으로 ContentType 설정
 		if (loginMember != null) {
-			// login success
+			// login successful
 
 			// session에 로그인 정보 저장
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", loginMember);
-			
-			// select 전체 게시글
+
+			// get data for request attribute			
 			BoardService bService = new BoardService();
-			List<Board> bList = bService.getArticleAll();
+			List<Board> bList = bService.getArticleAll(); // select 전체 게시글
 			
-			// 페이지 전환 - 전체 게시글 보기 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
+			
+			
+			// switch page
 			request.setAttribute("bList", bList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 			dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 			
-//			// Debug
+//			// debug
 //			PrintWriter out = response.getWriter();
 //			out.println("<html><head></head><body>");
 //			out.println("<h3>MainView.java - doPost() - login success</h3>");
@@ -88,20 +89,14 @@ public class LoginServlet extends HttpServlet {
 //			out.println("</body></html>");
 			
 		} else {
-			// login fail
+			// login failed
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("loginFailed.jsp");
+			// switch page
 			request.setAttribute("userId", userId);
 			request.setAttribute("userPw", userPw);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("loginFailed.jsp");
 			dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 			
-//			// Debug
-//			PrintWriter out = response.getWriter();
-//			out.println("<html><head></head><body>");
-//			out.println("<h3>MainView.java - doPost() - login fail</h3>");
-//			out.println("<div>request.getContextPath() 실행 결과 : " + request.getContextPath() + "</div>");
-//			out.println("<div>입력 Id = " + userId + ", 입력 Pw = " + userPw + "</div>");
-//			out.println("</body></html>");
 		}
 	}
 

@@ -24,11 +24,29 @@ public class CommentDAO {
 		sqlSession.close();
 		return rsComment;
 	}
+	
+	public int insert(Comment newComment) {
+		System.out.println("!! CommentDAO.insert() 실행");
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		int result = sqlSession.insert("commentXml.insertOne", newComment);
+		sqlSession.commit();
+		sqlSession.close();
+		return result;
+	}
 
 	public int update(Comment tgComment) {
 		System.out.println("!! CommentDAO.update() 실행");
 		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		int result = sqlSession.update("commentXml.updateOne", tgComment);
+		sqlSession.commit();
+		sqlSession.close();
+		return result;
+	}
+
+	public int delete(Comment tgComment) {
+		System.out.println("!! CommentDAO.delete() 실행");
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		int result = sqlSession.delete("commentXml.deleteOne", tgComment);
 		sqlSession.commit();
 		sqlSession.close();
 		return result;

@@ -7,8 +7,8 @@ public class MemberService {
 
 	public Member login(Member loginMember) {
 		MemberDao dao = new MemberDao();
-		Member selectResult = dao.select(loginMember);
-		return selectResult;
+		Member rsMember = dao.select(loginMember);
+		return rsMember;
 	}
 
 }

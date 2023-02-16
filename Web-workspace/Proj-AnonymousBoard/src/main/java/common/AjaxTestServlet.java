@@ -51,6 +51,8 @@ public class AjaxTestServlet extends HttpServlet {
 		
 		
 		
+		// process
+		
 		// CDN 추가하면 JSONObject 와 JSONArray 클래스를 활용할 수 있다.
 		// JSONObject
 		//		: json 형태로 문자열을 저장한다. 데이터 전송은 이 클래스 타입을 사용할 것.

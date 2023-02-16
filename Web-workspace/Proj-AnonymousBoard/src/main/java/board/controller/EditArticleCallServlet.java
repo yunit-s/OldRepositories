@@ -31,7 +31,7 @@ public class EditArticleCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("editArticleCallServlet.doGet() 실행");
+		System.out.println("EditArticleCallServlet.doGet() 실행");
 	}
 
 	/**
@@ -45,17 +45,20 @@ public class EditArticleCallServlet extends HttpServlet {
 		
 		
 		// process
+		
+		
+
+		// get data for request attribute
 		Board tgBoard = new Board();
 		tgBoard.setBoardNum(bNum);
-		
 		BoardService bService = new BoardService();
 		tgBoard = bService.getArticleOne(tgBoard);
 		
 		
 		
 		// switch page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editArticle.jsp");
 		request.setAttribute("tgBoard", tgBoard);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editArticle.jsp");
 		dispatcher.forward(request, response);
 		
 	}

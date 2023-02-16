@@ -32,7 +32,7 @@ public class NewArticleResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("newArticleResultServlet.doGet() 실행");
+		System.out.println("NewArticleResultServlet.doGet() 실행");
 	}
 
 	/**
@@ -53,16 +53,18 @@ public class NewArticleResultServlet extends HttpServlet {
 		newBoard.setBoardTitle(bTitle);
 		newBoard.setBoardAuthor(bAuthor);
 		newBoard.setBoardContent(bContent);
-		
 		BoardService bService = new BoardService();
 		int result = bService.addArticle(newBoard);
-
+		
+		
+		
+		// get data for request attribute
+		List<Board> bList = bService.getArticleAll(); // select 전체 게시글
+		
 		
 		
 		// switch page
-		List<Board> bList = bService.getArticleAll(); // select 전체 게시글
 		request.setAttribute("bList", bList);
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 		

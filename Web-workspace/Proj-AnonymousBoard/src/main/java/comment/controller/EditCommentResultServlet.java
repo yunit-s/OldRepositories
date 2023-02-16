@@ -34,7 +34,7 @@ public class EditCommentResultServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("editCommentResultServlet.doGet() 실행");
+		System.out.println("EditCommentResultServlet.doGet() 실행");
 	}
 
 	/**
@@ -56,21 +56,22 @@ public class EditCommentResultServlet extends HttpServlet {
 		tgComment.setCommentContent(cContent);
 		CommentService cService = new CommentService();
 		int result = cService.editComment(tgComment);
-
-		// tgBoard, cList 완성해서 article details 에 넘겨주기
+		
+		
+		
+		// get data for request attribute
 		Board tgBoard = new Board();
 		tgBoard.setBoardNum(cArticleNum);
 		BoardService bService = new BoardService();
 		tgBoard = bService.getArticleOne(tgBoard);
-
 		List<Comment> cList = cService.getCommentAll(tgBoard.getBoardNum());
 		
 		
 		
 		// switch page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		request.setAttribute("tgBoard", tgBoard);
 		request.setAttribute("cList", cList);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		dispatcher.forward(request, response);
 		
 	}

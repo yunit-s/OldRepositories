@@ -32,7 +32,7 @@ public class DelArticleCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("delArticleCallServlet.doGet() 실행");
+		System.out.println("DelArticleCallServlet.doGet() 실행");
 	}
 
 	/**
@@ -48,16 +48,18 @@ public class DelArticleCallServlet extends HttpServlet {
 		// process
 		Board tgBoard = new Board();
 		tgBoard.setBoardNum(bNum);
-		
 		BoardService bService = new BoardService();
 		int result = bService.delArticleOne(tgBoard);
 		
 		
 		
-		// switch page
+		// get data for request attribute
 		List<Board> bList = bService.getArticleAll(); // select 전체 게시글
-		request.setAttribute("bList", bList);
 		
+		
+		
+		// switch page
+		request.setAttribute("bList", bList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response);
 		

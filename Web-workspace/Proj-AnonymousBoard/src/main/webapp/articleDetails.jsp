@@ -100,13 +100,28 @@
 	<div style="text-align: center">
 		<h3>댓글</h3>
 	</div>
+	
+	<form action="newCommentCall" method="post" style="text-align: center">
+		<input type="hidden" name="cArticleNum" value="<%= bNum %>">
+		<div style="text-align: center">댓글 입력</div>
+		<table style="margin-left: auto; margin-right: auto">
+			<tr>
+				<td style="width: 80px">
+					<input type="text" name="cAuthor" style="border: 0; width: 80px" value="<%= loginMember.getMemberId() %>">
+				</td>
+				<td><input type="text" name="cContent" style="width: 250px"></td>
+				<td><button type="submit">댓글 입력</button></td>
+			</tr>
+		</table>
+	</form>
+	
 	<table style="margin-left:auto; margin-right:auto;" border="1">
 		<thead>
-			<th scope="col">작성자</th>
-			<th scope="col">내용</th>
-			<th scope="col">작성일</th>
-			<th scope="col"> </th>
-			<th scope="col"> </th>
+			<th scope="col" style="width: 80px">작성자</th>
+			<th scope="col" style="width: 250px">내용</th>
+			<th scope="col" style="width: 180px">작성일</th>
+			<th scope="col" style="width: 50px"> </th>
+			<th scope="col" style="width: 50px"> </th>
 		</thead>
 		<tbody>
 			<%
@@ -121,15 +136,15 @@
 			<tr>
 				<td><%= cAuthor %></td>
 				<td><%= cContent %></td>
-				<td><%= cDate %></td>
-				<td>
+				<td style="text-align: center"><%= cDate %></td>
+				<td style="text-align: center">
 					<form action="editCommentCall" method="post">
 						<input type="hidden" name="bNum" value="<%= bNum %>">
 						<input type="hidden" name="cNum" value="<%= cNum %>">
 						<button type="submit">수정</button>
 					</form>
 				</td>
-				<td>
+				<td style="text-align: center">
 					<form action="delCommentCall" method="post">
 						<input type="hidden" name="bNum" value="<%= bNum %>">
 						<input type="hidden" name="cNum" value="<%= cNum %>">

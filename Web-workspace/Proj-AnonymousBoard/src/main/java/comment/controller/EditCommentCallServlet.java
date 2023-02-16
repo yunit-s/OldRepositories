@@ -31,7 +31,7 @@ public class EditCommentCallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("editCommentCallServlet.doGet() 실행");
+		System.out.println("EditCommentCallServlet.doGet() 실행");
 	}
 
 	/**
@@ -40,20 +40,23 @@ public class EditCommentCallServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// input data
-		request.setCharacterEncoding("UTF-8");
 		int cNum = Integer.parseInt(request.getParameter("cNum"));
 		
 		
 		
 		// process
+		
+		
+
+		// get data for request attribute
 		CommentService cService = new CommentService();
 		Comment tgComment = cService.getCommentOne(cNum);
 		
 		
 		
 		// switch page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editComment.jsp");
 		request.setAttribute("tgComment", tgComment);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editComment.jsp");
 		dispatcher.forward(request, response);
 		
 	}

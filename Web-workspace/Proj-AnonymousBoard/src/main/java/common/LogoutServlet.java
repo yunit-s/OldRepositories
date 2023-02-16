@@ -31,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("logoutServlet.doGet() 실행");
+		System.out.println("LogoutServlet.doGet() 실행");
 	}
 
 	/**
@@ -39,15 +39,20 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// input data
 		HttpSession session = request.getSession(true);
+		
+		
+		
+		// process
 		try {
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			System.out.println("!!! logout! id : " + loginMember.getMemberId());
 			session.removeAttribute("loginMember");
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("!!! logoutServlet.doPost() 오류발생 : " + e);
-
+			System.out.println("!!! LogoutServlet.doPost() 오류발생 : " + e);
+			
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			if (loginMember != null) {
 				System.out.println("!!! logout! id : " + loginMember.getMemberId());
@@ -55,6 +60,13 @@ public class LogoutServlet extends HttpServlet {
 			}
 		}
 		
+		
+
+		// get data for request attribute
+		
+		
+		
+		// switch page
 		response.sendRedirect("login.html");
 		
 	}

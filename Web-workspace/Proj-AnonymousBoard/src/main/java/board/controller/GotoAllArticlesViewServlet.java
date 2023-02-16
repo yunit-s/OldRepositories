@@ -33,13 +33,23 @@ public class GotoAllArticlesViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// select 전체 게시글
+		// input data
+
+		
+		
+		// process
+		
+		
+
+		// get data for request attribute
 		BoardService bService = new BoardService();
 		List<Board> bList = bService.getArticleAll();
 		
-		// 페이지 전환 - 전체 게시글 보기 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
+		
+		
+		// switch page 
 		request.setAttribute("bList", bList);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 
 	}
