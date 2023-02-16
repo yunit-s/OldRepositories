@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.service.BoardService;
-import board.vo.Board;
+import boardncmt.service.BoardNCmtService;
+import boardncmt.vo.BoardNCmt;
 
 /**
  * Servlet implementation class GotoAllArticlesViewServlet
@@ -42,13 +42,13 @@ public class GotoAllArticlesViewServlet extends HttpServlet {
 		
 
 		// get data for request attribute
-		BoardService bService = new BoardService();
-		List<Board> bList = bService.getArticleAll();
+		BoardNCmtService bncService = new BoardNCmtService();
+		List<BoardNCmt> bncList = bncService.getArticleAll(); // select 전체 게시글
 		
 		
 		
 		// switch page 
-		request.setAttribute("bList", bList);
+		request.setAttribute("bncList", bncList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response); // request 객체와 response 객체를 dispatcher에게 넘겨주기
 

@@ -113,3 +113,17 @@ UPDATE comments SET commentContent = '안 살 건데용?' WHERE commentNum = 1;
 
 select * from comments;
 select * from comments where commentArticleNum=2;
+
+
+
+
+
+# 댓글 수 표현하기 (BoardNCmt VO)
+select * from boards;
+select * from comments;
+select commentArticleNum, count(commentArticleNum) from comments group by commentArticleNum;
+SELECT boardNum, boardTitle, boardAuthor, boardContent, boardDate, boardLikeNum, COUNT(comments.commentArticleNum) AS boardCommentCount
+	FROM boards
+    LEFT OUTER JOIN comments ON boards.boardNum = comments.commentArticleNum
+    GROUP BY boardNum;
+

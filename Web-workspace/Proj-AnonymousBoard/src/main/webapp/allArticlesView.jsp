@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="member.vo.Member, board.vo.Board, java.util.List" %>
+<%@ page import="member.vo.Member, boardncmt.vo.BoardNCmt, java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +25,7 @@
 	}
 	
 	// data from request
-	List<Board> bList = (List<Board>)request.getAttribute("bList");
+	List<BoardNCmt> bncList = (List<BoardNCmt>)request.getAttribute("bncList");
 	
 	%>
 	
@@ -62,12 +62,13 @@
 		</thead>
 		<tbody>
 			<%
-			if (!bList.isEmpty()) {
-				for (Board article : bList) {
+			if (!bncList.isEmpty()) {
+				for (BoardNCmt article : bncList) {
 					int bNum = article.getBoardNum();
 					String bTitle = article.getBoardTitle();
 					String bAuthor = article.getBoardAuthor();
 					String bDate = article.getBoardDate();
+					int bCommentCount = article.getBoardCommentCount();
 					int bLikeNum = article.getBoardLikeNum();
 			%>
 				<tr>
@@ -79,7 +80,7 @@
 					</td>
 					<td><%= bAuthor %></td>
 					<td><%= bDate %></td>
-					<td>댓글수불러오기</td>
+					<td><%= bCommentCount %></td>
 					<td><%= bLikeNum %></td>
 				</tr>
 			<%

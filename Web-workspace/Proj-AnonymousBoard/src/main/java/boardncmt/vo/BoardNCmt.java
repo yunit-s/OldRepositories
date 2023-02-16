@@ -3,25 +3,25 @@ package boardncmt.vo;
 public class BoardNCmt {
 
 	private int boardNum;
-	private String boardNCmtTitle;
-	private String boardNCmtAuthor;
-	private String boardNCmtContent;
-	private String boardNCmtDate;
-	private int boardNCmtCommentNum;
+	private String boardTitle;
+	private String boardAuthor;
+	private String boardContent;
+	private String boardDate;
+	private int boardCommentCount;
 	private int boardLikeNum;
 	
 	public BoardNCmt() {
 		// TODO Auto-generated constructor stub
 	}
-	public BoardNCmt(int boardNum, String boardNCmtTitle, String boardNCmtAuthor, String boardNCmtContent,
-			String boardNCmtDate, int boardNCmtCommentNum, int boardLikeNum) {
+	public BoardNCmt(int boardNum, String boardTitle, String boardAuthor, String boardContent, String boardDate,
+			int boardCommentCount, int boardLikeNum) {
 		super();
 		this.boardNum = boardNum;
-		this.boardNCmtTitle = boardNCmtTitle;
-		this.boardNCmtAuthor = boardNCmtAuthor;
-		this.boardNCmtContent = boardNCmtContent;
-		this.boardNCmtDate = boardNCmtDate;
-		this.boardNCmtCommentNum = boardNCmtCommentNum;
+		this.boardTitle = boardTitle;
+		this.boardAuthor = boardAuthor;
+		this.boardContent = boardContent;
+		this.boardDate = boardDate;
+		this.boardCommentCount = boardCommentCount;
 		this.boardLikeNum = boardLikeNum;
 	}
 	
@@ -31,35 +31,35 @@ public class BoardNCmt {
 	public void setBoardNum(int boardNum) {
 		this.boardNum = boardNum;
 	}
-	public String getBoardNCmtTitle() {
-		return boardNCmtTitle;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
-	public void setBoardNCmtTitle(String boardNCmtTitle) {
-		this.boardNCmtTitle = boardNCmtTitle;
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
-	public String getBoardNCmtAuthor() {
-		return boardNCmtAuthor;
+	public String getBoardAuthor() {
+		return boardAuthor;
 	}
-	public void setBoardNCmtAuthor(String boardNCmtAuthor) {
-		this.boardNCmtAuthor = boardNCmtAuthor;
+	public void setBoardAuthor(String boardAuthor) {
+		this.boardAuthor = boardAuthor;
 	}
-	public String getBoardNCmtContent() {
-		return boardNCmtContent;
+	public String getBoardContent() {
+		return boardContent;
 	}
-	public void setBoardNCmtContent(String boardNCmtContent) {
-		this.boardNCmtContent = boardNCmtContent;
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
-	public String getBoardNCmtDate() {
-		return boardNCmtDate;
+	public String getBoardDate() {
+		return boardDate;
 	}
-	public void setBoardNCmtDate(String boardNCmtDate) {
-		this.boardNCmtDate = boardNCmtDate;
+	public void setBoardDate(String boardDate) {
+		this.boardDate = boardDate;
 	}
-	public int getBoardNCmtCommentNum() {
-		return boardNCmtCommentNum;
+	public int getBoardCommentCount() {
+		return boardCommentCount;
 	}
-	public void setBoardNCmtCommentNum(int boardNCmtCommentNum) {
-		this.boardNCmtCommentNum = boardNCmtCommentNum;
+	public void setBoardCommentCount(int boardCommentCount) {
+		this.boardCommentCount = boardCommentCount;
 	}
 	public int getBoardLikeNum() {
 		return boardLikeNum;

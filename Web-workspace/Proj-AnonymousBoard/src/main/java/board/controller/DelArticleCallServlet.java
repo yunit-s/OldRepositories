@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.service.BoardService;
 import board.vo.Board;
+import boardncmt.service.BoardNCmtService;
+import boardncmt.vo.BoardNCmt;
 
 /**
  * Servlet implementation class DelArticleCallServlet
@@ -54,12 +56,13 @@ public class DelArticleCallServlet extends HttpServlet {
 		
 		
 		// get data for request attribute
-		List<Board> bList = bService.getArticleAll(); // select 전체 게시글
+		BoardNCmtService bncService = new BoardNCmtService();
+		List<BoardNCmt> bncList = bncService.getArticleAll(); // select 전체 게시글
 		
 		
 		
 		// switch page
-		request.setAttribute("bList", bList);
+		request.setAttribute("bncList", bncList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("allArticlesView.jsp");
 		dispatcher.forward(request, response);
 		
