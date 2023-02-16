@@ -7,32 +7,44 @@ import member.vo.Member;
 
 public class MemberDao {
 
+	SqlSession sqlSession;
+	
+	public MemberDao() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public MemberDao(SqlSession sqlSession) {
+		super();
+		this.sqlSession = sqlSession;
+	}
+
 	public Member select(Member loginMember) {
-		// 세션 연결 - factory에서
-		// 세션에서 selectOne()
-		// 세션 닫기
-		// 리턴
 		System.out.println("!! MemberDao.select() 실행");
-		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		Member rsMember = sqlSession.selectOne("memberXml.login", loginMember);
-		sqlSession.close();
 		return rsMember;
 	}
 
 	public Member selectOne(Member tgMember) {
 		System.out.println("!! MemberDao.selectOne() 실행");
-		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		Member rsMember = sqlSession.selectOne("memberXml.selectOne", tgMember);
-		sqlSession.close();
 		return rsMember;
 	}
 
 	public int insert(Member newMember) {
 		System.out.println("!! MemberDao.insert() 실행");
-		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		int result = sqlSession.insert("memberXml.insertOne", newMember);
-		sqlSession.commit();
-		sqlSession.close();
+		return result;
+	}
+
+	public int update(Member tgMember) {
+		System.out.println("!! MemberDao.update() 실행");
+		int result = sqlSession.update("memberXml.updateOne", tgMember);
+		return result;
+	}
+
+	public int delete(Member tgMember) {
+		System.out.println("!! MemberDao.delete() 실행");
+		int result = sqlSession.update("memberXml.deleteOne", tgMember);
 		return result;
 	}
 

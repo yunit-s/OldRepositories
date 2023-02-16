@@ -9,11 +9,20 @@ import common.mybatis.MyBatisConnectionFactory;
 
 public class BoardNCmtDAO {
 
+	SqlSession sqlSession;
+	
+	public BoardNCmtDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public BoardNCmtDAO(SqlSession sqlSession) {
+		super();
+		this.sqlSession = sqlSession;
+	}
+
 	public List<BoardNCmt> selectAll() {
 		System.out.println("!! BoardNCmtDAO.selectAll() 실행");
-		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		List<BoardNCmt> bncList = sqlSession.selectList("boardncmtXml.selectAll");
-		sqlSession.close();
 		return bncList;
 	}
 

@@ -49,7 +49,7 @@ pom.xml	->	dependencies 등록
 		
 	- board.vo
 		- Board.java
-			
+		
 	- comment.controller
 		- DelCommentCallServlet.java
 		- EditCommentCallServlet.java
@@ -105,7 +105,7 @@ pom.xml	->	dependencies 등록
 - [x] DB에 댓글 Table 생성하고, 더미 데이터 추가해서 댓글 띄우기
 - [x] 댓글 관련 Servlet 기능 구현하기
 - [x] 글 삭제하면 해당 글에 달려있는 댓글도 모두 지울 것
-- [x] 회원가입하기
+- [x] 회원가입, 회원탈퇴, 회원정보 변경
 - [x] 댓글 수 표현하기 - 전체 게시글 보기 첩근할 때(첫 로그인, 새 글 작성, 전체 글 보기 버튼, 글 삭제)
 - [ ] 댓글 추가, 수정, 삭제 AJAX로 구현
 - [ ] 좋아요 AJAX로 구현
@@ -123,6 +123,7 @@ pom.xml	->	dependencies 등록
 - [ ] mapper.xml에서 resultMap 기능 적용해보기
 - [ ] DAO에서 select() 구문 범용성있게 만들기
 - [ ] DAO 말고 Service에서 transaction처리(commit, rollback) 하도록 수정하기
+- [ ] 개인 정보 변경할 때, 비밀번호 아무것도 입력 안 했을 때 예외처리하기
 
 
 
@@ -147,9 +148,9 @@ AJAX를 사용하는 등 다른 기술을 사용하면 문제가 자연스럽게
 지금은 session 저장소와 클라이언트의 cookie에 history 데이터를 저장하는 등의 편법으로 막는 게 좋을 것 같다.
 
 * boards 테이블과 comments 테이블간의 foreign key에 의한 오류
-`
+```
 Cannot delete or update a parent row: a foreign key constraint fails (`proj_anonymous_board`.`comments`, CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`commentArticleNum`) REFERENCES `boards` (`boardNum`))
-`
+```
 	> 로직으로 처리하려면, 댓글부터 지운 뒤 글 삭제하면 가능할 듯.
 근데 로직 말고 `on delete cascade` 라는 sql query를 활용하면,
 무결성을 유지한 채로 글 삭제와 댓글 삭제 transaction을 한 번에 수행할 수 있다.
@@ -180,11 +181,11 @@ Cannot delete or update a parent row: a foreign key constraint fails (`proj_anon
 ## 그 외 정보
 * AJAX와 json 데이터 타입
 	> CDN 추가하면 JSONObject 와 JSONArray 클래스를 활용할 수 있다.
-		```
+	`
 JSONObject
 	: json 형태로 문자열을 저장한다. 데이터 전송은 이 클래스 타입을 사용할 것.
 	{"key1":"value1","key2":"value2"}
 JSONArray
 	json에서 배열 데이터를 저장할 때 활용.
 	["value1","value2","value3"]
-	
+	`

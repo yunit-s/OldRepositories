@@ -11,7 +11,7 @@
 
 	<%
 	// input data
-	// request에 저장한 데이터
+	// data from request
 	Board tgBoard = (Board)request.getAttribute("tgBoard");
 	
 	%>

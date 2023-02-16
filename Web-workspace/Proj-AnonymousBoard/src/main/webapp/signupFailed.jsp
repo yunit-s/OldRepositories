@@ -9,7 +9,9 @@
 <body>
 
 	<%
-		String userId = (String)request.getAttribute("userId");
+	// input data
+	// data from request
+	String userId = (String)request.getAttribute("userId");
 	%>
 
 	<h3>Sign up failed!</h3>

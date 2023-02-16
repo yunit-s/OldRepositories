@@ -29,7 +29,10 @@
 		<button onclick="history.back()">뒤로가기</button>
 		<a href="gotoAllArticlesView"><button>전체 글 보기</button></a>
 		<div style="float: right">
-			<span>login : <%= loginMember.getMemberName() %>	</span>
+			<span>login : <%= loginMember.getMemberName() %></span>
+			<form action="editMemberCall" method="post" style="display: inline">
+				<button type="submit">개인정보수정</button>
+			</form>
 			<form action="logout" method="post" style="display: inline">
 				<button type="submit">로그아웃</button>
 			</form>

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import board.service.BoardService;
 import board.vo.Board;
+import boardncmt.service.BoardNCmtService;
+import boardncmt.vo.BoardNCmt;
 import member.service.MemberService;
 import member.vo.Member;
 
@@ -77,12 +79,14 @@ public class SignupResultServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", newMember);
 
-			// get data for request attribute			
-			BoardService bService = new BoardService();
-			List<Board> bList = bService.getArticleAll(); // select 전체 게시글
+			// get data for request attribute
+			BoardNCmtService bncService = new BoardNCmtService();
+			List<BoardNCmt> bncList = bncService.getArticleAll(); // select 전체 게시글
+			
+			
 			
 			// set switch page
-			request.setAttribute("bList", bList);
+			request.setAttribute("bncList", bncList);
 			nextPageUrl = "allArticlesView.jsp";
 		}
 		

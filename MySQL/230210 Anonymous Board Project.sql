@@ -25,6 +25,7 @@ update members set memberPw='12' where memberId='son';
 
 select * from members;
 
+delete from members where memberId = 'qwer';
 
 
 

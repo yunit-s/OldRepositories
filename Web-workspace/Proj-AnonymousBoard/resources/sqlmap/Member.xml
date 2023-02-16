@@ -31,7 +31,7 @@
 		<!-- resultType 에서 원래 "member.vo.Member" 라고 써야 하지만, SqlMapConfig 에서 alias 설정해줬으니 바꿔서 써도 된다. -->
 		<!-- #{memberId} : parameterType인 Member 안에서 memberId 필드값을 대입한다는 의미 -->
 		<![CDATA[
-			SELECT memberId, memberName, memberPw
+			SELECT memberId, memberPw, memberName
 			FROM members
 			WHERE memberId = #{memberId} AND memberPw = #{memberPw};
 		]]>
@@ -39,7 +39,7 @@
 	
 	<select id="selectOne" parameterType="Member" resultType="Member">
 		<![CDATA[
-			SELECT memberId, memberName, memberPw
+			SELECT memberId, memberPw, memberName
 			FROM members
 			WHERE memberId = #{memberId};
 		]]>
@@ -49,9 +49,27 @@
 	<insert id="insertOne" parameterType="Member">
 		<![CDATA[
 			INSERT
-			INTO members(memberId, memberName, memberPw)
-			VALUES (#{memberId}, #{memberName}, #{memberPw});
+			INTO members(memberId, memberPw, memberName)
+			VALUES (#{memberId}, #{memberPw}, #{memberName});
 		]]>
 	</insert>
+	
+	<!-- update -->
+	<update id="updateOne" parameterType="Member">
+		<![CDATA[
+			UPDATE members
+			SET memberPw = #{memberPw}, memberName = #{memberName}
+			WHERE memberId = #{memberId};
+		]]>
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteOne" parameterType="Member">
+		<![CDATA[
+			DELETE
+			FROM members
+			WHERE memberId = #{memberId};
+		]]>
+	</delete>
 
 </mapper>
