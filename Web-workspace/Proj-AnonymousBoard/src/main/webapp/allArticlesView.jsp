@@ -30,17 +30,20 @@
 	%>
 	
 	<header>
-		<div style="text-align: right">
-			login : <%= loginMember.getMemberName() %>
+		<div style="float: right">
+			<span>login : <%= loginMember.getMemberName() %>	</span>
+			<form action="logout" method="post" style="display: inline">
+				<button type="submit">로그아웃</button>
+			</form>
 		</div>
-		<form action="logout" method="post" style="text-align: right">
-			<button type="submit">로그아웃</button>
-		</form>
+		<br>
 	</header>
 	
 	
 	
-	<h3 style="text-align: center">전체 글 보기</h3>
+	<div style="text-align: center">
+		<h3>전체 글 보기</h3>
+	</div>
 	
 	<!-- 새 글 작성 -->
 	<form action="newArticleCall" method="post" style="text-align: center">

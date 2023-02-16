@@ -1,23 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Anonymous Board</title>
+<title>회원가입</title>
 </head>
 <body>
 
 	<header>
+		<button onclick="history.back()">뒤로가기</button>
 	</header>
-
-
-
-	<main style="text-align: center">
-		<h1>** 익명 게시판 **</h1>
-	</main>
-
-
 	
-	<form action="login" method="post">
+	
+	
+	<div style="text-align: center">
+		<h3>회원가입</h3>
+	</div>
+	
+	<form action="signupResult" method="post">
 		<table style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td style="text-align: right">ID : </td>
@@ -28,22 +29,18 @@
 				<td><input type="password" name="userPw"></td>
 			</tr>
 			<tr>
+				<td style="text-align: right">이름 : </td>
+				<td><input type="text" name="userName"></td>
+			</tr>
+			<tr>
 				<td></td>
 				<td style="text-align: right">
-					<button type="submit">로그인</button>
+					<button type="submit">회원가입</button>
 				</td>
 			</tr>
 		</table>
 	</form>
 	
-	<form action="signupCall" method="post" style="text-align: center">
-		<button type="submit">회원가입</button>
-	</form>
-	
-	<div style="text-align: center; color: lightgray">
-		<br><br>
-		접속 url : http://127.0.0.1:8080/AnonymousBoard/login.html
-	</div>
 
 </body>
 </html>

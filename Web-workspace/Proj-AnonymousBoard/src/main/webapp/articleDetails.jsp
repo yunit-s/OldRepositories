@@ -34,12 +34,12 @@
 	<header>
 		<button onclick="history.back()">뒤로가기</button>
 		<a href="gotoAllArticlesView"><button>전체 글 보기</button></a>
-		<div style="text-align: right">
-			login : <%= loginMember.getMemberName() %>
+		<div style="float: right">
+			<span>login : <%= loginMember.getMemberName() %>	</span>
+			<form action="logout" method="post" style="display: inline">
+				<button type="submit">로그아웃</button>
+			</form>
 		</div>
-		<form action="logout" method="post" style="text-align: right">
-			<button type="submit">로그아웃</button>
-		</form>
 	</header>
 	
 	
@@ -80,12 +80,12 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td style="text-align: right">
-				<form action="editArticleCall" method="post">
+			<td style="text-align: right; align: right">
+				<form action="editArticleCall" method="post" style="display: inline">
 					<input type="hidden" name="bNum" value="<%= bNum %>">
 					<button type="submit">글 수정</button>
 				</form>
-				<form action="delArticleCall" method="post">
+				<form action="delArticleCall" method="post" style="display: inline">
 					<input type="hidden" name="bNum" value="<%= bNum %>">
 					<button type="submit">글 삭제</button>
 				</form>
@@ -120,8 +120,7 @@
 			<th scope="col" style="width: 80px">작성자</th>
 			<th scope="col" style="width: 250px">내용</th>
 			<th scope="col" style="width: 180px">작성일</th>
-			<th scope="col" style="width: 50px"> </th>
-			<th scope="col" style="width: 50px"> </th>
+			<th scope="col" style="width: 100px"> </th>
 		</thead>
 		<tbody>
 			<%
@@ -138,14 +137,12 @@
 				<td><%= cContent %></td>
 				<td style="text-align: center"><%= cDate %></td>
 				<td style="text-align: center">
-					<form action="editCommentCall" method="post">
+					<form action="editCommentCall" method="post" style="display: inline">
 						<input type="hidden" name="bNum" value="<%= bNum %>">
 						<input type="hidden" name="cNum" value="<%= cNum %>">
 						<button type="submit">수정</button>
 					</form>
-				</td>
-				<td style="text-align: center">
-					<form action="delCommentCall" method="post">
+					<form action="delCommentCall" method="post" style="display: inline">
 						<input type="hidden" name="bNum" value="<%= bNum %>">
 						<input type="hidden" name="cNum" value="<%= cNum %>">
 						<button type="submit">삭제</button>

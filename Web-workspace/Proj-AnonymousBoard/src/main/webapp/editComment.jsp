@@ -40,7 +40,7 @@
 		<table style="margin-left:auto; margin-right:auto;">
 			<tr>
 				<td style="text-align: right">댓글 작성자 : </td>
-				<td><input type="text" name="cAuthor" value="<%= cAuthor %>" readonly></td>
+				<td><input type="text" name="cAuthor" value="<%= cAuthor %>" style="border: 0" readonly></td>
 			</tr>
 			<tr>
 				<td style="text-align: right">댓글 내용 : </td>

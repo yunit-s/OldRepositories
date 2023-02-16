@@ -43,7 +43,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: right">글 작성자 : </td>
-				<td><input type="text" name="bAuthor" value="<%= bAuthor %>" readonly></td>
+				<td><input type="text" name="bAuthor" value="<%= bAuthor %>" style="border: 0" readonly></td>
 			</tr>
 			<tr>
 				<td style="text-align: right">글 내용 : </td>

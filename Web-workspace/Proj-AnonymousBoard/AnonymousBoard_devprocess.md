@@ -104,7 +104,10 @@ pom.xml	->	dependencies 등록
 - [x] 글 관련 Servlet 기능 구현하기
 - [x] DB에 댓글 Table 생성하고, 더미 데이터 추가해서 댓글 띄우기
 - [x] 댓글 관련 Servlet 기능 구현하기
-- [ ] 글 삭제하면 해당 글에 달려있는 댓글도 모두 지울 것
+- [x] 글 삭제하면 해당 글에 달려있는 댓글도 모두 지울 것
+- [x] 회원가입하기
+- [ ] 페이지네이션
+- [ ] 댓글 수 표현하기
 - [ ] 클래스 다이어그램? 그리기
 
 
@@ -113,9 +116,9 @@ pom.xml	->	dependencies 등록
 
 ## 미완료 세부 작업
 - [x] login.html에서 테이블 가운데정렬 -> style="margin: center" 으로 정렬 가능
+- [x] form, div 태그에서 자동 줄바꿈 속성 해제하기 -> style="display: inline" 이나 "float: left" 사용하면 된다.
 - [ ] loginMember session 오류나는 거 try_catch 로 session 오류 잡기
 - [ ] mapper.xml에서 resultMap 기능 적용해보기
-- [ ] transaction 실행 단위 구분짓기
 - [ ] DAO에서 select() 구문 범용성있게 만들기
 - [ ] DAO 말고 Service에서 transaction처리(commit, rollback) 하도록 수정하기
 
@@ -142,14 +145,17 @@ AJAX를 사용하는 등 다른 기술을 사용하면 문제가 자연스럽게
 지금은 session 저장소와 클라이언트의 cookie에 history 데이터를 저장하는 등의 편법으로 막는 게 좋을 것 같다.
 
 * boards 테이블과 comments 테이블간의 foreign key에 의한 오류
-```
+`
 Cannot delete or update a parent row: a foreign key constraint fails (`proj_anonymous_board`.`comments`, CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`commentArticleNum`) REFERENCES `boards` (`boardNum`))
-```
+`
 	> 로직으로 처리하려면, 댓글부터 지운 뒤 글 삭제하면 가능할 듯.
-	근데 로직 말고 `on delete cascade` 라는 sql query를 활용하면,
-	무결성을 유지한 채로 글 삭제와 댓글 삭제 transaction을 한 번에 수행할 수 있다.
-		- 참조 : CONSTRAINT 와 CASCADE 의 활용
+근데 로직 말고 `on delete cascade` 라는 sql query를 활용하면,
+무결성을 유지한 채로 글 삭제와 댓글 삭제 transaction을 한 번에 수행할 수 있다.
+	- 참조
+		CONSTRAINT 와 CASCADE 의 활용
 		<https://blog.ycpark.net/entry/FOREIGN-KEY-%EC%99%80-CONSTRAINT-%EC%9D%98-%EC%82%AC%EC%9A%A9>
+		ON DELETE CASCADE (feat. foreign key 로 연결된 row 한 번에 지우는 방법)
+		<https://velog.io/@eensungkim/ON-DELETE-CASCADE-feat.-row-%ED%95%9C-%EB%B2%88%EC%97%90-%EC%A7%80%EC%9A%B0%EB%8A%94-%EB%B0%A9%EB%B2%95-TIL-78%EC%9D%BC%EC%B0%A8>
 
 
 

@@ -16,14 +16,24 @@ public class MemberDao {
 		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
 		Member rsMember = sqlSession.selectOne("memberXml.login", loginMember);
 		sqlSession.close();
-		
-//		// debug
-//		if (rsMember == null) {
-//			System.out.println("!!! rsMember == null");
-//		} else {
-//			System.out.println("!!! rsMember != null. id = " + rsMember.getMemberId());
-//		}
 		return rsMember;
+	}
+
+	public Member selectOne(Member tgMember) {
+		System.out.println("!! MemberDao.selectOne() 실행");
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		Member rsMember = sqlSession.selectOne("memberXml.selectOne", tgMember);
+		sqlSession.close();
+		return rsMember;
+	}
+
+	public int insert(Member newMember) {
+		System.out.println("!! MemberDao.insert() 실행");
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		int result = sqlSession.insert("memberXml.insertOne", newMember);
+		sqlSession.commit();
+		sqlSession.close();
+		return result;
 	}
 
 }

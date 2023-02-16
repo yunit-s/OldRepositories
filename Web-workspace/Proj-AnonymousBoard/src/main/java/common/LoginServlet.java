@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
 			// login successful
 
 			// session에 로그인 정보 저장
+			loginMember.setMemberPw(null);
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", loginMember);
 

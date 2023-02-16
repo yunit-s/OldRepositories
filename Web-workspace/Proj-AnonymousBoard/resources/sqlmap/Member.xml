@@ -23,6 +23,8 @@
 		select에서 가져온 column과 매칭되는 vo의 field를 찾아서 값을 매핑해준다.
 		DB의 column명과 vo의 field명이 동일해야만 가능하다.
 	-->
+	
+	<!-- select -->
 	<select id="login" parameterType="Member" resultType="Member">
 		<!-- parameterType : isbn의 자료형. resultType : 결과로 리턴받는 데이터의 자료형 -->
 		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
@@ -31,8 +33,25 @@
 		<![CDATA[
 			SELECT memberId, memberName, memberPw
 			FROM members
-			WHERE memberId = #{memberId} AND memberPw = #{memberPw}	
+			WHERE memberId = #{memberId} AND memberPw = #{memberPw};
 		]]>
 	</select>
+	
+	<select id="selectOne" parameterType="Member" resultType="Member">
+		<![CDATA[
+			SELECT memberId, memberName, memberPw
+			FROM members
+			WHERE memberId = #{memberId};
+		]]>
+	</select>
+	
+	<!-- insert -->
+	<insert id="insertOne" parameterType="Member">
+		<![CDATA[
+			INSERT
+			INTO members(memberId, memberName, memberPw)
+			VALUES (#{memberId}, #{memberName}, #{memberPw});
+		]]>
+	</insert>
 
 </mapper>

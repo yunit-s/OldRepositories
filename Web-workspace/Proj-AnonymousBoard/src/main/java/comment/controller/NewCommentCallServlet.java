@@ -59,7 +59,7 @@ public class NewCommentCallServlet extends HttpServlet {
 		int result = cService.addComment(newComment);
 		
 		
-
+		
 		// get data for request attribute
 		Board tgBoard = new Board();
 		tgBoard.setBoardNum(cArticleNum);
