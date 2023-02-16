@@ -17,12 +17,4 @@ public class BoardNCmtDAO {
 		return bncList;
 	}
 
-//	public BoardNCmt selectOne(BoardNCmt tgBoardNCmt) {
-//		System.out.println("!! BoardNCmtDAO.selectOne() 실행");
-//		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
-//		BoardNCmt rsBoardNCmt = sqlSession.selectOne("boardncmtXml.selectOne", tgBoardNCmt);
-//		sqlSession.close();
-//		return rsBoardNCmt;
-//	}
-
 }

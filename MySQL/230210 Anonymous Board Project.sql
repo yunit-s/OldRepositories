@@ -127,3 +127,27 @@ SELECT boardNum, boardTitle, boardAuthor, boardContent, boardDate, boardLikeNum,
     LEFT OUTER JOIN comments ON boards.boardNum = comments.commentArticleNum
     GROUP BY boardNum;
 
+
+
+
+
+# 좋아요 테이블 likes 생성
+CREATE TABLE likes (
+	likeNum	INTEGER NOT NULL PRIMARY KEY auto_increment,
+    likeArticleNum	INTEGER NOT NULL,
+    likeMemberId	VARCHAR(10),
+    FOREIGN KEY (likeArticleNum) REFERENCES boards(boardNum) ON DELETE CASCADE,
+    FOREIGN KEY (likeMemberId) REFERENCES members(memberId) ON DELETE CASCADE
+);
+
+# 데이터 추가
+# INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('플스 팔아요!', 'seo', '싸게 팔아요.. 네고 사절!'); # 나머지 colomn 데이터는 알아서 들어간다.
+# INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('핸드폰 팔아요!', 'son', '5만원에 팔아요!');
+# INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('지갑 팝니다~~', 'seo', '택포 28만원이고 네고 없습니다.');
+INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(1, 1, 'seo');
+INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(2, 1, 'son');
+INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(3, 1, 'park');
+INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(4, 2, 'seo');
+INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(5, 3, 'son');
+
+select * from likes;

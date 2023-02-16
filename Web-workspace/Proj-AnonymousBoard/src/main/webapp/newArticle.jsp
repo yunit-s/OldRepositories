@@ -13,12 +13,6 @@
 	// input data
 	// data from session
 	Member loginMember = (Member)session.getAttribute("loginMember");
-//	try {
-//		loginMember = (Member)session.getAttribute("loginMember");
-//	} catch (Exception e) {
-//		System.out.println("!!! newArticle.jsp에서 session오류 발생");
-//		response.sendRedirect("sessionError.jsp");
-//	}
 	if (loginMember == null) {
 		System.out.println("!!! Session Expiration! (newArticle.jsp)");
 		response.sendRedirect("sessionError.jsp");
