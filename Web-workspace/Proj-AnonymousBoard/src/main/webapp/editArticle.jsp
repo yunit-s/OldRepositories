@@ -33,7 +33,7 @@
 		String bAuthor = tgBoard.getBoardAuthor();
 		String bContent = tgBoard.getBoardContent();
 		String bDate = tgBoard.getBoardDate();
-		int bLike = tgBoard.getBoardLike();
+		int bLikeNum = tgBoard.getBoardLikeNum();
 		%>
 		<input type="hidden" name="bNum" value="<%= bNum %>">
 		<table style="margin-left:auto; margin-right:auto;">

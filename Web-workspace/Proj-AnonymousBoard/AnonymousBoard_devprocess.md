@@ -152,9 +152,9 @@ Cannot delete or update a parent row: a foreign key constraint fails (`proj_anon
 근데 로직 말고 `on delete cascade` 라는 sql query를 활용하면,
 무결성을 유지한 채로 글 삭제와 댓글 삭제 transaction을 한 번에 수행할 수 있다.
 	- 참조
-		CONSTRAINT 와 CASCADE 의 활용
+		CONSTRAINT 와 CASCADE 의 활용 <br>
 		<https://blog.ycpark.net/entry/FOREIGN-KEY-%EC%99%80-CONSTRAINT-%EC%9D%98-%EC%82%AC%EC%9A%A9>
-		ON DELETE CASCADE (feat. foreign key 로 연결된 row 한 번에 지우는 방법)
+		ON DELETE CASCADE (feat. foreign key 로 연결된 row 한 번에 지우는 방법) <br>
 		<https://velog.io/@eensungkim/ON-DELETE-CASCADE-feat.-row-%ED%95%9C-%EB%B2%88%EC%97%90-%EC%A7%80%EC%9A%B0%EB%8A%94-%EB%B0%A9%EB%B2%95-TIL-78%EC%9D%BC%EC%B0%A8>
 
 

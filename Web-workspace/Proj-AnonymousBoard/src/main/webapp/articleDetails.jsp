@@ -56,7 +56,7 @@
 		String bAuthor = board.getBoardAuthor();
 		String bContent = board.getBoardContent();
 		String bDate = board.getBoardDate();
-		int bLike = board.getBoardLike();
+		int bLikeNum = board.getBoardLikeNum();
 		%>
 		<tr>
 			<td style="text-align: right" width="100px">글 번호 : </td>
@@ -76,7 +76,7 @@
 		</tr>
 		<tr>
 			<td style="text-align: right" width="100px">좋아요 : </td>
-			<td width="300px"><%= bLike %></td>
+			<td width="300px"><%= bLikeNum %></td>
 		</tr>
 		<tr>
 			<td></td>

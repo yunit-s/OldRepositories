@@ -11,7 +11,7 @@
 		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
 		<![CDATA[
 			SELECT boardNum, boardTitle, boardAuthor, boardContent,
-				boardDate, boardLike
+				boardDate, boardLikeNum
 			FROM boards;
 		]]>
 	</select>
@@ -19,7 +19,7 @@
 	<select id="selectOne" parameterType="Board" resultType="Board">
 		<![CDATA[
 			SELECT boardNum, boardTitle, boardAuthor, boardContent,
-				boardDate, boardLike
+				boardDate, boardLikeNum
 			FROM boards
 			WHERE boardNum = #{boardNum};
 		]]>

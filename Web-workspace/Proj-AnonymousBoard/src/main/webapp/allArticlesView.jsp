@@ -57,6 +57,7 @@
 			<th>글 제목</th>
 			<th>글 작성자</th>
 			<th>작성일</th>
+			<th>댓글 수</th>
 			<th>좋아요 수</th>
 		</thead>
 		<tbody>
@@ -67,7 +68,7 @@
 					String bTitle = article.getBoardTitle();
 					String bAuthor = article.getBoardAuthor();
 					String bDate = article.getBoardDate();
-					int bLike = article.getBoardLike();
+					int bLikeNum = article.getBoardLikeNum();
 			%>
 				<tr>
 					<td><%= bNum %></td>
@@ -78,7 +79,8 @@
 					</td>
 					<td><%= bAuthor %></td>
 					<td><%= bDate %></td>
-					<td><%= bLike %></td>
+					<td>댓글수불러오기</td>
+					<td><%= bLikeNum %></td>
 				</tr>
 			<%
 				}

@@ -7,19 +7,19 @@ public class Board {
 	private String boardAuthor;
 	private String boardContent;
 	private String boardDate;
-	private int boardLike;
+	private int boardLikeNum;
 	
 	public Board() {
 	}
 	public Board(int boardNum, String boardTitle, String boardAuthor, String boardContent, String boardDate,
-			int boardLike) {
+			int boardLikeNum) {
 		super();
 		this.boardNum = boardNum;
 		this.boardTitle = boardTitle;
 		this.boardAuthor = boardAuthor;
 		this.boardContent = boardContent;
 		this.boardDate = boardDate;
-		this.boardLike = boardLike;
+		this.boardLikeNum = boardLikeNum;
 	}
 	
 	public int getBoardNum() {
@@ -52,11 +52,11 @@ public class Board {
 	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
-	public int getBoardLike() {
-		return boardLike;
+	public int getBoardLikeNum() {
+		return boardLikeNum;
 	}
-	public void setBoardLike(int boardLike) {
-		this.boardLike = boardLike;
+	public void setBoardLikeNum(int boardLikeNum) {
+		this.boardLikeNum = boardLikeNum;
 	}
 	
 	

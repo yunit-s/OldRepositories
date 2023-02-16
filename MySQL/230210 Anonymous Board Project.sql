@@ -36,10 +36,14 @@ CREATE TABLE boards (
     boardAuthor	VARCHAR(10),
     boardContent	VARCHAR(100),
     boardDate		DATETIME DEFAULT NOW(),
-    boardLike INTEGER DEFAULT 0,
+    boardLikeNum INTEGER DEFAULT 0,
     FOREIGN KEY (boardAuthor) REFERENCES members(memberId) #MEMBERS의 memberId 와 같아야해.
 );
 # drop table boards;
+
+# 테이블 수정
+desc boards; # 테이블 정보 보기
+ALTER TABLE boards CHANGE COLUMN boardLikeNum boardLikeNum INTEGER DEFAULT 0; # 테이블 컬럼 수정(이름, 데이터타입, 속성)
 
 # 데이터 추가
 # INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('플스 팔아요!', 'seo', '싸게 팔아요.. 네고 사절!'); # 나머지 colomn 데이터는 알아서 들어간다.
@@ -60,7 +64,7 @@ delete from boards where boardAuthor is null;
 UPDATE boards SET boardTitle='asdf', boardContent='34t2t23t' WHERE boardNum=43;
 
 select * from boards;
-SELECT boardNum, boardTitle, boardAuthor, boardContent, boardDate, boardLike FROM boards;
+SELECT boardNum, boardTitle, boardAuthor, boardContent, boardDate, boardLikeNum FROM boards;
 
 
 
