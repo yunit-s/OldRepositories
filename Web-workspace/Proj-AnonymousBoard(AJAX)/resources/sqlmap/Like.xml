@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="likeXml">
+
+	<!-- select -->
+	<select id="selectOne" parameterType="Like" resultType="Like">
+		<![CDATA[
+			SELECT likeNum, likeArticleNum, likeMemberId
+			FROM likes
+			WHERE likeArticleNum = #{likeArticleNum} AND likeMemberId = #{likeMemberId};
+		]]>
+	</select>
+	
+	<!-- insert -->
+	<insert id="insertOne" parameterType="Like">
+		<![CDATA[
+			INSERT
+			INTO likes(likeArticleNum, likeMemberId)
+			VALUES (#{likeArticleNum}, #{likeMemberId});
+		]]>
+	</insert>
+
+	<!-- delete -->
+	<select id="deleteOne" parameterType="Like" resultType="Like">
+		<![CDATA[
+			DELETE
+			FROM likes
+			WHERE likeArticleNum = #{likeArticleNum} AND likeMemberId = #{likeMemberId};
+		]]>
+	</select>
+
+</mapper>

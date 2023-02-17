@@ -152,3 +152,4 @@ INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(4, 2, 'seo');
 INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(5, 3, 'son');
 
 select * from likes;
+select likeArticleNum, count(likeArticleNum) as likeCount from likes group by likeArticleNum;

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="boardXml">
+
+	<!-- select -->
+	<select id="selectAll" resultType="Board">
+		<!-- parameterType : isbn의 자료형. resultType : 결과로 리턴받는 데이터의 자료형 -->
+		<!-- CDATA 표현식 : SQL 구문이라는 것을 명시해주는 문법 -->
+		<![CDATA[
+			SELECT boardNum, boardTitle, boardAuthor, boardContent,
+				boardDate, boardLikeNum
+			FROM boards;
+		]]>
+	</select>
+	
+	<select id="selectOne" parameterType="Board" resultType="Board">
+		<![CDATA[
+			SELECT boardNum, boardTitle, boardAuthor, boardContent,
+				boardDate, boardLikeNum
+			FROM boards
+			WHERE boardNum = #{boardNum};
+		]]>
+	</select>
+	
+	<!-- insert -->
+	<insert id="insertOne" parameterType="Board">
+		<![CDATA[
+			INSERT
+			INTO boards(boardTitle, boardAuthor, boardContent)
+			VALUES (#{boardTitle}, #{boardAuthor}, #{boardContent});
+		]]>
+	</insert>
+	
+	<!-- update -->
+	<update id="updateOne" parameterType="Board">
+		<![CDATA[
+			UPDATE boards
+			SET boardTitle = #{boardTitle}, boardContent = #{boardContent}
+			WHERE boardNum = #{boardNum};
+		]]>
+	</update>
+
+	<update id="updateLikeNum" parameterType="Board">
+		<![CDATA[
+			UPDATE boards
+			SET boardLikeNum = #{boardLikeNum}
+			WHERE boardNum = #{boardNum};
+		]]>
+	</update>
+
+	<!-- delete -->
+	<delete id="deleteOne" parameterType="Board">
+		<![CDATA[
+			DELETE
+			FROM boards
+			WHERE boardNum = #{boardNum};
+		]]>
+	</delete>
+
+</mapper>
