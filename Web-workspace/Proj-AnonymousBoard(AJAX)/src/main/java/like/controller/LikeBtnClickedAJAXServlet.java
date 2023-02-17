@@ -2,9 +2,7 @@ package like.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +14,6 @@ import org.json.JSONObject;
 
 import board.service.BoardService;
 import board.vo.Board;
-import comment.service.CommentService;
-import comment.vo.Comment;
 import like.vo.Like;
 import member.vo.Member;
 

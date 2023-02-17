@@ -148,10 +148,15 @@
 						String cDate = item.getCommentDate();
 				%>
 				<tr>
-					<td><%= cAuthor %></td>
-					<td><%= cContent %></td>
-					<td style="text-align: center"><%= cDate %></td>
-					<td style="text-align: center">
+					<td id="<%= "cAuthorTdId" + cNum %>"><%= cAuthor %></td>
+					<td id="<%= "cContentTdId" + cNum %>"><%= cContent %></td>
+					<td id="<%= "cDateTdId" + cNum %>" style="text-align: center"><%= cDate %></td>
+					<td id="<%= "editCommentTdId" + cNum %>" style="text-align: center">
+						<!-- AJAX를 활용한 댓글 수정 -->
+						<button id="<%= "editCommentBtnId" + cNum %>" onclick="editCommentBtnFunc(<%= cNum %>)">수정</button>
+						
+						<!-- AJAX 없이 구현한 댓글 수정 -->
+						<!--
 						<form action="editCommentCall" method="post" style="display: inline">
 							<input type="hidden" name="bNum" value="<%= bNum %>">
 							<input type="hidden" name="cNum" value="<%= cNum %>">
@@ -162,6 +167,7 @@
 							<input type="hidden" name="cNum" value="<%= cNum %>">
 							<button type="submit">삭제</button>
 						</form>
+						-->
 					</td>
 				</tr>
 				<%
