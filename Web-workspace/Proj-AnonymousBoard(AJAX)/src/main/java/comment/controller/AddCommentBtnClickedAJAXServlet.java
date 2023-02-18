@@ -2,29 +2,35 @@ package comment.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import board.service.BoardService;
+import board.vo.Board;
 import comment.service.CommentService;
 import comment.vo.Comment;
+import member.vo.Member;
 
 /**
- * Servlet implementation class EditCommentCompleteBtnClickedAJAXServlet
+ * Servlet implementation class AddCommentBtnClickedAJAXServlet
  */
-@WebServlet("/editCommentCompleteBtnClickedAJAX")
-public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
+@WebServlet("/addCommentBtnClickedAJAX")
+public class AddCommentBtnClickedAJAXServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditCommentCompleteBtnClickedAJAXServlet() {
+    public AddCommentBtnClickedAJAXServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +39,32 @@ public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("EditCommentCompleteBtnClickedAJAXServlet.doGet() 실행");
+		System.out.println("AddCommentBtnClickedAJAXServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		// input data
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		request.setCharacterEncoding("UTF-8");
-		int cNum = Integer.parseInt(request.getParameter("cNum"));
-//		String cAuthor = request.getParameter("cAuthor");
-		String cContent = request.getParameter("cContent");
-//		String cDate = request.getParameter("cDate");
+		int cArticleNum = Integer.parseInt(request.getParameter("bNum"));
+		String cAuthor = loginMember.getMemberId();
+		String cContent = request.getParameter("newCommentContent");
 		
 		
 		
 		// process
-		Comment tgComment = new Comment();
-		tgComment.setCommentNum(cNum);
-		tgComment.setCommentContent(cContent);
+		Comment newComment = new Comment();
+		newComment.setCommentArticleNum(cArticleNum);
+		newComment.setCommentAuthor(cAuthor);
+		newComment.setCommentContent(cContent);
 		CommentService cService = new CommentService();
-		int result = cService.editComment(tgComment);
+//		int result = cService.addComment(newComment);
+		int result = 1;
 		
 		
 		
@@ -67,6 +76,7 @@ public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObj);
 		out.close();
+		
 	}
 
 }

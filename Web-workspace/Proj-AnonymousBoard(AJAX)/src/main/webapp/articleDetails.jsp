@@ -116,6 +116,7 @@
 			<h3>댓글</h3>
 		</div>
 		
+		<!-- 댓글 입력(form 태그) -->
 		<form action="newCommentCall" method="post" style="text-align: center">
 			<input type="hidden" name="cArticleNum" value="<%= bNum %>">
 			<div style="text-align: center">댓글 입력</div>
@@ -130,6 +131,25 @@
 			</table>
 		</form>
 		
+		<!-- 댓글 입력(AJAX) -->
+		<br><br><br>
+		<div>
+			<input type="hidden" name="cArticleNum" value="<%= bNum %>">
+			<div style="text-align: center">댓글 입력</div>
+			<table style="margin-left: auto; margin-right: auto">
+				<tr>
+					<td style="width: 80px">
+						<input type="text" name="cAuthor" style="border: 0; width: 80px" value="<%= loginMember.getMemberId() %>">
+					</td>
+					<td>
+						<input type="text" id="addCommentInputId" name="cContent" style="width: 250px"
+							onkeypress="if(event.code == 'Enter'){addCommentBtnFunc();}">
+					</td>
+					<td><button onclick="addCommentBtnFunc()">댓글 입력</button></td>
+				</tr>
+			</table>
+		</div>
+		
 		<table style="margin-left:auto; margin-right:auto;" border="1">
 			<thead>
 				<th scope="col" style="width: 80px">작성자</th>
@@ -137,7 +157,7 @@
 				<th scope="col" style="width: 180px">작성일</th>
 				<th scope="col" style="width: 100px"> </th>
 			</thead>
-			<tbody>
+			<tbody id="commentTbodyId">
 				<%
 				if (!cList.isEmpty()) {
 					for (Comment item : cList) {
@@ -147,7 +167,7 @@
 						String cContent = item.getCommentContent();
 						String cDate = item.getCommentDate();
 				%>
-				<tr>
+				<tr id="<%= "commentTrId" + cNum %>">
 					<td id="<%= "cAuthorTdId" + cNum %>"><%= cAuthor %></td>
 					<td id="<%= "cContentTdId" + cNum %>"><%= cContent %></td>
 					<td id="<%= "cDateTdId" + cNum %>" style="text-align: center"><%= cDate %></td>

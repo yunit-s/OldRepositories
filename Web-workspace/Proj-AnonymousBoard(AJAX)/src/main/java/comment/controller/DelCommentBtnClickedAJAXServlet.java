@@ -2,7 +2,9 @@ package comment.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import board.service.BoardService;
+import board.vo.Board;
 import comment.service.CommentService;
 import comment.vo.Comment;
 
 /**
- * Servlet implementation class EditCommentCompleteBtnClickedAJAXServlet
+ * Servlet implementation class DelCommentBtnClickedAJAXServlet
  */
-@WebServlet("/editCommentCompleteBtnClickedAJAX")
-public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
+@WebServlet("/delCommentBtnClickedAJAX")
+public class DelCommentBtnClickedAJAXServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditCommentCompleteBtnClickedAJAXServlet() {
+    public DelCommentBtnClickedAJAXServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +37,24 @@ public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("EditCommentCompleteBtnClickedAJAXServlet.doGet() 실행");
+		System.out.println("DelCommentBtnClickedAJAXServlet.doGet() 실행");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		// input data
-		request.setCharacterEncoding("UTF-8");
 		int cNum = Integer.parseInt(request.getParameter("cNum"));
-//		String cAuthor = request.getParameter("cAuthor");
-		String cContent = request.getParameter("cContent");
-//		String cDate = request.getParameter("cDate");
 		
 		
 		
 		// process
 		Comment tgComment = new Comment();
 		tgComment.setCommentNum(cNum);
-		tgComment.setCommentContent(cContent);
 		CommentService cService = new CommentService();
-		int result = cService.editComment(tgComment);
+		int result = cService.delCommentOne(tgComment);
 		
 		
 		
@@ -67,6 +66,7 @@ public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(jsonObj);
 		out.close();
+		
 	}
 
 }

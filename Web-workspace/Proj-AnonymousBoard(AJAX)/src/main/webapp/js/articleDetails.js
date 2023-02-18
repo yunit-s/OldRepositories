@@ -18,7 +18,7 @@ function likeBtnFunc() {
         type: 'POST',
         dataType: 'json',
         success: function(data) {
-            // console.log('AJAX 호출 success');
+            // console.log('!! AJAX 호출 success');
 			
             $('#bLikeNumTbl').text(data.bLikeNum);
 			if (data.isLiked == false) {
@@ -30,7 +30,7 @@ function likeBtnFunc() {
         error: function() {
             console.log('!! AJAX 호출 error');
         }
-    })
+    });
 }
 
 function editCommentBtnFunc(cNum) {
@@ -53,7 +53,7 @@ function editCommentBtnFunc(cNum) {
 	
 	// 출력 버튼 변경 - 수정+삭제 -> 수정+취소
 	let editCommentCompleteBtnTags = getMakingBtnTags(
-		'editCommentCompleteBtnId' + cNum, 'editCommentCompleteBtnFunc(' + cNum + ')', '수정');
+		'editCommentCompleteBtnId' + cNum, 'editCommentCompleteBtnFunc(' + cNum + ')', '완료');
 	let editCommentCancelBtnTags = getMakingBtnTags(
 		'editCommentCancelBtnId' + cNum, 'editCommentCancelBtnFunc(' + cNum + ')', '취소');
 	$('#editCommentTdId' + cNum).empty();
@@ -82,10 +82,10 @@ function editCommentCompleteBtnFunc(cNum) {
         type: 'POST',
         dataType: 'json',
         success: function(data) {
-            // console.log('AJAX 호출 success');
+            // console.log('!! AJAX 호출 success');
 
 			if (data.result > 0) {
-				// edit에 성공했을 경우
+				// edit 성공 시
 				// 내용 칸 수정
 				$('#cContentTdId' + cNum).empty();
 				$('#cContentTdId' + cNum).append(cContent);
@@ -101,7 +101,7 @@ function editCommentCompleteBtnFunc(cNum) {
 				$('#editCommentTdId' + cNum).append(delCommentBtnTags);
 
 			} else {
-				// edit에 실패했을 경우
+				// edit 실패 시
 				// 아무 변화 없음
 			}
             
@@ -109,7 +109,7 @@ function editCommentCompleteBtnFunc(cNum) {
         error: function() {
             console.log('!! AJAX 호출 error');
         }
-    })
+    });
 }
 
 function editCommentCancelBtnFunc(cNum) {
@@ -133,7 +133,67 @@ function editCommentCancelBtnFunc(cNum) {
 
 function delCommentBtnFunc(cNum) {
 	console.log('!! articleDetails.js.delCommentBtnFunc() 실행');
+
+	$.ajax({
+		url: 'delCommentBtnClickedAJAX',
+		async: true,
+		data: {
+			cNum
+		},
+		type: 'POST',
+		dataType: 'json',
+		success: function(data) {
+            // console.log('!! AJAX 호출 success');
+
+			if (data.result > 0) {
+				// delete 성공 시
+				// 해당 row 삭제
+				$('#commentTrId' + cNum).remove();
+			} else {
+				// delete 실패 시
+				// 아무 변화 없음
+			}
+		},
+		error: function() {
+            console.log('!! AJAX 호출 error');
+		}
+	});
 }
+
+function addCommentBtnFunc() {
+	console.log('!! articleDetails.js.addCommentBtnFunc() 실행');
+	
+	let bNum = $('#bNum').val();
+	let newCommentContent = $('#addCommentInputId').val();
+	// console.log($('#addCommentInputId').val());
+
+	$.ajax({
+		url: 'addCommentBtnClickedAJAX',
+		async: true,
+		data: {
+			bNum,
+			newCommentContent
+		},
+		type: 'POST',
+		dataType: 'json',
+		success: function(data) {
+            console.log('!! AJAX 호출 success');
+			
+			if (data.result > 0) {
+				// add 성공 시
+				// commentTbodyId tbody 안에 새로운 tr 생성. 아마 append일 듯
+				
+			} else {
+				// add 실패 시
+			}
+		},
+		error: function() {
+            console.log('!! AJAX 호출 error');
+		}
+	});
+}
+
+
 
 
 
