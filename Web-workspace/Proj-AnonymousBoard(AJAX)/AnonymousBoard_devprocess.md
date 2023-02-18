@@ -88,6 +88,11 @@ pom.xml	->	dependencies 등록
 		
 	- articleDetails.jsp <br>
 		글 세부 내용 보기
+		
+
+
+* AJAX 활용으로 인해 필요 없어진 파일
+	- 댓글 관련 대부분
 
 
 
@@ -194,3 +199,11 @@ JSONArray <br>
 
 * jQuery로 동적 테이블 생성하기
 	> 참조 : <https://lnsideout.tistory.com/entry/jQuery-%EC%A0%9C%EC%9D%B4%EC%BF%BC%EB%A6%AC-%ED%85%8C%EC%9D%B4%EB%B8%94-%ED%96%89tr-%EB%8F%99%EC%A0%81-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0>
+	
+* 코드 저장 후 실제로 서버에 반영되는 것 관련
+	> eclipse에서 저장한 내용은 모두 0~10초 사이에 적용된다. 그냥 현재 페이지 갱신만 해도 적용된다.
+	다만, eclipse에서 한 번 수정하면, 브라우저의 session 정보가 무조건 날아간다.
+	최소한 login 정보는 다시 불러와야 오류가 안 생긴다.
+	그리고 Javascript 코드를 vs code로 수정하는 경우, eclipse에서 해당 .js 파일을 열어두도록 하자.
+	eclipse에서 실시간 갱신을 해줘야만 서버에 정상적으로 적용된다...
+	이거 꼬이면 eclipse를 껐다가 켜야한다.

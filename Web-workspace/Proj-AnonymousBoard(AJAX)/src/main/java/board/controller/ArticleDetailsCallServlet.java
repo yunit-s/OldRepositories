@@ -38,6 +38,8 @@ public class ArticleDetailsCallServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// input data
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 //		request.setCharacterEncoding("UTF-8");
 		int bNum = Integer.parseInt(request.getParameter("bNum"));
 		
@@ -56,8 +58,6 @@ public class ArticleDetailsCallServlet extends HttpServlet {
 		List<Comment> cList = cService.getCommentAll(tgBoard.getBoardNum());
 		
 		// like 정보
-		HttpSession session = request.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
 		boolean isLiked = bService.isLiked(tgBoard.getBoardNum(), loginMember.getMemberId());
 		
 		

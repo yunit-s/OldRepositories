@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.service.BoardService;
 import board.vo.Board;
 import comment.service.CommentService;
 import comment.vo.Comment;
+import member.vo.Member;
 
 /**
  * Servlet implementation class EditArticleResultServlet
@@ -43,6 +45,8 @@ public class EditArticleResultServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// input data
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		request.setCharacterEncoding("UTF-8");
 		int bNum = Integer.parseInt(request.getParameter("bNum"));
 		String bTitle = request.getParameter("bTitle");
@@ -65,11 +69,15 @@ public class EditArticleResultServlet extends HttpServlet {
 		CommentService cService = new CommentService();
 		List<Comment> cList = cService.getCommentAll(tgBoard.getBoardNum());
 		
+		// like 정보
+		boolean isLiked = bService.isLiked(tgBoard.getBoardNum(), loginMember.getMemberId());
+		
 		
 		
 		// switch page
 		request.setAttribute("tgBoard", tgBoard);
 		request.setAttribute("cList", cList);
+		request.setAttribute("isLiked", isLiked);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		dispatcher.forward(request, response);
 		
