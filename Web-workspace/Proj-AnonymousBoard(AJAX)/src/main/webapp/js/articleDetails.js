@@ -2,6 +2,7 @@
  * 
  */
 
+// event functions
 function likeBtnFunc() {
 	console.log('!! articleDetails.js.likeBtnFunc() 실행');
 	
@@ -18,7 +19,7 @@ function likeBtnFunc() {
         dataType: 'json',
         success: function(data) {
             // console.log('AJAX 호출 success');
-            // console.log(data);
+			
             $('#bLikeNumTbl').text(data.bLikeNum);
 			if (data.isLiked == false) {
 				$('#likeBtnId').text(noliked);
@@ -27,7 +28,7 @@ function likeBtnFunc() {
 			}
         },
         error: function() {
-            // console.log('AJAX 호출 error');
+            console.log('!! AJAX 호출 error');
         }
     })
 }
@@ -36,8 +37,10 @@ function editCommentBtnFunc(cNum) {
 	console.log('!! articleDetails.js.editCommentBtnFunc() 실행');
 	
 	// 댓글 내용 칸을 <input> 으로 변경
+	// 기존 댓글 내용은 hidden으로 가지고 있을 것
 	let cContentTdText = $('#cContentTdId' + cNum).text();
 	let cContentTagsStr = "";
+	cContentTagsStr += '<input type="hidden" id="cContentPrev' + cNum + '" value="' + cContentTdText + '">';
 	cContentTagsStr += '<input ';
 	cContentTagsStr += 'type="text" ';
 	cContentTagsStr += 'id="cContentInputId' + cNum + '" ';
@@ -48,56 +51,103 @@ function editCommentBtnFunc(cNum) {
 	$('#cContentTdId' + cNum).append(cContentTags);
 	
 	
-	// 수정, 삭제 버튼 대신에 수정완료 버튼 출력
-	let editCommentBtnTagsStr = "";
-	editCommentBtnTagsStr += '<button ';
-	editCommentBtnTagsStr += 'id="editCommentBtnId" ';
-	editCommentBtnTagsStr += 'onclick="editCommentCompleteBtnFunc(' + cNum + ')">';
-	editCommentBtnTagsStr += '수정완료';
-	editCommentBtnTagsStr += '</button>';
-	let editBtnTags = [];
-	editBtnTags.push(editCommentBtnTagsStr);
+	// 출력 버튼 변경 - 수정+삭제 -> 수정+취소
+	let editCommentCompleteBtnTags = getMakingBtnTags(
+		'editCommentCompleteBtnId' + cNum, 'editCommentCompleteBtnFunc(' + cNum + ')', '수정');
+	let editCommentCancelBtnTags = getMakingBtnTags(
+		'editCommentCancelBtnId' + cNum, 'editCommentCancelBtnFunc(' + cNum + ')', '취소');
 	$('#editCommentTdId' + cNum).empty();
-	$('#editCommentTdId' + cNum).append(editBtnTags);
-	
-	// .text() 로는 태그를 넣어도 HTML 코드로 인식되지 않는다.
-	// $('#editCommentTdId').text(tags);
+	$('#editCommentTdId' + cNum).append(editCommentCompleteBtnTags);
+	$('#editCommentTdId' + cNum).append(' ');
+	$('#editCommentTdId' + cNum).append(editCommentCancelBtnTags);
 }
 
 function editCommentCompleteBtnFunc(cNum) {
 	console.log('!! articleDetails.js.editCommentCompleteBtnFunc() 실행');
 	
 	// 입력한 내용을 AJAX로 데이터 전달
-	let cAuthor = $('#cAuthorTdId' + cNum).text();
+	let cAuthor = $('#cAuthorTdId' + cNum).text(); // 필요한 정보는 아님
 	let cContent = $('#cContentInputId' + cNum).val();
-	let cDate = $('#cDateTdId' + cNum).text();
-
-	console.log(cNum, cAuthor, cContent, cDate);
-	// console.log($('#cContentInputId' + cNum).val());
+	let cDate = $('#cDateTdId' + cNum).text(); // 필요한 정보는 아님
 
 	$.ajax({
         url: 'editCommentCompleteBtnClickedAJAX',
         async: true,
         data: {
             cNum,
-			cAuthor,
+			cAuthor, // 필요한 정보는 아님
 			cContent,
-			cDate
+			cDate // 필요한 정보는 아님
         },
         type: 'POST',
         dataType: 'json',
         success: function(data) {
-            console.log('AJAX 호출 success');
-            console.log(data);
-            // $('#bLikeNumTbl').text(data.bLikeNum);
-			// if (data.isLiked == false) {
-			// 	$('#likeBtnId').text(noliked);
-			// } else {
-			// 	$('#likeBtnId').text(liked);
-			// }
+            // console.log('AJAX 호출 success');
+
+			if (data.result > 0) {
+				// edit에 성공했을 경우
+				// 내용 칸 수정
+				$('#cContentTdId' + cNum).empty();
+				$('#cContentTdId' + cNum).append(cContent);
+
+				// 출력 버튼 변경 - 수정+취소 -> 수정+삭제
+				let editCommentBtnTags = getMakingBtnTags(
+					'editCommentBtnId' + cNum, 'editCommentBtnFunc(' + cNum + ')', '수정');
+				let delCommentBtnTags = getMakingBtnTags(
+					'delCommentBtnId' + cNum, 'delCommentBtnFunc(' + cNum + ')', '삭제');
+				$('#editCommentTdId' + cNum).empty();
+				$('#editCommentTdId' + cNum).append(editCommentBtnTags);
+				$('#editCommentTdId' + cNum).append(' ');
+				$('#editCommentTdId' + cNum).append(delCommentBtnTags);
+
+			} else {
+				// edit에 실패했을 경우
+				// 아무 변화 없음
+			}
+            
         },
         error: function() {
-            console.log('AJAX 호출 error');
+            console.log('!! AJAX 호출 error');
         }
     })
+}
+
+function editCommentCancelBtnFunc(cNum) {
+	console.log('!! articleDetails.js.editCommentCancelBtnFunc() 실행');
+
+	// 내용 칸 되돌리기
+	let cContentPrev = $('#cContentPrev'+ cNum).val();
+	$('#cContentTdId' + cNum).empty();
+	$('#cContentTdId' + cNum).append(cContentPrev);
+
+	// 출력 버튼 변경 - 수정+취소 -> 수정+삭제
+	let editCommentBtnTags = getMakingBtnTags(
+		'editCommentBtnId' + cNum, 'editCommentBtnFunc(' + cNum + ')', '수정');
+	let delCommentBtnTags = getMakingBtnTags(
+		'delCommentBtnId' + cNum, 'delCommentBtnFunc(' + cNum + ')', '삭제');
+	$('#editCommentTdId' + cNum).empty();
+	$('#editCommentTdId' + cNum).append(editCommentBtnTags);
+	$('#editCommentTdId' + cNum).append(' ');
+	$('#editCommentTdId' + cNum).append(delCommentBtnTags);
+}
+
+function delCommentBtnFunc(cNum) {
+	console.log('!! articleDetails.js.delCommentBtnFunc() 실행');
+}
+
+
+
+// general functions
+function getMakingBtnTags(id, eventFunc, content) {
+	// .text() 로는 태그 문자열을 넣어도 HTML 코드로 인식되지 않는다.
+	// jQuery로는 .jsp에서 <%= %> 표현식 적용 안 됨
+	let makingBtnTagsStr = "";
+	makingBtnTagsStr += '<button ';
+	makingBtnTagsStr += 'id="' + id + '" ';
+	makingBtnTagsStr += 'onclick="' + eventFunc + '">';
+	makingBtnTagsStr += content;
+	makingBtnTagsStr += '</button>';
+	let makingBtnTags = [];
+	makingBtnTags.push(makingBtnTagsStr);
+	return makingBtnTags;
 }

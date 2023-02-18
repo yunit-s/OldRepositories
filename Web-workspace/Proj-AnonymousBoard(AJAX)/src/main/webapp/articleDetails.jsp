@@ -154,6 +154,7 @@
 					<td id="<%= "editCommentTdId" + cNum %>" style="text-align: center">
 						<!-- AJAX를 활용한 댓글 수정 -->
 						<button id="<%= "editCommentBtnId" + cNum %>" onclick="editCommentBtnFunc(<%= cNum %>)">수정</button>
+						<button id="<%= "delCommentBtnId" + cNum %>" onclick="delCommentBtnFunc(<%= cNum %>)">삭제</button>
 						
 						<!-- AJAX 없이 구현한 댓글 수정 -->
 						<!--

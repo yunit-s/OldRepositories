@@ -87,6 +87,7 @@ SHOW TABLE STATUS;
 DESC comments;
 SHOW FULL COLUMNS FROM comments;
 SELECT * FROM information_schema.table_constraints WHERE TABLE_NAME = 'comments';
+SELECT * FROM information_schema.table_constraints WHERE TABLE_NAME = 'likes';
 	# comments 테이블의 제약사항들 출력하기.
     # primary key와 foreign key에 관련된 정보를 볼 수 있다.
 
@@ -153,3 +154,5 @@ INSERT INTO likes(likeNum, likeArticleNum, likeMemberId) values(5, 3, 'son');
 
 select * from likes;
 select likeArticleNum, count(likeArticleNum) as likeCount from likes group by likeArticleNum;
+
+select * from boards;

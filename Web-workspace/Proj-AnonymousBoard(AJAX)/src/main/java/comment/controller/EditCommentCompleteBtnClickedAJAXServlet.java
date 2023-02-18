@@ -8,14 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import board.service.BoardService;
-import board.vo.Board;
-import like.vo.Like;
-import member.vo.Member;
+import comment.service.CommentService;
+import comment.vo.Comment;
 
 /**
  * Servlet implementation class EditCommentCompleteBtnClickedAJAXServlet
@@ -46,11 +43,25 @@ public class EditCommentCompleteBtnClickedAJAXServlet extends HttpServlet {
 
 		// input data
 		request.setCharacterEncoding("UTF-8");
+		int cNum = Integer.parseInt(request.getParameter("cNum"));
+//		String cAuthor = request.getParameter("cAuthor");
+		String cContent = request.getParameter("cContent");
+//		String cDate = request.getParameter("cDate");
+		
+		
+		
+		// process
+		Comment tgComment = new Comment();
+		tgComment.setCommentNum(cNum);
+		tgComment.setCommentContent(cContent);
+		CommentService cService = new CommentService();
+		int result = cService.editComment(tgComment);
+		
 		
 		
 		// output data
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("bLikeNum", 101010);
+		jsonObj.put("result", 1);
 		
 		response.setContentType("text/json; charset=utf-8"); // MIME type
 		PrintWriter out = response.getWriter();
