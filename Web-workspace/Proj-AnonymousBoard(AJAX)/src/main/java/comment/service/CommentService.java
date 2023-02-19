@@ -28,6 +28,15 @@ public class CommentService {
 		return rsComment;
 	}
 
+	public Comment getCommentNewOne(Comment newComment) {
+		System.out.println("!! CommentService.getCommentNewOne() 실행");
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		CommentDAO cDao = new CommentDAO(sqlSession);
+		Comment rsComment = cDao.selectNewOne(newComment);
+		sqlSession.close();
+		return rsComment;
+	}
+
 	public int addComment(Comment newComment) {
 		System.out.println("!! CommentService.addComment() 실행");
 		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();

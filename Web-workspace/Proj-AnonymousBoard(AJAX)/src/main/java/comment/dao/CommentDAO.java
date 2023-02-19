@@ -30,6 +30,12 @@ public class CommentDAO {
 		Comment rsComment = sqlSession.selectOne("commentXml.selectOne", commentNum);
 		return rsComment;
 	}
+
+	public Comment selectNewOne(Comment newComment) {
+		System.out.println("!! CommentDAO.selectNewOne() 실행");
+		Comment rsComment = sqlSession.selectOne("commentXml.selectNewOne", newComment);
+		return rsComment;
+	}
 	
 	public int insert(Comment newComment) {
 		System.out.println("!! CommentDAO.insert() 실행");

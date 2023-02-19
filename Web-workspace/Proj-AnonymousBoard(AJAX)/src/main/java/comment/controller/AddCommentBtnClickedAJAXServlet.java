@@ -54,6 +54,7 @@ public class AddCommentBtnClickedAJAXServlet extends HttpServlet {
 		int cArticleNum = Integer.parseInt(request.getParameter("bNum"));
 		String cAuthor = loginMember.getMemberId();
 		String cContent = request.getParameter("newCommentContent");
+		System.out.println("@@@ 1");
 		
 		
 		
@@ -63,14 +64,20 @@ public class AddCommentBtnClickedAJAXServlet extends HttpServlet {
 		newComment.setCommentAuthor(cAuthor);
 		newComment.setCommentContent(cContent);
 		CommentService cService = new CommentService();
-//		int result = cService.addComment(newComment);
-		int result = 1;
+		int result = cService.addComment(newComment);
+		newComment = cService.getCommentNewOne(newComment);
+//		int result = 1;
+		System.out.println("@@@ 2 : " + newComment.getCommentContent() + newComment.getCommentDate());
 		
 		
 		
 		// output data
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("result", result);
+		jsonObj.put("cNum", newComment.getCommentNum());
+		jsonObj.put("cArticleNum", newComment.getCommentArticleNum());
+		jsonObj.put("cAuthor", newComment.getCommentAuthor());
+		jsonObj.put("cContent", newComment.getCommentContent());
+		jsonObj.put("cDate", newComment.getCommentDate());
 		
 		response.setContentType("text/json; charset=utf-8"); // MIME type
 		PrintWriter out = response.getWriter();

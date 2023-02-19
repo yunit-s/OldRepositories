@@ -96,6 +96,10 @@
 				<td></td>
 				<td style="text-align: right; align: right">
 					<button id="likeBtnId" onclick="likeBtnFunc()" style="float: left; width: 150px"><%= likeBtnText %></button>
+					<%
+					// 자신이 작성한 글인 경우에만 수정, 삭제 버튼 출력
+					if (bAuthor.equals(loginMember.getMemberId())) {
+					%>
 					<form action="editArticleCall" method="post" style="display: inline">
 						<input type="hidden" name="bNum" value="<%= bNum %>">
 						<button type="submit">글 수정</button>
@@ -104,6 +108,9 @@
 						<input type="hidden" name="bNum" value="<%= bNum %>">
 						<button type="submit">글 삭제</button>
 					</form>
+					<%
+					}
+					%>
 				</td>
 			</tr>
 		</table>
@@ -116,23 +123,7 @@
 			<h3>댓글</h3>
 		</div>
 		
-		<!-- 댓글 입력(form 태그) -->
-		<form action="newCommentCall" method="post" style="text-align: center">
-			<input type="hidden" name="cArticleNum" value="<%= bNum %>">
-			<div style="text-align: center">댓글 입력</div>
-			<table style="margin-left: auto; margin-right: auto">
-				<tr>
-					<td style="width: 80px">
-						<input type="text" name="cAuthor" style="border: 0; width: 80px" value="<%= loginMember.getMemberId() %>">
-					</td>
-					<td><input type="text" name="cContent" style="width: 250px"></td>
-					<td><button type="submit">댓글 입력</button></td>
-				</tr>
-			</table>
-		</form>
-		
-		<!-- 댓글 입력(AJAX) -->
-		<br><br><br>
+		<!-- 댓글 입력 -->
 		<div>
 			<input type="hidden" name="cArticleNum" value="<%= bNum %>">
 			<div style="text-align: center">댓글 입력</div>
@@ -172,23 +163,15 @@
 					<td id="<%= "cContentTdId" + cNum %>"><%= cContent %></td>
 					<td id="<%= "cDateTdId" + cNum %>" style="text-align: center"><%= cDate %></td>
 					<td id="<%= "editCommentTdId" + cNum %>" style="text-align: center">
-						<!-- AJAX를 활용한 댓글 수정 -->
+						<%
+						// 자신이 작성한 댓글인 경우에만 수정, 삭제 버튼 출력
+						if (cAuthor.equals(loginMember.getMemberId())) {
+						%>
 						<button id="<%= "editCommentBtnId" + cNum %>" onclick="editCommentBtnFunc(<%= cNum %>)">수정</button>
 						<button id="<%= "delCommentBtnId" + cNum %>" onclick="delCommentBtnFunc(<%= cNum %>)">삭제</button>
-						
-						<!-- AJAX 없이 구현한 댓글 수정 -->
-						<!--
-						<form action="editCommentCall" method="post" style="display: inline">
-							<input type="hidden" name="bNum" value="<%= bNum %>">
-							<input type="hidden" name="cNum" value="<%= cNum %>">
-							<button type="submit">수정</button>
-						</form>
-						<form action="delCommentCall" method="post" style="display: inline">
-							<input type="hidden" name="bNum" value="<%= bNum %>">
-							<input type="hidden" name="cNum" value="<%= cNum %>">
-							<button type="submit">삭제</button>
-						</form>
-						-->
+						<%
+						}
+						%>
 					</td>
 				</tr>
 				<%

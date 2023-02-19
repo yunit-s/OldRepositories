@@ -28,7 +28,7 @@ function likeBtnFunc() {
 			}
         },
         error: function() {
-            console.log('!! AJAX 호출 error');
+            console.log('!! AJAX 호출 error - likeBtnFunc()');
         }
     });
 }
@@ -107,7 +107,7 @@ function editCommentCompleteBtnFunc(cNum) {
             
         },
         error: function() {
-            console.log('!! AJAX 호출 error');
+            console.log('!! AJAX 호출 error - editCommentCompleteBtnFunc()');
         }
     });
 }
@@ -155,7 +155,7 @@ function delCommentBtnFunc(cNum) {
 			}
 		},
 		error: function() {
-            console.log('!! AJAX 호출 error');
+            console.log('!! AJAX 호출 error - delCommentBtnFunc()');
 		}
 	});
 }
@@ -165,7 +165,6 @@ function addCommentBtnFunc() {
 	
 	let bNum = $('#bNum').val();
 	let newCommentContent = $('#addCommentInputId').val();
-	// console.log($('#addCommentInputId').val());
 
 	$.ajax({
 		url: 'addCommentBtnClickedAJAX',
@@ -177,18 +176,12 @@ function addCommentBtnFunc() {
 		type: 'POST',
 		dataType: 'json',
 		success: function(data) {
-            console.log('!! AJAX 호출 success');
-			
-			if (data.result > 0) {
-				// add 성공 시
-				// commentTbodyId tbody 안에 새로운 tr 생성. 아마 append일 듯
-				
-			} else {
-				// add 실패 시
-			}
+            // console.log('!! AJAX 호출 success');
+
+			$('#commentTbodyId').append(getMakingCommentRowTags(data.cNum, data.cAuthor, data.cContent, data.cDate));
 		},
 		error: function() {
-            console.log('!! AJAX 호출 error');
+            console.log('!! AJAX 호출 error - addCommentBtnFunc()');
 		}
 	});
 }
@@ -210,4 +203,20 @@ function getMakingBtnTags(id, eventFunc, content) {
 	let makingBtnTags = [];
 	makingBtnTags.push(makingBtnTagsStr);
 	return makingBtnTags;
+}
+
+function getMakingCommentRowTags(cNum, cAuthor, cContent, cDate) {
+	let makingCommentRowTagsStr = "";
+	makingCommentRowTagsStr += '<tr id="commentTrId' + cNum + '">';
+	makingCommentRowTagsStr += '<td id="cAuthorTdId' + cNum + '">' + cAuthor + '</td>';
+	makingCommentRowTagsStr += '<td id="cContentTdId' + cNum + '">' + cContent + '</td>';
+	makingCommentRowTagsStr += '<td id="cDateTdId' + cNum + '" style="text-align: center">' + cDate + '</td>';
+	makingCommentRowTagsStr += '<td id="editCommentTdId' + cNum + '" style="text-align: center">';
+	makingCommentRowTagsStr += getMakingBtnTags('editCommentBtnId' + cNum, 'editCommentBtnFunc(' + cNum + ')', '수정');
+	makingCommentRowTagsStr += ' ';
+	makingCommentRowTagsStr += getMakingBtnTags('delCommentBtnId' + cNum, 'delCommentBtnFunc(' + cNum + ')', '삭제');
+	makingCommentRowTagsStr += '</td></tr>';
+	let makingCommentRowTags = [];
+	makingCommentRowTags.push(makingCommentRowTagsStr);
+	return makingCommentRowTags;
 }
