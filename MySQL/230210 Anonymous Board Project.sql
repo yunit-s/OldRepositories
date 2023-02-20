@@ -45,6 +45,7 @@ CREATE TABLE boards (
 # 테이블 수정
 desc boards; # 테이블 정보 보기
 ALTER TABLE boards CHANGE COLUMN boardLikeNum boardLikeNum INTEGER DEFAULT 0; # 테이블 컬럼 수정(이름, 데이터타입, 속성)
+ALTER TABLE boards ADD COLUMN boardLikeNum INTEGER DEFAULT 0;
 
 # 데이터 추가
 # INSERT INTO boards(boardTitle, boardAuthor, boardContent) values('플스 팔아요!', 'seo', '싸게 팔아요.. 네고 사절!'); # 나머지 colomn 데이터는 알아서 들어간다.
