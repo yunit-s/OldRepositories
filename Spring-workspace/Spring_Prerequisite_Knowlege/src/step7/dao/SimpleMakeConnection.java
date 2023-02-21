@@ -7,6 +7,8 @@ public class SimpleMakeConnection implements ConnectionMaker {
 
 	@Override
 	public Connection getConnection() throws Exception {
+		System.out.println("!! SimpleMakeConnection.getConnection() 실행");
+		
 		// 1. Driver Loading
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+	scope
+		default값인 singleton 사용하자.
+		거의 대부분 singleton으로 사용된다. 명시할 필요 없음. 
+	-->
+	<bean id="foo0" class="springioc.sample2.Foo"></bean>
+	
+	<bean id="foo1" class="springioc.sample2.Foo">
+		<constructor-arg value="foo1 value" />
+	</bean>
+	
+	<bean id="foo2" class="springioc.sample2.Foo">
+		<constructor-arg index="0" type="java.lang.String" value="foo2 value" />
+		<constructor-arg index="1" type="int" value="1000" />
+	</bean>
+	
+	<bean id="myBar" class="springioc.sample2.Bar"></bean>
+	
+	<bean id="foo3" class="springioc.sample2.Foo">
+		<constructor-arg ref="myBar"></constructor-arg>
+	</bean>
+
+</beans>

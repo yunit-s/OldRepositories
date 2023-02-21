@@ -1,6 +1,5 @@
 package step4;
 
-import step4.dao.NUserDao;
 import step4.dao.UserDao;
 import step4.vo.User;
 

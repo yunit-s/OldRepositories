@@ -17,15 +17,15 @@ public class UserDao {
 	// Injection 이 발생했다.
 	// Injection은 생성자를 통한 주입이 있고, setter를 통한 주입이 있다.
 	//		spring에서는 setter를 통한 주입을 좀 더 선호한다.
-	public UserDao() {
-		// TODO Auto-generated constructor stub
-	}
 	public UserDao(ConnectionMaker connectionMaker) {
 		super();
 		this.connectionMaker = connectionMaker;
+		
+		System.out.println("!! UserDao 생성자 실행");
 	}
 	
 	public void insert(User user) throws Exception {
+		System.out.println("!!! UserDao.insert() 실행");
 		
 		// pure JDBC를 이용해서 Database처리를 해 보아요!
 		// 6단계로 처리를 해요!
@@ -53,6 +53,8 @@ public class UserDao {
 	}
 	
 	public User select(String userId) throws Exception {
+		System.out.println("!!! UserDao.select() 실행");
+		
 		// pure JDBC를 이용해서 Database처리를 해 보아요!
 		// 6단계로 처리를 해요!
 		

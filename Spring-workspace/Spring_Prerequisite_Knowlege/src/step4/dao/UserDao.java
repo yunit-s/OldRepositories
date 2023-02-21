@@ -1,17 +1,16 @@
 package step4.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import step3.vo.User;
+import step4.vo.User;
 
 
 // Database처리하는 코드
 // 2개의 method를 작성할꺼예요!
 // 사용자 입력, 조회
-public abstract class UserDao {
+public class UserDao {
 
 	SimpleMakeConnection simpleMakeConnection;
 	

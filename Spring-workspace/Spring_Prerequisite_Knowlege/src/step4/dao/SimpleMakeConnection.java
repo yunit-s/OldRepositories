@@ -12,7 +12,7 @@ public class SimpleMakeConnection {
 		// 2. 연결해보자.
 		String jdbcUrl = "jdbc:mysql://127.0.0.1:3306/spring?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
 		String id = "root";
-		String pw = "test1234";
+		String pw = "qwer1234";
 		
 		Connection con = DriverManager.getConnection(jdbcUrl, id, pw);
 		return con;

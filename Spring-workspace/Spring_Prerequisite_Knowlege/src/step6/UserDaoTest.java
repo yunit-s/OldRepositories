@@ -19,6 +19,9 @@ public class UserDaoTest {
 		
 		// 2. DAO 생성
 		UserDao dao = new UserDao(connectionMaker);
+			// connectionMaker를 내가 직접 SimpleMakeConnection을 호출해서 만든다.
+			// 그리고 그 커넥션 메이커를 직접 dao에 넘겨준다.
+			// 이 과정을 우리가 직접 하는 방식이 step6다.
 		
 		// 3. 사용자 입력
 		dao.insert(user);
