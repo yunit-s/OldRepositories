@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 수동 설정 방식 -->
+	<!--
+	<bean id="myObj" class="springioc.sample8.TestBean"
+		<property name="data1" ref="data1" />
+		<property name="data2" ref="data2" />
+	</bean>
+	-->
+	
+	<!--
+	자동 주입(Auto wiring) 방식
+		byType 활용
+		동일한 타입의 bean이 2개가 있다. 어떤 bean을 가져오게 될까?
+			-> 그냥 오류난다.
+		primary 속성
+			-> 동일한 타입의 bean이 여러 개인 경우, 기본이 되는 bean 설정하기
+	-->
+	<bean id="myObjAuto" class="springioc.sample9.TestBean" autowire="byType" />
+	<bean id="data11" class="springioc.sample9.DataBean" primary="true" />
+	<bean id="data22" class="springioc.sample9.DataBean" />
+	<!--
+	<bean id="data2" class="springioc.sample9.DataBean" />
+ 	-->
+
+</beans>

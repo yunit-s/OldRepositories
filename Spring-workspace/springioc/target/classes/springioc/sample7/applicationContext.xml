@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="developer" class="springioc.sample7.Developer">
+		<constructor-arg index="0" value="홍길동" />
+		<constructor-arg index="1" type="int" value="5000" />
+		<constructor-arg index="2" value="개발 1팀" />
+	</bean>
+	
+	<!--
+	스키마를 사용하는 방식을 더 많이 활용하자
+	-->
+	<bean id="emp" class="springioc.sample7.Emp" c:name="신사임당" c:salary="2000" />
+	<bean id="engineer" class="springioc.sample7.Engineer" c:emp-ref="emp" c:dept="기술 1팀" />
+	
+	<!-- 
+	auto wiring
+		세세하게 쓰면 좋겠지만, 이게 너무 많아지면 분명 실수할 수가 있겠지?
+		디버깅하기 힘들겠지?
+		어떻게 하면 더 편하게, 타이핑 줄이면서 자동으로 주입할 수 있을까?
+		그래서 나온게 자동 주입. auto wiring 속성.
+	-->
+
+</beans>

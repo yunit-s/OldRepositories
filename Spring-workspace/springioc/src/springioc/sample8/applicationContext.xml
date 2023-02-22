@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 수동 설정 방식 -->
+	<!--
+	<bean id="myObj" class="springioc.sample8.TestBean"
+		<property name="data1" ref="data1" />
+		<property name="data2" ref="data2" />
+	</bean>
+	-->
+	
+	<!--
+	자동 주입(Auto wiring) 방식
+		byName 활용
+	-->
+	<bean id="myObjAuto" class="springioc.sample8.TestBean" autowire="byName" />
+	<bean id="data1" class="springioc.sample8.DataBean" />
+	<bean id="data2" class="springioc.sample8.DataBean" />
+
+</beans>

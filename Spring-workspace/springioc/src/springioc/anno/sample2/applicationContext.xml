@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="springioc.anno.sample2" />
+	<bean id="emp1" class="springioc.anno.sample2.Emp" p:name="홍길동" p:age="20" />
+		<!--
+		id가 emp가 아니라 달라도, 연결이 잘 됐다.
+		-->
+	
+	<!--
+	일반 메소드에 매칭해야하는 bean
+		parameter 이름과 자료형을 중요하게 체크하자.
+	-->
+	<bean id="dept" class="java.lang.String" c:_0="개발 1팀" />
+		<!--
+		c:_0
+			constructor의 첫 번째 인자를 가리킨다.
+		-->
+
+</beans>
