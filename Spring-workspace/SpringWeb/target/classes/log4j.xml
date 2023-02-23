@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<!--
+	<appender>
+		log의 출력 위치를 지정한다.
+		appender의 클래스가 달라지면, 출력 방향이 아예 달라진다.
+		(console 출력, file 출력, DB 출력)
+			ConsoleAppender
+				console 출력
+			FileAppender
+				file 출력
+			RollingFileAppender
+				file 하나의 용량을 제한걸어서 file에 출력한다.
+			DailyRollingAppender
+				날짜별로 file을 나누어 출력한다.
+		org.apache.log4j.ConsoleAppender : 정해져있는, 이미 존재하는 java클래스
+		
+	<layout>
+		log의 출력 형태를 지정
+		class
+			
+		param name
+			
+		param value
+			log의 출력 형식을 설정한다. 가장 많이 쓰이는 방식이라서 이걸 사용한다.
+			%p
+				log level 출력
+			%m
+				log message 출력
+			%d
+				log 발생 시간 출력(yyyy-mm-dd hh:mm:ss)
+			%c
+				어떤 파일에서 발생했는지 출력
+			
+	-->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- Application Loggers -->
+	<!--
+	logger
+		메시지를 appender에 전달하는 역할
+		log의 출력 level에 따라서 출력 여부를 결정한다. (6단계로 구성되어 있음)
+		level value="info"
+			info 이상의  레벨만 볼 수 있다.
+			DEBUG, TRACE는 안 찍힌다.
+			
+	log level (6단계)
+		FATAL (6단계. 제일 높은 단계)
+			가장 높은 level. system에 심각한 문제가 있다. 이거는 log가 의미가 없어서 안 쓴다.
+		ERROR
+			실행 중 Error가 발생한 경우
+		WARN
+			오류의 원인이 될 수 있은 메시지 출력
+		INFO
+			application 운영
+			개발자가 운영을 위해 직접 찍는다.
+			운영 레벨
+		DEBUG
+			개발에 디버깅 용도
+			sysout 대신 사용하는 레벨
+		TRACE
+			DEBUG의 상세 버전
+	-->
+	<logger name="my.spring.SpringWeb">
+		<level value="debug" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<!-- Root Logger -->
+	<!--
+		디폴트 log 레벨 설정.
+		logger에서 더 낮은 레벨을 설정해두면, 그걸 더 우선적으로 적용시킨다. 
+	-->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>
