@@ -26,6 +26,7 @@ public class HomeController {
 	 */
 	// annotation을 이용해서 설정을 변경할 수 있다.
 	// GET 방식으로 타고 들어오면, home.jsp 로 빠져나가게 된다.
+	// 접속 URL : http://localhost:8080/SpringWeb/
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -39,11 +40,12 @@ public class HomeController {
 			// model을 따로 forwarding하지 않는다. 단지 저장만 해두면, jsp가 알아서 데이터를 가져가게 된다.
 		
 		request.setAttribute("attr_key", "attr_value");
-		logger.debug("debug 로그 출력  - 지역 : {}, 시간 : {}.", locale, formattedDate);
+		logger.debug("HomeController.home() 실행");
 		
 		return "home";
 	}
 	
+//	// POST 방식으로 선언하는 방법
 //	@RequestMapping(value = "/", method = RequestMethod.POST)
 //	public String homePost(Locale locale, Model model) {
 //		logger.info("Welcome home! The client locale is {}.", locale);

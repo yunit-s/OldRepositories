@@ -34,12 +34,13 @@
 				log 발생 시간 출력(yyyy-mm-dd hh:mm:ss)
 			%c
 				어떤 파일에서 발생했는지 출력
-			
+			%n
+				줄바꿈인 듯?
 	-->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+			<param name="ConversionPattern" value="%-5p: %c - %m, time:%d%n" />
 		</layout>
 	</appender>
 	
@@ -69,11 +70,18 @@
 		TRACE
 			DEBUG의 상세 버전
 	-->
+	
+	<!--
+	우리가 만든 application 에 대한 설정
+	-->
 	<logger name="my.spring.SpringWeb">
 		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
+	<!--
+	Spring 자체와 관련된 log들 출력 설정
+	-->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
