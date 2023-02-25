@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,7 +21,7 @@ public class TestController08 {
 
 	@PostMapping("useEL")
 	public String myMethod(Model model) {
-		logger.debug("testController08.useEL 호출");
+		logger.debug("TestController08/useEL (@PostMapping) 호출");
 		
 		model.addAttribute("myName", "홍길동");
 		model.addAttribute("myAge", 20);
@@ -35,4 +36,12 @@ public class TestController08 {
 		
 		return "sample01/testController08";
 	}
+
+	@GetMapping("useELGet")
+	public String myMethodGet() {
+		logger.debug("TestController08/useELGet (@GetMapping) 호출");
+		
+		return "sample01/testController08";
+	}
+
 }
