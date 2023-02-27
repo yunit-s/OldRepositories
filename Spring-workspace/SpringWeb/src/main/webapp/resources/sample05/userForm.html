@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>@ModelAttribute 활용 - Command 객체</h1>
+	<div>resources/sample05/userForm.html 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample05/userForm.html</div>
+	<div>url 직접 접근</div>
+	
+	<!--
+	input 의 name 이 User vo의 필드명과 동일해야 한다.
+	-->
+	<h3>학생 정보를 입력하세요!</h3>
+	<form action="/SpringWeb/modelAttributes2" method="post">
+		<div>학번 : <input type="number" name="userNumber"></div>
+		<div>이름 : <input type="text" name="userName"></div>
+		<div>학과 : <input type="text" name="userDept"></div>
+		<input type="submit" value="서버로 전송!">
+	</form>
+	<div>Command 객체란? : html에서 데이터 전송해서 만들어진 vo 객체. 즉, 클라이언트가 보내준 데이터로 만들어진 객체</div>
+	<div>여기서 Controller에 넘기는 데이터가 </div>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 package my.spring.SpringWeb.sample02;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +13,11 @@ import my.spring.SpringWeb.sample02.vo.User;
 @RequestMapping(value="userCtr01")
 public class UserController01 {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserController01.class);
+//	private static final Logger logger = LoggerFactory.getLogger(UserController01.class);
 	
 	@GetMapping(value="callByGet")
 	public ModelAndView callByGetMethod() {
-		logger.debug("userCtr01/callByGet (@GetMapping) 호출");
+//		logger.debug("userCtr01/callByGet (@GetMapping) 호출");
 		
 		ModelAndView mav = new ModelAndView();
 		

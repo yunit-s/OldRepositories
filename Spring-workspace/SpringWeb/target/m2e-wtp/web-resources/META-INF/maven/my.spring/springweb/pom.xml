@@ -18,7 +18,9 @@
 		<org.aspectj-version>1.9.9.1</org.aspectj-version>
 		
 		<!-- Log4j 1버전? -->
+		<!--
 		<org.slf4j-version>1.7.36</org.slf4j-version>
+		-->
 		
 		<log4j2.version>2.17.1</log4j2.version>
 	</properties>
@@ -52,6 +54,7 @@
 		
 		<!-- Logging -->
 		<!-- log4j 1점대 버전 -->
+		<!--
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -69,6 +72,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		-->
 		
 		<!--
 		이 아래 내용들 삭제하자.
@@ -204,6 +208,7 @@
 			<artifactId>log4j-web</artifactId>
 			<version>${log4j2.version}</version>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

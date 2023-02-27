@@ -1,7 +1,7 @@
 package my.spring.SpringWeb.sample01;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/testController02")
 public class TestController02 {
 
-	private static final Logger logger = LoggerFactory.getLogger(TestController02.class);
+//	private static final Logger logger = LoggerFactory.getLogger(TestController02.class);
 	
 	@RequestMapping("/info")
 		// 계층구조로써, 이 메소드는 /testController02/info 로 접근해야 한다.
 	String myMethod1() {
-		logger.debug("/testController02/info 호출");
+//		logger.debug("/testController02/info 호출");
 		return "sample01/testController02";
 	}
 	
 	@RequestMapping("/profile")
 	String myMethod2() {
-		logger.debug("/testController02/profile 호출");
+//		logger.debug("/testController02/profile 호출");
 		return "sample01/testController02";
 	}
 	
@@ -38,7 +38,7 @@ public class TestController02 {
 	//		http://localhost:8080/SpringWeb/testController02/test03
 	@RequestMapping(value= {"", "/test01", "test02", "test03/*"})
 	String myMethod3() {
-		logger.debug("/testController02/ 멀티 호출");
+//		logger.debug("/testController02/ 멀티 호출");
 		return "sample01/testController02";
 	}
 }

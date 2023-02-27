@@ -11,10 +11,11 @@
 <body>
 
 	<h1>JSTL과 Controller 활용하는 예제</h1>
-	<div>.jsp 화면</div>
+	<div>memberView.jsp 화면</div>
 	<h3>접근 방법</h3>
-	<div>http://localhost:8080/SpringWeb/jstlExample</div>
-	<div>JSTLExampleController.java 를 통해서 접근</div>
+	<div>http://localhost:8080/SpringWeb/resources/sample02/memberForm.html</div>
+	<div>html에 직접 접근한 뒤, submit으로 컨트롤러 호출</div>
+	<div>MemberController.java 를 통해서 접근</div>
 	
 	<h3>회원 정보 보기</h3>
 	<div>member1 버튼으로 호출된 경우, 아래 내용이 자동으로 작성된다.</div>

@@ -2,8 +2,8 @@ package my.spring.SpringWeb.sample02;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/calc.do")
 public class CalcController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CalcController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(CalcController.class);
 
 	// 기존 방식
 	// request 객체를 통해서 데이터 입출력

@@ -14,6 +14,22 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- Log4j 설정 -->
+	<!--
+	프로젝트 만들 때마다 이거 설정 추가하면 된다.
+	class path
+		ㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍ
+	log4j2.xml 파일은 추가로 만들어야 한다.
+	-->
+	<context-param>
+		<param-name>log4jConfiguration</param-name>
+		<param-value>classpath:/log4j2.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.apache.logging.log4j.web.Log4jServletContextListener
+		</listener-class>
+	</listener>
+
 	<!-- Processes application requests -->
 	<!--
 	DispatcherServlet 의 정의. 애초에 Spring이 만들어준다.
