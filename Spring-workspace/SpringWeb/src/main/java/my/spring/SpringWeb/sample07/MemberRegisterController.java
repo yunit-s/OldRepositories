@@ -53,7 +53,7 @@ public class MemberRegisterController {
 		log.debug("MemberRegisterController.handler3() 호출 - memberRegisterStep3");
 		log.debug(member);
 		
-		sessionStatus.setComplete();
+//		sessionStatus.setComplete();
 			// session 안에 있는 데이터 중 내가 처리할 데이터 key를 제거한다.
 		
 //		return "sample07/registerStep3";
@@ -65,6 +65,6 @@ public class MemberRegisterController {
 	public String saveInfoHandler() {
 		log.debug("MemberRegisterController.saveInfoHandler() 호출");
 		
-		return "sample07/memberRegisterStep1";
+		return "sample07/registerStep1";
 	}
 }

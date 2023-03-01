@@ -27,13 +27,13 @@ public class SessionAttributesController02 {
 	// data1이라는 key로 메소드의 리턴값이 Model에 자동으로 저장된다.
 	@ModelAttribute("data1")
 	public String createString1() {
-		log.debug("SessionAttributesController01.createString1() 호출");
+		log.debug("SessionAttributesController02.createString1() 호출");
 		return "createString1";
 	}
 	
 	@ModelAttribute("data2")
 	public String createString2(HttpServletRequest request) {
-		log.debug("SessionAttributesController01.createString2() 호출");
+		log.debug("SessionAttributesController02.createString2() 호출");
 
 		// session 직접 이용하기
 		HttpSession session = request.getSession(true);
