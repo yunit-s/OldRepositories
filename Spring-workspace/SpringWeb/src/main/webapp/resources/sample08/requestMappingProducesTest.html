@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>@RequestMapping - Produces 속성</h1>
+	<div>requestMappingProducesTest.html 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample08/requestMappingProducesTest.html</div>
+	<hr>
+	
+	<h3>Request Headers 확인하는 방법</h3>
+	<div>브라우저에서 f12 - Network 탭 열어두기</div>
+	<div>a 태그나 form 태그 클릭하면, 빨간 글씨 뭐 하나 생긴다. 그거 클릭하면, header 정보 확인 가능하다.</div>
+	
+	<h3>Get 방식으로 호출 1</h3>
+	<a href="/SpringWeb/testProducesController1">produces의 content-type : 설정 안 한다. 결과는 jsp로 사용한다.</a>
+	
+	<h3>Get 방식으로 호출 2</h3>
+	<a href="/SpringWeb/testProducesController2">produces의 content-type : text/plain. 결과는 jsp로 사용한다.</a>
+	
+	<h3>Get 방식으로 호출 3</h3>
+	<a href="/SpringWeb/testProducesController3">produces의 content-type : text/html. Stream을 이용해 직접 출력한다.</a>
+	
+	<h3>Get 방식으로 호출 4</h3>
+	<a href="/SpringWeb/testProducesController4">produces의 content-type : application/json. Stream을 이용해 직접 출력한다.</a>
+
+</body>
+</html>
