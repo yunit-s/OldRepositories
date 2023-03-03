@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<!--
+	property 설정
+		외부 파일을 이용해서 데이터베이스 접속정보 가져오기
+		이제 이거 필요없다. 다른 곳에서 설정한다.
+	-->
+<!-- 	<properties resource="./driver.properties"/> -->
+	
+	<!-- MyBatis가 동작하는 기본적인 방식에 대한 세팅정보가 있다. -->
+	<settings>
+		<!-- 데이터가 없을 시 NULL 처리 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<!-- Log4J 와 MyBatis를 연동해서 Query문과 실행결과를 log로 출력할 수 있게 설정 -->
+		<setting name="logImpl" value="LOG4J2" />
+	</settings>
+	
+	<!-- 별명 지정하기 -->
+	<typeAliases>
+<!-- 	 	<typeAlias type="member.vo.Member" alias="Member"/> -->
+<!-- 	 	<typeAlias type="board.vo.Board" alias="Board"/> -->
+<!-- 	 	<typeAlias type="comment.vo.Comment" alias="Comment"/> -->
+<!-- 	 	<typeAlias type="boardncmt.vo.BoardNCmt" alias="BoardNCmt"/> -->
+<!-- 	 	<typeAlias type="like.vo.Like" alias="Like"/> -->
+	</typeAliases>
+	
+</configuration>
