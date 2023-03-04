@@ -42,6 +42,7 @@ public class ArticleDetailsCallServlet extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 //		request.setCharacterEncoding("UTF-8");
 		int bNum = Integer.parseInt(request.getParameter("bNum"));
+		int bLikeNum = Integer.parseInt(request.getParameter("bLikeNum"));
 		
 		
 		
@@ -54,6 +55,7 @@ public class ArticleDetailsCallServlet extends HttpServlet {
 		tgBoard.setBoardNum(bNum);
 		BoardService bService = new BoardService();
 		tgBoard = bService.getArticleOne(tgBoard);
+		tgBoard.setBoardLikeNum(bLikeNum);
 		CommentService cService = new CommentService();
 		List<Comment> cList = cService.getCommentAll(tgBoard.getBoardNum());
 		

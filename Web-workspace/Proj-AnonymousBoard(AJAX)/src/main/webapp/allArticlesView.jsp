@@ -71,7 +71,7 @@
 				<tr>
 					<td><%= bNum %></td>
 					<td>
-						<a href="articleDetailsCall?bNum=<%= bNum %>">
+						<a href="articleDetailsCall?bNum=<%= bNum %>&bLikeNum=<%= bLikeNum %>">
 							<%= bTitle %>
 						</a>
 					</td>

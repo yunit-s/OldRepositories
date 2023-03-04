@@ -13,6 +13,18 @@
 			WHERE likeArticleNum = #{likeArticleNum} AND likeMemberId = #{likeMemberId};
 		]]>
 	</select>
+
+<!-- 	<resultMap id="likeCountMap" type="Like"> -->
+<!-- 		<result column="likeArticleNum" property="likeArticleNum" /> -->
+<!-- 		<result column="likeCount" property="likeNum" /> -->
+<!-- 	</resultMap> -->
+	<select id="getLikeCount" resultType="Like">
+		<![CDATA[
+			SELECT likeArticleNum, count(likeArticleNum) AS likeNum
+			FROM likes
+			GROUP BY likeArticleNum;
+		]]>
+	</select>
 	
 	<!-- insert -->
 	<insert id="insertOne" parameterType="Like">

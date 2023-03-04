@@ -1,5 +1,7 @@
 package like.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import like.vo.Like;
@@ -33,6 +35,12 @@ public class LikeDAO {
 		System.out.println("!! LikeDAO.insertOne() 실행");
 		int result = sqlSession.insert("likeXml.insertOne", tgLike);
 		return result;
+	}
+	
+	public List<Like> getLikeCount() {
+		System.out.println("!! LikeDAO.getLikeCount() 실행");
+		List<Like> lList = sqlSession.selectList("likeXml.getLikeCount");
+		return lList;
 	}
 	
 }
