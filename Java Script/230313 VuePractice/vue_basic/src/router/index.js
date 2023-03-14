@@ -21,22 +21,46 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Comp2View')
   },
   {
-    path: '/subcomptest/parentcomp',
+    path: '/subcomponent/parentcomp',
     name: 'ParentComp',
-    redirect: '/subcomptest/parentcomp/childcomp1', // 서브컴포넌트 초기값 설정
-    component: () => import(/* webpackChunkName: "about" */ '../views/SubCompTest/ParentComp'),
+    redirect: '/subcomponent/parentcomp/childcomp1', // 서브컴포넌트 초기값 설정
+    component: () => import(/* webpackChunkName: "about" */ '../views/SubComponent/ParentCompView'),
     children: [
       {
         path: 'childcomp1',
-        component: () => import(/* webpackChunkName: "about" */ '../components/SubCompTest/ChildComp1')
+        component: () => import(/* webpackChunkName: "about" */ '../components/SubComponent/ChildComp1')
       },
       {
         path: 'childcomp2',
-        component: () => import(/* webpackChunkName: "about" */ '../components/SubCompTest/ChildComp2')
+        component: () => import(/* webpackChunkName: "about" */ '../components/SubComponent/ChildComp2')
       },
       {
         path: 'childcomp3',
-        component: () => import(/* webpackChunkName: "about" */ '../components/SubCompTest/ChildComp3')
+        component: () => import(/* webpackChunkName: "about" */ '../components/SubComponent/ChildComp3')
+      }
+    ]
+  },
+  {
+    path: '/kakaomap/kakaomap',
+    name: 'Kakaomap',
+    // redirect: '/subcomponent/parentcomp/childcomp1', // 서브컴포넌트 초기값 설정
+    component: () => import(/* webpackChunkName: "about" */ '../views/Kakaomap/KakaomapView'),
+    children: [
+      {
+        path: 'exam1_simple',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Kakaomap/Exam1_Simple')
+      },
+      {
+        path: 'exam2_simple',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Kakaomap/Exam2_Simple')
+      },
+      {
+        path: 'exam3_marker',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Kakaomap/Exam3_Marker')
+      },
+      {
+        path: 'exam4_searchlist',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Kakaomap/Exam4_SearchList')
       }
     ]
   }

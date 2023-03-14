@@ -5,7 +5,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/comp1">comp1</router-link> |
       <router-link to="/comp2">comp2</router-link> |
-      <router-link to="/subcomptest/parentcomp">SubCompTest</router-link>
+      <router-link to="/subcomponent/parentcomp">SubComponent</router-link> |
+      <router-link to="/kakaomap/kakaomap">Kakaomap</router-link>
     </nav>
     <router-view/>
     <v-footer/>
