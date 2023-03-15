@@ -2,7 +2,6 @@
   <div class="exam3_marker">
     <h3>Exam3_Marker.vue 출력</h3>
     <div>참고 사이트 : <a href="https://codesandbox.io/s/nervous-keldysh-87yxg">https://codesandbox.io/s/nervous-keldysh-87yxg</a></div>
-    <div id="map"></div>
     <div class="button-group">
       <button @click="changeSize(0)">Hide</button>
       <button @click="changeSize(400)">show</button>
@@ -11,6 +10,7 @@
       <button @click="displayMarker([])">marker set 3 (empty)</button>
       <button @click="displayInfoWindow">infowindow</button>
     </div>
+    <div id="map"></div>
   </div>
 </template>
 
