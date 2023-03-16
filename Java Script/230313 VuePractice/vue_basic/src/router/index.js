@@ -43,7 +43,7 @@ const routes = [
   {
     path: '/kakaomap/kakaomap',
     name: 'Kakaomap',
-    // redirect: '/subcomponent/parentcomp/childcomp1', // 서브컴포넌트 초기값 설정
+    redirect: '/kakaomap/kakaomap/exam1_simple', // 서브컴포넌트 초기값 설정
     component: () => import(/* webpackChunkName: "about" */ '../views/Kakaomap/KakaomapView'),
     children: [
       {
@@ -62,6 +62,22 @@ const routes = [
         path: 'exam4_searchlist',
         component: () => import(/* webpackChunkName: "about" */ '../components/Kakaomap/Exam4_SearchList')
       }
+    ]
+  },
+  {
+    path: '/serveraccess',
+    name: 'ServerAccess',
+    redirect: '/serveraccess/exam1_axios', // 서브컴포넌트 초기값 설정
+    component: () => import(/* webpackChunkName: "about" */ '../views/ServerAccess/ServerAccessView'),
+    children: [
+      {
+        path: 'exam1_axios',
+        component: () => import(/* webpackChunkName: "about" */ '../components/ServerAccess/Exam1_Axios')
+      },
+      // {
+      //   path: 'exam2_',
+      //   component: () => import(/* webpackChunkName: "about" */ '../components/ServerAccess/Exam2_')
+      // },
     ]
   }
 ]

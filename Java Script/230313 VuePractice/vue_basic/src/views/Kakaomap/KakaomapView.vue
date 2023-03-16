@@ -1,6 +1,7 @@
 <template>
   <div class="kakaomap">
     <h1>카카오맵 API 활용하기</h1>
+    <div>주의 : 실행된 Vue App URL과 카카오에 등록한 메인 domain URL이 동일해야 한다. (ex. http://localhost:8080/)</div>
     <div class="kakaomap-body">
       <router-link to="/kakaomap/kakaomap/exam1_simple"> <button>단순 맵 출력1</button> </router-link> |
       <button v-on:click="moveTo('exam2_simple')">단순 맵 출력2</button> |
