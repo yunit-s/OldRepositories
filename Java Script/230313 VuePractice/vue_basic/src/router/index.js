@@ -73,11 +73,23 @@ const routes = [
       {
         path: 'exam1_axios',
         component: () => import(/* webpackChunkName: "about" */ '../components/ServerAccess/Exam1_Axios')
+      }
+    ]
+  },
+  {
+    path: '/gymmanna',
+    name: 'GymManna',
+    redirect: '/gymmanna/exam1_signin', // 서브컴포넌트 초기값 설정
+    component: () => import(/* webpackChunkName: "about" */ '../views/Proj-GymManna/GymMannaView'),
+    children: [
+      {
+        path: 'exam1_signin',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/Exam1_SignIn')
       },
-      // {
-      //   path: 'exam2_',
-      //   component: () => import(/* webpackChunkName: "about" */ '../components/ServerAccess/Exam2_')
-      // },
+      {
+        path: 'exam2_articlegathering',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/Exam2_ArticleGathering')
+      }
     ]
   }
 ]
