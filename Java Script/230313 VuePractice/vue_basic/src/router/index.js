@@ -79,16 +79,16 @@ const routes = [
   {
     path: '/gymmanna',
     name: 'GymManna',
-    redirect: '/gymmanna/exam1_signin', // 서브컴포넌트 초기값 설정
+    redirect: '/gymmanna/signin', // 서브컴포넌트 초기값 설정
     component: () => import(/* webpackChunkName: "about" */ '../views/Proj-GymManna/GymMannaView'),
     children: [
       {
-        path: 'exam1_signin',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/Exam1_SignIn')
+        path: 'signin',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/SignIn')
       },
       {
-        path: 'exam2_articlegathering',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/Exam2_ArticleGathering')
+        path: 'articlegathering',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/ArticleGathering')
       }
     ]
   }

@@ -1,5 +1,5 @@
 export default {
-  name: "Exam1_SignIn",
+  name: "SignIn",
   data() {
     return {
       // 지역변수

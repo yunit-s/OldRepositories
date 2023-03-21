@@ -1,6 +1,6 @@
 <template>
-  <div class="exam1_signin">
-    <h3>Exam1_SignIn.vue 출력</h3>
+  <div class="signin">
+    <h3>SignIn.vue 출력</h3>
     <button @click="login()">login()</button> |
     <button @click="register()">register()</button> |
     <button @click="func()">func()</button> |
@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script src="./js/Exam1_SignIn.js"></script>
+<script src="./js/SignIn.js"></script>
 <script>
 
 </script>

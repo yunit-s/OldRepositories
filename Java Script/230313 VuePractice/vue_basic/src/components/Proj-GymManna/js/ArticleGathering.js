@@ -1,5 +1,5 @@
 export default {
-  name: "Exam2_ArticleGathering",
+  name: "ArticleGathering",
   data() {
     return {
       // 지역변수

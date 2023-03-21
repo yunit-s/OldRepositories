@@ -257,3 +257,7 @@ select * from information_schema.table_constraints where table_name = 'centertbl
 
 # primary key 추가
 # ALTER TABLE article_gathering ADD PRIMARY KEY (article_gnum);
+select * from article_gathering;
+select * from centertbl;
+select * from user;
+delete from user where user_id='qw';
