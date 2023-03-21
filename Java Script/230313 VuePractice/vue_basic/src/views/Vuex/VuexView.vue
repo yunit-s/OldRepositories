@@ -1,13 +1,13 @@
 <template>
-  <div class="gymmanna">
-    <h1>GYM만나 프로젝트 테스트</h1>
-    <div class="gymmanna-body">
-      <button v-on:click="moveTo('signin')">SignIn</button> |
-      <button @click="moveTo('articlegathering')">ArticleGathering</button> |
+  <div class="vuex">
+    <h1>Vuex 테스트</h1>
+    <div class="vuex-body">
+      <button v-on:click="moveTo('exam1_actions')">Exam1</button> |
+      <button @click="moveTo('exam2_getters')">Exam2</button> |
       <!-- <button @click="moveTo('exam3_')">예제3</button> <br><br> -->
 
       <h1>자식 router-view</h1>
-      <div class="gymmanna-child">
+      <div class="vuex-child">
         <router-view/>
       </div>
     </div>
@@ -16,10 +16,10 @@
 
 <script>
 export default {
-  name: "GymMannaView", // 컴포넌트 이름 지정
+  name: "VuexView", // 컴포넌트 이름 지정
   data() {
     return {
-      domain: "/gymmanna"
+      domain: "/Vuex"
     };
   },
   methods: {

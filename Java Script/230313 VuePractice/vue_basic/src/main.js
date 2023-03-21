@@ -11,4 +11,9 @@ const app = createApp(App).use(store).use(router);
 import axios from 'axios'
 app.config.globalProperties.$axios = axios; // 전역 객체로 설정
 
+// vuex 코드
+import Vuex from 'vuex';
+app.use(Vuex);
+// app.config.productionTip = false;
+
 app.mount('#app');

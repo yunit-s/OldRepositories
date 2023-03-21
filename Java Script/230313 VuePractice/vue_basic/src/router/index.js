@@ -91,6 +91,22 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../components/Proj-GymManna/ArticleGathering')
       }
     ]
+  },
+  {
+    path: '/vuex',
+    name: 'Vuex',
+    redirect: '/Vuex/exam1_actions', // 서브컴포넌트 초기값 설정
+    component: () => import(/* webpackChunkName: "about" */ '../views/Vuex/VuexView'),
+    children: [
+      {
+        path: 'exam1_actions',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Vuex/Exam1_Actions')
+      },
+      {
+        path: 'exam2_getters',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Vuex/Exam2_Getters')
+      },
+    ]
   }
 ]
 

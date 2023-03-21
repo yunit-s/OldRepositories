@@ -8,7 +8,8 @@
       <router-link to="/subcomponent/parentcomp">SubComponent</router-link> |
       <router-link to="/kakaomap/kakaomap">Kakaomap</router-link> |
       <router-link to="/serveraccess">ServerAccess</router-link> |
-      <router-link to="/gymmanna">Proj-GymManna</router-link>
+      <router-link to="/gymmanna">Proj-GymManna</router-link> |
+      <router-link to="/vuex">Vuex</router-link> |
     </nav>
     <router-view/>
     <v-footer/>
