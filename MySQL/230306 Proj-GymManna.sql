@@ -5,9 +5,6 @@ CREATE SCHEMA gymmanna;
 # 스키마 선택
 USE gymmanna;
 
-# 테이블 선택
-USE gymmanna;
-
 ###### 테이블 생성 ######
 # 사용자 테이블
 CREATE TABLE `user` (
@@ -260,4 +257,20 @@ select * from information_schema.table_constraints where table_name = 'centertbl
 select * from article_gathering;
 select * from centertbl;
 select * from user;
-delete from user where user_id='qw';
+delete from user where user_id='innateace@gmail.com';
+
+
+select * from comment_gathering;
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (1,'닉네임01','내용01');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (1,'닉네임02','내용02');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (1,'닉네임01','내용033');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (1,'닉네임02','내용04444');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (1,'닉네임01','오키오키');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (3,'닉네임31','내용31');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (3,'닉네임32','내용32');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (3,'닉네임31','내용333');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (3,'닉네임32','내용34444');
+INSERT INTO comment_gathering (article_gnum,user_nickname,comment_gcontent) VALUES (3,'닉네임31','오키오키');
+
+INSERT INTO article_gathering (article_gtitle, article_gcontent,user_id,category_type,center_num) VALUES ('글제목', '내용은 이렇게 작성한다.', 'ccccc', '헬스', 2);
+select * from centertbl;

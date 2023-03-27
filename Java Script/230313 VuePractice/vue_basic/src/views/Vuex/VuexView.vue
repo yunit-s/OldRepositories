@@ -19,7 +19,7 @@ export default {
   name: "VuexView", // 컴포넌트 이름 지정
   data() {
     return {
-      domain: "/Vuex"
+      domain: "/vuex"
     };
   },
   methods: {

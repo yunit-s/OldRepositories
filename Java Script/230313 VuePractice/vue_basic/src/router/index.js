@@ -95,7 +95,7 @@ const routes = [
   {
     path: '/vuex',
     name: 'Vuex',
-    redirect: '/Vuex/exam1_actions', // 서브컴포넌트 초기값 설정
+    redirect: '/vuex/exam1_actions', // 서브컴포넌트 초기값 설정
     component: () => import(/* webpackChunkName: "about" */ '../views/Vuex/VuexView'),
     children: [
       {
@@ -105,6 +105,22 @@ const routes = [
       {
         path: 'exam2_getters',
         component: () => import(/* webpackChunkName: "about" */ '../components/Vuex/Exam2_Getters')
+      },
+    ]
+  },
+  {
+    path: '/kakaologin',
+    name: 'KakaoLogin',
+    redirect: '/kakaologin/exam1_simple', // 서브컴포넌트 초기값 설정
+    component: () => import(/* webpackChunkName: "about" */ '../views/KakaoLogin/KakaoLoginView'),
+    children: [
+      {
+        path: 'exam1_simple',
+        component: () => import(/* webpackChunkName: "about" */ '../components/KakaoLogin/Exam1_Simple')
+      },
+      {
+        path: 'exam2_arrowfunction',
+        component: () => import(/* webpackChunkName: "about" */ '../components/KakaoLogin/Exam2_ArrowFunction')
       },
     ]
   }
