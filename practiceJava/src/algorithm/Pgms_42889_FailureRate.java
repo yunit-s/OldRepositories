@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
-class Solution {
+class Solution42889 {
 	
 	int[] currStage;
 	int[] complUser;
@@ -100,7 +100,7 @@ public class Pgms_42889_FailureRate {
 		}
 		
 		// process
-		Solution s = new Solution();
+		Solution42889 s = new Solution42889();
 		s.solution(N, stages);
 		
 	}
