@@ -83,7 +83,7 @@ class Solution_120956 {
                             break;
                         }
                     }
-                    // 매치되지 않았으면 다시 Queue에 저장r
+                    // 매치되지 않았으면 다시 Queue에 저장
                     ableQ.add(qWord);
                 }
 
