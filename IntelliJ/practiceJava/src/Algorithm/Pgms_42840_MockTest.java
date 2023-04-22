@@ -41,7 +41,6 @@ class Solution_42840 {
         }
 
         int[] answer = new int[list.size()];
-        int j = 0;
         for (int i = 0; i < list.size(); i++) {
             answer[i] = list.get(i);
         }
