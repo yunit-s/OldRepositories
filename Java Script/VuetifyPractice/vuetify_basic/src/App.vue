@@ -4,6 +4,7 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/dividelayoutview">Divide</router-link> |
+      <router-link to="/tabview">Tab</router-link> |
       <router-link to="/lumoshomeview">Lumos</router-link> |
     </nav>
     <router-view />

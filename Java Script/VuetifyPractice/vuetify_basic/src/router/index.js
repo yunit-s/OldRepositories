@@ -23,6 +23,13 @@ const routes = [
     component: () => import(/**/ '../views/DivideLayoutView.vue')
   },
 
+  // Tab 화면전환
+  {
+    path: '/tabview',
+    name: 'tabview',
+    component: () => import(/**/ '../views/TabView.vue')
+  },
+
   // 루모스 프로젝트
   {
     path: '/lumoshomeview',
