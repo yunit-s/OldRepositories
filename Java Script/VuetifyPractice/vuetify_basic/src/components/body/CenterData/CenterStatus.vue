@@ -1,6 +1,9 @@
 <template>
   <v-container class="centerstatus">
-    센터 현황
+    <h1>센터 현황</h1>
+    <p>그래프</p>
+    <p>데이터</p>
+    <p>표</p>
   </v-container>
 </template>
 

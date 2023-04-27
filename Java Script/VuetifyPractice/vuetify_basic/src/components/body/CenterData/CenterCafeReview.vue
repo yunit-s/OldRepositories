@@ -1,6 +1,9 @@
 <template>
   <v-container class="centercafereview">
-    센터 카페리뷰
+    <h1>카페 리뷰 분석</h1>
+    <p>리뷰</p>
+    <p>내용</p>
+    <p>표시</p>
   </v-container>
 </template>
 

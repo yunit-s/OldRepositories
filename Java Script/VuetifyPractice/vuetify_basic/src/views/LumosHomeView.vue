@@ -11,11 +11,15 @@
       </v-row>
 
       <v-row>
-        <center-data-layout />
+        <v-col>
+          <center-data-layout />
+        </v-col>
       </v-row>
       
       <v-row>
-        <footer-layout />
+        <v-col>
+          <footer-layout />
+        </v-col>
       </v-row>
     </v-container>
   </v-main>
@@ -24,10 +28,10 @@
 <script>
 // Components
 import { defineComponent } from 'vue';
-import MainContentsLayout from '@/components/frame/MainContentsLayout.vue';
-import MainSideLayout from '@/components/frame/MainSideLayout.vue';
-import CenterDataLayout from '@/components/frame/CenterDataLayout.vue';
-import FooterLayout from '@/components/frame/FooterLayout.vue';
+import MainContentsLayout from '@/components/layout/MainContentsLayout.vue';
+import MainSideLayout from '@/components/layout/MainSideLayout.vue';
+import CenterDataLayout from '@/components/layout/CenterDataLayout.vue';
+import FooterLayout from '@/components/layout/FooterLayout.vue';
 
 export default defineComponent({
   // components: { MainContentsLayout },

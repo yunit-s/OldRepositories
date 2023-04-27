@@ -39,12 +39,12 @@ const routes = [
   {
     path: '/maincontentslayout',
     name: 'maincontentslayout',
-    component: () => import(/**/ '../components/frame/MainContentsLayout.vue')
+    component: () => import(/**/ '../components/layout/MainContentsLayout.vue')
   },
   {
     path: '/mainsidelayout',
     name: 'mainsidelayout',
-    component: () => import(/**/ '../components/frame/MainSideLayout.vue'),
+    component: () => import(/**/ '../components/layout/MainSideLayout.vue'),
     children: [
       {
         path: '/searchcenterlist',
@@ -61,32 +61,32 @@ const routes = [
   {
     path: '/centerdatalayout',
     name: 'centerdatalayout',
-    component: () => import(/**/ '../components/frame/CenterDataLayout.vue'),
+    component: () => import(/**/ '../components/layout/CenterDataLayout.vue'),
     children: [
       {
         path: 'centerbasicinfo',
         name: 'centerbasicinfo',
-        component: () => import(/**/ '../components/body/CenterBasicInfo.vue')
+        component: () => import(/**/ '../components/body/CenterData/CenterBasicInfo.vue')
       },
       {
         path: 'centerdetailinfo',
         name: 'centerdetailinfo',
-        component: () => import(/**/ '../components/body/CenterDetailInfo.vue')
+        component: () => import(/**/ '../components/body/CenterData/CenterDetailInfo.vue')
       },
       {
         path: 'centerevalgrade',
         name: 'centerevalgrade',
-        component: () => import(/**/ '../components/body/CenterEvalGrade.vue')
+        component: () => import(/**/ '../components/body/CenterData/CenterEvalGrade.vue')
       },
       {
         path: 'centercafereview',
         name: 'centercafereview',
-        component: () => import(/**/ '../components/body/CenterCafeReview.vue')
+        component: () => import(/**/ '../components/body/CenterData/CenterCafeReview.vue')
       },
       {
         path: 'centerstatus',
         name: 'centerstatus',
-        component: () => import(/**/ '../components/body/CenterStatus.vue')
+        component: () => import(/**/ '../components/body/CenterData/CenterStatus.vue')
       },
     ]
   },

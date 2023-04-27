@@ -1,13 +1,13 @@
 <template>
-  <v-container class="centerevalgrade">
-    센터 평가 등급
+  <v-container>
+    로그인 첫 화면
   </v-container>
 </template>
 
 <script>
 
 export default {
-  name: 'CenterEvalGrade',
+  name: 'LoginMainView',
 
 }
 </script>

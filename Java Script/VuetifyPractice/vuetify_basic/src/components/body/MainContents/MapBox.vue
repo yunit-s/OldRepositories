@@ -1,13 +1,13 @@
 <template>
-  <v-container class="centerdetailinfo">
-    센터 상세 정보
+  <v-container>
+    여기는 지도 표시할 부분
   </v-container>
 </template>
 
 <script>
 
 export default {
-  name: 'CenterDetailInfo',
+  name: 'MapBox',
 
 }
 </script>
