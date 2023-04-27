@@ -1,17 +1,21 @@
 <template>
   <v-container>
-    여기는 지도 표시할 부분
+    
+    <!-- <v-btn @click="btnTest">버튼</v-btn> -->
+
+    <div class="map_wrap">
+      <div
+        id="map"
+        style="width: 100%; height: 100%; position: relative; overflow: hidden"
+      ></div>
+    </div>
+
   </v-container>
 </template>
 
-<script>
+<script src="./js/MapBox.js"></script>
 
-export default {
-  name: 'MapBox',
-
-}
-</script>
-
-<style scoped>
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss">
+@import "./scss/MapBox.scss";
 </style>
