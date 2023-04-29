@@ -86,22 +86,6 @@ class Solution_67256 {
             }
         }
 
-//        int[][] distArr = new int[10][10];
-//        for (int i = 0; i < 10; i++) {
-//            for (int j = 0; j < 10; j++) {
-//                int small = 0;
-//                int big = 0;
-//                if (i < j) {
-//                    small = i;
-//                    big = j;
-//                } else {
-//                    small = j;
-//                    big = i;
-//                }
-//                // 거리 계산식
-//            }
-//        }
-
         return answer;
     }
 }
@@ -119,7 +103,7 @@ public class Pgms_67256_PressKeypad {
 
         Solution_67256 sol = new Solution_67256();
         for (int i = 0; i < tcNumbers.length; i++) {
-            System.out.println(sol.solution_1(tcNumbers[i], tcHand[i]));
+            System.out.println("tc" + (i + 1) + "> " + sol.solution_1(tcNumbers[i], tcHand[i]));
         }
     }
 }
