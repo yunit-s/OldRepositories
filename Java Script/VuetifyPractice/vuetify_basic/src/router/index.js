@@ -30,6 +30,13 @@ const routes = [
     component: () => import(/**/ '../views/TabView.vue')
   },
 
+  // Vuex 활용
+  {
+    path: '/vuexview',
+    name: 'vuexview',
+    component: () => import(/**/ '../views/VuexView.vue')
+  },
+
   // 루모스 프로젝트
   {
     path: '/lumosprojectview',
