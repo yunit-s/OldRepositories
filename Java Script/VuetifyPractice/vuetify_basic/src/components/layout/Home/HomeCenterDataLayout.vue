@@ -1,5 +1,5 @@
 <template>
-  <div class="centerdatalayout">
+  <div>
     <v-card style="min-height: 350px">
 
       <v-tabs
@@ -10,8 +10,8 @@
         <v-tab :value="1">기본정보</v-tab>
         <v-tab :value="2">상세정보</v-tab>
         <v-tab :value="3">평가등급</v-tab>
-        <v-tab :value="4">카페 리뷰 분석</v-tab>
-        <v-tab :value="5">센터 현황</v-tab>
+        <v-tab :value="4">리뷰 분석</v-tab>
+        <v-tab :value="5">센터 상태그래프</v-tab>
       </v-tabs>
 
       <v-window v-model="tab">
@@ -30,11 +30,11 @@
           </v-container>
 
           <v-container fluid v-if="n === 4">
-            <center-cafe-review />
+            <center-review-data />
           </v-container>
 
           <v-container fluid v-if="n === 5">
-            <center-status />
+            <center-status-graph />
           </v-container>
         </v-window-item>
 
@@ -45,28 +45,17 @@
 </template>
 
 <script>
-import CenterBasicInfo from '../body/CenterData/CenterBasicInfo.vue'
-import CenterDetailInfo from '../body/CenterData/CenterDetailInfo.vue'
-import CenterEvalGrade from '../body/CenterData/CenterEvalGrade.vue'
-import CenterCafeReview from '../body/CenterData/CenterCafeReview.vue'
-import CenterStatus from '../body/CenterData/CenterStatus.vue'
+import CenterBasicInfo from '@/components/body/HomeCenterData/CenterBasicInfo.vue'
+import CenterDetailInfo from '@/components/body/HomeCenterData/CenterDetailInfo.vue'
+import CenterEvalGrade from '@/components/body/HomeCenterData/CenterEvalGrade.vue'
+import CenterReviewData from '@/components/body/HomeCenterData/CenterReviewData.vue'
+import CenterStatusGraph from '@/components/body/HomeCenterData/CenterStatusGraph.vue'
 
 export default {
-  name: 'CenterDataLayout',
-  components: { CenterBasicInfo, CenterDetailInfo, CenterEvalGrade, CenterCafeReview, CenterStatus },
+  components: {CenterBasicInfo, CenterDetailInfo, CenterEvalGrade, CenterReviewData, CenterStatusGraph},
   data: () => ({
     tab: null,
   }),
 
 }
-
 </script>
-
-<style scoped>
-
-.centerdatalayout {
-  background-color: honeydew;
-  min-height: 350px;
-}
-
-</style>
