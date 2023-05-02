@@ -4,7 +4,7 @@ export default createStore({
   state: {
     // 글로벌로 관리될 상태 값 
     counter: 0,
-    count: 0,
+    count: 10,
     strArr: [],
     jsonData: '',
   },

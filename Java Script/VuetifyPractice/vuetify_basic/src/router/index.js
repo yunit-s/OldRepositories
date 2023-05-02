@@ -37,6 +37,13 @@ const routes = [
     component: () => import(/**/ '../views/VuexView.vue')
   },
 
+  // Lifecycle에 따른 Vue 속성 동작
+  {
+    path: '/lifecycleview',
+    name: 'lifecycleview',
+    component: () => import(/**/ '../views/LifecycleView.vue')
+  },
+
   // 루모스 프로젝트
   {
     path: '/lumosprojectview',
