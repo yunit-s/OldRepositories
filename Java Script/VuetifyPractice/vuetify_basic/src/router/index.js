@@ -44,6 +44,13 @@ const routes = [
     component: () => import(/**/ '../views/LifecycleView.vue')
   },
 
+  // Axios 호출
+  {
+    path: '/axiosview',
+    name: 'axiosview',
+    component: () => import(/**/ '../views/AxiosView.vue')
+  },
+
   // 루모스 프로젝트
   {
     path: '/lumosprojectview',
