@@ -65,6 +65,10 @@ const routes = [
         path: 'loginhomeview',
         component: () => import(/**/ '../views/LoginHomeView.vue')
       },
+      {
+        path: 'yunittestview',
+        component: () => import(/**/ '../views/YunitTestView.vue')
+      },
     ]
   },
 

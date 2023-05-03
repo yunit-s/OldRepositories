@@ -7,6 +7,32 @@ export default createStore({
     count: 10,
     strArr: [],
     jsonData: '',
+    searchedCenter: [
+      {
+        data1keyNum: "초기값 번호1",
+        data1keyName: "데이터 이름1",
+        data1keycontents: "데이터 내용1",
+        data1keyDetail: "데이터 상세정보1",
+        data1keyOther: "데이터 기타정보1",
+      },
+      {
+        data2keyNum: "초기값 번호2",
+        data2keyName: "데이터 이름2",
+        data2keycontents: "데이터 내용2",
+        data2keyDetail: "데이터 상세정보2",
+        data2keyOther: "데이터 기타정보2",
+      },
+    ],
+    markerPositions: [
+      [37.499590490909185, 127.0263723554437],
+      [37.499427948430814, 127.02794423197847],
+      [37.498553760499505, 127.02882598822454],
+      [37.497625593121384, 127.02935713582038],
+      [37.49629291770947, 127.02587362608637],
+      [37.49754540521486, 127.02546694890695],
+      [37.49646391248451, 127.02675574250912],
+    ],
+    markers: [],
   },
   getters: {
     // 데이터에 변화를 줄 수는 없음
@@ -19,6 +45,15 @@ export default createStore({
     },
     getJsonData(state) {
       return state.jsonData;
+    },
+    getSearchedCenter(state) {
+      return state.searchedCenter;
+    },
+    getMarkerPositions(state) {
+      return state.markerPositions;
+    },
+    getMarkers(state) {
+      return state.markers;
     },
   },
   mutations: {
@@ -37,6 +72,7 @@ export default createStore({
     editCount2Mutation(state, newCount) {
       state.count = newCount;
     },
+    // 배열 다루기
     multipleStatesSetMutation(state, strArrData) {
       console.log("@@ multipleStatesSetMutation 실행");
       console.log(strArrData[0] + ", " + strArrData[1] + ", " + strArrData[2]);
@@ -46,6 +82,22 @@ export default createStore({
       console.log("@@ editJsonDataMutation 실행");
       console.log(newJson);
       state.jsonData = newJson;
+    },
+    // Lumos 프로젝트
+    editSearchedCenterMutation(state, newSearchedCenter) {
+      console.log("@@ editSearchedCenterMutation 실행");
+      console.log(newSearchedCenter);
+      state.searchedCenter = newSearchedCenter;
+    },
+    editMarkerPositionsMutation(state, newMarkerPositions) {
+      console.log("@@ editMarkerPositionsMutation 실행");
+      console.log(newMarkerPositions);
+      state.markerPositions = newMarkerPositions;
+    },
+    editMarkersMutation(state, newMarkers) {
+      console.log("@@ editMarkersMutation 실행");
+      console.log(newMarkers);
+      state.markers = newMarkers;
     },
   },
   actions: {
@@ -72,6 +124,16 @@ export default createStore({
     },
     editJsonData({ commit }, newJson) {
       commit("editJsonDataMutation", newJson);
+    },
+    // Lumos 프로젝트
+    editSearchedCenter({ commit }, newSearchedCenter) {
+      commit("editSearchedCenterMutation", newSearchedCenter);
+    },
+    editMarkerPositions({ commit }, newMarkerPositions) {
+      commit("editMarkerPositionsMutation", newMarkerPositions);
+    },
+    editMarkers({ commit }, newMarkers) {
+      commit("editMarkersMutation", newMarkers);
     },
   },
   modules: {

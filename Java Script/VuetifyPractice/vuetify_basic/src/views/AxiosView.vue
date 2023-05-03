@@ -63,17 +63,17 @@ export default {
       console.log("@@ axiosGetTest 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .get(
           `${serverUrl}/sample/list/` + this.text1
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -81,17 +81,17 @@ export default {
       console.log("@@ axiosPutTest 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .put(
           `${serverUrl}/sample/newsample`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -99,17 +99,17 @@ export default {
       console.log("@@ axiosPostTest 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .post(
           `${serverUrl}/sample/postmethod1`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -117,17 +117,17 @@ export default {
       console.log("@@ axiosDeleteTest 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .delete(
           `${serverUrl}/sample/delmethod`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -135,18 +135,18 @@ export default {
       console.log("@@ getCenterOne 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .get(
           `${serverUrl}/searchMap/center/1`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
           this.jsonData = response.data;
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -154,18 +154,18 @@ export default {
       console.log("@@ getChildcareEvalOne 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .get(
           `${serverUrl}/searchMap/childcare_eval/1`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
           this.jsonData = response.data;
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -173,18 +173,18 @@ export default {
       console.log("@@ getChildcareViolationOne 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .get(
           `${serverUrl}/searchMap/childcare_violation/14`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
           this.jsonData = response.data;
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },
@@ -192,18 +192,18 @@ export default {
       console.log("@@ getKidsdataDetailOne 실행");
       console.log(this.$axios);
       
-      var serverUrl = process.env.VUE_APP_SERVER_URL;
+      let serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .get(
           `${serverUrl}/searchMap/kidsdata_detail/1`
         )
         .then((response) => {
-          console.log("@@ axios 성공");
+          console.log("@@@ axios 성공");
           console.log(response);
           this.jsonData = response.data;
         })
         .catch((error) => {
-          console.log("@@ axios 실패");
+          console.log("@@@ axios 실패");
           console.log(error);
         });
     },

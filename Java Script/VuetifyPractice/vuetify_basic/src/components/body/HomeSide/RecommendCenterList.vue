@@ -9,20 +9,22 @@
     <h2>추천 리스트 1</h2>
     <p>내용</p>
     <v-divider></v-divider>
-    <h2>추천 리스트 1</h2>
-    <p>내용</p>
-    <v-divider></v-divider>
-    <h2>추천 리스트 1</h2>
-    <p>내용</p>
-    <v-divider></v-divider>
-    <h2>추천 리스트 1</h2>
-    <p>내용</p>
+    <p>searchedCenterVuex : {{ searchedCenterVuex }}</p>
   </div>
 </template>
 
 <script>
 
 export default {
+  computed: {
+    searchedCenterVuex() {
+      return this.$store.getters.getSearchedCenter;
+    },
+  },
+  data() {
+    return {
 
+    }
+  }
 }
 </script>
