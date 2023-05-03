@@ -33,6 +33,15 @@
       </v-col>
     </v-row>
     
+    <v-row>
+      <v-col>
+        <h2>JSON 데이터 출력하기</h2>
+        <p>jsonData.centerNum : {{ jsonData.centerNum }}</p>
+        <p>jsonData : {{ jsonData }}</p>
+      </v-col>
+    </v-row>
+
+    
   </v-container>
 </template>
 
@@ -41,7 +50,8 @@
 export default {
   data() {
     return {
-      text1: "textfield"
+      text1: "textfield",
+      jsonData: ""
     }
   },
   methods: {
@@ -56,7 +66,7 @@ export default {
       var serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .get(
-          `${serverUrl}/searchMap/teststr/` + this.text1
+          `${serverUrl}/sample/list/` + this.text1
         )
         .then((response) => {
           console.log("@@ axios 성공");
@@ -74,7 +84,7 @@ export default {
       var serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .put(
-          `${serverUrl}/searchMap/newsample`
+          `${serverUrl}/sample/newsample`
         )
         .then((response) => {
           console.log("@@ axios 성공");
@@ -92,7 +102,7 @@ export default {
       var serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .post(
-          `${serverUrl}/searchMap/postmethod1`
+          `${serverUrl}/sample/postmethod1`
         )
         .then((response) => {
           console.log("@@ axios 성공");
@@ -110,7 +120,7 @@ export default {
       var serverUrl = process.env.VUE_APP_SERVER_URL;
       this.$axios
         .delete(
-          `${serverUrl}/searchMap/delmethod`
+          `${serverUrl}/sample/delmethod`
         )
         .then((response) => {
           console.log("@@ axios 성공");
@@ -133,6 +143,7 @@ export default {
         .then((response) => {
           console.log("@@ axios 성공");
           console.log(response);
+          this.jsonData = response.data;
         })
         .catch((error) => {
           console.log("@@ axios 실패");
@@ -151,6 +162,7 @@ export default {
         .then((response) => {
           console.log("@@ axios 성공");
           console.log(response);
+          this.jsonData = response.data;
         })
         .catch((error) => {
           console.log("@@ axios 실패");
@@ -169,6 +181,7 @@ export default {
         .then((response) => {
           console.log("@@ axios 성공");
           console.log(response);
+          this.jsonData = response.data;
         })
         .catch((error) => {
           console.log("@@ axios 실패");
@@ -187,6 +200,7 @@ export default {
         .then((response) => {
           console.log("@@ axios 성공");
           console.log(response);
+          this.jsonData = response.data;
         })
         .catch((error) => {
           console.log("@@ axios 실패");
