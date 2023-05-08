@@ -1,26 +1,12 @@
 export default {
   computed: {
-    searchedCenterVuex() {
-      return this.$store.getters.getSearchedCenter;
-    },
-    markerPositionsVuex() {
-      console.log("@@@ MapBox Marker 테스트");
-      let markerPositions = this.$store.getters.getMarkerPositions;
-      this.displayMarkerVuex(markerPositions);
-      return markerPositions;
-      // return this.$store.getters.getMarkerPositions;
-    },
-    markersVuex() {
-      return this.$store.getters.getMarkers;
+    searchedCentersVuex() {
+      console.log("@@@ computed-searchedCentersVuex 실행");
+      return this.$store.getters.getSearchedCenters;
     },
   },
   data() {
     return {
-      markerPositions1: [
-        [33.452278, 126.567803],
-        [33.452671, 126.574792],
-        [33.451744, 126.572441],
-      ],
       markers: [],
       infowindow: null,
     };
@@ -102,42 +88,22 @@ export default {
         this.map.setBounds(bounds);
       }
     },
-    displayMarkerVuex(markerPositions) {
-      console.log("@@ displayMarkerVuex 실행");
+  },
+  watch: {
+    searchedCentersVuex(newVal, oldVal) {
+      console.log("@@@ watch-searchedCentersVuex 실행", newVal, oldVal);
+      // console.log(newVal, oldVal);
 
-      // 기존 마커 지우기
-      if (this.markersVuex.length > 0) {
-        this.markersVuex.forEach((marker) => marker.setMap(null));
+      // 마커 정보 저장하고 지도에 출력
+      let positions = [];
+      for (let i = 0; i < newVal.length; i++) {
+        positions.push([newVal[i].centerDetailLatitude,
+          newVal[i].centerDetailLongitude]);
       }
+      this.displayMarker(positions);
 
-      // markerPositions에 저장된 배열 데이터를 kakao의 LatLng 객체 배열로 변환
-      // position : markerPositions 배열의 각 원소
-      // LatLng : 위도, 경도 좌표값 저장 객체
-      const positions = markerPositions.map(
-        (position) => new kakao.maps.LatLng(...position)
-      );
+      // 마커마다 센터 번호 저장하고, 클릭하면 상세정보 보기
 
-      if (positions.length > 0) {
-        // 마커 정보 저장
-        this.markersVuex = positions.map(
-          (position) =>
-            new kakao.maps.Marker({
-              map: this.map,
-              position,
-            })
-        );
-
-        // positions 배열의 데이터를 LatLngBounds 단일 객체에 포함시키기
-        const bounds = positions.reduce(
-          // callback : 지정한 위치를 포함하는 최소 박스 경계영역 데이터 저장
-          (bounds, latlng) => bounds.extend(latlng),
-          // initail value : LatLngBounds 객체 생성
-          new kakao.maps.LatLngBounds()
-        );
-        
-        // 지도 영역의 경계 정의
-        this.map.setBounds(bounds);
-      }
     },
   },
 }

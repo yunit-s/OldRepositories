@@ -1,5 +1,4 @@
-import { createStore } from 'vuex';
-import storeDivided from './modules/storeDivided';
+import { createStore } from 'vuex'
 
 export default createStore({
   state: {
@@ -8,7 +7,7 @@ export default createStore({
     count: 10,
     strArr: [],
     jsonData: '',
-    searchedCenter: [
+    searchedCenters: [
       {
         data1keyNum: "초기값 번호1",
         data1keyName: "데이터 이름1",
@@ -34,6 +33,54 @@ export default createStore({
       [37.49646391248451, 127.02675574250912],
     ],
     markers: [],
+    kidsdataDetail: [
+      {
+        centerNum: -1,
+        centerDetailState: "초기값",
+        centerDetailCity: "초기값",
+        centerDetailBame: "초기값",
+        centerDetailClassification: "초기값",
+        centerDetailCenteropen: "초기값",
+        centerDetailOfficenumber: -1,
+        centerDetailAddress: "초기값",
+        centerDetailPhone: "초기값",
+        centerDetailFax: "초기값",
+        centerDetailRoomcount: -1,
+        centerDetailRoomsize: -1,
+        centerDetailPlaygroundcount: "초기값",
+        centerDetailTeachercount: -1,
+        centerDetailRegularperson: -1,
+        centerDetailCurrentperson: -1,
+        centerDetailLatitude: 37.49494949,
+        centerDetailLongitude: 127.02777777,
+        centerDetailVehicle: "초기값",
+        centerDetailHompage: "초기값",
+        centerDetailEstablish: "초기값",
+      },
+      {
+        centerNum: -2,
+        centerDetailState: "초기값",
+        centerDetailCity: "초기값",
+        centerDetailBame: "초기값",
+        centerDetailClassification: "초기값",
+        centerDetailCenteropen: "초기값",
+        centerDetailOfficenumber: -1,
+        centerDetailAddress: "초기값",
+        centerDetailPhone: "초기값",
+        centerDetailFax: "초기값",
+        centerDetailRoomcount: -1,
+        centerDetailRoomsize: -1,
+        centerDetailPlaygroundcount: "초기값",
+        centerDetailTeachercount: -1,
+        centerDetailRegularperson: -1,
+        centerDetailCurrentperson: -1,
+        centerDetailLatitude: 37.49499494,
+        centerDetailLongitude: 127.02778888,
+        centerDetailVehicle: "초기값",
+        centerDetailHompage: "초기값",
+        centerDetailEstablish: "초기값",
+      }
+    ]
   },
   getters: {
     // 데이터에 변화를 줄 수는 없음
@@ -45,17 +92,19 @@ export default createStore({
       return state.strArr;
     },
     getJsonData(state) {
-      console.log("@@ index(store) - getters");
       return state.jsonData;
     },
-    getSearchedCenter(state) {
-      return state.searchedCenter;
+    getSearchedCenters(state) {
+      return state.searchedCenters;
     },
     getMarkerPositions(state) {
       return state.markerPositions;
     },
     getMarkers(state) {
       return state.markers;
+    },
+    getKidsdataDetail(state) {
+      return state.kidsdataDetail;
     },
   },
   mutations: {
@@ -81,18 +130,20 @@ export default createStore({
       state.strArr = strArrData;
     },
     setJsonDataMutation(state, newJson) {
-      console.log("@@ index(store) - mutations");
       state.jsonData = newJson;
     },
     // Lumos 프로젝트
-    setSearchedCenterMutation(state, newSearchedCenter) {
-      state.searchedCenter = newSearchedCenter;
+    setSearchedCentersMutation(state, newSearchedCenters) {
+      state.searchedCenters = newSearchedCenters;
     },
     setMarkerPositionsMutation(state, newMarkerPositions) {
       state.markerPositions = newMarkerPositions;
     },
     setMarkersMutation(state, newMarkers) {
       state.markers = newMarkers;
+    },
+    setKidsdataDetailMutation(state, newKidsdataDetail) {
+      state.kidsdataDetail = newKidsdataDetail;
     },
   },
   actions: {
@@ -118,12 +169,11 @@ export default createStore({
       commit("multipleStatesSetMutation", strArrData);
     },
     setJsonData({ commit }, newJson) {
-      console.log("@@ index(store) - actions");
       commit("setJsonDataMutation", newJson);
     },
     // Lumos 프로젝트
-    setSearchedCenter({ commit }, newSearchedCenter) {
-      commit("setSearchedCenterMutation", newSearchedCenter);
+    setSearchedCenters({ commit }, newSearchedCenters) {
+      commit("setSearchedCentersMutation", newSearchedCenters);
     },
     setMarkerPositions({ commit }, newMarkerPositions) {
       commit("setMarkerPositionsMutation", newMarkerPositions);
@@ -131,8 +181,10 @@ export default createStore({
     setMarkers({ commit }, newMarkers) {
       commit("setMarkersMutation", newMarkers);
     },
+    setKidsdataDetail({ commit }, newKidsdataDetail) {
+      commit("setKidsdataDetailMutation", newKidsdataDetail);
+    },
   },
   modules: {
-    storeDivided,
   }
 })
