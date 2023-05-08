@@ -1,4 +1,5 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import storeDivided from './modules/storeDivided';
 
 export default createStore({
   state: {
@@ -44,6 +45,7 @@ export default createStore({
       return state.strArr;
     },
     getJsonData(state) {
+      console.log("@@ index(store) - getters");
       return state.jsonData;
     },
     getSearchedCenter(state) {
@@ -66,37 +68,30 @@ export default createStore({
     decCount(state) {
       state.count--;
     },
-    editCount1Mutation(state, newCount) {
+    setCount1Mutation(state, newCount) {
       state.count = newCount;
     },
-    editCount2Mutation(state, newCount) {
+    setCount2Mutation(state, newCount) {
       state.count = newCount;
     },
     // 배열 다루기
     multipleStatesSetMutation(state, strArrData) {
-      console.log("@@ multipleStatesSetMutation 실행");
-      console.log(strArrData[0] + ", " + strArrData[1] + ", " + strArrData[2]);
+      // console.log("@@ multipleStatesSetMutation 실행");
+      // console.log(strArrData[0] + ", " + strArrData[1] + ", " + strArrData[2]);
       state.strArr = strArrData;
     },
-    editJsonDataMutation(state, newJson) {
-      console.log("@@ editJsonDataMutation 실행");
-      console.log(newJson);
+    setJsonDataMutation(state, newJson) {
+      console.log("@@ index(store) - mutations");
       state.jsonData = newJson;
     },
     // Lumos 프로젝트
-    editSearchedCenterMutation(state, newSearchedCenter) {
-      console.log("@@ editSearchedCenterMutation 실행");
-      console.log(newSearchedCenter);
+    setSearchedCenterMutation(state, newSearchedCenter) {
       state.searchedCenter = newSearchedCenter;
     },
-    editMarkerPositionsMutation(state, newMarkerPositions) {
-      console.log("@@ editMarkerPositionsMutation 실행");
-      console.log(newMarkerPositions);
+    setMarkerPositionsMutation(state, newMarkerPositions) {
       state.markerPositions = newMarkerPositions;
     },
-    editMarkersMutation(state, newMarkers) {
-      console.log("@@ editMarkersMutation 실행");
-      console.log(newMarkers);
+    setMarkersMutation(state, newMarkers) {
       state.markers = newMarkers;
     },
   },
@@ -112,30 +107,32 @@ export default createStore({
       context.commit("decCount");
     },
     // 아래 두 액션은 동일하게 동작함
-    editCount1(context, newCount) {
-      context.commit("editCount1Mutation", newCount);
+    setCount1(context, newCount) {
+      context.commit("setCount1Mutation", newCount);
     },
-    editCount2({ commit }, newCount) {
-      commit("editCount2Mutation", newCount);
+    setCount2({ commit }, newCount) {
+      commit("setCount2Mutation", newCount);
     },
     // 배열 다루기
     multipleStatesSet({ commit }, strArrData) {
       commit("multipleStatesSetMutation", strArrData);
     },
-    editJsonData({ commit }, newJson) {
-      commit("editJsonDataMutation", newJson);
+    setJsonData({ commit }, newJson) {
+      console.log("@@ index(store) - actions");
+      commit("setJsonDataMutation", newJson);
     },
     // Lumos 프로젝트
-    editSearchedCenter({ commit }, newSearchedCenter) {
-      commit("editSearchedCenterMutation", newSearchedCenter);
+    setSearchedCenter({ commit }, newSearchedCenter) {
+      commit("setSearchedCenterMutation", newSearchedCenter);
     },
-    editMarkerPositions({ commit }, newMarkerPositions) {
-      commit("editMarkerPositionsMutation", newMarkerPositions);
+    setMarkerPositions({ commit }, newMarkerPositions) {
+      commit("setMarkerPositionsMutation", newMarkerPositions);
     },
-    editMarkers({ commit }, newMarkers) {
-      commit("editMarkersMutation", newMarkers);
+    setMarkers({ commit }, newMarkers) {
+      commit("setMarkersMutation", newMarkers);
     },
   },
   modules: {
+    storeDivided,
   }
 })

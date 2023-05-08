@@ -4,7 +4,11 @@ export default {
       return this.$store.getters.getSearchedCenter;
     },
     markerPositionsVuex() {
-      return this.$store.getters.getMarkerPositions;
+      console.log("@@@ MapBox Marker 테스트");
+      let markerPositions = this.$store.getters.getMarkerPositions;
+      this.displayMarkerVuex(markerPositions);
+      return markerPositions;
+      // return this.$store.getters.getMarkerPositions;
     },
     markersVuex() {
       return this.$store.getters.getMarkers;

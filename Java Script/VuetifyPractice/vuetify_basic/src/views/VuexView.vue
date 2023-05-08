@@ -24,8 +24,8 @@
         <p>두 버튼 모두 동일하게 동작함</p>
         <p>문자열도 입력 가능은 하다.</p>
         <v-text-field v-model="message" style="width: 150px;"></v-text-field>
-        <v-btn @click="editVuexStateCount1">editVuexStateCount1</v-btn>
-        <v-btn @click="editVuexStateCount2()">editVuexStateCount2</v-btn>
+        <v-btn @click="setVuexStateCount1">setVuexStateCount1</v-btn>
+        <v-btn @click="setVuexStateCount2()">setVuexStateCount2</v-btn>
       </v-col>
     </v-row>
 
@@ -45,7 +45,7 @@
 
     <v-row>
       <v-col>
-        <h2>computed 말고 data에 저장하기</h2>
+        <h2>computed 말고 data에 Vuex 데이터 저장하고 불러오기</h2>
         <p>불가능한 듯...</p>
       </v-col>
     </v-row>
@@ -55,7 +55,18 @@
         <h2>JSON 데이터 저장하고 출력하기</h2>
         <p>json 배열도 잘 되네</p>
         <p>jsonDataVuex : {{ jsonDataVuex }}</p>
-        <v-btn @click="editJsonData">editJsonData</v-btn>
+        <v-btn @click="setJsonData">setJsonData</v-btn>
+      </v-col>
+    </v-row>
+    <v-divider />
+
+    <v-row>
+      <v-col>
+        <h2>Store 파일 모듈화하기</h2>
+        <p>storeDivided.js 파일에 작성한 state 다루기</p>
+        <p>Divided - count : {{ dividedCountVuex }}</p>
+        <v-text-field v-model="dividedCount" style="width: 100px;" />
+        <v-btn @click="setDividedCount()">setDividedCount</v-btn>
       </v-col>
     </v-row>
 
@@ -80,6 +91,9 @@ export default {
     jsonDataVuex() {
       return this.$store.getters.getJsonData;
     },
+    dividedCountVuex() {
+      return this.$store.state.storeDivided.dividedCount;
+    },
   },
   data() {
     return {
@@ -101,7 +115,8 @@ export default {
           7: "json 7번 데이터",
           8: "json 8번 데이터"
         },
-      ]
+      ],
+      dividedCount: 12,
     };
   },
   methods: {
@@ -114,17 +129,22 @@ export default {
     decrementCount() {
       this.$store.dispatch('subCount');
     },
-    editVuexStateCount1() {
-      this.$store.dispatch('editCount1', this.message);
+    setVuexStateCount1() {
+      this.$store.dispatch('setCount1', this.message);
     },
-    editVuexStateCount2() {
-      this.$store.dispatch('editCount2', this.message);
+    setVuexStateCount2() {
+      this.$store.dispatch('setCount2', this.message);
     },
     multipleParam() {
       this.$store.dispatch('multipleStatesSet', this.strArrData);
     },
-    editJsonData() {
-      this.$store.dispatch('editJsonData', this.jsonDataSample);
+    setJsonData() {
+      this.$store.dispatch('setJsonData', this.jsonDataSample);
+    },
+    // 모듈화한 vuex 데이터 actions 호출
+    // 특별한 것 없이 actions에 정의한 이름 호출하면 된다.
+    setDividedCount() {
+      this.$store.dispatch('setDividedCount', this.dividedCount);
     },
   }
 }

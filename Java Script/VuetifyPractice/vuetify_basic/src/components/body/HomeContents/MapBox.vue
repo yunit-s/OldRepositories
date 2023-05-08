@@ -6,7 +6,7 @@
     ></div>
   </div>
   <div>
-    <v-btn @click="displayMarker(markerPositionsVuex)">마커표시</v-btn>
+    <v-btn @click="displayMarkerVuex(markerPositionsVuex)">마커표시</v-btn>
   </div>
 </template>
 
