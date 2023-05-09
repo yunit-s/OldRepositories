@@ -5,10 +5,10 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/dividelayoutview">Divide</router-link> |
       <router-link to="/tabview">Tab</router-link> |
-      <router-link to="/lumosprojectview">Lumos</router-link> |
       <router-link to="/vuexview">Vuex</router-link> |
       <router-link to="/lifecycleview">Lifecycle</router-link> |
       <router-link to="/axiosview">Axios</router-link> |
+      <router-link to="/lumosprojectview">Lumos</router-link> |
     </nav>
     <router-view />
     

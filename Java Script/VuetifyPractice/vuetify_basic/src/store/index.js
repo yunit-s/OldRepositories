@@ -1,4 +1,5 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import storeDivided from './modules/storeDivided';
 
 export default createStore({
   state: {
@@ -80,7 +81,8 @@ export default createStore({
         centerDetailHompage: "초기값",
         centerDetailEstablish: "초기값",
       }
-    ]
+    ],
+    clickedCenter: {},
   },
   getters: {
     // 데이터에 변화를 줄 수는 없음
@@ -105,6 +107,9 @@ export default createStore({
     },
     getKidsdataDetail(state) {
       return state.kidsdataDetail;
+    },
+    getClickedCenter(state) {
+      return state.clickedCenter;
     },
   },
   mutations: {
@@ -145,6 +150,10 @@ export default createStore({
     setKidsdataDetailMutation(state, newKidsdataDetail) {
       state.kidsdataDetail = newKidsdataDetail;
     },
+    setClickedCenterMutation(state, newClickedCenter) {
+      console.log("@@@@ vuex-setClickedCenterMutation", newClickedCenter);
+      state.clickedCenter = newClickedCenter;
+    },
   },
   actions: {
     // 비동기 로직을 처리
@@ -184,7 +193,11 @@ export default createStore({
     setKidsdataDetail({ commit }, newKidsdataDetail) {
       commit("setKidsdataDetailMutation", newKidsdataDetail);
     },
+    setClickedCenter({ commit }, newClickedCenter) {
+      commit("setClickedCenterMutation", newClickedCenter);
+    },
   },
   modules: {
+    storeDivided,
   }
 })
