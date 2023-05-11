@@ -48,7 +48,7 @@
 배열 내용 복사하기 <br>
 42839, <br>
 
-# 자료구조, 알고리즘 라이브러리
+# 자료구조 라이브러리
 
 * LinkedList
 * ArrayList <br>
@@ -71,6 +71,11 @@ Heap 과 관련이 있음 <br>
 add(), first(), pullFirst(), <br>
 HashSet보다 느리지만 자동 오름차순 정렬을 해준다. <br>
 42839, <br>
+
+# 알고리즘
+
+* BFS(Bread-First Search) <br>
+1844,
 
 ---
 
