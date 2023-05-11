@@ -30,3 +30,4 @@ bin/
 
 ### 임의로 추가
 .idea/misc.xml
+.idea/workspace.xml
