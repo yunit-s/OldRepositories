@@ -39,6 +39,9 @@
 * 문자열1.startsWith(문자열2) <br>
 42577,
 * 문자열.substring(시작index, 끝index + 1)
+* 가변 문자열 StringBuilder 클래스 <br>
+setCharAt(인덱스, char형 고칠 문자) <br>
+155652,
 
 ## 배열
 
