@@ -63,9 +63,10 @@ put(데이터), get(키), getOrDefault(키, 기본값), keySet(), values(), <br>
 push(), pop(), <br>
 64061,
 * Queue <br>
-add(), poll(), <br>
-LinkedList<>() 로 구현한다.
-12906, 120956,
+offer(), poll(), peek(), isEmpty(), size(), clear(), <br>
+add(), remove(), element()는 오류가 생기면 exception이 발생하는 메서드임. <br>
+LinkedList<>() 로 구현한다. <br>
+1844, 12906, 120956,
 * PriorityQueue <br>
 add(), poll(), <br>
 Heap 과 관련이 있음 <br>
