@@ -10,6 +10,9 @@
 * 배열의 길이는 arr.length, 문자열의 길이는 String.length()
 * swap() 은 내장 메소드가 없다. 구현해야 한다.
 * ArrayList<Integer>를 int[] 로 한 번에 바꾸는 방법은 없다. 하나씩 저장해야함
+* 이미 map.entrySet() 으로 for-each문이 실행되는 경우, 하위 로직을 실행하는 중에 map에서 데이터를 빼버리면
+for문에서 오류난다. <br>
+43162,
 
 ---
 
@@ -80,6 +83,8 @@ HashSet보다 느리지만 자동 오름차순 정렬을 해준다. <br>
 
 * BFS(Bread-First Search) <br>
 1844,
+* DFS(Depth-First Search) <br>
+43162,
 
 ---
 
