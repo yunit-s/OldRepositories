@@ -82,7 +82,7 @@ HashSet보다 느리지만 자동 오름차순 정렬을 해준다. <br>
 # 알고리즘
 
 * BFS(Bread-First Search) <br>
-1844,
+1844, 43163
 * DFS(Depth-First Search) <br>
 43162,
 
