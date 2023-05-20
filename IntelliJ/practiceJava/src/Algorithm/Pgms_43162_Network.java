@@ -5,7 +5,34 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-class Solution_43162 {
+// ChatGPT 코드
+// 깔끔하네
+class Solution_43162_2 {
+    public int solution(int n, int[][] computers) {
+        boolean[] visited = new boolean[n];
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                dfs(i, computers, visited);
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private void dfs(int node, int[][] computers, boolean[] visited) {
+        visited[node] = true;
+
+        for (int i = 0; i < computers.length; i++) {
+            if (computers[node][i] == 1 && !visited[i]) {
+                dfs(i, computers, visited);
+            }
+        }
+    }
+}
+class Solution_43162_1 {
     public int solution(int n, int[][] computers) {
         int answer = 0;
 
@@ -59,7 +86,7 @@ public class Pgms_43162_Network {
                 },
         };
 
-        Solution_43162 sol =  new Solution_43162();
+        Solution_43162_1 sol =  new Solution_43162_1();
         for (int i = 0; i < tcN.length; i++) {
             System.out.println("tc" + (i + 1) + "> " + sol.solution(tcN[i], tcComputers[i]));
         }
