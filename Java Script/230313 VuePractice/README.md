@@ -5,6 +5,7 @@
 ### 참고 사이트
 
 https://kdydesign.github.io/2019/04/22/vue-cli3-tutorial/
+https://ddoni-code.tistory.com/3
 
 ### Node js 설치
 
@@ -12,9 +13,20 @@ node js는 8.9 이상의 버전을 설치할 것
 
 ### Vue-CLI 설치
 
+기존에 설치했던 버전 삭제하기
+
+> 2.x버전 삭제  
+: npm r -g vue-cli  
+3.x버전 삭제  
+: npm r -g @vue/cli  
+만약 permissions issue 에러가 뜬다면, 맨 앞에 sudo 를 붙여주자.
+
 3.x 버전 설치하기
 
-> npm i -g @vue/cli
+> 3.x 버전 설치  
+: npm i -g @vue/cli  
+2.x 버전 설치  
+: npm i -g vue-cli
 
 설치된 버전 확인하기
 
