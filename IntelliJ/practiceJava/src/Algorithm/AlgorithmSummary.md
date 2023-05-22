@@ -11,13 +11,20 @@ char배열 사용하기 / StringBuilder 클래스 활용하기
 * 배열의 길이는 arr.length, 문자열의 길이는 String.length()
 * swap() 은 내장 메소드가 없다. 구현해야 한다.
 * ArrayList<Integer>를 int[] 로 한 번에 바꾸는 방법은 없다. 하나씩 저장해야함 <br>
--> 되지 않나? int[] intArr = 어레이리스트.toArray(new int[어레이리스트.size()]); <br>
+=> 되지 않나? int[] intArr = 어레이리스트.toArray(new int[어레이리스트.size()]); <br>
+=> ㄴㄴㄴㄴ 안 될 듯. int[]같은 primitive type은 제네릭 타입으로 사용할 수 없고, 이때는 자동변환이 안 되기 때문. <br>
 43164
-* int[] 를 ArrayList 로 한 번에 바꾸는 방법
+* int[] 를 ArrayList 로 한 번에(x) 두 번에(o) 바꾸는 방법 <br>
+Integer[] peopleArray = Arrays.stream(people).boxed().toArray(Integer[]::new); // int[] 를 Integer[]로 변경 <br>
+List<Integer> peopleList = new LinkedList<>(Arrays.asList(peopleArray)); <br>
+42885,
 * int[] 를 Set 으로 한 번에 바꾸는 방법 <br>
--> new HashSet<>(Arrays.asList(배열)) <br>
+=> new HashSet<>(Arrays.asList(배열)) <br>
+=> ㄴㄴㄴㄴ 이것도 안 됨. int는 primitive type이기 때문
 43163,
 * int[] 를 Stack 으로 한 번에 바꾸는 방법
+* 속도 비교 : Arrays.sort(배열) > ArrayList.sort(컴퍼레이터) > LinkedList.sort(컴퍼레이터) <br>
+42885,
 * 이미 map.entrySet() 으로 for-each문이 실행되는 경우, 하위 로직을 실행하는 중에 map에서 데이터를 빼버리면
 for문에서 오류난다. <br>
 43162,
