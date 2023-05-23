@@ -51,6 +51,13 @@ const routes = [
     component: () => import(/**/ '../views/AxiosView.vue')
   },
 
+  // Dialog 활용
+  {
+    path: '/dialogview',
+    name: 'dialogview',
+    component: () => import(/**/ '../views/DialogView.vue')
+  },
+
   // 루모스 프로젝트
   {
     path: '/lumosprojectview',

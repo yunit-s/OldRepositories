@@ -8,6 +8,7 @@
       <router-link to="/vuexview">Vuex</router-link> |
       <router-link to="/lifecycleview">Lifecycle</router-link> |
       <router-link to="/axiosview">Axios</router-link> |
+      <router-link to="/dialogview">Dialog</router-link> |
       <router-link to="/lumosprojectview">Lumos</router-link> |
     </nav>
     <router-view />

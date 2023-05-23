@@ -8,7 +8,6 @@ export default {
   data() {
     return {
       markers: [],
-      infowindow: null,
     };
   },
   mounted() {
@@ -80,7 +79,7 @@ export default {
         const bounds = positions.reduce(
           // callback : 지정한 위치를 포함하는 최소 박스 경계영역 데이터 저장
           (bounds, latlng) => bounds.extend(latlng),
-          // initail value : LatLngBounds 객체 생성
+          // initial value : LatLngBounds 객체 생성
           new kakao.maps.LatLngBounds()
         );
 
