@@ -99,7 +99,7 @@ HashSet보다 느리지만 자동 오름차순 정렬을 해준다. <br>
 * Greedy(탐욕법) <br>
 42860, 42862, 42883
 * BFS(Bread-First Search) <br>
-1844, 43163
+1844, 43163, 87694
 * DFS(Depth-First Search) <br>
 43162, 43164
 
