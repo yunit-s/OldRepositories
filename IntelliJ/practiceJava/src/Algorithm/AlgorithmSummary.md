@@ -80,6 +80,9 @@ Arrays.sort(다차원배열, Comparator.comparingInt(a -> a[0])); <br>
 * System.arraycopy(srcArray, 0, destArray, 0, srcArray.length); <br>
 배열 내용 복사하기 <br>
 42839, <br>
+* int[] 배열 복사하기 <br>
+int[] 새배열 = Arrays.copyOf(소스배열, 소스배열길이); <br>
+87946,
 
 # 자료구조 라이브러리
 
