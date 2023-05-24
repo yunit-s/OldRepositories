@@ -74,6 +74,9 @@ setCharAt(인덱스, char형 고칠 문자) <br>
 * 배열 정렬할 때 기준 커스텀하기 <br>
 Arrays.sort(배열, new Comparator<Integer>() {}) <br>
 42746
+* 다차원 배열 정렬하기 <br>
+Arrays.sort(다차원배열, Comparator.comparingInt(a -> a[0])); <br>
+42884,
 * System.arraycopy(srcArray, 0, destArray, 0, srcArray.length); <br>
 배열 내용 복사하기 <br>
 42839, <br>
