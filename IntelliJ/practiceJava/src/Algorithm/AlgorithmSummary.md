@@ -23,6 +23,12 @@ List<Integer> peopleList = new LinkedList<>(Arrays.asList(peopleArray)); <br>
 => ㄴㄴㄴㄴ 이것도 안 됨. int는 primitive type이기 때문
 43163,
 * int[] 를 Stack 으로 한 번에 바꾸는 방법
+* int[] -> Integer[] <br>
+Integer[] Integer배열 = Arrays.stream(int배열).boxed().toArray(Integer[]::new); <br>
+42746,
+* Integer[] -> int[] <br>
+int배열 = Arrays.stream(Integer배열).mapToInt(Integer::intValue).toArray(); <br>
+42746,
 * 속도 비교 : Arrays.sort(배열) > ArrayList.sort(컴퍼레이터) > LinkedList.sort(컴퍼레이터) <br>
 42885,
 * 이미 map.entrySet() 으로 for-each문이 실행되는 경우, 하위 로직을 실행하는 중에 map에서 데이터를 빼버리면
@@ -65,6 +71,9 @@ setCharAt(인덱스, char형 고칠 문자) <br>
 
 * Arrays.sort(배열) <br>
 42576, 42577, <br>
+* 배열 정렬할 때 기준 커스텀하기 <br>
+Arrays.sort(배열, new Comparator<Integer>() {}) <br>
+42746
 * System.arraycopy(srcArray, 0, destArray, 0, srcArray.length); <br>
 배열 내용 복사하기 <br>
 42839, <br>
