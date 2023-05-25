@@ -98,7 +98,7 @@ put(데이터), get(키), getOrDefault(키, 기본값), putIfAbsent(키, 기본v
 1845, <br>
 * Stack <br>
 push(), pop(), <br>
-64061,
+12909, 64061,
 * Queue <br>
 offer(), poll(), peek(), isEmpty(), size(), clear(), <br>
 add(), remove(), element()는 오류가 생기면 exception이 발생하는 메서드임. <br>
