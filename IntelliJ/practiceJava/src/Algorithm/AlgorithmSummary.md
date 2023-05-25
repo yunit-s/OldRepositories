@@ -103,7 +103,7 @@ push(), pop(), <br>
 offer(), poll(), peek(), isEmpty(), size(), clear(), <br>
 add(), remove(), element()는 오류가 생기면 exception이 발생하는 메서드임. <br>
 LinkedList<>() 로 구현한다. <br>
-1844, 12906, 120956,
+1844, 12906, 42587, 120956,
 * PriorityQueue <br>
 add(), poll(), <br>
 Heap 과 관련이 있음 <br>
