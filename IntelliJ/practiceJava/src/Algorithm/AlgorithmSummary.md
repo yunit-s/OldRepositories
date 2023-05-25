@@ -20,7 +20,7 @@ List<Integer> peopleList = new LinkedList<>(Arrays.asList(peopleArray)); <br>
 42885,
 * int[] 를 Set 으로 한 번에 바꾸는 방법 <br>
 => new HashSet<>(Arrays.asList(배열)) <br>
-=> ㄴㄴㄴㄴ 이것도 안 됨. int는 primitive type이기 때문
+=> ㄴㄴㄴㄴ 이것도 안 됨. int는 primitive type이기 때문 <br>
 43163,
 * int[] 를 Stack 으로 한 번에 바꾸는 방법
 * int[] -> Integer[] <br>
@@ -84,7 +84,7 @@ Arrays.sort(다차원배열, Comparator.comparingInt(a -> a[0])); <br>
 * System.arraycopy(srcArray, 0, destArray, 0, srcArray.length); <br>
 배열 내용 복사하기 <br>
 42839, <br>
-* int[] 배열 복사하기 <br>
+* int[] 배열 복사하기(String[]도 가능) <br>
 int[] 새배열 = Arrays.copyOf(소스배열, 소스배열길이); <br>
 87946,
 
@@ -98,7 +98,7 @@ put(데이터), get(키), getOrDefault(키, 기본값), putIfAbsent(키, 기본v
 1845, <br>
 * Stack <br>
 push(), pop(), <br>
-12909, 64061,
+12909, 42584, 64061,
 * Queue <br>
 offer(), poll(), peek(), isEmpty(), size(), clear(), <br>
 add(), remove(), element()는 오류가 생기면 exception이 발생하는 메서드임. <br>
