@@ -71,6 +71,10 @@ setCharAt(인덱스, char형 고칠 문자) <br>
 
 * Arrays.sort(배열) <br>
 42576, 42577, <br>
+* int[] 배열을 내림차순으로 정렬하기 <br>
+Integer[] 새배열 = Arrays.stream(기존배열).boxed().toArray(Integer[]::new); <br>
+Arrays.sort(새배열, Collections.reverseOrder()); <br>
+42747,
 * 배열 정렬할 때 기준 커스텀하기 <br>
 Arrays.sort(배열, new Comparator<Integer>() {}) <br>
 42746
