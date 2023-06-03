@@ -9,6 +9,7 @@
       <router-link to="/lifecycleview">Lifecycle</router-link> |
       <router-link to="/axiosview">Axios</router-link> |
       <router-link to="/dialogview">Dialog</router-link> |
+      <router-link to="/componcompview">CompOnComp</router-link> |
       <router-link to="/lumosprojectview">Lumos</router-link> |
     </nav>
     <router-view />

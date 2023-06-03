@@ -343,7 +343,7 @@ INSERT INTO sidocode(sido_state, sido_sidocode, sido_city, sido_sggcode) VALUES(
 INSERT INTO sidocode(sido_state, sido_sidocode, sido_city, sido_sggcode) VALUES('경기도', 41, '성남시분당구', 41135);
 
 /* INSERT QUERY NO: 112 */
-INSERT INTO sidocode(sido_state, sido_sidocode, sido_city, sido_sggcode) VALUES('경기도', 41, '고양시 일산서구', 41287);
+INSERT INTO sidocode(sido_state, sido_sidocode, sido_city, sido_sggcode) VALUES('경기도', 41, '고양시일산서구', 41287);
 
 /* INSERT QUERY NO: 113 */
 INSERT INTO sidocode(sido_state, sido_sidocode, sido_city, sido_sggcode) VALUES('경기도', 41, '과천시', 41290);

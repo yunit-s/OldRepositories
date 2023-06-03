@@ -58,6 +58,13 @@ const routes = [
     component: () => import(/**/ '../views/DialogView.vue')
   },
 
+  // Comp on Comp 활용
+  {
+    path: '/componcompview',
+    name: 'componcompview',
+    component: () => import(/**/ '../views/CompOnCompView.vue')
+  },
+
   // 루모스 프로젝트
   {
     path: '/lumosprojectview',
