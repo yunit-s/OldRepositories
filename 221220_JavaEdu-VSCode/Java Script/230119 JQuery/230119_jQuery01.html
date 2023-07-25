@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <!-- jQuery를 사용하기 위한 CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+    <script src="./js/230119_jQuery01.js"></script>
+
+    <!-- CSS 적용하기 -->
+    <style>
+        /* class값이 myStyle인 태그에 적용 */
+        .myStyle {
+            color: red;
+        }
+    </style>
+
+    <!-- Bootstrap CDN을 포함해서 제공하는 CSS 이용하기 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+    <!-- select 태그. combobox같은 기능 -->
+    <select>
+        <option>홍길동</option>
+        <option>신사임당</option>
+        <option>강감찬</option>
+        <option>이순신</option>
+    </select>
+    <br><br>
+
+    <!--
+        event
+            Browser에서 사용자가 발생시킬 수 있는 event의 종류가 정해져있다.
+            click, dbclick, change, mouseover, mouseenter, mouseleave, keypress, keyup, keydown, ...
+        inline event model
+            HTML의 입장에서 이러한 event들을 쉽게 처리할 수 있는 방법이다.
+            tag의 속성을 이용해서 event를 처리한다.
+            속성 이름 : on + event이름
+    -->
+
+    <!--
+        event source(이벤트가 발생한 객체)
+            div element다.
+            정확히는, DOM 안에 있는 div element로 만든 node를 지칭한다.
+            div : ㅍㅍㅍㅍㅍㅍㅍㅍ
+            onclick : ㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍ
+            onClickFunc() : delegation model의 이벤트 핸들러. 이 핸들러 안에 event객체를 전달한다.
+    -->
+    <div onclick="onClickFunc()">클릭하면 onClickFunc() 실행됨</div>
+    <div ondblclick="onDblClickFunc()">더블클릭하면 onDblClickFunc() 실행됨</div>
+    
+    <!--
+        change event
+            select 박스의 선택값이 변경됐을 때 호출되는 이벤트
+            변경 안 되면 이벤트 발생 안 함
+    -->
+    <select id="changeSelected" onchange="onChangeFunc()">
+        <option>홍길동</option>
+        <option>신사임당</option>
+        <option>강감찬</option>
+        <option>이순신</option>
+    </select>
+    <div id="nameDiv">여기에 이름들 출력해보자.</div>
+    <br><br>
+
+
+    <!--
+        버튼 만들기
+        input의 button으로도 만들 수 있지만, button 태그로도 만들 수 있다.
+        button 태그를 더 많이 사용한다.
+    -->
+    <input type="button" value="input type=button 으로 만든 버튼">
+    <br><br>
+    <button class="myStyle">button tag, CSS를 활용한 버튼</button>
+    <br><br>
+    <button class="btn btn-primary">Bootstrap library를 활용한 버튼 - primary</button>
+    <button class="btn btn-warning">Bootstrap library를 활용한 버튼 - warning</button>
+    <button class="btn btn-danger">Bootstrap library를 활용한 버튼 - danger</button>
+    <button class="btn btn-info">Bootstrap library를 활용한 버튼 - info</button>
+    
+</body>
+</html>

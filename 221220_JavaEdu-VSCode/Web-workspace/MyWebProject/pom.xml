@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.test</groupId>
+  <artifactId>MyWebProject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <dependencies>
+  <!-- 필요한 라이브러리 포함시키기 -->
+  <!--
+  	Servlet에 대한 library를 포함시켜야 한다.
+  	우리는 Tomcat 9버전 안에 있는 Servlet API를 사용하자.
+  	아래 내용들만 적어두면, 이 프로젝트를 사용하는 환경에서 이 API들이 없으면 다운로드해서 실행시키게 된다.
+  	저장하면, 자동으로 다운로드하게 되며, 그 위치는 C:\Users\KOSA\.m2\repository 폴더 안에 전부 저장된다.
+  	이걸 이용하면, 이제부터는 build-path를 직접 설정할 일이 없어진다.
+  -->
+  
+  <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
+  <dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-servlet-api</artifactId>
+    <version>9.0.71</version>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+  <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.28</version>
+  </dependency>
+
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

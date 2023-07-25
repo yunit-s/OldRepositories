@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office-using props</title>
+
+    <!-- jQuery 사용을 위한 CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터 활용를 위한 CDN -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <!-- Axios 활용을 위한 CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="main-div">
+        <h1>Box Office</h1>
+        <button v-on:click="rootBtnClicked">root 버튼</button><br><br>
+        <global-cmp1 v-on:emit-evt-g1="occurEvtRoot"></global-cmp1><br>
+        <global-cmp2 v-bind:movie-list-g2="movieListRoot"></global-cmp2>
+    </div>
+
+    <script>
+        // Local components
+        // L1 - text field, search button
+        let localCmp1 = {
+            template: `
+            <div>
+                <h4 v-show="false">local-cmp1 템플릿</h4>
+                <div>날짜 입력 : 
+                    <input type="text" v-model="inputDate" />
+                    <button v-on:click="l1BtnClicked">검색</button><br>
+                </div>
+            </div>`,
+            // Root component를 제외한 모든 component는 data를 함수의 리턴객체로 표현해야 한다.
+            data: function() {
+                return {
+                    inputDate: ''
+                }
+            },
+            methods: {
+                // Occur event to get box office info
+                l1BtnClicked: function() {
+                    console.log('btnClicked() 호출됨');
+
+                    // jQuery로 textfield 읽는 방법
+                    // let date = $('#dateTxtField').val();
+                    // // console.log('emit(). 이벤트 발생.');
+                    // this.$emit('emit-evt-l1', date);
+
+                    // v-model directive로 textfield 읽는 방법
+                    this.$emit('emit-evt-l1', this.inputDate);
+                }
+            }
+        };
+        // L2 - movie list table
+        let localCmp2 = {
+            template: `
+            <div>
+                <h4 v-show="false">local-cmp2 템플릿</h4>
+                <table border="1">
+                    <caption>[ 영화 순위 ]</caption>
+                    <div>
+                        <tr>
+                            <th width="20px">Select</th>
+                            <th width="20px">Rank</th>
+                            <th width="100px">Poster</th>
+                            <th width="500px">Title</th>
+                            <th width="100px">AudiAcc</th>
+                            <th width="130px">OpenDt</th>
+                            <th width="20px">Index</th>
+                            <th width="80px">Delete</th>
+                        </tr>
+                        <tr v-for="(item, index) in movieListL2" :key="index">
+                            <td align="center"><input type="checkbox" v-bind:id="'chkbox'+(index + 1)" /></td>
+                            <td align="center">{{ item.rank }}</td>
+                            <td align="center"><img v-bind:src="item.thumbnailUrl" /></td>
+                            <td align="left">{{ item.movieNm }}</td>
+                            <td align="center">{{ item.audiAcc }}</td>
+                            <td align="center">{{ item.openDt }}</td>
+                            <td align="center">{{ index }}</td>
+                            <td align="center"><button v-on:click="l2BtnClicked(index, $event)" v-bind:id="'delBtn'+(index + 1)">삭제</button></td>
+                        </tr>
+                    </div>
+                </table>
+            </div>`,
+            props: {
+                movieListL2: Array
+            },
+            methods: {
+                // Delete one movie data
+                l2BtnClicked: function(index) {
+                    console.log('l2BtnCliecked() 호출됨');
+                    this.movieListL2.splice(index, 1); // 영화리스트 배열에서 index 위치의 요소 1개 삭제
+                }
+            }
+        }
+
+
+
+
+
+        // Global components
+        // G1 - include L1
+        Vue.component('global-cmp1', {
+            template: `
+            <div>
+                <h3 v-show="false">전역 컴포넌트1 템플릿</h3>
+                <local-cmp1 v-on:emit-evt-l1="occurEvtG1"></local-cmp1><br>
+            </div>`,
+            methods: {
+                // L2의 이벤트 발생에 따라 L2로부터 데이터 전달받고, Root로 이벤트 발생시키기
+                occurEvtG1: function(param) {
+                    console.log('occurEvtG1() 호출됨');
+                    // console.log(param);
+                    this.$emit('emit-evt-g1', param);
+                }
+            },
+            components: {
+                'local-cmp1': localCmp1
+            }
+        });
+        // G2 - Include L2, delete one movie data
+        Vue.component('global-cmp2', {
+            template: `
+            <div>
+                <h3 v-show="false">전역 컴포넌트2 템플릿</h3>
+                <button v-on:click="g2BtnClicked">전역2 버튼</button><br><br>
+                <button v-on:click="g2DelBtnClicked">선택 삭제 버튼</button><br><br>
+                <local-cmp2 v-bind:movie-list-l2="movieListG2"></local-cmp2><br>
+            </div>`,
+            props: {
+                movieListG2: Array
+            },
+            methods: {
+                // debug
+                g2BtnClicked: function() {
+                    console.log('g2BtnClicked() 호출됨');
+                    if (this.movieListG2.length == 0) {
+                        console.log('axios 데이터 없음');
+                    } else {
+                        console.log(this.movieListG2);
+                    }
+                },
+                // Delete checked movie data from movie list
+                g2DelBtnClicked: function() {
+                    console.log('g2DelBtnClicked() 호출됨');
+                    for (let i = this.movieListG2.length - 1; i >= 0; i--) {
+                        // 삭제 방식이 index에 대해 한 개씩 삭제하는 로직이라서 역순으로 삭제해야 한다.
+                        let cbidx = '#chkbox' + (i + 1);
+
+                        // jQuery로 체크박스 체크 여부 확인하기
+                        //      기존 방식
+                        // if($(cbidx).is(':checked')) {
+                        //     this.movieListG2.splice(i, 1); // 영화리스트 배열에서 index가 i인 위치의 요소 1개 삭제
+                        // }
+                        //      1.6버전 이상일 때 권장하는 방식
+                        if($(cbidx).prop('checked')) {
+                            $(cbidx).prop('checked', false); // 체크박스 체크 해제
+                            this.movieListG2.splice(i, 1); // 영화리스트 배열에서 index가 i인 위치의 요소 1개 삭제
+                        }
+                    }
+                }
+            },
+            components: {
+                'local-cmp2': localCmp2
+            }
+        })
+
+
+
+
+
+        // Root component
+        new Vue({
+            // template: '<div>root 컴포넌트 템플릿</div>'
+            data: {
+                movieListRoot: [] // 박스오피스 정보
+            },
+            methods: {
+                // G1의 이벤트 발생에 따라 G1으로부터 날짜 데이터 전달받고, 박스오피스 검색하기
+                occurEvtRoot: function(date) {
+                    console.log('occurEvtRoot() 호출됨');
+                    // console.log(date);
+                    this.connAxios(date); // date : textfield에서 입력한 날짜
+                },
+                // debug
+                rootBtnClicked: function() {
+                    console.log('rootBtnClicked() 호출됨');
+                    console.log(this.movieListRoot);
+                },
+                // Get movie data
+                connAxios: function(date) {
+                    console.log('connAxios() 호출됨');
+
+                    // Get box office data from online open API
+                    axios({
+                        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',
+                        method: 'GET',
+                        params: {
+                            key: 'e8b19160d24b80d241f860153813316d',
+                            targetDt: date
+                        },
+                        responseType: 'json'
+                    }).then(result => {
+                        // 여기서 then()의 매개변수를 단순히 function(result) {}으로 하면 안 된다.
+                        //      function()으로 했을 때와 Arrow function '=>' 으로 구현했을 때의
+                        //      this가 가리킬 수 있는 객체가 달라지기 때문
+
+                        console.log('axios 호출 성공');
+                        // console.log(result);
+                        // console.log(result.data);
+                        
+                        this.movieListRoot = result.data.boxOfficeResult.dailyBoxOfficeList;
+                            // dailyBoxOfficeList만 Array이고, 나머진 Object다.
+                            // Array가 활용하기 더 좋은 듯.
+                        console.log('this.movieListRoot = ');
+                        console.log(this.movieListRoot);
+                        
+                        this.movieListRoot.forEach(item => {
+                            // forEach()
+                            //      자바스크립트의 배열에서 활용 가능한 반복문.
+                            //      인자는 자동으로 배열의 요소들을 하나씩 가져오게 된다.
+                            
+                            // Get movie poster from kakao search
+                            axios({
+                                url: 'https://dapi.kakao.com/v2/search/image',
+                                method: 'GET',
+                                params: {
+                                    // 검색어
+                                    query: item.movieNm + ' 포스터'
+                                },
+                                headers: {
+                                    // 인증에 대한 정보 입력
+                                    // Authorization: 'KakaoAK ${REST_API_KEY}'
+                                    Authorization: 'KakaoAK e5511dcd4332e8a8fb811afe1f102815'
+                                },
+                                responseType: 'json' // 받아올 데이터의 자료 구조
+                            }).then(imageList => {
+                                console.log('axios 호출 성공');
+
+                                // 이미지 데이터 저장하기
+                                //      Vue.set()을 쓰지 않으면 화면 갱신이 자동으로 이루어지지 않음.
+                                //      Vue.set() 관련 정보 : https://v2.vuejs.org/v2/api/#Vue-set
+                                // item.thumbnailUrl = imageList.data.documents[0].thumbnail_url;
+                                Vue.set(item, 'thumbnailUrl', imageList.data.documents[0].thumbnail_url);
+                            }).catch(error => {
+                                console.log('axios 호출 실패');
+                            })
+                            // .finally(function(result) {
+                            //     // 성공 여부에 상관없이 마지막으로 실행되는 부분 
+                            //     console.log('finally 호출');
+                            // })
+                        });
+
+                    }).catch(error => {
+                        console.log('axios 호출 실패');
+                    }).finally(function(result) {
+                        console.log('finally 호출');
+                    })
+                }
+            }
+        }).$mount('#main-div');
+    </script>
+</body>
+</html>

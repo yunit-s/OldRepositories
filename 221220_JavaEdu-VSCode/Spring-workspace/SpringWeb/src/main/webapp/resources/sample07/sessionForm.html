@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- jQuery에 대한 CDN 설정 -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<!-- Javascript source code -->
+<script src="../js/common.js"></script>
+
+</head>
+<body>
+
+	<h1>Session 기본예제</h1>
+	<div>resources/sample07/sessionForm.html 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample07/sessionForm.html</div>
+	<div>url 직접 접근</div>
+
+	<h3>학생 정보 등록</h3>
+	<hr>
+	<form id="myForm" action="" method="post">
+		<span>action:</span>
+		<select>
+			<option selected="selected">/SpringWeb/sessionAttributesTest01</option>
+				<!--
+				selected
+					처음 선택되어 있을 데이터
+				-->
+			<option>/SpringWeb/sessionAttributesTest02</option>
+			<option>/SpringWeb/sessionAttributesTest03</option>
+			<option>/SpringWeb/sessionAttributesTest04</option>
+			<option>/SpringWeb/sessionAttributesTest05</option>
+			<option>/SpringWeb/sessionAttributesTest06</option>
+			<option>/SpringWeb/sessionAttributesTest07</option>
+		</select>
+		<br>
+		전달할 메시지 : <input type="text" name="msg"><br>
+		학생 번호 : <input type="number" name="studentNumber"><br>
+		학생 이름 : <input type="text" name="studentName"><br>
+		학생 학과 : <input type="text" name="studentDept"><br>
+		<input type="submit" value="등록" onclick="myFunc()">
+			<!--
+			onclick
+				Javascript 이벤트처리
+				이벤트처리를 먼저 수행한 뒤 submit이 실행된다.
+			-->
+		
+	</form>
+
+</body>
+</html>

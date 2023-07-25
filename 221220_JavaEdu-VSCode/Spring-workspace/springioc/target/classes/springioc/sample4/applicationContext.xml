@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="day" class="springioc.sample4.AbstractDay" factory-method="getInstance">
+		<!--
+		AbstractDay는 추상 클래스다. static 메소드를 활용하기 위해서 객체를 만들려고 하는데 과연 만들어질까?
+			기존 방식대로라면 만들어지지 않는다.
+			이를 만들어내기 위한 속성이 factory-method 속성이다.
+		factory-method 속성
+			생성자가 아니라 다른 방식으로 객체를 생성하기 위한 방법
+		-->
+	</bean>
+
+</beans>

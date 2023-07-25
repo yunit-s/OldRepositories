@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>JSTL 활용하기</h1>
+	<div>.jsp 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample02/memberForm.html</div>
+	<div>.java 를 통해서 접근</div>
+	
+	<div>html 정적 리소스니까 webapp/resources/ 에 넣어야 한다.</div>
+
+	<h3>회원 정보를 입력하세요.</h3>
+	<form action="/SpringWeb/member1" method="post">
+		<!-- action : context route 기입 -->
+		<input type="text" placeholder="이름" name="name"><br>
+		<input type="text" placeholder="전화번호" name="phone"><br>
+		<input type="text" placeholder="아이디" name="id"><br>
+		<input type="password" placeholder="비밀번호" name="password"><br>
+		<input type="submit" value="서버로 전송">
+	</form>
+	<br>
+
+	<h3>회원 정보를 입력하세요. (다른 핸들러 호출하기. member2)</h3>
+	<form action="/SpringWeb/member2" method="post">
+		<input type="text" placeholder="이름" name="name"><br>
+		<input type="text" placeholder="전화번호" name="phone"><br>
+		<input type="text" placeholder="아이디" name="id"><br>
+		<input type="password" placeholder="비밀번호" name="password"><br>
+		<input type="submit" value="서버로 전송">
+	</form>
+
+	<h3>회원 정보를 입력하세요. (다른 핸들러 호출하기. member3)</h3>
+	<form action="/SpringWeb/member3" method="post">
+		<input type="text" placeholder="이름" name="name"><br>
+		<input type="text" placeholder="전화번호" name="phone"><br>
+		<input type="text" placeholder="아이디" name="id"><br>
+		<input type="password" placeholder="비밀번호" name="password"><br>
+		<input type="submit" value="서버로 전송">
+	</form>
+
+	<h3>회원 정보를 입력하세요. (다른 핸들러 호출하기. member4)</h3>
+	<form action="/SpringWeb/member4" method="post">
+		<input type="text" placeholder="이름" name="name"><br>
+		<input type="text" placeholder="전화번호" name="phone"><br>
+		<input type="text" placeholder="아이디" name="id"><br>
+		<input type="password" placeholder="비밀번호" name="password"><br>
+		<input type="submit" value="서버로 전송">
+	</form>
+
+</body>
+</html>

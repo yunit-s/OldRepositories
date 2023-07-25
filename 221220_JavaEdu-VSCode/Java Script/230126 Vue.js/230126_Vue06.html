@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- EventBus를 이용해서 하위 component에서 상위 component로 event를 전달하기 -->
+    <div id="app">
+        하위 component에서 상위 component로 event+data 전달하기 - eventBus 활용<br>
+        <child-component></child-component>
+    </div>
+
+    <script>
+        // EventBus를 이용하기 위해서 Vue instance를 생성
+        let eventBus = new Vue(); // 이번엔 어디에 안 붙이기 때문에 안에 {} 안 적는다.
+            // ㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍㅍ
+            // Vue instance가 eventBus의 기능을 하는 것.
+        // 하위 component로 사용할 전역 component를 등록하기
+        Vue.component('child-component', {
+            template: '<button v-on:click="btnClick">버튼 클릭</button>',
+            methods: {
+                btnClick: function() {
+                    // eventBus에 대해서 event를 발생시킨다.
+                    eventBus.$emit('generateEvent', 300);
+                }
+            }
+        });
+
+        // Root component 생성
+        new Vue({
+            el: '#app',
+            created: function() {
+                // 이 단계에서는 AJAX나 데이터 준비하는 작업을 많이 한다.
+                // eventBus에 대해서 이벤트를 등록해 놓기
+                eventBus.$on('generateEvent', function(value) {
+                    // 나중에 나에게 ()가 발생하면 실행할 내용 정의
+                    console.log('이벤트 발생!!', value);
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

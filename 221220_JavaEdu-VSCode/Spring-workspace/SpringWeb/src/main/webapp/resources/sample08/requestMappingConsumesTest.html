@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>@RequestMapping - Consumes 속성</h1>
+	<div>requestMappingConsumesTest.html 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample08/requestMappingConsumesTest.html</div>
+	<hr>
+	
+	<h3>Request Headers 확인하는 방법</h3>
+	<div>브라우저에서 f12 - Network 탭 열어두기</div>
+	<div>a 태그나 form 태그 클릭하면, 빨간 글씨 뭐 하나 생긴다. 그거 클릭하면, header 정보 확인 가능하다.</div>
+	
+	<h3>Get 방식으로 호출(415 Error가 뜨는 게 정상)</h3>
+	<a href="/SpringWeb/testConsumesController1">consume의 content-type : application/json</a>
+	<div>Get 방식은 Request Headers 안에 Content-Type 정보가 아예 없는데,</div>
+	<div>맵핑된 메소드의 consumes 속성에는 원하는 Content-type이 존재하기 때문에 이를 띄울 수 없다.</div>
+	<div>415 Error : 지원되지 않는 Media Type</div>
+	
+	<h3>Post 방식으로 호출(이건 된다.)</h3>
+	<form action="/SpringWeb/testConsumesController2" method="post">
+		<input type="submit" value="consume의 content-type : application/json">
+	</form>
+	<div>이 방식으로 보내면, Request Headers 안에 Content-Type 이 담겨있다.</div>
+	<div>Content-Type: application/x-www-form-urlencoded</div>
+	<div>이게 post 방식의 디폴트 타입이다.</div>
+	<div>consumes 속성 안에 application/json 만 적어서는 어차피 매칭이 안 돼서, 위와 같은 415 Error가 뜨게 된다.</div>
+	<div>호출이 정상적으로 되면, jsp 파일을 따라가게 된다.</div>
+
+</body>
+</html>

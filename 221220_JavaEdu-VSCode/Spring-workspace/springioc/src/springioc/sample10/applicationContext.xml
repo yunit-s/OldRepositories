@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="constructor"
+	>
+
+	<!-- 수동 설정 방식 -->
+	<!--
+	<bean id="myObj" class="springioc.sample8.TestBean"
+		<property name="data1" ref="data1" />
+		<property name="data2" ref="data2" />
+	</bean>
+	-->
+	
+	<!--
+	자동 주입(Auto wiring) 방식
+		default-autowire="constructor"
+			xml 전체에서 기본값을 constructor로 설정
+			생성자를 통해서 초기화한다.
+	-->
+	<bean id="myObjAuto" class="springioc.sample10.TestBean" />
+	<bean id="myObjAuto2" class="springioc.sample10.TestBean" autowire="no" />
+	<bean id="data11" class="springioc.sample10.DataBean" primary="true" />
+	<bean id="data22" class="springioc.sample10.DataBean" />
+
+</beans>

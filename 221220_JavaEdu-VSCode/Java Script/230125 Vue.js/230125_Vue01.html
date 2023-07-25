@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <!-- 이 div 안쪽에서만 Vue instance의 유효범위다. -->
+        {{ message }}
+        <div id="myDiv">내부 div태그</div>
+        <button v-on:click="myClick">버튼 클릭</button>
+            <!--
+                v-on 속성 : Vue.js 에서 이벤트를 처리하는 방법
+                click : 이벤트 이름
+                "" : 내가 실행할 핸들러(함수)의 레퍼런스(= 함수의 이름)
+                    여기서 myClick() 이라고 쓰면 안 된다.
+                    myClick()의 리턴값은 undefined니까 이상한 값이 click에 들어가게 된다.
+            -->
+    </div>
+
+    <!-- Vue와 관련된 Java Script code -->
+    <!-- body 안에 있는 html 코드보다 아래쪽에 있어야 한다. -->
+    <script>
+        
+        // Vue instance(인스턴스)를 생성
+        //      HTML에 발생하는 이벤트 처리를 담당해서 데이터를 바꾸는 일을 한다.
+        // new Vue(); // Vue.js CDN에서 가져온 뷰 라이브러리의 Vue() 생성자 함수를 호출. 객체 생성
+            // 우리가 만든 생성자 함수가 아니라, 이미 만들어져있던 생성자 함수를 호출한 거지?
+            // 그런데 지금 만들어진 Vue instance는 우리가 원하는 일을 하는 객체여야 한다.
+            // 이때 우리가 원하는 것을 객체로 전달한다.
+        new Vue({
+            el: '#app', // element. 지금 만들어진 Vue 객체가 어디에 위치할 것인지를 지칭하는 것
+            data: {
+                // Vue instance가 가지고 있는 필드값, 속성값 이런 것들을 여기에 작성
+                message: 'Vue instance의 data.message 내용'
+                    // 이 message 값을 div 태그 안의 문자 {{ message }} 에 바인딩한다.
+                    // 그렇게 되면, 원래는 {{ message }} 라고 출력됐던 게, message 키의 value로 대체된다.
+            },
+
+            // el, data의 호칭
+            //      Java Script 객체로 따지면, el과 data는 property의 key이지만,
+            //      Vue instance를 기준으로 하면, 뷰 인스턴스가 가지고 있는 el속성과 data속성 이라고 부른다.
+
+            // 원래는 코드를 따로 빼서 구현하는데, 우리는 편의상 여기 안에 작성했음.
+            
+            methods: {
+                // 이 안에 있는 것들이 Vue 객체가 가진 메소드들이다.
+                myFunc: function() {
+                    console.log('Vue instance의 myFunc method 호출');
+                },
+                // 이벤트 핸들러 역할을 하는 메소드
+                myClick: function() {
+                    console.log('Vue instance의 myClick method 호출. 버튼 클릭됨.');
+                    const myDiv = document.getElementById('myDiv');
+                    myDiv.innerText = 'myClick을 통해서 화면 변경';
+                        // 이 코드로는 beforeUpdate가 호출이 안 된다.
+                        // 이거는 data를 변화시킨 것이 아니다. 화면만 변화시킨 것.
+                    this.message = 'this.message 로 Vue 데이터 변경하기';
+                        // Vue의 data인 message가 변경되면서 beforeUpdate가 호출된다.
+                }
+            },
+
+            // Hook override
+            beforeCreate: function() {
+                // beforeCreate Hook method
+                // instance가 생성되고 가장 처음에 실행되는 life cycle 단계
+                // 이 상태가 되면, 자동으로 메소드가 호출된다.
+                console.log('beforeCreate Hook 메소드 호출');
+
+                // 이 시점에는 아직 data 속성과 methods 속성이 정의되지 않은 시점이다.
+                //      또한 data가 화면에 부착되지도 않은 시점이다.
+                //      따라서 화면에 대한 어떠한 처리도 할 수 없다.
+                // Vue 안의 data 안의 message에 접근해보자.
+                
+                // console.log(this.data.message);
+                    // this를 하면 Vue객체를 가리키고, message는 data라는 속성 안에 있는 객체니까
+                    //      위처럼 적어야만 할 것 같다.
+                    //      하지만 실제로 Vue 객체가 가지고 있는 지역변수는 data 안에 있는 것들이다.
+                    //      따라서 아래처럼 표기하는 것이 맞다.
+                console.log(this.message); // 출력 : undefined
+                    // 왜 undefined가 떴을까?
+                    //      아직 data 속성과 methods 속성이 정의되지 않은 시점이기 때문
+                    //      실체는 만들어졌지만 아직 사용하기 전 상태 라는 느낌이기에 붙은 이름이 beforeCreate
+
+            },
+            created: function() {
+                // created Hook method
+                // 이 시점에는 data속성과 method속성을 사용할 수 있다.
+                console.log('created Hook 메소드 호출');
+                console.log(this.message); // 출력 : Vue instance의 data.message 내용
+                this.myFunc(); // 출력 : Vue instance의 myFunc method 호출
+            },
+            beforeMount: function() {
+                console.log('beforeMount가 호출');
+                // 아직 DOM(화면)에 붙지 않았기 때문에 뭔가 처리를 할 수 없다.
+                // 할 수 있는 것이 많이 없기 때문에 일반적으로 여기는 잘 안 쓰인다.
+                myDiv.innerText = 'myDiv의 innerText 값 변경(beforeMound 단계)';
+            },
+            mounted: function() {
+                console.log('mounted가 호출');
+                // 화면에 Vue instance가 붙은 직후에 호출되기 때문에, 비로소 화면제어를 할 수 있다.
+
+                // 화면 제어 예시
+                // $('#myDiv').text('jQuery로 값 변경'); // jQuery 구문으로 표현
+                const myDiv = document.getElementById('myDiv'); // 순수 ECMA Java Script 코드로 표현
+                    // 이를 통해 문서 객체를 가져올 수 있다.
+                myDiv.innerText = 'myDiv의 innerText 값 변경(mounted 단계)';
+            },
+            beforeUpdate: function() {
+                console.log('beforeUpdate가 호출');
+                // 데이터가 변경된 후 화면에 다시 그리기 전(rendering 되기 전)에 호출되는 Hook
+            },
+            updated: function() {
+                console.log('updated 호출됨');
+                // beforeUpdate : 랜더링되기 전
+                // updated : 랜더링된 후
+                // 데이터가 변경이 되면 어쨌든 둘 다 호출이 되긴 한다.
+                //      어쨌든 화면을 다시 그려야 하기 때문
+            }
+
+        });
+    </script>
+</body>
+</html>

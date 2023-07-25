@@ -1,0 +1,22 @@
+# Git hub initialize (for Windows)
+
+git --version
+    git version 2.39.0.windows.1
+git config --global user.name (username)
+git config --global user.email (useremail)
+git init
+git remote add origin (repository address)
+git add .
+git commit -m 'commit message'
+git push -u origin main
+    warning: could not find UI helper 'GitHub.UI'
+    Select an authentication method for 'https://github.com/':
+    1. Web browser (default)
+    2. Device code
+    3. Personal access token
+    option (enter for default):
+# 3번 선택 후, 본인 토큰 입력. 토큰 입력하는 부분은 터미널 입력창에 아무것도 안 보임.
+# Windows와 Mac을 함께 사용하는 경우, 윈도우에서는 아래 명령어 추가로 입력해줄 것.
+# 안 그러면 "LF will be replaced by CRLF the next time Git touches it" 오류가 생긴다.
+git config --global core.autocrlf true
+# complete

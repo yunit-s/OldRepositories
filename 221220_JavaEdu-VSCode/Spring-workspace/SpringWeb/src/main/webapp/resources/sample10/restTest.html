@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- jQuery 사용을 위한 CDN -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<!-- Javascript source code -->
+<script>
+
+	function myFunc(restMethod) {
+		$.ajax({
+			url: "/SpringWeb/rest/user",
+			method: restMethod,
+			data: {
+				id: $("#id").val(),
+				name: $("#name").val()
+			},
+			success: function() {
+				alert("myFunc() AJAX 호출 성공");
+			},
+			error: function() {
+				alert("myFunc() AJAX 호출 실패");
+			}
+		});
+	}
+
+</script>
+
+</head>
+<body>
+
+	<h1>REST 방식 적용시켜보기 with AJAX</h1>
+	<div>restTest.html 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample10/restTest.html</div>
+	<div>html url 직접 접근</div>
+	<hr>
+	
+	<h3>AJAX로 호출하기</h3>
+	<div>id: <input type="text" id="id"></div>
+	<div>name: <input type="text" id="name"></div>
+	<button onclick="myFunc('get')">GET 방식 호출</button>
+	<button onclick="myFunc('delete')">DELETE 방식 호출</button>
+	<div>GET 방식은 잘 되고 DELETE 방식은 잘 안 되는 경우. 이유가 뭘까?</div>
+	<div>-> DELETE 방식도 POST방식처럼 request body에 데이터가 담기기 때문에 파싱 작업을 거쳐야 하기 때문이다.</div>
+
+</body>
+</html>

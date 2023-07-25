@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="boardncmtXml">
+
+	<!-- select -->
+	<select id="selectAll" parameterType="BoardNCmt" resultType="BoardNCmt">
+		<![CDATA[
+			SELECT boardNum, boardTitle, boardAuthor, boardContent,
+				boardDate, boardLikeNum,
+				COUNT(comments.commentArticleNum) AS boardCommentCount
+			FROM boards
+    		LEFT OUTER JOIN comments ON boards.boardNum = comments.commentArticleNum
+    		GROUP BY boardNum;
+		]]>
+	</select>
+
+</mapper>

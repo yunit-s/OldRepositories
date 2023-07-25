@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        하위 component에서 상위 component로 event+data 전달하기<br>
+        <child-component></child-component>
+        <child-component v-on:print_msg="printText"></child-component>
+        
+    </div>
+
+    <script>
+        // 전역 component로 만들 거고, Root Component의 하위로 사용하자.
+        // 전역 component 등록
+        Vue.component('child-component', {
+            template: '<button v-on:click="childFunc">버튼 클릭하기</button>',
+                // v-on 디렉티브 : 이벤트 처리와 관련된 내용
+                //      v-on:이벤트이름="이벤트핸들러함수"
+                //      click : Java script에서 정해놓은 click이라는 이벤트 이름
+                //      childFunc : 함수를 가리키는 reference
+            // 버튼의 상위 컴포넌트 : child-component
+            //      그러면 childFunc는 어디에서 선언되어야 할까?
+            data() {
+                return {
+                    myData: 200
+                }
+            },
+            methods: {
+                childFunc: function() {
+                    // alert('버튼 클릭 성공. childFunc() 호출됨.');
+                    // emit()
+                    //      ㅍㅍㅍㅍㅍ
+                    //      특정 이벤트를 발생시켜 주겠다는 기능
+                    //      $는 붙여줘야해.
+                    //      첫 번째 인자 : 우리가 정해준 이벤트 이름
+                    //      그 다음 인자들 : 이벤트에 전달해줄 데이터들
+                    this.$emit('print_msg', 100, 'Hello', {
+                        msg: '전달된 이벤트'
+                    });
+                }
+            }
+        });
+
+        // Vue instance 생성
+        new Vue({
+            el: '#app',
+            methods: {
+                printText: function(...args) {
+                    // rest parameter 사용
+                    //      갯수 상관없이 전부 전달받기
+                    console.log('이벤트 발생');
+                    console.log(args[0]); // 출력 : 100
+                    console.log(args[1]); // 출력 : 'Hello'
+                    console.log(args[2]); // 출력 : 전달된 이벤트
+
+                }
+            }
+        });
+    </script>
+</body>
+</html>

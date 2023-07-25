@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DTD 지시어. 이건 mapper고, mybatis를 활용하고 있는 거고, 이거에 대한 오류 체크를 DTD 가 해준다고 생각하면 된다. -->
+<!DOCTYPE mapper 
+          PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+          
+<mapper namespace="myBoard">
+
+	<!--
+		id : 이 기능에 대해 이름 붙이기
+		전달해줄 데이터는 없으니 parameterType 안 적음. 리턴 자료는 board 타입
+	-->
+	<select id="allBoards" resultType="Board">
+		<![CDATA[
+			SELECT boardNum, boardTitle, boardContent, boardAuthor, boardDate, boardLike
+			FROM boards
+		]]>
+	</select>
+
+</mapper>

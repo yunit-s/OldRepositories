@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="consoleRef" class="springioc.sample6.ConsoleOutput"></bean>
+		<!--
+		콘솔에 출력하는 bean reference라는 의미로 이름지음
+		-->
+	
+	<!-- 서브 태그로 작성 -->
+	<bean id="fileRef" class="springioc.sample6.FileOutput">
+		<constructor-arg value="./fileio/sample6_fileoutput.txt"/>
+	</bean>
+	<bean id="fileRef2" class="springioc.sample6.FileOutput">
+		<property name="filePath">
+			<value>./fileio/sample6_fileoutput2.txt</value>
+		</property>
+	</bean>
+	
+	<!-- c schema, p schema 활용해서 작성 -->
+	<bean id="fileRef3" class="springioc.sample6.FileOutput" c:filePath="./fileio/sample6_fileoutput3.txt"/>
+		<!--
+		c 스키마 활용
+			constructor-arg
+			filePath : 생성자의 매개변수 이름 
+		-->
+	<bean id="fileRef4" class="springioc.sample6.FileOutput" p:filePath="./fileio/sample6_fileoutput4.txt" />
+		<!--
+		p schema 활용
+			property. setter를 활용하여 필드값 설정
+		-->
+	 
+	 <!-- 출력용 bean 생성 -->
+	<bean id="myBeanConsole" class="springioc.sample6.MessageBeanImpl" c:name="홍길동" p:phone="010-1234-0000" p:output-ref="consoleRef" />
+		<!--
+		c, p 스키마 쓸 때는 reference 타입일 때 '-ref' 붙여줘야 한다.
+		-->
+	<bean id="myBeanFile" class="springioc.sample6.MessageBeanImpl" c:name="홍길동1" p:phone="010-1234-0001" p:output-ref="fileRef" />
+	<bean id="myBeanFile2" class="springioc.sample6.MessageBeanImpl" c:name="홍길동2" p:phone="010-1234-0002" p:output-ref="fileRef2" />
+	<bean id="myBeanFile3" class="springioc.sample6.MessageBeanImpl" c:name="홍길동3" p:phone="010-1234-0003" p:output-ref="fileRef3" />
+	<bean id="myBeanFile4" class="springioc.sample6.MessageBeanImpl" c:name="홍길동4" p:phone="010-1234-0004" p:output-ref="fileRef4" />
+
+</beans>

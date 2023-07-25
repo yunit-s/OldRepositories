@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>230118_2_index.html 타이틀</title>
+</head>
+<body>
+    태그 밖 body 본문 내용
+    <!-- 아무 태그로도 둘러쌓이지 않은 코드는 별로 좋지 않다. -->
+    <!-- HTML은 대소문자 구분을 하지 않는다. 아무렇게나 섞어서 써도 된다. -->
+    <h1>h1 태그. heading1. 큰 글자로 출력</h1>
+    <div>div 태그. 구역을 나눈다.</div>
+    <span>span 태그. 이것도 영역을 나누는 태그다.</span>
+    <span>span 태그 2. 옆으로 이어진다.</span>
+
+    <!-- 공백 추가하기 -->
+
+
+
+    <div>div 태그. 코드에서 3줄 공백 넣어서 작성. (그래봤자 줄간격은 무시된다.)</div>
+    <!-- 화면처리는 원래 CSS를 이용한다. 그렇지만 간단하게 하기 위해서 tag를 제공해준다. -->
+    <br><br><br>
+    <div>div 태그. br태그를 활용했기 때문에 이번엔 제대로 3줄 공백 추가됨.</div>
+
+    <!-- 이미지 표현하기 -->
+    <!--
+        img 태그를 활용해서 상대 경로로 이미지 링크. CSS가 아니라서 권장하는 방법은 아니다.
+        이미지 두 개가 간격이 벌어져있는데, element의 기본 margin과 padding이 설정되어 있기 때문이다.
+        더 정밀하게 표현하려면 CSS를 사용해야 한다.
+    -->
+    <img src="./image/coffee.jpg" width="200">
+    <img src="./image/coffee.jpg">
+    <br><br>
+
+    <!-- 링크 만들기 -->
+    <!--
+        Hyperlink 라고 표현. 클릭 가능한 링크
+        a 라는 element -> anchor 의 약자
+    -->
+    <a href="http://www.naver.com">네이버로 가기</a>
+    <br><br>
+
+    <!-- 사용자 입력 양식 -->
+    <!-- input tag에서 type 속성에 원하는 종류를 넣으면, 그에 맞는 control을 생성할 수 있다. -->
+    <input type="text">
+    <input type="button">
+    <input type="radio">
+    <input type="checkbox">
+    <textarea>textarea 태그. 여러 줄의 문자를 입력할 수 있는 곳. 그리고 여기는 textarea의 초기 내용값</textarea>
+    
+</body>
+</html>

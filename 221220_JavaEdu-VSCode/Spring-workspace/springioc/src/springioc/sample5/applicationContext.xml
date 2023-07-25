@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- default 생성자를 통해서 객체 만들기 -->
+	<bean id="f1" class="springioc.sample5.User" />
+	
+	<bean id="f2" class="springioc.sample5.User">
+		<constructor-arg index="0" value="홍길동" />
+		<constructor-arg index="1" value="2000-01-01" />
+	</bean>
+	
+	<bean id="f3" class="springioc.sample5.User">
+		<property name="name" value="신사임당" />
+		<property name="birth" value="2001-02-02" />
+	</bean>
+	
+	<!--
+	c schema와 p schema를 활용해서 하위 태그를 쓰지 않고 더 간략하게 작성해보자
+		꼭 파라미터 이름을 명시할 필요는 없다.
+		대신, _index번호 를  활용할 수가 있다.
+	-->
+	<bean id="f4" class="springioc.sample5.User" c:name="홍길동" c:birth="2000-01-01" />
+	<bean id="f5" class="springioc.sample5.User" c:name="홍길동" c:_1="2000-01-01" />
+	<bean id="f6" class="springioc.sample5.User" p:name="홍길동" p:birth="2000-01-01" />
+
+</beans>

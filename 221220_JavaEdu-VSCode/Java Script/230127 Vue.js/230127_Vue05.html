@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue05-template</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터를 위한 CDN 포함시키기 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <!-- Axios를 위한 CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1>template 알아보기</h1>
+        안녕하세요! {{ message }}
+    </div>
+
+    <script>
+        new Vue({
+            template: `<div>
+                <h1> 타이틀 </h1>
+                기존 내용을 이걸로 대치시킴. {{ message }}
+                <p>백틱을 이용해서 여러 줄을 입력할 수 있다.</p>
+                그런데 이렇게 javascript 안에 html 코드를 넣는 방식은
+                코드가 길어질 경우 좋지 않은 방식이다.<br>
+                그러면 어떻게 하면 좋을까?
+                </div>`,
+            data: {
+                message: '홍길동'
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

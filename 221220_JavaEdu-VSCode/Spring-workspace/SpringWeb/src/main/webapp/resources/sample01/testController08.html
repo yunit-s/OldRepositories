@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>EL 에 대해 알아보자.</h1>
+	<div>/resources/sample01/testController08.html 화면</div>
+	<h3>접근 방법</h3>
+	<div>http://localhost:8080/SpringWeb/resources/sample01/testController08.html</div>
+	<div>url에 직접 접근</div>
+	<br>
+
+	<form action="/SpringWeb/testController08/useEL" method="post">
+		<div>Post 방식</div>
+		이름 : <input type="text" name="userName"><br>
+		나이 : <input type="number" name="userAge"><br>
+		<input type="hidden" name="httpMethod" value="post">
+		<input type="submit" value="서버로 전송!(Post)">
+	</form>
+	<br>
+		
+	<form action="/SpringWeb/testController08/useELGet" method="get">
+		<div>Get 방식</div>
+		이름 : <input type="text" name="userName"><br>
+		나이 : <input type="number" name="userAge"><br>
+		<input type="hidden" name="httpMethod" value="get">
+		<input type="submit" value="서버로 전송!(Get)">
+	</form>
+
+</body>
+</html>

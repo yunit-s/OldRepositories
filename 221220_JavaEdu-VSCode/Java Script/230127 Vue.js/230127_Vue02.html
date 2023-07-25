@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue02-Nested Routing</title>
+
+    <!-- Vue.js 활용을 위한 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+
+    <!-- Vue 라우터를 위한 CDN 포함시키기 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1>Vue 라우터 - Nested Routing</h1>
+
+        <!-- 링크를 눌렀을 때, 목표로 하는 컴포넌트가 보여지는 곳 -->
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // member component 생성
+        let memberComponent = {
+            // Nested routing
+            //      라우팅된 결과를 member component에서 또 다시 라우팅하는 것을 말한다.
+            //      member component 안에서도 profile과 post의 내용들이 라우팅되어야하기 때문에
+            //          이 안에서도 router-view가 있어야 한다.
+            template: `<div>
+                    여기는 member component입니다.
+                    <router-view></router-view>
+                </div>`
+        };
+
+        // profile component 생성
+        let profileComponent = {
+            template: `<div>
+                    여기는 profile component입니다.
+                </div>`
+        };
+        // post component 생성
+        let postComponent = {
+            template: `<div>
+                    여기는 post component입니다.
+                </div>`
+        };
+
+        // 컴포넌트 생성 끝. 이제 경로를 설정해보자.
+        //      어떤 경로가 어떤 컴포넌트와 매칭되는지 설정하기
+        let routes = [{
+            path: '/member', // <router-view> 에 넣기
+            component: memberComponent,
+
+            // html 화면에서는 결과물을 바로 확인할 수 없다.
+            //      url에서 /member 를 추가로 입력해줘야 원하는 결과물을 확인할 수 있다.
+            //      http://127.0.0.1:5500/Java%20Script/230127/230127_Vue02.html#/member
+
+            // Nested routing을 위한 자식 컴포넌트를 설정
+            //      자식 컴포넌트들에 대해 각각 어떤 라우팅을 할 건지 설정
+            //      여러 개를 설정하기 위해 배열로 설정한다.
+            children: [{
+                // routes 라우팅 안에서 또 한 번의 라우팅을 설정한다.
+                path: 'profile', // /member/profile
+                component: profileComponent
+                // 확인 url : http://127.0.0.1:5500/Java%20Script/230127/230127_Vue02.html#/member/profile
+            }, {
+                path: 'post', // /member/post
+                component: postComponent
+                // 확인 url : http://127.0.0.1:5500/Java%20Script/230127/230127_Vue02.html#/member/post
+            }]
+        }];
+
+        // 경로 생성 끝. 이제 VueRouter 객체를 생성하자.
+        let router = new VueRouter({
+            routes // routes: routes 의 축약형 표현
+        });
+
+        // Root component 생성
+        new Vue({
+            // router 설정
+            router // router: router 의 축약형 표현
+        }).$mount('#app');
+    </script>
+</body>
+</html>
