@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/zulu11.60.19-ca-fx-jdk11.0.17-macosx_aarch64">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/commons-dbcp2-2.9.0.jar"/>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/commons-pool2-2.11.1.jar"/>
+	<classpathentry kind="lib" path="/Users/yunhyeong/Documents/Developer/eclipse-workspace/Config/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
